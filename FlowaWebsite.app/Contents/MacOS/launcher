@@ -9,7 +9,11 @@ cd "$REPO_ROOT"
 
 LOG="/tmp/flowa-website.log"
 
-if [ ! -d node_modules ]; then
+if [ -d .git ]; then
+  git pull --ff-only origin main >> "$LOG" 2>&1 || true
+fi
+
+if [ ! -d node_modules ] || [ "package-lock.json" -nt "node_modules" ]; then
   osascript <<EOF
 tell application "Terminal"
   activate
