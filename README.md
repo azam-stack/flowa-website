@@ -30,3 +30,15 @@ npm run preview   # serve the production build locally
 - Farver, skrifttype og spacing er samlet i `tailwind.config.ts` (`bg`, `fg`, `muted`, `border`, `accent`, `ink*` for de mørke sektioner).
 - Ét accentfarve (Flowas orange) bruges bevidst sparsomt — resten af paletten er sort/hvid/varm grå.
 - Scroll-reveal (`Reveal.tsx`) bruger IntersectionObserver + en almindelig opacity/transform-transition — bevidst valgt frem for CSS keyframe-animationer, som viste sig upålidelige på tværs af scroll-mønstre under test.
+
+## Se det lokalt hver dag
+
+**Første gang:**
+```bash
+git clone https://github.com/azam-stack/flowa-website.git
+cd flowa-website
+```
+
+**Hver gang derefter** — dobbeltklik `start.command` (macOS) / `start.bat` (Windows), eller kør `./start.sh`. Den installerer kun dependencies første gang og åbner derefter automatisk `http://localhost:5174` i din browser.
+
+**Skrivebordsikon (macOS):** Hold ⌘ + Option nede og træk `FlowaWebsite.app` til skrivebordet for at lave en genvej (appen skal blive liggende i repoet).
