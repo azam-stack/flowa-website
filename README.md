@@ -14,9 +14,10 @@ npm run preview   # serve the production build locally
 ## Structure
 
 - `src/content/site.en.ts` — every user-facing string lives here, typed. No component hard-codes copy. A future `site.<locale>.ts` can mirror this shape for translations.
-- `src/sections/` — one component per homepage section, assembled in `src/App.tsx`. Order matches the v2 brief: Hero → Trust → Problems → Value props → Pipeline → No cure/no pay → How it works → Services → Industries → Case studies → Why Flowa → Pricing → FAQ → Final CTA → Contact.
+- `src/sections/` — one component per homepage section, assembled in `src/App.tsx`. Order: Hero → Trust → Problems → Value props → Pipeline → No cure/no pay → How it works → **Team** ("The two people behind every Flowa campaign") → Services → Industries → Case studies → Why Flowa → **What sets us apart** → Pricing → FAQ → Final CTA → Contact.
 - `src/components/nav/` — the mega-menu system (`useMegaMenu` state machine, `MegaPanel` shell, per-menu panels, mobile drawer). See inline comments for the interaction spec (open/close delays, keyboard nav, the "bridge" technique that stops a diagonal mouse path from closing the menu).
-- `src/components/` — shared UI (Nav, Footer, Button, Logo, Reveal, Container, SectionLabel, DecorativeBlob).
+- `src/components/` — shared UI (Nav, Footer, Button, Logo, Reveal, Container, SectionLabel, DecorativeBlob, TeamPortrait).
+- No router — this is a single static page with anchor-link navigation. The addendum brief's "team section moves to an About page, homepage keeps the short version" was not built for that reason; both new team-related sections currently live on the homepage only.
 - The contact form (`Contact.tsx`) uses `mailto:` to `flowameetings@gmail.com` plus a honeypot field — there is no backend. For real server-side validation and delivery without relying on the visitor's mail client, wire it to a form service (e.g. Formspree or Resend) instead of `mailto:`.
 
 ## What's placeholder and needs updating
@@ -27,6 +28,9 @@ npm run preview   # serve the production build locally
 - **FAQ** (`site.en.ts` → `faq.items`): two answers (cancelled/no-show meetings, minimum term) are marked placeholder — insert Flowa's actual policy.
 - **LinkedIn links** (Nav/Footer/Contact) point at linkedin.com generally — update to Flowa's own company page.
 - **Reviews/badges**: intentionally not included — add a section only once real Clutch/G2/Trustpilot/LinkedIn recommendations exist. A fake badge does more damage than a missing one.
+- **Team** (`site.en.ts` → `team.ahmed` / `team.anton`): `surname`, `linkedin` and `bio` are `null` — marked with a `TODO(founders)` comment right above the object. Nothing fabricated renders in their place: the page shows first name only (no bracket text) and "Bio coming soon." instead of an invented bio, and the LinkedIn icon simply doesn't render while the URL is `null`. Fill these in and the two team sections, the Contact-section avatar caption, and the FAQ answer all pick them up automatically — no other code changes needed. Once real LinkedIn URLs exist, also add `sameAs` to the `founder` array in the Organization JSON-LD in `index.html` (left out for now rather than shipped incomplete).
+- **Team portraits** (`public/images/team/ahmed.{jpg,webp,avif}`, `anton.*`): cropped from the founders' supplied photos to a matching 4:5 ratio and eye-line (~38% from top) for both. If either photo is replaced, re-crop to the same ratio/eye-line by hand — there's no automated pipeline for this.
+- **Signed statement attribution** (`site.en.ts` → `signedStatementAttribution`): defaults to `"ahmed"`. The quote text itself is verbatim from the brief; only which founder's name sits underneath is a placeholder choice — change the constant to `"anton"` if preferred.
 
 ## Design
 

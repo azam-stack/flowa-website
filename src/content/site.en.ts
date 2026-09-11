@@ -68,11 +68,12 @@ export const nav = {
 
 export const hero = {
   eyebrow: "B2B appointment setting — you pay per meeting, not per activity",
-  h1: ["We book the meetings", "that turn into opportunities."],
+  h1: ["Creating meetings.", "That create opportunities."],
   sub: "Flowa fills your calendar with qualified sales meetings with the decision-makers you actually want to sell to — so your team spends its time in conversations, not hunting for them.",
   ctaPrimary: "Book a call",
   ctaSecondary: "See how it works",
   reassurance: "No lock-in. You only pay for meetings that meet your criteria.",
+  foundedBy: "Founded and run by Ahmed and Anton.",
   card: {
     label: "From first contact to booked meeting",
     steps: ["Prospects", "Conversations", "Qualified meetings", "Opportunities"],
@@ -137,6 +138,90 @@ export const howItWorks = {
     { n: "04", title: "Qualification", body: "We only count meetings that meet the criteria we agreed in advance." },
     { n: "05", title: "Booking", body: "Qualified meetings land straight in your calendar, ready for the next conversation." },
   ],
+} as const;
+
+/**
+ * The two founders. `surname`, `linkedin` and `bio` are `null` until the
+ * founders supply them — do not invent them. Components must branch on
+ * `null` rather than render it, so nothing fabricated reaches the page.
+ * TODO(founders): supply ahmed.surname, ahmed.linkedin, ahmed.bio,
+ * anton.surname, anton.linkedin, anton.bio — see addendum brief Part A/C.
+ */
+export type TeamMember = {
+  firstName: string;
+  surname: string | null;
+  role: string;
+  /** Base path with no extension — TeamPortrait derives .avif/.webp/.jpg. */
+  photoBase: string;
+  linkedin: string | null;
+  bio: string | null;
+  owns: string[];
+};
+
+export const team: { ahmed: TeamMember; anton: TeamMember } = {
+  ahmed: {
+    firstName: "Ahmed",
+    surname: null,
+    role: "Co-founder",
+    photoBase: "/images/team/ahmed",
+    linkedin: null,
+    bio: null,
+    owns: ["Market research and targeting", "Outreach copy and sequences", "Reporting"],
+  },
+  anton: {
+    firstName: "Anton",
+    surname: null,
+    role: "Co-founder",
+    photoBase: "/images/team/anton",
+    linkedin: null,
+    bio: null,
+    owns: ["Campaign strategy", "Calls and conversations", "Booking and follow-up"],
+  },
+} as const;
+
+// Which founder's name sits under the signed statement below the team
+// cards. Swap to "anton" if the founders prefer — the quote text itself
+// is verbatim from the addendum brief.
+export const signedStatementAttribution: keyof typeof team = "ahmed";
+
+export const signedStatement = {
+  quote:
+    "We'd rather run five campaigns properly than twenty badly. That's why we take on a limited number of clients at a time — and why we'll say no if we don't think we can fill your calendar.",
+} as const;
+
+export const whatSetsUsApart = {
+  eyebrow: "What sets us apart",
+  h2: "You'll always know who's calling on your behalf.",
+  intro:
+    "Flowa is deliberately small. When you work with us, you work with the two people whose names are on this page — not an account manager who forwards your feedback to a team you never meet.",
+  blocks: [
+    {
+      title: "Your outreach is written by the people who send it",
+      body: "Every email and every call script is written for your market by us, not generated from a template library and not handed to a junior. If a message isn't working, we know within days, because we're the ones reading the replies.",
+    },
+    {
+      title: "One conversation, not a chain of handovers",
+      body: "No account manager, no ticket queue, no weekly status call that exists to justify a retainer. You get a direct line to the person running your campaign, and an answer the same working day.",
+    },
+    {
+      title: "We only make money when a meeting lands",
+      body: "Our incentive is identical to yours. We don't get paid for volume, for activity reports, or for lists. That's also why we'll tell you early if we don't think your market is a fit for outbound.",
+    },
+    {
+      title: "We do the research by hand",
+      body: "Every company and every contact is checked by a person before anyone is contacted. It's slower than buying a list, and it's the reason the meetings you take are with people who can actually sign.",
+    },
+  ],
+  cta: "Book a call",
+  ctaCaption: "You'll speak to Ahmed or Anton, not a salesperson.",
+} as const;
+
+export const peopleSection = {
+  eyebrow: "The team",
+  h2: "The two people behind every Flowa campaign",
+  intro: "No pods, no offshore team, no rotating SDRs. These are the people who research your market, write your outreach, make the calls and book the meetings.",
+  ownsHeading: "What they own",
+  bioPending: "Bio coming soon.",
 } as const;
 
 export const services = {
@@ -218,6 +303,7 @@ export const faq = {
   h2: "Frequently asked questions",
   items: [
     { q: "How does no cure, no pay work?", a: "You only pay for meetings that meet the criteria we agree in advance — no meetings, no invoice. There's no charge for leads, calls or activity." },
+    { q: "Who contacts our prospects?", a: "Ahmed and Anton. No one else speaks to your market on your behalf — no call centre, no rotating team of junior SDRs." },
     { q: "What counts as a qualified meeting?", a: "We agree this with you concretely before we start — typically based on role or decision-making authority, genuine interest, and a match with your ICP. The criteria are written down, so there's no ambiguity later." },
     { q: "Who do you contact on our behalf?", a: "We contact decision-makers at companies that match the customer profile we define together with you — never a random or generic list." },
     { q: "How do you find the companies?", a: "Through structured research targeted at your ICP: industry, size, geography and any other criteria you define with us." },
@@ -251,17 +337,18 @@ export const contact = {
   submit: "Book a call",
   successTitle: "Thanks — we'll come back to you within one working day.",
   successBody: "If your email client didn't open automatically, write to us directly at",
+  responsePromise: "You'll hear back from Ahmed or Anton within one working day.",
 } as const;
 
 export const footer = {
-  tagline: "We book the meetings that turn into opportunities.",
+  tagline: "Creating meetings. That create opportunities.",
   navigationHeading: "Navigation",
   contactHeading: "Contact",
   rights: "All rights reserved.",
 } as const;
 
 export const meta = {
-  title: "Flowa — We book the meetings that turn into opportunities.",
+  title: "Flowa — Creating meetings. That create opportunities.",
   description: "Flowa helps B2B companies get qualified sales meetings with the decision-makers they actually want to sell to. No cure, no pay — you only pay for meetings that meet your criteria.",
   keywords: "B2B appointment setting, appointment setting agency UK, B2B lead generation London, sales meetings booked for you, outbound agency UK, cold email agency, pay per qualified meeting",
 } as const;

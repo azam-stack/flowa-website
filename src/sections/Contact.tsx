@@ -4,7 +4,8 @@ import { Container } from "@/components/Container";
 import { SectionLabel } from "@/components/SectionLabel";
 import { Button } from "@/components/Button";
 import { Reveal } from "@/components/Reveal";
-import { contact } from "@/content/site.en";
+import { TeamPortrait } from "@/components/TeamPortrait";
+import { contact, team } from "@/content/site.en";
 
 const inputCls =
   "w-full rounded-xl border border-border bg-bg px-4 py-3 text-[15px] text-fg placeholder:text-muted/70 transition-colors focus-visible:border-accent";
@@ -60,6 +61,22 @@ export function Contact() {
                 <Linkedin size={18} className="text-muted" />
                 {contact.linkedin}
               </a>
+            </div>
+
+            <div className="mt-10 flex items-center gap-3.5">
+              <picture>
+                <source srcSet={`${team.ahmed.photoBase}.avif`} type="image/avif" />
+                <source srcSet={`${team.ahmed.photoBase}.webp`} type="image/webp" />
+                <img
+                  src={`${team.ahmed.photoBase}.jpg`}
+                  alt={`${team.ahmed.firstName}, ${team.ahmed.role}`}
+                  width={56}
+                  height={56}
+                  loading="lazy"
+                  className="h-14 w-14 shrink-0 rounded-full object-cover grayscale"
+                />
+              </picture>
+              <p className="text-[15px] font-medium text-fg">{contact.responsePromise}</p>
             </div>
           </Reveal>
 

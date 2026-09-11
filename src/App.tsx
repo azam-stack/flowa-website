@@ -7,10 +7,12 @@ import { ValueProps } from "@/sections/ValueProps";
 import { PipelineFunnel } from "@/sections/PipelineFunnel";
 import { Differentiator } from "@/sections/Differentiator";
 import { HowItWorks } from "@/sections/HowItWorks";
+import { Team } from "@/sections/Team";
 import { Services } from "@/sections/Services";
 import { Audience } from "@/sections/Audience";
 import { CaseStudies } from "@/sections/CaseStudies";
 import { WhyFlowa } from "@/sections/WhyFlowa";
+import { WhatSetsUsApart } from "@/sections/WhatSetsUsApart";
 import { Pricing } from "@/sections/Pricing";
 import { FAQ } from "@/sections/FAQ";
 import { FinalCTA } from "@/sections/FinalCTA";
@@ -28,10 +30,12 @@ export default function App() {
         <PipelineFunnel />
         <Differentiator />
         <HowItWorks />
+        <Team />
         <Services />
         <Audience />
         <CaseStudies />
         <WhyFlowa />
+        <WhatSetsUsApart />
         <Pricing />
         <FAQ />
         <FinalCTA />
