@@ -14,11 +14,14 @@ export function Hero() {
           <div className="min-w-0">
             <SectionLabel>{hero.eyebrow}</SectionLabel>
             <h1
-              className="mt-4 font-extrabold leading-[0.98] tracking-[-0.03em] text-fg [&>span]:block [&>span]:w-max [&>span]:whitespace-nowrap [&>span]:text-[clamp(1.2rem,6.2vw,4.2rem)] lg:[&>span]:text-[clamp(2.1rem,3.4vw,2.75rem)]"
+              className="mt-4 text-balance font-extrabold text-[color:var(--flowa-text)] [letter-spacing:-0.035em] [line-height:0.94] text-[clamp(2.2rem,11vw,6.5rem)] lg:whitespace-nowrap lg:text-[clamp(2.2rem,3.5vw,2.85rem)]"
               data-hero-h1
             >
-              <span data-hero-line="0">{hero.h1[0]}</span>
-              <span data-hero-line="1">{hero.h1[1]}</span>
+              {hero.h1[0]}
+              <br />
+              <span className="text-accent-display" data-hero-line="1">
+                {hero.h1[1]}
+              </span>
             </h1>
             <p className="mt-6 max-w-[52ch] text-lg leading-relaxed text-[#4A4744]">{hero.sub}</p>
             <div className="mt-9 flex flex-col gap-5 sm:flex-row sm:items-center">

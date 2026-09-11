@@ -1,6 +1,6 @@
 import { Logo } from "./Logo";
 import { Container } from "./Container";
-import { nav, footer, contact } from "@/content/site.en";
+import { nav, footer, contact, hero } from "@/content/site.en";
 
 const LINKS = [
   { href: "#services", label: nav.links.services },
@@ -16,7 +16,11 @@ export function Footer() {
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div className="max-w-xs">
             <Logo />
-            <p className="mt-4 text-[15px] leading-relaxed text-muted">&ldquo;{footer.tagline}&rdquo;</p>
+            <p className="mt-4 text-lg font-bold leading-[1.05] tracking-tight text-[color:var(--flowa-text)]">
+              {hero.h1[0]}
+              <br />
+              <span className="text-accent-display">{hero.h1[1]}</span>
+            </p>
           </div>
 
           <div className="flex flex-wrap gap-x-10 gap-y-6">

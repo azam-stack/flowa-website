@@ -5,6 +5,14 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --flowa-text: #0c0c0b;
+    /* Same hue as the brand accent (#EE9E47), deepened for use at display
+       size: the brand orange itself is ~2.1:1 against the hero background
+       and fails WCAG even for large text. This clears 3:1. Display-only —
+       buttons, icons and the timeline keep the original accent colour. */
+    --flowa-orange-display: #c9741e;
+  }
   html {
     scroll-behavior: smooth;
   }

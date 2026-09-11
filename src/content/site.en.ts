@@ -341,7 +341,6 @@ export const contact = {
 } as const;
 
 export const footer = {
-  tagline: "Creating meetings. That create opportunities.",
   navigationHeading: "Navigation",
   contactHeading: "Contact",
   rights: "All rights reserved.",

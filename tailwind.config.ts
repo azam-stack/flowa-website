@@ -14,6 +14,8 @@ export default {
           DEFAULT: "#EE9E47",
           hover: "#D9822C",
           fg: "#0C0C0B",
+          /** Deepened for display-size type only — see index.css. */
+          display: "var(--flowa-orange-display)",
         },
         ink: {
           DEFAULT: "#0C0C0B",
