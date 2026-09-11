@@ -1,26 +1,16 @@
 import { Container } from "@/components/Container";
 import { Reveal } from "@/components/Reveal";
+import { trust } from "@/content/site.en";
 
-const SLOTS = 5;
-
+/** No verified client logos exist yet — per brief, we never ship fake or
+ * placeholder logo boxes. A single, founder-verifiable credential line
+ * stands in until real logos are cleared for use. */
 export function TrustBar() {
   return (
-    <section className="border-y border-border py-10">
+    <section className="border-y border-border py-8">
       <Container>
         <Reveal>
-          <p className="mb-6 text-center text-xs font-semibold uppercase tracking-[0.14em] text-muted">
-            Bygget til ambitiøse B2B-virksomheder
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            {Array.from({ length: SLOTS }).map((_, i) => (
-              <div
-                key={i}
-                className="flex h-14 w-36 items-center justify-center rounded-xl border border-dashed border-border text-xs font-medium text-muted/70"
-              >
-                Kundelogo
-              </div>
-            ))}
-          </div>
+          <p className="text-center text-sm text-muted">{trust.credential}</p>
         </Reveal>
       </Container>
     </section>

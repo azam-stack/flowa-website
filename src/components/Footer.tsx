@@ -1,11 +1,12 @@
 import { Logo } from "./Logo";
 import { Container } from "./Container";
+import { nav, footer, contact } from "@/content/site.en";
 
 const LINKS = [
-  { href: "#services", label: "Services" },
-  { href: "#hvem-er-vi", label: "Hvem er vi" },
-  { href: "#cases", label: "Cases" },
-  { href: "#kontakt", label: "Book et kald" },
+  { href: "#services", label: nav.links.services },
+  { href: "#about", label: nav.links.about },
+  { href: "#case-studies", label: nav.links.caseStudies },
+  { href: "#contact", label: nav.bookCall },
 ];
 
 export function Footer() {
@@ -15,12 +16,12 @@ export function Footer() {
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div className="max-w-xs">
             <Logo />
-            <p className="mt-4 text-[15px] leading-relaxed text-muted">"Vi booker møder. Der skaber muligheder."</p>
+            <p className="mt-4 text-[15px] leading-relaxed text-muted">&ldquo;{footer.tagline}&rdquo;</p>
           </div>
 
           <div className="flex flex-wrap gap-x-10 gap-y-6">
             <div>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.1em] text-muted">Navigation</p>
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.1em] text-muted">{footer.navigationHeading}</p>
               <ul className="space-y-2">
                 {LINKS.map((l) => (
                   <li key={l.href}>
@@ -32,16 +33,16 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.1em] text-muted">Kontakt</p>
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.1em] text-muted">{footer.contactHeading}</p>
               <ul className="space-y-2">
                 <li>
-                  <a href="mailto:flowameetings@gmail.com" className="text-sm text-fg/80 hover:text-fg">
-                    flowameetings@gmail.com
+                  <a href={`mailto:${contact.email}`} className="text-sm text-fg/80 hover:text-fg">
+                    {contact.email}
                   </a>
                 </li>
                 <li>
                   <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" className="text-sm text-fg/80 hover:text-fg">
-                    LinkedIn
+                    {contact.linkedin}
                   </a>
                 </li>
               </ul>
@@ -50,7 +51,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col gap-2 border-t border-border pt-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Flowa. Alle rettigheder forbeholdes.</p>
+          <p>© {new Date().getFullYear()} Flowa. {footer.rights}</p>
         </div>
       </Container>
     </footer>

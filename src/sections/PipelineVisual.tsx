@@ -1,55 +1,86 @@
-const STAGES = ["Prospects", "Samtaler", "Kvalificerede møder", "Muligheder"];
+import { useEffect, useRef, useState } from "react";
+import { hero } from "@/content/site.en";
 
-/** Original abstract pipeline visualization — not stock imagery. Subtle motion only. */
+const STEP_MS = 3000;
+
+/** Original abstract pipeline visualization — not stock imagery. Cycles
+ * through the four stages on a slow loop, pausing on hover; ends each cycle
+ * with a concrete artefact (a booked-meeting card) so the diagram reads as
+ * a picture of the product, not an abstract diagram. */
 export function PipelineVisual() {
+  const steps = hero.card.steps;
+  const [activeStep, setActiveStep] = useState(0);
+  const [hovering, setHovering] = useState(false);
+  const reducedMotion = useRef(typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+
+  useEffect(() => {
+    if (reducedMotion.current) {
+      setActiveStep(steps.length - 1);
+      return;
+    }
+    if (hovering) return;
+    const id = setInterval(() => setActiveStep((s) => (s + 1) % steps.length), STEP_MS);
+    return () => clearInterval(id);
+  }, [hovering, steps.length]);
+
+  const showMeeting = activeStep === steps.length - 1;
+
   return (
-    <div className="relative rounded-[28px] border border-border bg-card p-6 shadow-[0_1px_2px_rgba(12,12,11,0.04),0_24px_48px_-20px_rgba(12,12,11,0.16)] sm:p-8">
+    <div
+      className="relative overflow-hidden rounded-[28px] border border-border bg-card p-6 shadow-[0_1px_2px_rgba(12,12,11,0.04),0_24px_48px_-20px_rgba(12,12,11,0.16)] sm:p-8"
+      onMouseEnter={() => setHovering(true)}
+      onMouseLeave={() => setHovering(false)}
+    >
       <div className="mb-6 flex items-center justify-between">
-        <span className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Fra kontakt til møde</span>
-        <span className="flex h-2.5 w-2.5 items-center justify-center">
-          <span className="h-2 w-2 animate-pulse rounded-full bg-accent" />
-        </span>
+        <span className="text-[13px] font-medium text-muted">{hero.card.label}</span>
       </div>
 
       <div className="relative flex flex-col gap-0">
-        {STAGES.map((stage, i) => (
-          <div key={stage} className="relative flex items-center gap-4 py-3.5">
-            <div className="relative flex h-8 w-8 shrink-0 items-center justify-center">
-              {i < STAGES.length - 1 && (
-                <span className="absolute left-1/2 top-8 h-[calc(100%+0.75rem)] w-px -translate-x-1/2 overflow-hidden bg-border">
-                  <span
-                    className="absolute left-0 top-0 h-3 w-px bg-accent motion-safe:animate-[flow_2.6s_ease-in-out_infinite]"
-                    style={{ animationDelay: `${i * 0.5}s` }}
-                  />
+        {steps.map((stage, i) => {
+          const state = i < activeStep ? "completed" : i === activeStep ? "active" : "upcoming";
+          return (
+            <div key={stage} className="relative flex items-center gap-4 py-3">
+              <div className="relative flex h-8 w-8 shrink-0 items-center justify-center">
+                {i < steps.length - 1 && (
+                  <span className="absolute left-1/2 top-8 h-[calc(100%+0.5rem)] w-px -translate-x-1/2 bg-border">
+                    <span
+                      className="absolute left-0 top-0 w-px bg-accent transition-[height] duration-500 ease-out"
+                      style={{ height: i < activeStep ? "100%" : "0%" }}
+                    />
+                  </span>
+                )}
+                <span
+                  className={`z-10 flex h-8 w-8 items-center justify-center rounded-full border text-xs font-bold transition-colors duration-300 ${
+                    state === "active"
+                      ? "border-accent bg-accent text-accent-fg"
+                      : state === "completed"
+                        ? "border-transparent bg-accent/[0.12] text-accent-hover"
+                        : "border-border bg-bg text-muted"
+                  }`}
+                >
+                  {i + 1}
                 </span>
-              )}
-              <span
-                className={`z-10 flex h-8 w-8 items-center justify-center rounded-full border text-xs font-bold ${
-                  i === STAGES.length - 1 ? "border-accent bg-accent text-accent-fg" : "border-border bg-bg text-fg"
-                }`}
-              >
-                {i + 1}
-              </span>
+              </div>
+              <span className={`text-[15px] font-medium transition-colors duration-300 ${state === "upcoming" ? "text-muted" : "text-fg"}`}>{stage}</span>
             </div>
-            <span className={`text-[15px] font-medium ${i === STAGES.length - 1 ? "text-fg" : "text-fg/75"}`}>{stage}</span>
+          );
+        })}
+      </div>
+
+      <div className="mt-5 grid overflow-hidden transition-[grid-template-rows] duration-500 ease-out" style={{ gridTemplateRows: showMeeting ? "1fr" : "0fr" }}>
+        <div className="overflow-hidden">
+          <div className="flex items-start justify-between gap-3 rounded-2xl border border-accent/20 bg-accent/[0.06] p-4">
+            <div>
+              <p className="text-sm font-bold text-fg">{hero.card.meeting.company}</p>
+              <p className="mt-0.5 text-[13px] text-muted">{hero.card.meeting.role}</p>
+              <p className="mt-1.5 text-[13px] font-medium text-fg/70">{hero.card.meeting.when}</p>
+            </div>
+            <span className="shrink-0 rounded-full bg-accent px-2.5 py-1 text-[11px] font-semibold text-accent-fg">{hero.card.meeting.tag}</span>
           </div>
-        ))}
+        </div>
       </div>
 
-      <div className="mt-6 rounded-2xl bg-fg/[0.03] p-4">
-        <p className="text-sm leading-relaxed text-muted">
-          I ser kun møder, der lever op til jeres kriterier — resten sorterer vi fra, før det når jeres kalender.
-        </p>
-      </div>
-
-      <style>{`
-        @keyframes flow {
-          0% { top: 0; opacity: 0; }
-          15% { opacity: 1; }
-          85% { opacity: 1; }
-          100% { top: calc(100% - 0.75rem); opacity: 0; }
-        }
-      `}</style>
+      <p className="mt-4 text-[13px] leading-relaxed text-muted">{hero.card.caption}</p>
     </div>
   );
 }

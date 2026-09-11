@@ -1,8 +1,8 @@
 # Flowa — marketing website
 
-Premium B2B marketing site for Flowa (appointment setting / B2B mødebooking, no cure no pay). Vite + React + TypeScript + Tailwind. Static site, no backend.
+Premium B2B marketing site for Flowa (appointment setting / B2B lead generation, no cure no pay). Vite + React + TypeScript + Tailwind. Static site, no backend. English (en-GB).
 
-## Kom i gang
+## Getting started
 
 ```bash
 npm install
@@ -11,34 +11,32 @@ npm run build     # typecheck + production build to dist/
 npm run preview   # serve the production build locally
 ```
 
-## Struktur
+## Structure
 
-- `src/sections/` — én komponent pr. sektion på forsiden (Hero, ValueProps, Differentiator, HowItWorks, Services, Audience, CaseStudies, WhyFlowa, Pricing, FAQ, FinalCTA, Contact), samlet i `src/App.tsx`.
-- `src/components/` — genbrugelige UI-dele (Nav, Footer, Button, Logo, Reveal, Container, SectionLabel).
-- Kontaktformularen (`Contact.tsx`) bruger `mailto:` til `flowameetings@gmail.com` — der er ingen backend. Skal den sende rigtige emails uden at åbne brugerens mailklient, kobl den til en formular-service (fx Formspree eller Resend) i stedet for `mailto:`.
+- `src/content/site.en.ts` — every user-facing string lives here, typed. No component hard-codes copy. A future `site.<locale>.ts` can mirror this shape for translations.
+- `src/sections/` — one component per homepage section, assembled in `src/App.tsx`. Order matches the v2 brief: Hero → Trust → Problems → Value props → Pipeline → No cure/no pay → How it works → Services → Industries → Case studies → Why Flowa → Pricing → FAQ → Final CTA → Contact.
+- `src/components/nav/` — the mega-menu system (`useMegaMenu` state machine, `MegaPanel` shell, per-menu panels, mobile drawer). See inline comments for the interaction spec (open/close delays, keyboard nav, the "bridge" technique that stops a diagonal mouse path from closing the menu).
+- `src/components/` — shared UI (Nav, Footer, Button, Logo, Reveal, Container, SectionLabel, DecorativeBlob).
+- The contact form (`Contact.tsx`) uses `mailto:` to `flowameetings@gmail.com` plus a honeypot field — there is no backend. For real server-side validation and delivery without relying on the visitor's mail client, wire it to a form service (e.g. Formspree or Resend) instead of `mailto:`.
 
-## Hvad er placeholder og skal opdateres
+## What's placeholder and needs updating
 
-- **Cases** (`CaseStudies.tsx`): kundenavne, branche, citater og tal er alle `[placeholder]` — ingen tal er opdigtet. Udfyld når rigtige cases er godkendt til offentliggørelse.
-- **Trust-bar logoer** (`TrustBar.tsx`): tomme "Kundelogo"-bokse. Erstat med rigtige kundelogoer, når I har lov til at vise dem.
-- **FAQ** (`FAQ.tsx`): to svar ("Hvad hvis et møde bliver aflyst?", "Er der binding?") er markeret som placeholder — indsæt jeres faktiske politik.
-- **LinkedIn-linket** i Nav/Footer/Contact peger på linkedin.com generelt — opdatér til Flowas egen virksomhedsside.
-- **Priser** (`Pricing.tsx`): Bronze/Sølv/Guld/Platin-priserne er reelle tal fra briefet, ikke placeholder.
+- **Pricing** (`site.en.ts` → `pricing.tiers`): prices are `£TBC` on purpose. The v1 figures were in DKK (1,500 / 1,400 / 1,200 / 1,000 kr per meeting) and were **not** auto-converted — the founder sets the real GBP figures per tier.
+- **Trust strip** (`TrustBar.tsx`): no verified client logos exist yet, so this renders a single placeholder credential line instead of fake/placeholder logo boxes. Replace with a real, founder-verifiable line (or real logos) once available.
+- **Case studies** (`site.en.ts` → `caseStudies.items`): client names, industries, quotes and metrics are all `[placeholder]` — no numbers are invented. Fill in once cases are cleared for publication.
+- **FAQ** (`site.en.ts` → `faq.items`): two answers (cancelled/no-show meetings, minimum term) are marked placeholder — insert Flowa's actual policy.
+- **LinkedIn links** (Nav/Footer/Contact) point at linkedin.com generally — update to Flowa's own company page.
+- **Reviews/badges**: intentionally not included — add a section only once real Clutch/G2/Trustpilot/LinkedIn recommendations exist. A fake badge does more damage than a missing one.
 
 ## Design
 
-- Farver, skrifttype og spacing er samlet i `tailwind.config.ts` (`bg`, `fg`, `muted`, `border`, `accent`, `ink*` for de mørke sektioner).
-- Ét accentfarve (Flowas orange) bruges bevidst sparsomt — resten af paletten er sort/hvid/varm grå.
-- Scroll-reveal (`Reveal.tsx`) bruger IntersectionObserver + en almindelig opacity/transform-transition — bevidst valgt frem for CSS keyframe-animationer, som viste sig upålidelige på tværs af scroll-mønstre under test.
+- Tokens live in `tailwind.config.ts`: `bg`, `fg`, `muted`, `border`, `accent` (+ `accent-hover`), and `ink*` for the dark sections. One accent colour (Flowa orange) used deliberately sparingly against a black/off-white base.
+- No section carries an ALL-CAPS eyebrow above its heading — `SectionLabel` is sentence-case, normal body size, by design (see v2 brief §3.1: that pattern reads as generic AI-landing-page chrome).
+- `Reveal.tsx` uses IntersectionObserver + a plain opacity/transform transition rather than a CSS keyframe animation with `animation-fill-mode: forwards` — the latter turned out not to reliably reach its end state depending on scroll pattern during testing.
+- The one background device across the site is `DecorativeBlob` — the real logo's O-silhouette, reused at low opacity rather than a generic gradient or grid texture.
 
-## Se det lokalt hver dag
+## Known gaps against the v2 QA gate
 
-**Første gang:**
-```bash
-git clone https://github.com/azam-stack/flowa-website.git
-cd flowa-website
-```
-
-**Hver gang derefter** — dobbeltklik `start.command` (macOS) / `start.bat` (Windows), eller kør `./start.sh`. Den installerer kun dependencies første gang og åbner derefter automatisk `http://localhost:5174` i din browser.
-
-**Skrivebordsikon (macOS):** Hold ⌘ + Option nede og træk `FlowaWebsite.app` til skrivebordet for at lave en genvej (appen skal blive liggende i repoet).
+- **Lighthouse scores** were not run in the build environment (no Lighthouse CLI available there) — verify Performance/Accessibility/Best Practices/SEO before shipping.
+- **`next/font` / `next/image`**: this is a Vite project, not Next.js, so those specific APIs don't apply. The same *outcomes* are covered instead — fonts are self-hosted via `@fontsource-variable/inter` with `font-display: swap`, and the one raster image (the logo) is served at a fixed, explicit size.
+- **Server-side form validation**: not implemented — see the contact-form note above.

@@ -2,7 +2,9 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/sections/Hero";
 import { TrustBar } from "@/sections/TrustBar";
+import { Problems } from "@/sections/Problems";
 import { ValueProps } from "@/sections/ValueProps";
+import { PipelineFunnel } from "@/sections/PipelineFunnel";
 import { Differentiator } from "@/sections/Differentiator";
 import { HowItWorks } from "@/sections/HowItWorks";
 import { Services } from "@/sections/Services";
@@ -21,7 +23,9 @@ export default function App() {
       <main>
         <Hero />
         <TrustBar />
+        <Problems />
         <ValueProps />
+        <PipelineFunnel />
         <Differentiator />
         <HowItWorks />
         <Services />

@@ -2,14 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Container } from "@/components/Container";
 import { SectionLabel } from "@/components/SectionLabel";
 import { Reveal } from "@/components/Reveal";
-
-const STEPS = [
-  { n: "01", title: "Strategi", body: "Vi definerer ICP, målvirksomheder og relevante beslutningstagere sammen med jer." },
-  { n: "02", title: "Research", body: "Vi identificerer de virksomheder og personer, der faktisk matcher profilen." },
-  { n: "03", title: "Outreach", body: "Vi kontakter prospects direkte og professionelt — på vegne af jer, i jeres tone." },
-  { n: "04", title: "Kvalificering", body: "Vi tæller kun møder, der lever op til de kriterier, vi har aftalt på forhånd." },
-  { n: "05", title: "Booking", body: "Kvalificerede møder lander direkte i jeres kalender, klar til den næste samtale." },
-];
+import { howItWorks } from "@/content/site.en";
 
 export function HowItWorks() {
   const [active, setActive] = useState(0);
@@ -32,19 +25,17 @@ export function HowItWorks() {
   }, []);
 
   return (
-    <section id="sadan-fungerer-det" className="py-24 md:py-32">
+    <section id="how-it-works" className="py-24 md:py-32">
       <Container>
         <Reveal>
-          <SectionLabel>Processen</SectionLabel>
-          <h2 className="mt-4 max-w-xl text-3xl font-extrabold leading-tight tracking-tight text-fg sm:text-4xl">
-            Sådan skaber vi møder
-          </h2>
+          <SectionLabel>{howItWorks.eyebrow}</SectionLabel>
+          <h2 className="mt-3 max-w-xl text-3xl font-extrabold leading-tight tracking-tight text-fg sm:text-4xl">{howItWorks.h2}</h2>
         </Reveal>
 
         <div className="mt-16 grid grid-cols-1 gap-10 lg:grid-cols-[280px_1fr] lg:gap-16">
           <div className="hidden lg:block">
             <div className="sticky top-32 flex flex-col gap-1">
-              {STEPS.map((step, i) => (
+              {howItWorks.steps.map((step, i) => (
                 <button
                   key={step.n}
                   onClick={() => refs.current[i]?.scrollIntoView({ behavior: "smooth", block: "center" })}
@@ -60,7 +51,7 @@ export function HowItWorks() {
           </div>
 
           <div className="flex flex-col gap-6">
-            {STEPS.map((step, i) => (
+            {howItWorks.steps.map((step, i) => (
               <div
                 key={step.n}
                 ref={(el) => (refs.current[i] = el)}
