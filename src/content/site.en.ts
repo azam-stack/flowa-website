@@ -111,17 +111,22 @@ export const hero = {
  * ("require a transparent background at 3× the display height"), both
  * clear it well past 3×.
  *
- * TODO: the outbound network in this environment is blocked by the same
- * org egress policy that blocks every other arbitrary external host, so
- * fetching official logos directly from the remaining companies' sites
- * isn't possible here — they need to be supplied the same way Adversus
- * and Generaxion's were (their own press/brand page, or requested
- * directly), plus confirmed permission to use them:
- * [
- *   { name: "Lemon Marketing", slug: "lemon-marketing", url: "https://lemonmarketing.dk" },
- *   { name: "Datapeeps", slug: "datapeeps", url: "https://datapeeps.dk" },
- *   { name: "Partner Team", slug: "partner-team", url: "https://partnerteam.dk" },
- * ]
+ * Lemon Marketing, Datapeeps and Partner Team also supplied their own
+ * files directly. Partner Team's was flat near-white with no alpha —
+ * chroma-keyed the same way as Generaxion's. Lemon Marketing's was
+ * already genuinely transparent, just cropped to content. Neither's
+ * colours or shapes were altered.
+ *
+ * Datapeeps' file is NOT a wordmark on a plain background — it's a full
+ * gradient brand tile (icon + "DataPeeps" wordmark baked into a blue
+ * gradient card, more like an app icon/social avatar than a marquee
+ * logo). A gradient can't be chroma-keyed the way a flat background can
+ * without tracing the mark out by hand, which the brief explicitly
+ * rules out — so it's used as supplied, background intact. This is the
+ * one visibly inconsistent logo in the strip (a small coloured rounded
+ * tile among otherwise-transparent wordmarks); ask Datapeeps for a
+ * transparent-background version if that inconsistency matters.
+ *
  * Confirm the exact legal spelling/capitalisation of every name with the
  * founders — it must match how each company writes it themselves.
  */
@@ -129,10 +134,13 @@ export type Client = { name: string; slug: string; url: string; scale?: number; 
 export const clients: Client[] = [
   { name: "Adversus", slug: "adversus", url: "https://adversus.io", format: "png", scale: 1 },
   { name: "Generaxion", slug: "generaxion", url: "https://generaxion.com", format: "png", scale: 1 },
+  { name: "Lemon Marketing", slug: "lemon-marketing", url: "https://lemonmarketing.dk", format: "png", scale: 1 },
+  { name: "Datapeeps", slug: "datapeeps", url: "https://datapeeps.dk", format: "png", scale: 1 },
+  { name: "Partner Team", slug: "partner-team", url: "https://partnerteam.dk", format: "png", scale: 1 },
 ];
 
 export const clientLogos = {
-  heading: "Companies we've booked meetings for",
+  heading: "Companies that trust us",
 } as const;
 
 /**
