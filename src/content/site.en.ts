@@ -118,15 +118,14 @@ export const hero = {
  * was just a lemon photo with no text) was already genuinely transparent,
  * used as supplied. Neither's colours or shapes were altered.
  *
- * Datapeeps' file is NOT a wordmark on a plain background — it's a full
- * gradient brand tile (icon + "DataPeeps" wordmark baked into a blue
- * gradient card, more like an app icon/social avatar than a marquee
- * logo). A gradient can't be chroma-keyed the way a flat background can
- * without tracing the mark out by hand, which the brief explicitly
- * rules out — so it's used as supplied, background intact. This is the
- * one visibly inconsistent logo in the strip (a small coloured rounded
- * tile among otherwise-transparent wordmarks); ask Datapeeps for a
- * transparent-background version if that inconsistency matters.
+ * Datapeeps later supplied a proper vector logo (replacing an earlier
+ * raster file that was a full gradient brand tile, not a marquee-ready
+ * wordmark). The SVG's wordmark path ships with `fill="white"` — built
+ * for a dark surface — so on this light background it would render as
+ * an invisible name next to a visible icon. Recoloured just that fill to
+ * `#0c0c0b` (the site's near-black text colour) to make it legible here;
+ * shapes, the icon's colours and everything else in the file are
+ * untouched — a colour swap on real vector source, not a redraw.
  *
  * Confirm the exact legal spelling/capitalisation of every name with the
  * founders — it must match how each company writes it themselves.
@@ -136,7 +135,7 @@ export const clients: Client[] = [
   { name: "Adversus", slug: "adversus", url: "https://adversus.io", format: "png", scale: 1 },
   { name: "Generaxion", slug: "generaxion", url: "https://generaxion.com", format: "png", scale: 1 },
   { name: "Lemon Marketing", slug: "lemon-marketing", url: "https://lemonmarketing.dk", format: "png", scale: 1 },
-  { name: "Datapeeps", slug: "datapeeps", url: "https://datapeeps.dk", format: "png", scale: 1 },
+  { name: "Datapeeps", slug: "datapeeps", url: "https://datapeeps.dk", format: "svg", scale: 1 },
   { name: "Partner Team", slug: "partner-team", url: "https://partnerteam.dk", format: "png", scale: 1 },
 ];
 
