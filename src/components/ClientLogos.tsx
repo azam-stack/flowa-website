@@ -1,7 +1,7 @@
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { clientLogos, clients, type Client } from "@/content/site.en";
 
-const PIXELS_PER_SECOND = 60;
+const PIXELS_PER_SECOND = 28;
 const INITIAL_SETS_PER_HALF = 3;
 
 /**
