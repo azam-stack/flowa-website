@@ -2,31 +2,22 @@
 # Flowa website — desktop launcher.
 # This .app lives inside the cloned repo; make a Finder *alias* to it on
 # your Desktop (don't move the .app itself).
+#
+# Always opens a visible Terminal window — never runs silently in the
+# background — so it's obvious the click did something, even if it's
+# just "still installing" or "hit an error".
 
 set -e
 REPO_ROOT="$(cd "$(dirname "$0")/../../.." && pwd)"
-cd "$REPO_ROOT"
-
-LOG="/tmp/flowa-website.log"
-
-if [ -d .git ]; then
-  git pull --ff-only origin main >> "$LOG" 2>&1 || true
-fi
-
-if [ ! -d node_modules ] || [ "package-lock.json" -nt "node_modules" ]; then
-  osascript <<EOF
-tell application "Terminal"
-  activate
-  do script "cd \"$REPO_ROOT\" && npm install && npm run dev"
-end tell
-EOF
-  exit 0
-fi
 
 if curl -s -o /dev/null --max-time 1 "http://localhost:5174"; then
   open "http://localhost:5174"
   exit 0
 fi
 
-nohup "${SHELL:-/bin/zsh}" -lc "cd \"$REPO_ROOT\" && npm run dev" > "$LOG" 2>&1 &
-disown
+osascript <<EOF
+tell application "Terminal"
+  activate
+  do script "cd \"$REPO_ROOT\" && ./start.sh"
+end tell
+EOF
