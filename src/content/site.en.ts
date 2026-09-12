@@ -113,9 +113,10 @@ export const hero = {
  *
  * Lemon Marketing, Datapeeps and Partner Team also supplied their own
  * files directly. Partner Team's was flat near-white with no alpha —
- * chroma-keyed the same way as Generaxion's. Lemon Marketing's was
- * already genuinely transparent, just cropped to content. Neither's
- * colours or shapes were altered.
+ * chroma-keyed the same way as Generaxion's. Lemon Marketing's proper
+ * wordmark (the "LEMON MARKETING" lockup, replacing an earlier file that
+ * was just a lemon photo with no text) was already genuinely transparent,
+ * used as supplied. Neither's colours or shapes were altered.
  *
  * Datapeeps' file is NOT a wordmark on a plain background — it's a full
  * gradient brand tile (icon + "DataPeeps" wordmark baked into a blue
