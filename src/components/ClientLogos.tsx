@@ -143,7 +143,7 @@ function LogoLink({ client, ariaHidden, onImgLoad }: { client: Client; ariaHidde
       className="group shrink-0"
     >
       <img
-        src={`/logos/${client.slug}.svg`}
+        src={`/logos/${client.slug}.${client.format ?? "svg"}`}
         alt={ariaHidden ? "" : client.name}
         onLoad={onImgLoad}
         style={{ transform: `scale(${scale})` }}
