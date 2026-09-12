@@ -155,11 +155,6 @@ export function Nav() {
                 {nav.links.pricing}
               </a>
             </li>
-            <li>
-              <a href="#case-studies" onClick={() => menu.closeAll()} className="rounded-lg px-3.5 py-2 text-sm font-medium text-fg/75 transition-colors hover:text-fg">
-                {nav.links.caseStudies}
-              </a>
-            </li>
           </ul>
 
           <div className="hidden lg:block">

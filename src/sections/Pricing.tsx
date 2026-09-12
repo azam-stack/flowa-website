@@ -7,7 +7,7 @@ import { pricing } from "@/content/site.en";
 
 export function Pricing() {
   return (
-    <section id="pricing" className="border-t border-border py-24 md:py-32">
+    <section id="pricing" className="border-t border-border py-12 md:py-14">
       <Container>
         <Reveal>
           <SectionLabel>{pricing.eyebrow}</SectionLabel>
@@ -15,11 +15,11 @@ export function Pricing() {
           <p className="mt-4 max-w-xl text-[17px] leading-relaxed text-muted">{pricing.body}</p>
         </Reveal>
 
-        <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {pricing.tiers.map((tier, i) => (
             <Reveal key={tier.name} delay={i * 60}>
               <div
-                className={`relative flex h-full flex-col rounded-3xl border p-7 ${
+                className={`relative flex h-full flex-col rounded-3xl border p-5 ${
                   tier.popular ? "border-fg bg-fg text-bg" : "border-border bg-card text-fg"
                 }`}
               >
@@ -41,7 +41,7 @@ export function Pricing() {
         </div>
 
         <Reveal delay={200}>
-          <div className="mt-8 rounded-2xl border border-border bg-card p-6">
+          <div className="mt-6 rounded-2xl border border-border bg-card p-6">
             <p className="mb-3 text-sm font-semibold text-fg">{pricing.includedHeading}</p>
             <div className="flex flex-wrap gap-x-8 gap-y-2.5">
               {pricing.included.map((item) => (

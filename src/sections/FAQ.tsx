@@ -6,10 +6,10 @@ import { Reveal } from "@/components/Reveal";
 import { faq } from "@/content/site.en";
 
 export function FAQ() {
-  const [open, setOpen] = useState<number | null>(0);
+  const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-24 md:py-32">
+    <section id="faq" className="py-12 md:py-14">
       <Container>
         <Reveal>
           <SectionLabel>{faq.eyebrow}</SectionLabel>
@@ -17,7 +17,7 @@ export function FAQ() {
         </Reveal>
 
         <Reveal delay={100}>
-          <div className="mt-12 divide-y divide-border border-y border-border">
+          <div className="mt-6 divide-y divide-border border-y border-border">
             {faq.items.map((item, i) => {
               const isOpen = open === i;
               return (
@@ -25,7 +25,7 @@ export function FAQ() {
                   <button
                     onClick={() => setOpen(isOpen ? null : i)}
                     aria-expanded={isOpen}
-                    className="flex w-full items-center justify-between gap-4 py-6 text-left"
+                    className="flex w-full items-center justify-between gap-4 py-[14px] text-left"
                   >
                     <span className="text-[17px] font-semibold text-fg">{item.q}</span>
                     <ChevronDown

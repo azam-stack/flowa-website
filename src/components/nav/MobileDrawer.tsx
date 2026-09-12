@@ -43,11 +43,8 @@ export function MobileDrawer({ open, onClose }: { open: boolean; onClose: () => 
                 </div>
               </div>
             ))}
-            <a href="#pricing" onClick={onClose} className="border-b border-border py-4 text-base font-semibold text-fg">
+            <a href="#pricing" onClick={onClose} className="py-4 text-base font-semibold text-fg">
               {nav.links.pricing}
-            </a>
-            <a href="#case-studies" onClick={onClose} className="py-4 text-base font-semibold text-fg">
-              {nav.links.caseStudies}
             </a>
           </nav>
         </div>

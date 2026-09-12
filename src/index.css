@@ -12,6 +12,12 @@
        and fails WCAG even for large text. This clears 3:1. Display-only —
        buttons, icons and the timeline keep the original accent colour. */
     --flowa-orange-display: #c9741e;
+    /* Darker still, for white TEXT on an orange background (RiskBand
+       heading isn't this — it's white on near-black — but the comparison
+       table's Flowa header cell and any future solid-orange band need
+       this: #C9741E only reaches 3.5:1 for body text and fails there. */
+    --flowa-band: #a85e14;
+    --flowa-ink: #121110;
   }
   html {
     scroll-behavior: smooth;

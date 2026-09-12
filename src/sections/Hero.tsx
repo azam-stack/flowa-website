@@ -7,7 +7,7 @@ import { PipelineVisual } from "./PipelineVisual";
 
 export function Hero() {
   return (
-    <section id="top" className="relative flex min-h-[88vh] items-center overflow-hidden pb-14 pt-28 md:pt-32">
+    <section id="top" className="relative flex min-h-[58vh] items-center overflow-hidden pb-8 pt-20 md:pt-24">
       <DecorativeBlob className="pointer-events-none absolute -bottom-24 -right-24 h-[520px] w-[520px] text-accent/[0.05]" />
       <Container className="relative">
         <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10">

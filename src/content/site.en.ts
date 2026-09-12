@@ -5,6 +5,13 @@
  *
  * `£TBC` marks prices that were DKK in the v1 brief and must NOT be
  * auto-converted — the founder sets the real GBP figures.
+ *
+ * RESTRUCTURE NOTE: the homepage was cut to 11 sections per the WINGM-model
+ * restructure brief. Deleted exports (problems, valueProps, services,
+ * industries, differentiator, pipelineSection, whatSetsUsApart, whyFlowa,
+ * caseStudies, trust) are gone, not commented out — see git history if you
+ * need the old copy. `team`, `signedStatement*`, `peopleSection` are
+ * frozen (section 7, "Founders") and were not touched by this pass.
  */
 
 export const PRICE_TBC = "£TBC" as const;
@@ -13,7 +20,6 @@ export const nav = {
   links: {
     services: "Services",
     industries: "Industries",
-    caseStudies: "Case studies",
     about: "About",
     pricing: "Pricing",
   },
@@ -21,10 +27,10 @@ export const nav = {
   servicesPanel: {
     coreHeading: "Core services",
     core: [
-      { title: "Appointment setting", description: "Qualified meetings with decision-makers, booked straight into your calendar.", href: "#services" },
-      { title: "Lead research", description: "Hand-verified lists of companies that match your ICP.", href: "#services" },
-      { title: "Outbound campaigns", description: "Cold email at scale, built on data that's actually checked.", href: "#services" },
-      { title: "Sales development", description: "An outbound function that runs without you hiring for it.", href: "#services" },
+      { title: "Appointment setting", description: "Qualified meetings with decision-makers, booked straight into your calendar.", href: "#offer" },
+      { title: "Lead research", description: "Hand-verified lists of companies that match your ICP.", href: "#offer" },
+      { title: "Outbound campaigns", description: "Cold email at scale, built on data that's actually checked.", href: "#offer" },
+      { title: "Sales development", description: "An outbound function that runs without you hiring for it.", href: "#offer" },
     ],
     howWeWorkHeading: "How we work",
     howWeWork: [
@@ -34,9 +40,9 @@ export const nav = {
     ],
     bySizeHeading: "By company size",
     bySize: [
-      { title: "Startup", href: "#industries" },
-      { title: "Scale-up", href: "#industries" },
-      { title: "Established B2B", href: "#industries" },
+      { title: "Startup", href: "#contact" },
+      { title: "Scale-up", href: "#contact" },
+      { title: "Established B2B", href: "#contact" },
     ],
     featured: {
       title: "No cure, no pay",
@@ -45,19 +51,21 @@ export const nav = {
       href: "#pricing",
     },
   },
+  // Industries content stays in this mega-menu only — the standalone
+  // "Industries" homepage section was cut in the restructure.
   industriesPanel: [
-    { title: "B2B SaaS", href: "#industries" },
-    { title: "IT & software", href: "#industries" },
-    { title: "Marketing & creative agencies", href: "#industries" },
-    { title: "Professional services", href: "#industries" },
-    { title: "Consulting", href: "#industries" },
-    { title: "Other B2B", href: "#industries" },
+    { title: "B2B SaaS", href: "#contact" },
+    { title: "IT & software", href: "#contact" },
+    { title: "Marketing & creative agencies", href: "#contact" },
+    { title: "Professional services", href: "#contact" },
+    { title: "Consulting", href: "#contact" },
+    { title: "Other B2B", href: "#contact" },
   ],
   aboutPanel: {
     companyHeading: "Company",
     company: [
-      { title: "About Flowa", href: "#about" },
-      { title: "Who we are", href: "#about" },
+      { title: "About Flowa", href: "#team" },
+      { title: "Who we are", href: "#team" },
       { title: "Contact", href: "#contact" },
     ],
     learnHeading: "Learn",
@@ -82,61 +90,108 @@ export const hero = {
   },
 } as const;
 
-export const trust = {
-  // No verified client logos exist yet. Per brief: never ship fake/placeholder
-  // logo boxes — either a real, founder-verified credential line or nothing.
-  credential: "[TODO: add one verifiable credential the founder can confirm — e.g. markets served, meetings booked to date, or niche focus]",
-} as const;
+/**
+ * C1: no client logo strip, not even a placeholder. `ClientLogos` reads
+ * this array and renders nothing at all while it's empty — do not add a
+ * "logos coming soon" caption or a greyed-out box instead of a real logo.
+ * TODO(founders): add real clients here once any exist, as
+ * { name, logoSrc }. An empty array is correct, not a bug.
+ */
+export type Client = { name: string; logoSrc: string };
+export const clients: Client[] = [];
 
-export const problems = {
+/**
+ * Section 2, "Problem" — merges the old six-card Problems grid and the
+ * four-card ValueProps grid into one section, capped at four items per
+ * the restructure brief (1.3).
+ */
+export const problem = {
   eyebrow: "Why Flowa",
-  h2: "Problems we take off your plate",
+  h2: "Outbound that nobody owns doesn't happen.",
   items: [
-    { title: "Unpredictable pipeline", body: "Deals dry up the moment prospecting stops being anyone's full-time job." },
-    { title: "Referral dependency", body: "Growth that relies on word-of-mouth stalls the moment referrals slow down." },
-    { title: "Reps prospecting instead of selling", body: "Your best closers spend their week finding people to talk to, not talking to them." },
-    { title: "A bad experience with a previous agency", body: "Vague reporting, unqualified leads, and a contract that was hard to get out of." },
-    { title: "Lists that go nowhere", body: "Bought data that bounces, annoys the wrong people, or is simply out of date." },
-    { title: "No one owns outbound", body: "It's everyone's job a little and no one's job properly — so it doesn't happen." },
+    { title: "Unpredictable pipeline", body: "Deals dry up the moment prospecting stops being someone's job." },
+    { title: "Reps prospecting instead of selling", body: "Your best closers spend the week finding people to talk to, not talking to them." },
+    { title: "No one owns outbound", body: "It's everyone's job a little and no one's job properly. So it doesn't happen." },
+    { title: "A bad experience with an agency before", body: "Vague reporting, unqualified leads, and a contract that was hard to leave." },
   ],
 } as const;
 
-export const valueProps = {
-  eyebrow: "Why Flowa",
-  h2: "Your sales team shouldn't spend its week looking for meetings.",
-  body: "Flowa handles research and appointment setting, so your team can spend its time on what actually closes deals.",
+/**
+ * Section 3, "Offer" — replaces the old four-card Services grid. The four
+ * service names are folded into one sentence rather than four cards, per
+ * the restructure brief (1.3).
+ */
+export const offer = {
+  eyebrow: "What you get",
+  h2: "Everything that fills your calendar, in one service.",
+  body: "Appointment setting, lead research, outbound campaigns and sales development — one team, one point of contact, one invoice. You don't buy a list or a tool. You buy a calendar full of qualified meetings.",
+} as const;
+
+/**
+ * Section 4, "RiskBand" — copy is verbatim from the restructure brief
+ * (2.1). Check 3 is a required bracketed placeholder, not an oversight —
+ * see PART 6, item 1 of the brief.
+ */
+export const riskBand = {
+  headline: ["If we don't book the meetings,", "you don't pay."],
+  paragraph: "No retainers. No setup fees. No paying for activity, effort or a monthly report. You pay per qualified meeting and nothing else.",
+  checks: [
+    "You set the qualification criteria before we start",
+    "You only pay for meetings that meet them",
+    // TODO(founders): confirm the no-show policy — see PART 6, item 1 of the restructure brief.
+    "[NO-SHOW POLICY — founders to confirm]",
+  ],
+  payoff: "We only get paid when your calendar fills. That's the deal.",
+} as const;
+
+/**
+ * Attached to the base of the Hero (section 1) — not its own section.
+ * Every figure here is a promise the founders need to confirm before
+ * launch — see PART 6, item 3 of the restructure brief.
+ */
+export const commitmentsBar = {
   items: [
-    { n: "01", title: "The right companies", body: "We define your ideal customer profile with you and target research accordingly — not broadly, but correctly." },
-    { n: "02", title: "The right decision-makers", body: "We find the people who can actually say yes — not a generic contact from the website." },
-    { n: "03", title: "Qualified conversations", body: "We talk to prospects directly and professionally, and filter out the ones without real interest or need." },
-    { n: "04", title: "Meetings in the calendar", body: "Only meetings that meet your criteria make it into your calendar — ready for you to take over." },
+    // TODO(founders): confirm this is a promise Flowa will keep.
+    { figure: "24h", label: "Reply to any question, on any working day" },
+    // TODO(founders): confirm this is a promise Flowa will keep.
+    { figure: "2", label: "People on your account. The two who own the company" },
+    // TODO(founders): confirm this is a promise Flowa will keep.
+    { figure: "0", label: "Retainers, setup fees and lock-in" },
   ],
 } as const;
 
-export const pipelineSection = {
-  eyebrow: "The process",
-  h2: "What your pipeline looks like with Flowa",
-  footnote: "Results depend on your industry, target market and offer — we'll give you a realistic range once we understand yours, not before.",
-  stages: ["Prospects", "Conversations", "Qualified meetings", "Opportunities"],
-} as const;
-
-export const differentiator = {
-  eyebrow: "Commercial model",
-  h2: "No cure, no pay.",
-  body: "Flowa is only paid for the qualified meetings we deliver. No meetings, no invoice — it's that simple.",
-  notPayFor: { heading: "You don't pay for", items: ["Scraped lists", "Irrelevant contacts", "Unanswered emails", "Activity reports"] },
-  payFor: { heading: "You pay for", items: ["Qualified B2B meetings", "Relevant decision-makers", "Genuine interest", "Meetings that meet the criteria we agreed"] },
-} as const;
-
+/**
+ * Section 5, "HowItWorks" — rebuilt per the restructure brief (2.3). The
+ * heading ships without a timeframe: no number has been confirmed that
+ * holds on every engagement — see PART 6, item 2 of the restructure brief.
+ */
 export const howItWorks = {
-  eyebrow: "The process",
-  h2: "How we create meetings",
+  eyebrow: "How it works",
+  h2: "From kickoff to your first qualified meeting",
   steps: [
-    { n: "01", title: "Strategy", body: "We define your ICP, target companies and relevant decision-makers together with you." },
-    { n: "02", title: "Research", body: "We identify the companies and people who actually match the profile." },
-    { n: "03", title: "Outreach", body: "We contact prospects directly and professionally — on your behalf, in your tone." },
-    { n: "04", title: "Qualification", body: "We only count meetings that meet the criteria we agreed in advance." },
-    { n: "05", title: "Booking", body: "Qualified meetings land straight in your calendar, ready for the next conversation." },
+    { n: "01", title: "Define who you want to meet", body: "We agree your ideal customer, the job titles worth talking to, and what counts as a qualified meeting." },
+    { n: "02", title: "We build the list by hand", body: "Every company and contact is checked by a person. No purchased lists, no scraped data." },
+    { n: "03", title: "We run the outreach", body: "Email and phone, written and made by us. You see everything that goes out." },
+    { n: "04", title: "You take the meetings", body: "Booked into your calendar, with the context you need before you join." },
+  ],
+} as const;
+
+/**
+ * Section 6, "ComparisonTable" — replaces the old two-column WhyFlowa
+ * table. Rows describe commercial terms only, per C3 of the restructure
+ * brief — never an outcome or a performance claim.
+ */
+export const comparisonTable = {
+  eyebrow: "Comparison",
+  h2: "Why not hire an SDR, or use a traditional agency?",
+  columns: ["Hiring an SDR", "A traditional outbound agency", "Flowa"],
+  rows: [
+    { label: "Cost model", cells: ["Salary, tools, management overhead", "Monthly retainer regardless of output", "Per qualified meeting"] },
+    { label: "Your risk if it doesn't work", cells: ["You've hired someone", "You've paid the retainer", "You've paid nothing"] },
+    { label: "Minimum commitment", cells: ["Employment contract", "Typically 3–6 months", "None"] },
+    { label: "Who does the work", cells: ["One junior, learning your market", "A rotating pod you rarely meet", "Ahmed and Anton. Every time"] },
+    { label: "What you're buying", cells: ["Capacity", "Activity and reports", "Meetings"] },
+    { label: "Getting started", cells: ["Recruit, onboard, train", "Onboarding, then a shared queue", "We start on your list in week one"] },
   ],
 } as const;
 
@@ -146,6 +201,10 @@ export const howItWorks = {
  * `null` rather than render it, so nothing fabricated reaches the page.
  * TODO(founders): supply ahmed.surname, ahmed.linkedin, ahmed.bio,
  * anton.surname, anton.linkedin, anton.bio — see addendum brief Part A/C.
+ *
+ * FROZEN — section 7 ("Founders") in the restructure brief. Do not edit
+ * this export, `signedStatement*`, `peopleSection`, `Team.tsx` or
+ * `TeamPortrait.tsx`; only its position in the page may change.
  */
 export type TeamMember = {
   firstName: string;
@@ -189,97 +248,12 @@ export const signedStatement = {
     "We'd rather run five campaigns properly than twenty badly. That's why we take on a limited number of clients at a time — and why we'll say no if we don't think we can fill your calendar.",
 } as const;
 
-export const whatSetsUsApart = {
-  eyebrow: "What sets us apart",
-  h2: "You'll always know who's calling on your behalf.",
-  intro:
-    "Flowa is deliberately small. When you work with us, you work with the two people whose names are on this page — not an account manager who forwards your feedback to a team you never meet.",
-  blocks: [
-    {
-      title: "Your outreach is written by the people who send it",
-      body: "Every email and every call script is written for your market by us, not generated from a template library and not handed to a junior. If a message isn't working, we know within days, because we're the ones reading the replies.",
-    },
-    {
-      title: "One conversation, not a chain of handovers",
-      body: "No account manager, no ticket queue, no weekly status call that exists to justify a retainer. You get a direct line to the person running your campaign, and an answer the same working day.",
-    },
-    {
-      title: "We only make money when a meeting lands",
-      body: "Our incentive is identical to yours. We don't get paid for volume, for activity reports, or for lists. That's also why we'll tell you early if we don't think your market is a fit for outbound.",
-    },
-    {
-      title: "We do the research by hand",
-      body: "Every company and every contact is checked by a person before anyone is contacted. It's slower than buying a list, and it's the reason the meetings you take are with people who can actually sign.",
-    },
-  ],
-  cta: "Book a call",
-  ctaCaption: "You'll speak to Ahmed or Anton, not a salesperson.",
-} as const;
-
 export const peopleSection = {
   eyebrow: "The team",
   h2: "The two people behind every Flowa campaign",
   intro: "No pods, no offshore team, no rotating SDRs. These are the people who research your market, write your outreach, make the calls and book the meetings.",
   ownsHeading: "What they own",
   bioPending: "Bio coming soon.",
-} as const;
-
-export const services = {
-  eyebrow: "Services",
-  h2: "What you get with Flowa",
-  items: [
-    { title: "Appointment setting", body: "Qualified B2B meetings with relevant decision-makers, delivered straight into your calendar." },
-    { title: "Lead research", body: "Research and identification of the companies and people who match your ideal customer profile." },
-    { title: "Outbound campaigns", body: "Targeted outbound prospecting, tailored to your industry, tone and sales process." },
-    { title: "Sales development", body: "Ongoing support to build a predictable pipeline of qualified opportunities." },
-  ],
-} as const;
-
-export const industries = {
-  eyebrow: "Who we work with",
-  h2: "More relevant conversations, with the companies you actually want to sell to.",
-  items: ["B2B SaaS", "IT & software", "Marketing & creative agencies", "Professional services", "Consulting", "Other B2B"],
-} as const;
-
-export const caseStudies = {
-  eyebrow: "Case studies",
-  h2: "Results from client partnerships",
-  note: "Structure ready for real figures — the content below is placeholder until cases are cleared for publication.",
-  readMore: "Read the case study",
-  items: [
-    {
-      client: "[Client name]",
-      industry: "[Industry]",
-      quote: "From unpredictable pipeline to qualified sales meetings.",
-      metrics: [
-        { value: "[XX]", label: "meetings booked" },
-        { value: "[XX%]", label: "qualification rate" },
-      ],
-    },
-    {
-      client: "[Client name]",
-      industry: "[Industry]",
-      quote: "[Client quote to be inserted]",
-      metrics: [
-        { value: "[XX]", label: "meetings booked" },
-        { value: "[XX%]", label: "qualification rate" },
-      ],
-    },
-  ],
-} as const;
-
-export const whyFlowa = {
-  eyebrow: "Comparison",
-  h2: "Not more leads. Better meetings.",
-  columns: { traditional: "Traditional lead generation", flowa: "Flowa" },
-  rows: [
-    { label: "Focus", traditional: "Volume", flowa: "Quality and relevance" },
-    { label: "Qualification", traditional: "Rarely, if at all", flowa: "Every meeting qualified against agreed criteria" },
-    { label: "Decision-makers", traditional: "Generic contacts", flowa: "Relevant decision-makers" },
-    { label: "Commercial model", traditional: "Pay for activity or leads", flowa: "No cure, no pay — pay for meetings" },
-    { label: "Transparency", traditional: "Limited insight into the process", flowa: "Full visibility into strategy and progress" },
-    { label: "Outcome", traditional: "A long list to work through", flowa: "A calendar you can actually sell from" },
-  ],
 } as const;
 
 export const pricing = {
@@ -298,6 +272,8 @@ export const pricing = {
   included: ["Strategy & ICP definition", "Targeted research", "Direct outreach", "Qualification against your criteria", "Meetings delivered to your calendar"],
 } as const;
 
+/** Section 9, "Faq" — trimmed to six questions per the restructure brief
+ * acceptance test (Part 4). */
 export const faq = {
   eyebrow: "Questions",
   h2: "Frequently asked questions",
@@ -305,25 +281,23 @@ export const faq = {
     { q: "How does no cure, no pay work?", a: "You only pay for meetings that meet the criteria we agree in advance — no meetings, no invoice. There's no charge for leads, calls or activity." },
     { q: "Who contacts our prospects?", a: "Ahmed and Anton. No one else speaks to your market on your behalf — no call centre, no rotating team of junior SDRs." },
     { q: "What counts as a qualified meeting?", a: "We agree this with you concretely before we start — typically based on role or decision-making authority, genuine interest, and a match with your ICP. The criteria are written down, so there's no ambiguity later." },
-    { q: "Who do you contact on our behalf?", a: "We contact decision-makers at companies that match the customer profile we define together with you — never a random or generic list." },
-    { q: "How do you find the companies?", a: "Through structured research targeted at your ICP: industry, size, geography and any other criteria you define with us." },
-    { q: "Which companies do you work with?", a: "Primarily B2B companies in SaaS, professional services, IT/software, marketing and consulting — but we always assess the specific fit." },
-    { q: "How quickly can we start?", a: "After an initial call we agree strategy and ICP, after which onboarding can typically begin within a short timeframe. The exact timeline depends on your industry and complexity." },
     { q: "What happens if a meeting is cancelled or a prospect doesn't show?", a: "[Placeholder — insert Flowa's actual policy for cancelled or no-show meetings here.]" },
     { q: "Is there a minimum term?", a: "[Placeholder — insert Flowa's actual notice/contract terms here.]" },
+    { q: "How quickly can we start?", a: "After an initial call we agree strategy and ICP, after which onboarding can typically begin within a short timeframe. The exact timeline depends on your industry and complexity." },
   ],
 } as const;
 
+/**
+ * Section 10, "FinalCta" — merged with the old standalone Contact form
+ * section (the restructure brief's 11-section table has no separate
+ * "Contact" row; the booking form now lives inside this section, which
+ * answers "How do I start?"). The mailto/honeypot logic itself is
+ * unchanged from before the restructure.
+ */
 export const finalCta = {
-  h2: "Ready for more relevant sales conversations?",
-  body: "Let's talk about your target market, ideal customers and meeting goals — no obligation.",
-  cta: "Book a call",
-} as const;
-
-export const contact = {
-  eyebrow: "Contact",
-  h2: "Book a call",
-  body: "Fill in the form and we'll come back to you as soon as possible to find a time that works.",
+  eyebrow: "Get started",
+  h2: "Ready to fill your calendar?",
+  body: "Tell us about your ideal customer and we'll come back to you within one working day to find a time that works.",
   email: "flowameetings@gmail.com",
   linkedin: "Flowa on LinkedIn",
   fields: {
@@ -349,5 +323,5 @@ export const footer = {
 export const meta = {
   title: "Flowa — Creating meetings. That create opportunities.",
   description: "Flowa helps B2B companies get qualified sales meetings with the decision-makers they actually want to sell to. No cure, no pay — you only pay for meetings that meet your criteria.",
-  keywords: "B2B appointment setting, appointment setting agency UK, B2B lead generation London, sales meetings booked for you, outbound agency UK, cold email agency, pay per qualified meeting",
+  keywords: "B2B appointment setting, appointment setting agency UK, B2B lead generation London, qualified sales meetings, outbound agency UK, cold email agency, pay per qualified meeting",
 } as const;

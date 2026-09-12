@@ -16,7 +16,15 @@ export default {
           fg: "#0C0C0B",
           /** Deepened for display-size type only — see index.css. */
           display: "var(--flowa-orange-display)",
+          /** Deepened further still, for white text ON an orange fill
+           * (comparison-table header cell). #EE9E47 and even
+           * --flowa-orange-display are not safe as a solid background
+           * under white text — see index.css. */
+          band: "var(--flowa-band)",
         },
+        /** Near-black used specifically for the RiskBand / comparison
+         * table — a fraction darker than `fg`/`ink`, per spec. */
+        riskband: "var(--flowa-ink)",
         ink: {
           DEFAULT: "#0C0C0B",
           soft: "#171613",

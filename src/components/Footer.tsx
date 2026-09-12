@@ -1,17 +1,16 @@
 import { Logo } from "./Logo";
 import { Container } from "./Container";
-import { nav, footer, contact, hero } from "@/content/site.en";
+import { nav, footer, finalCta, hero } from "@/content/site.en";
 
 const LINKS = [
-  { href: "#services", label: nav.links.services },
-  { href: "#about", label: nav.links.about },
-  { href: "#case-studies", label: nav.links.caseStudies },
+  { href: "#offer", label: nav.links.services },
+  { href: "#team", label: nav.links.about },
   { href: "#contact", label: nav.bookCall },
 ];
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-bg py-14">
+    <footer className="border-t border-border bg-bg py-8">
       <Container>
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div className="max-w-xs">
@@ -40,13 +39,13 @@ export function Footer() {
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.1em] text-muted">{footer.contactHeading}</p>
               <ul className="space-y-2">
                 <li>
-                  <a href={`mailto:${contact.email}`} className="text-sm text-fg/80 hover:text-fg">
-                    {contact.email}
+                  <a href={`mailto:${finalCta.email}`} className="text-sm text-fg/80 hover:text-fg">
+                    {finalCta.email}
                   </a>
                 </li>
                 <li>
                   <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" className="text-sm text-fg/80 hover:text-fg">
-                    {contact.linkedin}
+                    {finalCta.linkedin}
                   </a>
                 </li>
               </ul>
@@ -54,7 +53,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-2 border-t border-border pt-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-6 flex flex-col gap-2 border-t border-border pt-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Flowa. {footer.rights}</p>
         </div>
       </Container>
