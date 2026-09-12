@@ -91,14 +91,40 @@ export const hero = {
 } as const;
 
 /**
- * C1: no client logo strip, not even a placeholder. `ClientLogos` reads
- * this array and renders nothing at all while it's empty — do not add a
- * "logos coming soon" caption or a greyed-out box instead of a real logo.
- * TODO(founders): add real clients here once any exist, as
- * { name, logoSrc }. An empty array is correct, not a bug.
+ * Client logo marquee (supersedes C1 — Flowa now has real clients, so this
+ * section ships once logos exist). `ClientLogos` reads this array and
+ * renders nothing at all while it's empty — do not add a "logos coming
+ * soon" caption or a greyed-out box instead of a real logo.
+ *
+ * `slug` maps to `public/logos/{slug}.svg`. `scale` is an optional 0.8–1.3
+ * per-logo optical correction (default 1.0) — set by eye once the real
+ * mark is in place, since a wordmark and a mark+wordmark lockup at
+ * identical pixel heights read as mismatched.
+ *
+ * TODO: the five clients below are named in the brief but their official
+ * SVG logos could not be fetched — outbound network access to their
+ * domains is blocked by the same organisation egress policy that blocks
+ * every other arbitrary external host in this environment (confirmed via
+ * 403 CONNECT on adversus.io and generaxion.com). Get each company's
+ * official SVG (their press/brand page, or request one directly — never
+ * a screenshot, trace, or aggregator-site pull) and confirmed permission
+ * to use it, drop the files at `public/logos/{slug}.svg`, then populate:
+ * [
+ *   { name: "Adversus", slug: "adversus", url: "https://adversus.io" },
+ *   { name: "Generaxion", slug: "generaxion", url: "https://generaxion.com" },
+ *   { name: "Lemon Marketing", slug: "lemon-marketing", url: "https://lemonmarketing.dk" },
+ *   { name: "Datapeeps", slug: "datapeeps", url: "https://datapeeps.dk" },
+ *   { name: "Partner Team", slug: "partner-team", url: "https://partnerteam.dk" },
+ * ]
+ * Confirm the exact legal spelling/capitalisation of each name with the
+ * founders first — it must match how each company writes it themselves.
  */
-export type Client = { name: string; logoSrc: string };
+export type Client = { name: string; slug: string; url: string; scale?: number };
 export const clients: Client[] = [];
+
+export const clientLogos = {
+  heading: "Companies we've booked meetings for",
+} as const;
 
 /**
  * Section 2, "Problem" — merges the old six-card Problems grid and the

@@ -3,14 +3,15 @@ import { Reveal } from "@/components/Reveal";
 import { commitmentsBar } from "@/content/site.en";
 
 /**
- * Attached to the base of the Hero (section 1) — not its own top-level
- * section, per the restructure brief (2.2). Commitments, not history:
- * Flowa has no client base or performance record to quote a stat bar
- * from (see PART 0 of the restructure brief).
+ * Attached directly above RiskBand (section 4) — not its own top-level
+ * section. Moved out of the hero once ClientLogos took its place there
+ * (client-logo-marquee brief). Commitments, not history: Flowa has no
+ * client base or performance record to quote a stat bar from (see PART 0
+ * of the restructure brief).
  */
 export function CommitmentsBar() {
   return (
-    <Container className="mt-10">
+    <Container className="my-10 md:my-14">
       <Reveal className="grid grid-cols-1 gap-6 sm:grid-cols-3">
         {commitmentsBar.items.map((item) => (
           <div key={item.label} className="flex flex-col items-center rounded-2xl border border-black/[0.06] bg-white p-6 text-center">

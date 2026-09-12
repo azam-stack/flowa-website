@@ -1,6 +1,7 @@
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { CommitmentsBar } from "@/components/CommitmentsBar";
+import { ClientLogos } from "@/components/ClientLogos";
 import { Hero } from "@/sections/Hero";
 import { Problem } from "@/sections/Problem";
 import { Offer } from "@/sections/Offer";
@@ -12,26 +13,26 @@ import { Pricing } from "@/sections/Pricing";
 import { FAQ } from "@/sections/FAQ";
 import { FinalCTA } from "@/sections/FinalCTA";
 
-// ClientLogos (C1 of the restructure brief) is deliberately NOT mounted:
-// content.clients is empty, and the brief requires the section not be
-// mounted at all in that state — not rendered-but-empty. The component
-// stays in the codebase (src/components/ClientLogos.tsx) for when real
-// clients exist.
+// ClientLogos renders nothing while content.clients is empty (currently
+// the case — see the TODO on `clients` in site.en.ts), so mounting it
+// unconditionally here is safe: it's a no-op until real logos are wired
+// in, at which point it's already in place at the base of the hero.
 
 export default function App() {
   return (
     <div className="min-h-screen overflow-x-hidden bg-bg text-fg">
       <Nav />
       <main>
-        {/* 1. Hero, with CommitmentsBar attached to its base — one section, not two */}
+        {/* 1. Hero, with ClientLogos attached to its base — one section, not two */}
         <Hero />
-        <CommitmentsBar />
+        <ClientLogos />
 
         {/* 2 */}
         <Problem />
         {/* 3 */}
         <Offer />
-        {/* 4 */}
+        {/* 4. CommitmentsBar attached directly above RiskBand — one section, not two */}
+        <CommitmentsBar />
         <RiskBand />
         {/* 5 */}
         <HowItWorks />
