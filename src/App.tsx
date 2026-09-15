@@ -1,37 +1,39 @@
+import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
-import { ClientLogos } from "@/components/ClientLogos";
-import { Hero } from "@/sections/Hero";
-import { Offer } from "@/sections/Offer";
-import { RiskBand } from "@/sections/RiskBand";
-import { HowItWorks } from "@/sections/HowItWorks";
-import { ComparisonTable } from "@/sections/ComparisonTable";
-import { Team } from "@/sections/Team";
-import { Pricing } from "@/sections/Pricing";
-import { GetStarted } from "@/sections/GetStarted";
+import { ScrollManager } from "@/components/ScrollManager";
+import { HomePage } from "@/pages/HomePage";
+import { ServicesHubPage } from "@/pages/ServicesHubPage";
+import { ServicePage } from "@/pages/ServicePage";
+import { CasesPage } from "@/pages/CasesPage";
+import { NotFoundPage } from "@/pages/NotFoundPage";
+import { getService } from "@/content/services";
 
-/**
- * In the order a visitor asks: what is it (Hero) · who we've booked for
- * (logos) · what do I get (Offer) · how does it work · what do I risk
- * (the deal) · why not an SDR or agency · who does the work · what does
- * it cost · what am I unsure about, and how do I start.
- */
+/** /services/:slug renders the template for any live service in the registry; anything else is a 404. */
+function ServiceRoute() {
+  const { slug } = useParams();
+  const service = getService(slug);
+  return service ? <ServicePage key={service.slug} service={service} /> : <NotFoundPage />;
+}
+
 export default function App() {
+  const basename = import.meta.env.BASE_URL.replace(/\/$/, "");
   return (
-    <div className="min-h-screen overflow-x-hidden bg-bg text-fg">
-      <Nav />
-      <main id="main" tabIndex={-1} className="outline-none">
-        <Hero />
-        <ClientLogos />
-        <Offer />
-        <HowItWorks />
-        <RiskBand />
-        <ComparisonTable />
-        <Team />
-        <Pricing />
-        <GetStarted />
-      </main>
-      <Footer />
-    </div>
+    <BrowserRouter basename={basename}>
+      <ScrollManager />
+      <div className="min-h-screen overflow-x-hidden bg-bg text-fg">
+        <Nav />
+        <main id="main" tabIndex={-1} className="outline-none">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/services" element={<ServicesHubPage />} />
+            <Route path="/services/:slug" element={<ServiceRoute />} />
+            <Route path="/cases" element={<CasesPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 }

@@ -1,5 +1,6 @@
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useMagnetic } from "@/hooks/useMagnetic";
 
 /**
@@ -56,12 +57,29 @@ interface LinkButtonProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   children: ReactNode;
 }
 
-export function LinkButton({ variant = "primary", size = "md", arrow = false, magnetic = false, className = "", children, ...rest }: LinkButtonProps) {
+/** Internal routes ("/services/…", "/#pricing") go through the router; anchors, mailto and external URLs stay plain links. */
+export function isRouteHref(href: string | undefined): href is string {
+  return typeof href === "string" && href.startsWith("/") && !href.startsWith("//");
+}
+
+export function LinkButton({ variant = "primary", size = "md", arrow = false, magnetic = false, className = "", children, href, ...rest }: LinkButtonProps) {
   const ref = useMagnetic<HTMLAnchorElement>(magnetic ? 0.28 : 0);
-  return (
-    <a ref={magnetic ? ref : undefined} className={classes(variant, size, className)} {...rest}>
+  const inner = (
+    <>
       <Label>{children}</Label>
       {arrow && <ArrowRight size={16} className="transition-transform duration-[240ms] ease-flowa group-hover:translate-x-[3px] motion-reduce:transition-none" aria-hidden="true" />}
+    </>
+  );
+  if (isRouteHref(href)) {
+    return (
+      <Link ref={magnetic ? ref : undefined} to={href} className={classes(variant, size, className)} {...rest}>
+        {inner}
+      </Link>
+    );
+  }
+  return (
+    <a ref={magnetic ? ref : undefined} href={href} className={classes(variant, size, className)} {...rest}>
+      {inner}
     </a>
   );
 }

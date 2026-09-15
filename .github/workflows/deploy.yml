@@ -33,8 +33,10 @@ jobs:
           # Sub-path when served from <user>.github.io/<repo>/. Set to "/"
           # (or remove) once the site runs on its own domain.
           VITE_BASE: /flowa-website/
-          # Optional form delivery endpoint (see README → Form delivery).
-          VITE_FORM_ENDPOINT: ${{ secrets.VITE_FORM_ENDPOINT }}
+          # Lead endpoint (backend/ worker), booking link and analytics sink (see README).
+          VITE_CONTACT_ENDPOINT: ${{ vars.VITE_CONTACT_ENDPOINT }}
+          VITE_BOOKING_URL: ${{ vars.VITE_BOOKING_URL }}
+          VITE_ANALYTICS_ENDPOINT: ${{ vars.VITE_ANALYTICS_ENDPOINT }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

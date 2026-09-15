@@ -17,75 +17,40 @@
 export const PRICE_TBC = "£TBC" as const;
 
 /**
- * Anchor navigation. Every link points at a section that exists on this
- * page — the mega-menu (src/components/nav/) is kept in the codebase but
- * unmounted until there are real sub-pages for it to point at.
+ * Primary navigation. Route links ("/services", "/cases") and section
+ * links ("/#how-it-works") both go through the router; a section link on
+ * another page navigates there first and then scrolls. The Services item
+ * opens the mega-menu; its service rows come from the service registry
+ * (src/content/services), never from a second list here.
  */
 export const nav = {
-  anchors: [
-    { label: "Services", href: "#offer", sectionId: "offer" },
-    { label: "How it works", href: "#how-it-works", sectionId: "how-it-works" },
-    { label: "Pricing", href: "#pricing", sectionId: "pricing" },
-    { label: "Team", href: "#team", sectionId: "team" },
-    { label: "FAQ", href: "#faq", sectionId: "faq" },
+  primary: [
+    { key: "services", label: "Services", href: "/services", menu: true },
+    { key: "how-it-works", label: "How it works", href: "/#how-it-works" },
+    { key: "who-we-help", label: "Who we help", href: "/#who-we-help" },
+    { key: "cases", label: "Cases", href: "/cases" },
+    { key: "about", label: "About", href: "/#team" },
   ],
-  links: {
-    services: "Services",
-    industries: "Industries",
-    about: "About",
-    pricing: "Pricing",
-  },
   bookCall: "Book a call",
   skipToContent: "Skip to content",
   menuOpen: "Open menu",
   menuClose: "Close menu",
-  servicesPanel: {
-    coreHeading: "Core services",
-    core: [
-      { title: "Appointment setting", description: "Qualified meetings with decision-makers, booked straight into your calendar.", href: "#offer" },
-      { title: "Lead research", description: "Hand-verified lists of companies that match your ICP.", href: "#offer" },
-      { title: "Outbound campaigns", description: "Cold email at scale, built on data that's actually checked.", href: "#offer" },
-      { title: "Sales development", description: "An outbound function that runs without you hiring for it.", href: "#offer" },
+  megaMenu: {
+    servicesHeading: "Services",
+    allServices: "All services",
+    howItWorksHeading: "How it works",
+    howItWorks: [
+      { label: "Research", href: "/#how-it-works" },
+      { label: "Reach", href: "/#how-it-works" },
+      { label: "Qualify", href: "/services/appointment-setting#qualification" },
+      { label: "Book", href: "/#how-it-works" },
     ],
-    howWeWorkHeading: "How we work",
-    howWeWork: [
-      { title: "Our process", href: "#how-it-works" },
-      { title: "Qualification criteria", href: "#faq" },
-      { title: "Reporting & transparency", href: "#faq" },
+    whyHeading: "Why Flowa",
+    why: [
+      { title: "No cure. No pay.", body: "You pay per qualified meeting. Nothing else.", href: "/#pricing" },
+      { title: "Qualified meetings.", body: "Five written checks before anything is booked.", href: "/services/appointment-setting#qualification" },
+      { title: "Human conversations.", body: "Two founders. No call centre, no rotating pod.", href: "/#team" },
     ],
-    bySizeHeading: "By company size",
-    bySize: [
-      { title: "Startup", href: "#contact" },
-      { title: "Scale-up", href: "#contact" },
-      { title: "Established B2B", href: "#contact" },
-    ],
-    featured: {
-      title: "No cure, no pay",
-      body: "You pay per qualified meeting. Nothing else.",
-      linkLabel: "See pricing",
-      href: "#pricing",
-    },
-  },
-  // Industries content stays in this mega-menu only — the standalone
-  // "Industries" homepage section was cut in the restructure.
-  industriesPanel: [
-    { title: "B2B SaaS", href: "#contact" },
-    { title: "IT & software", href: "#contact" },
-    { title: "Marketing & creative agencies", href: "#contact" },
-    { title: "Professional services", href: "#contact" },
-    { title: "Consulting", href: "#contact" },
-    { title: "Other B2B", href: "#contact" },
-  ],
-  aboutPanel: {
-    companyHeading: "Company",
-    company: [
-      { title: "About Flowa", href: "#team" },
-      { title: "Who we are", href: "#team" },
-      { title: "Contact", href: "#contact" },
-    ],
-    learnHeading: "Learn",
-    // No blog exists yet — do not link an empty blog. Add items here once content exists.
-    learn: [] as { title: string; href: string }[],
   },
 } as const;
 
@@ -195,11 +160,13 @@ export const offer = {
   h2: "Everything that fills your calendar, in one service.",
   body: "Appointment setting, lead research, outbound campaigns and sales development — one team, one point of contact, one invoice. You don't buy a list or a tool. You buy a calendar full of qualified meetings.",
   ctaSecondary: "See pricing",
-  servicesHeading: "The four things we do",
+  explore: "Read more",
+  servicesHeading: "What we do",
   services: [
     { id: "appointment-setting", title: "Appointment setting", description: "Qualified meetings with decision-makers, booked straight into your calendar." },
     { id: "lead-research", title: "Lead research", description: "Hand-verified lists of companies that match your ICP." },
-    { id: "outbound-campaigns", title: "Outbound campaigns", description: "Cold email and phone, built on data that's actually checked." },
+    { id: "cold-calling", title: "Cold calling", description: "Direct conversations with decision-makers, made by the founders." },
+    { id: "cold-email", title: "Cold email", description: "Targeted sequences built on data that's actually checked, every reply handled by a person." },
     { id: "sales-development", title: "Sales development", description: "An outbound function that runs without you hiring for it." },
   ],
 } as const;
@@ -424,11 +391,110 @@ export const finalCta = {
 } as const;
 
 export const footer = {
-  navigationHeading: "Navigation",
+  servicesHeading: "Services",
+  companyHeading: "Company",
   contactHeading: "Contact",
+  legalHeading: "Legal",
+  company: [
+    { label: "About", href: "/#team" },
+    { label: "How it works", href: "/#how-it-works" },
+    { label: "Who we help", href: "/#who-we-help" },
+    { label: "Cases", href: "/cases" },
+    { label: "Contact", href: "#contact" },
+  ],
+  /**
+   * Privacy and terms pages. Empty until the founders supply the legal
+   * text; the column is omitted while empty rather than linking to a
+   * page that does not exist. TODO(founders).
+   */
+  legal: [] as { label: string; href: string }[],
+  cta: { heading: "Ready to create more opportunities?", body: "Tell us who you sell to. Ahmed or Anton will reply within one working day." },
   rights: "All rights reserved.",
   /** TODO(founders): LinkedIn company page URL. The link is omitted while null. */
   linkedinUrl: null as string | null,
+} as const;
+
+/**
+ * "Who we help": a fit description, not an industry list. Nothing here is
+ * a customer claim; the verticals named are those of the clients whose
+ * logos are on the page.
+ */
+export const whoWeHelp = {
+  eyebrow: "Who we help",
+  h2: "B2B companies whose sales start with a conversation.",
+  intro: "Flowa works when a meeting with the right person is worth real money to you, and when that person can be described before we start. If that is you, we are a fit. If not, we will say so on the first call.",
+  fitHeading: "A good fit",
+  fit: [
+    { title: "You sell B2B", body: "Your deals start with a conversation between people, not a checkout." },
+    { title: "Your ICP can be written down", body: "Industries, company sizes and the roles worth talking to, agreed before outreach starts." },
+    { title: "A meeting has a value", body: "One qualified meeting with a decision-maker is worth more to you than a month of activity reports." },
+    { title: "You want meetings, not a report", body: "Your team should be in conversations, not building lists and chasing replies." },
+  ],
+  lessHeading: "Less of a fit",
+  less: "Consumer products, self-serve tools with no sales conversation, and offers where the buyer cannot be named in advance.",
+  soFarHeading: "Where we have booked meetings so far",
+  soFar: ["Software and SaaS", "Marketing and creative agencies", "Data and consulting"],
+} as const;
+
+/**
+ * The operator section on the appointment-setting page: the person
+ * behind the system. Copy only says what the team export already says.
+ */
+export const operator = {
+  eyebrow: "The person behind the system",
+  h2: "Real expertise behind every meeting.",
+  body: "Every list, every sequence and every qualification decision on your engagement is made by a founder, not handed to a pod. Ahmed builds the targeting and the outreach; Anton makes the calls and books the meetings. The system is theirs, and so is the accountability.",
+  note: "That is also why Flowa takes on a limited number of clients at a time.",
+} as const;
+
+/** Labels for a statistic's source type. Rendered beside every number so a target or benchmark is never read as a result. */
+export const statSources = {
+  verified: "Flowa result",
+  benchmark: "Industry benchmark",
+  target: "Flowa target",
+  process: "How we work",
+} as const;
+
+/** The shared lead form: one field set, one set of messages, every page. */
+export const leadForm = {
+  fields: {
+    firstName: "First name",
+    lastName: "Last name",
+    email: "Business email",
+    phone: "Phone",
+    company: "Company",
+    jobTitle: "Job title",
+    companySize: "Company size",
+    industry: "Industry",
+    website: "Company website",
+    goal: "What are you looking to achieve?",
+    goalPlaceholder: "A sentence on your offer, the decision-makers you want to meet and the volume you have in mind",
+    preferredTiming: "Preferred meeting timing",
+    optional: "optional",
+    select: "Select",
+  },
+  errors: {
+    required: "Please fill this in.",
+    email: "That doesn't look like a business email address.",
+    phone: "That doesn't look like a phone number.",
+    website: "That doesn't look like a website address.",
+    invalid: "Please choose one of the options.",
+    summary: "A few fields need attention.",
+    network: "We couldn't reach our server, so nothing was sent. Check your connection and try again, or write to us at",
+    timeout: "The server took too long to answer, so we can't confirm it arrived. Try again, or write to us at",
+    server: "Something went wrong on our side and your request wasn't sent. Try again, or write to us at",
+    rateLimited: "That's a few attempts in a row. Give it a minute, or write to us at",
+    duplicate: "We already have this request. Ahmed or Anton will reply within one working day.",
+  },
+  submit: "Fill my calendar",
+  sending: "Sending…",
+  retry: "Try again",
+  privacy: "We use what you send us only to reply to you. Nothing is shared or added to a list.",
+  successTitle: "On it. Ahmed or Anton will reply within one working day.",
+  successBody: "You'll get a reply from",
+  mailtoTitle: "We've opened your email client with the details filled in.",
+  mailtoBody: "Press send there and it reaches us. If nothing opened, write to us directly at",
+  sendAnother: "Send another request",
 } as const;
 
 export const meta = {

@@ -1,14 +1,37 @@
-// Fails the build if any user-facing string in src/content/site.en.ts
-// still contains a bracketed placeholder like "[Company name]" or
-// "[NO-SHOW POLICY — founders to confirm]", or if pricing is in tiers
-// mode while a tier price is still £TBC. Missing content must be omitted
-// from the page, never shown as a note to the founders.
-import { pathToFileURL } from "node:url";
+// Fails the build if any user-facing string in the content modules still
+// contains a bracketed placeholder like "[Company name]", if pricing is in
+// tiers mode while a tier price is still £TBC, if a statistic claims to be
+// a benchmark without naming its source, or if a case study would show
+// metrics without being verified. Missing content must be omitted from
+// the page, never shown as a note to the founders.
 import path from "node:path";
+import { pathToFileURL } from "node:url";
+import { build } from "esbuild";
 import fs from "node:fs";
 
-const file = path.resolve(process.cwd(), "src/content/site.en.ts");
-const content = await import(pathToFileURL(file).href);
+const root = process.cwd();
+const tmp = path.join(root, "node_modules", ".flowa-content-check.mjs");
+fs.writeFileSync(
+  path.join(root, "node_modules", ".flowa-content-entry.ts"),
+  `export * as site from "@/content/site.en";
+export * as hub from "@/content/services-hub";
+export * as cases from "@/content/cases";
+export * as demo from "@/content/demo";
+export { services } from "@/content/services";`,
+);
+await build({
+  entryPoints: [path.join(root, "node_modules", ".flowa-content-entry.ts")],
+  bundle: true,
+  format: "esm",
+  platform: "node",
+  outfile: tmp,
+  alias: { "@": path.join(root, "src") },
+  define: { "import.meta.env": JSON.stringify({ BASE_URL: "/", DEV: false, PROD: true, MODE: "production" }) },
+  logLevel: "silent",
+});
+const content = await import(pathToFileURL(tmp).href);
+fs.rmSync(tmp, { force: true });
+fs.rmSync(path.join(root, "node_modules", ".flowa-content-entry.ts"), { force: true });
 
 const PLACEHOLDER = /\[[^\]]+\]/;
 const problems = [];
@@ -23,38 +46,38 @@ function walk(value, trail) {
   }
 }
 
-for (const [name, value] of Object.entries(content)) {
+for (const [name, value] of Object.entries(content.site)) {
   if (name === "PRICE_TBC") continue;
-  walk(value, name);
+  walk(value, `site.${name}`);
+}
+walk(content.hub, "servicesHub");
+walk(content.cases, "cases");
+walk(content.demo, "demo");
+walk(content.services, "services");
+
+const pricing = content.site.pricing;
+if (pricing?.mode === "tiers") {
+  for (const tier of pricing.tiers) {
+    if (tier.price === content.site.PRICE_TBC) problems.push(`pricing.tiers (${tier.name}): price is ${content.site.PRICE_TBC} while mode is "tiers"`);
+  }
+  if (pricing.tiers.some((t) => t.popular) && !pricing.popularBasis) problems.push(`pricing: a tier is marked popular but popularBasis is null`);
 }
 
-if (content.pricing?.mode === "tiers") {
-  for (const tier of content.pricing.tiers) {
-    if (tier.price === content.PRICE_TBC) problems.push(`pricing.tiers (${tier.name}): price is ${content.PRICE_TBC} while mode is "tiers"`);
+// Statistics: a benchmark must name its source; a verified stat must have a value or be null (pending), never a placeholder word.
+for (const s of content.services) {
+  for (const stat of s.stats.items) {
+    if (stat.sourceType === "benchmark" && !stat.source) problems.push(`services/${s.slug} stat "${stat.label}": benchmark without a source`);
+    if (!["verified", "benchmark", "target", "process"].includes(stat.sourceType)) problems.push(`services/${s.slug} stat "${stat.label}": unknown sourceType`);
+    if (typeof stat.value === "string" && /x%|tbd|tbc|\?/i.test(stat.value)) problems.push(`services/${s.slug} stat "${stat.label}": value "${stat.value}" is a placeholder; use null until verified`);
   }
-  if (content.pricing.tiers.some((t) => t.popular) && !content.pricing.popularBasis) {
-    problems.push(`pricing: a tier is marked popular but popularBasis is null`);
+  if (s.system) {
+    for (const n of s.system.nodes) if (!["current", "supporting", "future"].includes(n.status)) problems.push(`services/${s.slug} node "${n.label}": unknown status`);
   }
 }
 
-// The FAQPage JSON-LD in index.html must say exactly what the FAQ section
-// says — search engines show the structured answers, visitors see the
-// rendered ones, and the two drift silently otherwise.
-const html = fs.readFileSync(path.resolve(process.cwd(), "index.html"), "utf8");
-const faqLd = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
-  .map((m) => JSON.parse(m[1]))
-  .find((d) => d["@type"] === "FAQPage");
-if (!faqLd) {
-  problems.push("index.html: no FAQPage JSON-LD block found");
-} else {
-  const ld = faqLd.mainEntity.map((q) => [q.name, q.acceptedAnswer.text]);
-  const site = content.faq.items.map((f) => [f.q, f.a]);
-  if (JSON.stringify(ld) !== JSON.stringify(site)) {
-    problems.push(`index.html FAQPage JSON-LD (${ld.length} items) does not match faq.items in site.en.ts (${site.length} items) — update the JSON-LD`);
-    site.forEach(([q, a], i) => {
-      if (!ld[i] || ld[i][0] !== q || ld[i][1] !== a) problems.push(`  faq.items[${i}] "${q}" differs`);
-    });
-  }
+// Cases: metrics only with verified === true is enforced by the component; here we refuse a verified case with no client-approved content.
+for (const c of content.cases.caseStudies) {
+  if (c.verified && (!c.testimonial || !c.outcomes.length)) problems.push(`cases: "${c.client}" is marked verified but has no outcomes or testimonial`);
 }
 
 if (problems.length) {
@@ -63,4 +86,4 @@ if (problems.length) {
   console.error("");
   process.exit(1);
 }
-console.log("content ok: no placeholders in src/content/site.en.ts; FAQ JSON-LD in sync");
+console.log(`content ok: no placeholders across site, services (${content.services.length}), hub, cases, demo`);

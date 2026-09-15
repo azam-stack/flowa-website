@@ -1,0 +1,18 @@
+# Cloudflare Worker for the Flowa lead endpoint.
+#   cd backend && npx wrangler kv namespace create LEADS   (paste the id below)
+#   npx wrangler secret put RESEND_API_KEY
+#   npx wrangler deploy
+name = "flowa-contact"
+main = "src/worker.ts"
+compatibility_date = "2025-01-01"
+
+[[kv_namespaces]]
+binding = "LEADS"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"
+
+[vars]
+ALLOWED_ORIGINS = "https://flowa.dk,https://www.flowa.dk,https://azam-stack.github.io"
+NOTIFY_TO = "info@flowa.dk"
+NOTIFY_FROM = "Flowa website <website@flowa.dk>"
+RATE_LIMIT = "5"
+# CRM_WEBHOOK_URL = "https://hooks.example.com/..."   (optional; token via `wrangler secret put CRM_WEBHOOK_TOKEN`)

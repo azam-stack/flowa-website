@@ -11,7 +11,7 @@ export interface AccordionItem {
  * FAQ; anything else that folds should use this rather than its own
  * grid-rows implementation.
  */
-export function Accordion({ items, defaultOpen = null, className = "" }: { items: readonly AccordionItem[]; defaultOpen?: number | null; className?: string }) {
+export function Accordion({ items, defaultOpen = null, className = "", onOpen }: { items: readonly AccordionItem[]; defaultOpen?: number | null; className?: string; onOpen?: (item: AccordionItem, index: number) => void }) {
   const [open, setOpen] = useState<number | null>(defaultOpen);
   const baseId = useId();
 
@@ -27,7 +27,10 @@ export function Accordion({ items, defaultOpen = null, className = "" }: { items
               <button
                 id={buttonId}
                 type="button"
-                onClick={() => setOpen(isOpen ? null : i)}
+                onClick={() => {
+                  setOpen(isOpen ? null : i);
+                  if (!isOpen) onOpen?.(item, i);
+                }}
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 className="flex w-full items-center justify-between gap-4 py-4 text-left"

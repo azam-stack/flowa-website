@@ -1,4 +1,5 @@
-import { useEffect, useRef, type InputHTMLAttributes, type TextareaHTMLAttributes } from "react";
+import { useEffect, useRef, type InputHTMLAttributes, type SelectHTMLAttributes, type TextareaHTMLAttributes } from "react";
+import { ChevronDown } from "lucide-react";
 
 const CONTROL =
   "w-full rounded-field border bg-bg px-4 text-body text-fg placeholder:text-muted transition-[border-color,box-shadow] duration-fast focus:outline-none focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/30 motion-reduce:transition-none";
@@ -54,6 +55,31 @@ export function TextareaField({ id, label, error, hint, className = "", attempt 
         {label}
       </label>
       <textarea ref={ref} id={id} aria-invalid={error ? true : undefined} aria-describedby={describedBy} className={controlClasses(!!error, "resize-none py-3")} {...input} />
+      <FieldNote id={id} error={error} hint={hint} />
+    </div>
+  );
+}
+
+/** A native select styled like the inputs: keyboard and screen-reader behaviour come for free. */
+export function SelectField({ id, label, error, hint, className = "", attempt = 0, options, placeholder, ...select }: FieldBase & SelectHTMLAttributes<HTMLSelectElement> & { options: readonly string[]; placeholder: string }) {
+  const describedBy = error ? `${id}-error` : hint ? `${id}-hint` : undefined;
+  const ref = useShake<HTMLSelectElement>(error, attempt);
+  return (
+    <div className={className}>
+      <label htmlFor={id} className="mb-1.5 block text-small font-medium text-fg">
+        {label}
+      </label>
+      <div className="relative">
+        <select ref={ref} id={id} aria-invalid={error ? true : undefined} aria-describedby={describedBy} defaultValue="" className={controlClasses(!!error, "h-11 appearance-none pr-10 md:h-12")} {...select}>
+          <option value="">{placeholder}</option>
+          {options.map((o) => (
+            <option key={o} value={o}>
+              {o}
+            </option>
+          ))}
+        </select>
+        <ChevronDown size={16} className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-muted" aria-hidden="true" />
+      </div>
       <FieldNote id={id} error={error} hint={hint} />
     </div>
   );

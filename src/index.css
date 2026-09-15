@@ -646,3 +646,143 @@
     transform: none !important;
   }
 }
+
+/* ---------- Services architecture: living systems ---------- */
+/* The engine strip: a light sweeps the line while the strip is on screen. */
+.engine-line {
+  background: linear-gradient(90deg, rgb(var(--rgb-border)) 0 100%);
+}
+.engine-line::after {
+  content: "";
+  position: absolute;
+  inset: -2px 0;
+  background: linear-gradient(90deg, rgb(var(--rgb-accent) / 0) 0%, rgb(var(--rgb-accent)) 50%, rgb(var(--rgb-accent) / 0) 100%);
+  background-size: 22% 100%;
+  background-repeat: no-repeat;
+  animation: engine-sweep 8.4s linear infinite;
+  animation-play-state: paused;
+}
+.engine-line-dark {
+  background: linear-gradient(90deg, rgb(255 255 255 / 0.2) 0 100%);
+}
+[data-active="true"] .engine-line::after {
+  animation-play-state: running;
+}
+@keyframes engine-sweep {
+  from { background-position: -22% 0; }
+  to { background-position: 122% 0; }
+}
+
+@media (min-width: 1024px) {
+  .process {
+    grid-template-columns: repeat(var(--n, 5), minmax(0, 1fr));
+  }
+}
+/* The process line: fills as the section arrives, then keeps moving. */
+.process-fill,
+.process-fill-v {
+  transition: width 1200ms var(--ease-emphasized), height 1200ms var(--ease-emphasized);
+}
+.process-fill { width: 0; }
+.process-fill-v { height: 0; }
+.process[data-inview="true"] .process-fill { width: 100%; }
+.process[data-inview="true"] .process-fill-v { height: 100%; }
+.process-dash {
+  background-image: linear-gradient(90deg, rgb(var(--rgb-bg)) 0 50%, transparent 50% 100%);
+  background-size: 14px 1px;
+  opacity: 0;
+  animation: process-march 1.2s linear infinite;
+  animation-play-state: paused;
+}
+.process[data-inview="true"] .process-dash { opacity: 0.55; }
+.process[data-active="true"] .process-dash { animation-play-state: running; }
+@keyframes process-march {
+  from { background-position: 0 0; }
+  to { background-position: 14px 0; }
+}
+.process-dot {
+  left: 0;
+  opacity: 0;
+  animation: process-travel 6s var(--ease-smooth) infinite;
+  animation-play-state: paused;
+}
+.process[data-inview="true"] .process-dot { opacity: 1; }
+.process[data-active="true"] .process-dot { animation-play-state: running; }
+@keyframes process-travel {
+  0% { left: 0; opacity: 0; }
+  8% { opacity: 1; }
+  88% { left: calc(100% - 7px); opacity: 1; }
+  100% { left: calc(100% - 7px); opacity: 0; }
+}
+.process-node {
+  transition: background-color var(--dur-fast) ease-out, border-color var(--dur-fast) ease-out, color var(--dur-fast) ease-out;
+  transition-delay: calc(300ms + var(--i, 0) * 180ms);
+}
+.process[data-inview="true"] .process-node {
+  background-color: rgb(var(--rgb-accent));
+  border-color: rgb(var(--rgb-accent));
+  color: rgb(var(--rgb-fg));
+}
+
+/* Pipeline hero: three points drifting between spine and object. */
+@keyframes particle-drift {
+  0% { transform: translate(0, 0); opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { transform: translate(36px, -18px); opacity: 0; }
+}
+.particle {
+  animation: particle-drift 3.3s var(--ease-smooth) infinite;
+}
+
+/* Dialer: audio bars while connected. */
+@keyframes wave {
+  0%, 100% { height: 20%; }
+  50% { height: 100%; }
+}
+.wave {
+  height: 20%;
+  animation: wave 900ms ease-in-out infinite;
+}
+
+/* Reply routing: each step of a route arrives after the previous. */
+@keyframes route-in {
+  from { opacity: 0; transform: translateX(-6px); }
+  to { opacity: 1; transform: none; }
+}
+.route-step {
+  animation: route-in var(--dur) var(--ease-emphasized) both;
+  animation-delay: calc(var(--i, 0) * 110ms);
+}
+
+/* Operator scene: lines from the objects to the person, drawn on arrival. */
+.operator-line {
+  fill: none;
+  stroke: rgb(var(--rgb-fg) / 0.35);
+  stroke-width: 0.35;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1100ms var(--ease-emphasized);
+  transition-delay: calc(400ms + var(--t, 0ms));
+}
+[data-inview="true"] .operator-line {
+  stroke-dashoffset: 0;
+}
+.operator-portrait {
+  -webkit-mask-image: linear-gradient(180deg, #000 82%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 82%, transparent 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .engine-line::after,
+  .process-dash,
+  .process-dot,
+  .particle,
+  .wave,
+  .route-step {
+    animation: none;
+  }
+  .process-dot { left: calc(100% - 7px); opacity: 1; }
+  .operator-line { stroke-dashoffset: 0; }
+  .route-step { opacity: 1; transform: none; }
+}

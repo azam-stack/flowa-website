@@ -1,6 +1,23 @@
-# Flowa — marketing website
+# Flowa — website
 
-One-page marketing site for Flowa (B2B appointment setting, pay per qualified meeting). Vite + React 18 + TypeScript + Tailwind 3. Static, no backend. Copy is English (en-GB); the market/language/currency decision is still open (see "Decisions that are still the founders'").
+Marketing website for Flowa (B2B appointment setting, cold calling and cold email, paid per qualified meeting). Vite + React 18 + TypeScript + Tailwind 3 + React Router. The site is static (GitHub Pages); the lead form posts to a small Cloudflare Worker in `backend/`. Copy is English (en-GB); the market/language/currency decision is still open (see "Decisions that are still the founders'").
+
+## Routes
+
+| Route | Page | Data |
+|---|---|---|
+| `/` | Home | `src/content/site.en.ts` |
+| `/services` | Services hub | `src/content/services-hub.ts` + the service registry |
+| `/services/appointment-setting` | Service page | `src/content/services/appointment-setting.ts` |
+| `/services/cold-calling` | Service page | `src/content/services/cold-calling.ts` |
+| `/services/cold-email` | Service page | `src/content/services/cold-email.ts` |
+| `/cases` | Cases | `src/content/cases.ts` |
+
+Every service page is the same template (`src/pages/ServicePage.tsx`) rendering one `ServiceDefinition` (`src/content/types.ts`). To add a service (LinkedIn outreach, lead research, multichannel), add a data file and register it in `src/content/services/index.ts`; the route, the mega-menu, the hub card, the footer, the related-services links, the sitemap and the prerendered HTML follow. The content modules import nothing from React, so they can move to a CMS without touching components.
+
+**Honesty is in the types.** A `Stat` carries `sourceType: "verified" | "benchmark" | "target" | "process"` and the page prints the provenance beside every number (`SourceBadge`); a `value: null` stat is pending a real figure and is not rendered; only verified numeric stats count up. A `CaseStudy` renders metrics and its testimonial only when `verified: true`; `caseStudies` is empty until a client approves a write-up. Every product-style visualisation uses the generic demo data in `src/content/demo.ts` and is labelled illustrative. `scripts/check-content.mjs` fails the build on placeholders, benchmarks without a source, placeholder stat values and unverified "verified" cases.
+
+**Direct loads.** `scripts/prerender-routes.mjs` runs after the Vite build and writes one HTML file per route with its title, description, canonical, Open Graph/Twitter tags and JSON-LD (Service, FAQPage, BreadcrumbList; Organization and WebSite are in `index.html`), plus `404.html` as the SPA fallback and `sitemap.xml`. `src/lib/seo.ts` keeps the live document in step during client-side navigation.
 
 ## Getting started
 
@@ -18,26 +35,29 @@ npm run check:content  # the content check on its own
 
 Every push to `main` builds the site and publishes it to GitHub Pages via `.github/workflows/deploy.yml`. One-time setup in the repository: **Settings → Pages → Build and deployment → Source: GitHub Actions**. The site is then at https://azam-stack.github.io/flowa-website/ and updates itself a minute or two after each push.
 
-The workflow builds with `VITE_BASE=/flowa-website/` so assets resolve under the sub-path (every `public/` file referenced from code goes through `src/lib/asset.ts`). When the site moves to its own domain, set a custom domain under the same Pages settings and change `VITE_BASE` in the workflow to `/`. An optional `VITE_FORM_ENDPOINT` repository secret is passed to the build for form delivery.
+The workflow builds with `VITE_BASE=/flowa-website/` so assets resolve under the sub-path (every `public/` file referenced from code goes through `src/lib/asset.ts`). When the site moves to its own domain, set a custom domain under the same Pages settings and change `VITE_BASE` in the workflow to `/`. The workflow passes the repository variables `VITE_CONTACT_ENDPOINT`, `VITE_BOOKING_URL` and `VITE_ANALYTICS_ENDPOINT` to the build (Settings → Secrets and variables → Actions → Variables); each is optional.
 
-### Form delivery
+### Form delivery, booking and analytics
 
-The request form posts to `VITE_FORM_ENDPOINT` if that variable is set at build time (a Formspree/Basin-style URL that accepts JSON and returns 2xx). Then the page shows a true "sent" state or a real error with the direct email address. Without the variable, the form opens the visitor's email client with the details filled in, and the page says exactly that ("Your email client should have opened"), never "sent".
+One form (`src/components/LeadForm.tsx`) on every page: first/last name, business email, phone, company, job title, company size, industry, website, goal, preferred timing. Validation and sanitisation live in `src/lib/lead-schema.ts` and are shared with the backend, so the server enforces exactly what the form promises. Honeypot, minimum time-on-form, disabled button while sending, and the last successful submission remembered for the session so an identical resubmit is acknowledged instead of re-sent.
 
-```bash
-VITE_FORM_ENDPOINT=https://formspree.io/f/xxxx npm run build
-```
+- `VITE_CONTACT_ENDPOINT` set: the form POSTs JSON to it (the worker in `backend/`) and shows the real outcome: sent, validation errors from the server, rate-limited, server error, network failure or timeout, each with a retry where retrying makes sense.
+- Unset: the form opens the visitor's email client with the details filled in and says exactly that, never "sent".
+- `VITE_BOOKING_URL`: the one booking flow. Every "Book a call" (`BookCallLink`) goes to it; unset, they go to the lead form on the current page.
+- `VITE_ANALYTICS_ENDPOINT`: events (`page_view`, `service_view`, `cta_click`, `book_call_click`, `form_start/submit/success/error`, `service_card_click`, `case_study_open`, `faq_open`, `scroll_depth`) are pushed to `window.dataLayer` always and beaconed there when set. No lead fields are ever sent to analytics. UTM parameters are captured on landing and attached to the lead.
 
-## Structure
+See `backend/README.md` for deploying the worker (KV storage, Resend notification, CRM provider interface, rate limit).
 
-Nine sections, each answering one question, assembled in `src/App.tsx` in this order:
+## Home page structure
+
+Sections, each answering one question, assembled in `src/pages/HomePage.tsx` in this order:
 
 | # | File | Answers | Anchor |
 |---|---|---|---|
 | 1 | `sections/Hero.tsx` + `components/ClientLogos.tsx` | What is it, for whom, on what terms? | `#top` |
 | 2 | `sections/Offer.tsx` | What do I get? (four services as a list) | `#offer` + one id per service |
-| 3 | `sections/WhyFlowa.tsx` | Why Flowa? (four contrasts) | — |
-| 4 | `sections/HowItWorks.tsx` | How does it work? (four steps) | `#how-it-works` |
+| 3 | `sections/HowItWorks.tsx` | How does it work? (four steps) | `#how-it-works` |
+| 4 | `sections/WhoWeHelp.tsx` | Who is it for? (a fit description) | `#who-we-help` |
 | 5 | `sections/RiskBand.tsx` | What do I risk? (the deal) | — |
 | 6 | `sections/ComparisonTable.tsx` | Why you and not an SDR or an agency? | — |
 | 7 | `sections/Team.tsx` | Who does the work? | `#team` |
@@ -47,7 +67,8 @@ Nine sections, each answering one question, assembled in `src/App.tsx` in this o
 
 - **`src/content/site.en.ts`** is the only place copy lives. No component hard-codes a user-facing string. A `site.da.ts` with the same shape is the path to a Danish version.
 - **`scripts/check-content.mjs`** runs before every build and fails it if any string in the content file contains a bracketed placeholder, if pricing is in `tiers` mode while a price is still `£TBC` or a tier is marked popular without a `popularBasis`, or if the FAQPage JSON-LD in `index.html` differs from `faq.items`. Missing content is omitted from the page by the components, never shown as a note to the founders.
-- **Navigation** is a flat anchor nav (Services · How it works · Pricing · Team · FAQ + Book a call) with an active-section underline and a mobile drawer (`components/nav/MobileDrawer.tsx`: focus trap, Escape, scroll lock, focus return). The earlier mega-menu is kept under `archive/` for the day there are real sub-pages; it is not built.
+- **Navigation**: Services (mega-menu: the three services, the four steps, three reasons; hover intent, arrow keys, Escape) · How it works · Who we help · Cases · About + Book a call. One underline glides to the current route or, on the home page, the section in view. The mobile drawer (`components/nav/MobileDrawer.tsx`) traps focus, closes on Escape and returns focus.
+- **Service-page components** (`src/components/`): `StatsBand` + `SourceBadge`, `FlowaEngine` (the recurring pipeline strip), `ProcessFlow` (five steps on a line that keeps moving), `QualificationModel` (interactive five-criteria pipeline), `ChannelSystem` (current / supporting / planned nodes), `Pillars` (people, process, performance micro-systems), `ReplyRouting`, `ReportingPanel` (funnel from `CampaignMetrics`, labelled demo data), `OperatorSection` (Ahmed's cutout inside a glass composition; the team portraits themselves are untouched), `ProspectCard`, `MeetingCard`, `ServiceCard`, `CaseStudies`, `FaqSection`, `RelatedServices`, `LeadCta`. Hero visualisations: `PipelineVisual`, `DialerVisual`, `EmailVisual`, all lazy-loaded, all gated by IntersectionObserver and tab visibility, all static in their final state under `prefers-reduced-motion`.
 - **Shared components** (`src/components/`): `Section` + `SectionHeader` (one rhythm, one eyebrow style), `Card`, `Badge`, `Accordion`, `Field`/`TextareaField`, `Button`/`LinkButton`, `Reveal`, `TeamPortrait`, `ClientLogos`, `Logo`, `DecorativeBlob`, `Container`.
 - **Client logos** (`public/logos/`) are the clients' real marks, processed only to key out flat backgrounds; none is redrawn. The marquee measures its own width and pauses on hover, focus, when off-screen and when the tab is hidden.
 
@@ -105,11 +126,14 @@ The plan's mobile target was 7 500 px. The remaining ~1 400 px cannot be found w
 Nothing below is shown as a placeholder — each is omitted until it exists.
 
 1. **Market, language and currency.** Domain `.dk`, Danish clients and founders, en-GB copy, `£` in the pricing types, UK keywords in `index.html`. Pick DK-first, UK-first or bilingual; then set `lang`, `hreflang`, meta keywords, `areaServed` in the Service JSON-LD and the currency together.
-2. **Form endpoint** — see "Form delivery".
+2. **Form endpoint and booking link** — deploy `backend/` and set `VITE_CONTACT_ENDPOINT`; set `VITE_BOOKING_URL` once a booking tool exists.
 3. **Prices.** `pricing.mode` is `"model"` (how pricing works + a quote call to action). Switch to `"tiers"` only when `pricing.tiers[*].price` holds real figures; the build refuses `£TBC` in that mode. `popularBasis` must name the data behind a "most chosen" badge, or the badge doesn't render.
 4. **No-show / cancellation policy** (`riskBand.checks` shows two confirmed checks; add the third when the policy exists, and a matching FAQ entry).
 5. **Founder bios and LinkedIn URLs** (`team.ahmed`, `team.anton`: `surname`, `bio`, `linkedin` are `null`; `footer.linkedinUrl` too). When the URLs exist, also add `sameAs` to the founders in the Organization JSON-LD.
-7. **A time-to-first-meeting figure** for the how-it-works heading, only if it holds on every engagement.
+6. **A time-to-first-meeting figure** for the how-it-works heading, only if it holds on every engagement.
+7. **Verified figures.** Every statistic on the service pages is a process fact or a Flowa target and says so. Stats with `value: null` (meetings booked to date, lead-to-meeting rate, connection rate, reply rate, qualified-response rate, meetings generated) render as soon as a measured figure replaces the null with `sourceType: "verified"`.
+8. **Cases.** `caseStudies` is empty; the pages show the client logos and the case structure until a client approves a write-up.
+9. **Legal pages.** `footer.legal` is empty and the column is omitted until privacy and terms text exists.
 
 ## SEO and sharing
 

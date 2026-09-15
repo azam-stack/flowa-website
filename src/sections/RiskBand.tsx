@@ -2,6 +2,7 @@ import { Check } from "lucide-react";
 import { Section, Container } from "@/components/Section";
 import { Reveal } from "@/components/Reveal";
 import { AmbientGradient } from "@/components/AmbientGradient";
+import { OpportunityNodes } from "@/components/OpportunityNodes";
 import { riskBand } from "@/content/site.en";
 
 /**
@@ -11,7 +12,7 @@ import { riskBand } from "@/content/site.en";
  * Commitments render as a list only once there are three; until then
  * one sentence stands in.
  */
-export function RiskBand() {
+export function RiskBand({ showNodes = false }: { showNodes?: boolean }) {
   const showList = riskBand.checks.length >= 3;
   return (
     <Section tone="band" density="band" divider={false} className="band-depth relative overflow-hidden md:mx-4 md:rounded-panel lg:mx-6">
@@ -44,6 +45,13 @@ export function RiskBand() {
             <hr className="mt-6 border-t border-white/20 md:mt-7" />
             <p className="mt-5 text-[17px] font-semibold leading-snug text-white md:mt-6 md:text-[19px]">{riskBand.payoff}</p>
           </Reveal>
+        </div>
+        {showNodes && (
+          <Reveal delay={300} className="mt-10 max-w-3xl md:mt-14">
+            <OpportunityNodes />
+          </Reveal>
+        )}
+        <div className="hidden">
         </div>
       </Container>
     </Section>

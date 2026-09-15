@@ -2,6 +2,9 @@ import { Section, SectionHeader, Container } from "@/components/Section";
 import { LinkButton } from "@/components/Button";
 import { Reveal } from "@/components/Reveal";
 import { offer } from "@/content/site.en";
+import { getService, servicePath } from "@/content/services";
+import { SmartLink } from "@/components/SmartLink";
+import { ArrowRight } from "lucide-react";
 
 /**
  * "What you get" — the pitch on the left, the four services on the right
@@ -33,6 +36,12 @@ export function Offer() {
                   <div>
                     <h3 className="text-h3 text-fg">{service.title}</h3>
                     <p className="mt-1.5 text-body text-muted">{service.description}</p>
+                    {getService(service.id) && (
+                      <SmartLink href={servicePath(service.id)} className="group mt-2 inline-flex items-center gap-1.5 text-small font-semibold text-fg">
+                        {offer.explore}
+                        <ArrowRight size={14} className="transition-transform duration-[240ms] ease-flowa group-hover:translate-x-[3px]" aria-hidden="true" />
+                      </SmartLink>
+                    )}
                   </div>
                 </li>
               ))}
