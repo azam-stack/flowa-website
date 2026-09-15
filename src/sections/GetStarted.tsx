@@ -6,7 +6,7 @@ import { Card } from "@/components/Card";
 import { Button } from "@/components/Button";
 import { Field, TextareaField } from "@/components/Field";
 import { Reveal } from "@/components/Reveal";
-import { faq, finalCta, footer, team, chapters } from "@/content/site.en";
+import { faq, finalCta, footer, team } from "@/content/site.en";
 import { asset } from "@/lib/asset";
 
 /**
@@ -88,7 +88,7 @@ export function GetStarted() {
       <Container>
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-20">
           <div>
-            <SectionHeader eyebrow={faq.eyebrow} title={faq.h2} chapter={chapters.getStarted} />
+            <SectionHeader eyebrow={faq.eyebrow} title={faq.h2} />
             <Reveal delay={120} variant="near" className="mt-6 md:mt-8">
               <Accordion className="stagger" items={faq.items.map((f) => ({ title: f.q, body: f.a }))} />
             </Reveal>

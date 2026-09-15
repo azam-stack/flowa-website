@@ -90,8 +90,6 @@ export const nav = {
 } as const;
 
 export const hero = {
-  /** System-style label above the headline; the first chapter of the page. */
-  system: "01 / Flow — B2B appointment setting",
   eyebrow: "B2B appointment setting — pay per meeting",
   h1: ["Creating meetings.", "That create opportunities."],
   sub: "Flowa fills your calendar with qualified sales meetings with the decision-makers you actually want to sell to — so your team spends its time in conversations, not hunting for them.",
@@ -105,29 +103,6 @@ export const hero = {
     caption: "You only ever see meetings that meet your criteria. We filter out everything else before it reaches your calendar.",
     // An illustrative, anonymised example — not a real client or contact.
     meeting: { company: "Head of Sales, logistics company (120 people)", role: "Decision-maker · matches your ICP", when: "Tue 14 Oct, 10:00", tag: "Qualified" },
-  },
-  /**
-   * The hero's product interface — a pipeline as Flowa runs it. Every row
-   * is illustrative (invented company names, no real prospects) and the
-   * panel says so in its header. Stage indices point into `stages`.
-   */
-  pipeline: {
-    system: "Flowa / Live pipeline",
-    status: "Active",
-    note: "Illustrative",
-    stages: ["Prospect", "Contacted", "Qualified", "Meeting booked"],
-    rows: [
-      { company: "Nordvik Logistics", role: "Head of Sales", stage: 3, when: "Tue 10:00" },
-      { company: "Helix Software", role: "VP Commercial", stage: 2, when: "2 min ago" },
-      { company: "Brant & Co.", role: "Chief Operating Officer", stage: 1, when: "Today" },
-      { company: "Meridian Freight", role: "Sales Director", stage: 0, when: "Queued" },
-    ],
-    metrics: [
-      { label: "Criteria", value: "Agreed" },
-      { label: "Qualified", value: "2" },
-      { label: "Booked", value: "1" },
-    ],
-    caption: "You only ever see meetings that meet your criteria. Everything else is filtered out before it reaches your calendar.",
   },
 } as const;
 
@@ -196,28 +171,17 @@ export const clientLogos = {
  * where it belongs.
  */
 /**
- * Chapter labels — one per section, top-right of its header on desktop.
- * Together they read as the story: flow, need, system, terms, process,
- * comparison, people, pricing, opportunity.
+ * "Why Flowa" — four contrasts, each a claim about how Flowa works
+ * against the thing it is not. Titles are set large; one line under each.
  */
-export const chapters = {
-  problem: "02 / Need",
-  offer: "03 / System",
-  riskBand: "04 / Terms",
-  howItWorks: "05 / Process",
-  comparison: "06 / Comparison",
-  team: "07 / People",
-  pricing: "08 / Pricing",
-  getStarted: "09 / Opportunity",
-} as const;
-
-export const problem = {
+export const why = {
   eyebrow: "Why Flowa",
-  h2: "Outbound that nobody owns doesn't happen.",
+  h2: "Meetings that are actually worth taking.",
   items: [
-    { title: "Unpredictable pipeline", body: "Deals dry up the moment prospecting stops being someone's job." },
-    { title: "Reps prospecting instead of selling", body: "Your best closers spend the week finding people to talk to, not talking to them." },
-    { title: "No one owns outbound", body: "It's everyone's job a little and no one's job properly. So it doesn't happen." },
+    { title: "Qualified meetings. Not lists of leads.", body: "You get a meeting in the calendar with someone who fits your criteria, not a spreadsheet of names to chase." },
+    { title: "Decision-makers. Not whoever picks up.", body: "We speak with the people who can say yes, and we agree with you in advance who those are." },
+    { title: "Genuine interest. Not someone who agreed to a call.", body: "A meeting counts only when it meets the criteria we wrote down together." },
+    { title: "Paid on meetings. Not on activity.", body: "No retainer, no setup fee. If we don't book the meetings, you don't pay." },
   ],
 } as const;
 
@@ -232,14 +196,11 @@ export const offer = {
   body: "Appointment setting, lead research, outbound campaigns and sales development — one team, one point of contact, one invoice. You don't buy a list or a tool. You buy a calendar full of qualified meetings.",
   ctaSecondary: "See pricing",
   servicesHeading: "The four things we do",
-  /** System label over the module grid. */
-  system: "Flowa / Modules",
-  /** `module` is the system-style name of each service; the title and description are the plain-language offer. */
   services: [
-    { id: "lead-research", module: "Targeting", title: "Lead research", description: "Hand-verified lists of companies that match your ICP." },
-    { id: "outbound-campaigns", module: "Outreach", title: "Outbound campaigns", description: "Cold email and phone, built on data that's actually checked." },
-    { id: "appointment-setting", module: "Meeting generation", title: "Appointment setting", description: "Qualified meetings with decision-makers, booked straight into your calendar." },
-    { id: "sales-development", module: "Pipeline", title: "Sales development", description: "An outbound function that runs without you hiring for it." },
+    { id: "appointment-setting", title: "Appointment setting", description: "Qualified meetings with decision-makers, booked straight into your calendar." },
+    { id: "lead-research", title: "Lead research", description: "Hand-verified lists of companies that match your ICP." },
+    { id: "outbound-campaigns", title: "Outbound campaigns", description: "Cold email and phone, built on data that's actually checked." },
+    { id: "sales-development", title: "Sales development", description: "An outbound function that runs without you hiring for it." },
   ],
 } as const;
 
@@ -265,14 +226,11 @@ export const riskBand = {
 export const howItWorks = {
   eyebrow: "How it works",
   h2: "From kickoff to your first qualified meeting",
-  /** System label over the process. */
-  system: "Flowa / Process",
-  /** `stage` is the system name; `output` says what each step hands to the next — paraphrased from `body`, nothing new promised. */
   steps: [
-    { n: "01", stage: "Target", title: "Define who you want to meet", body: "We agree your ideal customer, the job titles worth talking to, and what counts as a qualified meeting.", output: "Written qualification criteria" },
-    { n: "02", stage: "Research", title: "We build the list by hand", body: "Every company and contact is checked by a person. No purchased lists, no scraped data.", output: "Hand-verified list" },
-    { n: "03", stage: "Outreach", title: "We run the outreach", body: "Email and phone, written and made by us. You see everything that goes out.", output: "Every message visible to you" },
-    { n: "04", stage: "Meeting", title: "You take the meetings", body: "Booked into your calendar, with the context you need before you join.", output: "Meeting in your calendar" },
+    { n: "01", title: "Target", body: "We agree your ideal customer, the job titles worth talking to, and what counts as a qualified meeting." },
+    { n: "02", title: "Reach", body: "We build the list by hand and start the conversations — email and phone, written and made by us." },
+    { n: "03", title: "Qualify", body: "We separate genuine interest from a polite yes, against the criteria we wrote down together." },
+    { n: "04", title: "Book", body: "Qualified meetings go straight into your calendar, with the context you need before you join." },
   ],
 } as const;
 

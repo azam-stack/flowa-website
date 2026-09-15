@@ -32,7 +32,6 @@
     --d2: 16px;  /* mid: headings, rows             */
     --d3: 28px;  /* far: surfaces (cards, tables)   */
     --stagger: 70ms;
-    --band-pad: clamp(4rem, 8vw, 7rem);
   }
   @media (max-width: 767px) {
     :root {
@@ -66,29 +65,6 @@
   p {
     text-wrap: pretty;
   }
-}
-
-/* ---------- System typography: small technical labels ---------- */
-.sys {
-  font-size: 11px;
-  line-height: 1;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-@keyframes dot-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(238, 158, 71, 0.45); }
-  60% { box-shadow: 0 0 0 5px rgba(238, 158, 71, 0); }
-}
-.dot {
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  border-radius: 999px;
-  background: #ee9e47;
-  animation: dot-pulse 2.4s var(--ease-soft) infinite;
 }
 
 /* ---------- Scroll reveal (IntersectionObserver sets data-inview) ---------- */
@@ -404,8 +380,7 @@
   }
   .drift,
   .liquid,
-  .liquid > div,
-  .dot {
+  .liquid > div {
     animation: none;
   }
   .btn-label > span {

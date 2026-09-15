@@ -52,7 +52,6 @@ export function SectionHeader({
   eyebrow,
   title,
   lead,
-  chapter,
   align = "left",
   tone = "light",
   className = "",
@@ -60,8 +59,6 @@ export function SectionHeader({
   eyebrow: string;
   title: ReactNode;
   lead?: ReactNode;
-  /** Story chapter, e.g. "03 / System" — set right of the eyebrow. */
-  chapter?: string;
   align?: "left" | "center";
   tone?: Tone;
   className?: string;
@@ -72,7 +69,6 @@ export function SectionHeader({
       <p className={`flex items-center gap-3 text-eyebrow ${dark ? "text-ink-muted" : "text-muted"} ${align === "center" ? "justify-center" : ""}`}>
         <span className="rule h-px w-6 shrink-0 bg-accent" aria-hidden="true" />
         {eyebrow}
-        {chapter && <span className={`sys ml-auto pl-6 ${dark ? "text-ink-muted" : "text-muted"}`}>{chapter}</span>}
       </p>
       <h2 className={`far mt-2 text-h2 md:mt-3 ${dark ? "text-white" : "text-fg"}`}>{title}</h2>
       {lead && <p className={`mt-4 max-w-lead text-lead md:mt-5 ${dark ? "text-white/[0.88]" : "text-muted"} ${align === "center" ? "mx-auto" : ""}`}>{lead}</p>}

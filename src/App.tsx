@@ -2,7 +2,7 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { ClientLogos } from "@/components/ClientLogos";
 import { Hero } from "@/sections/Hero";
-import { Problem } from "@/sections/Problem";
+import { WhyFlowa } from "@/sections/WhyFlowa";
 import { Offer } from "@/sections/Offer";
 import { RiskBand } from "@/sections/RiskBand";
 import { HowItWorks } from "@/sections/HowItWorks";
@@ -12,10 +12,10 @@ import { Pricing } from "@/sections/Pricing";
 import { GetStarted } from "@/sections/GetStarted";
 
 /**
- * Nine sections, each answering one question (UI/UX plan §8):
- * 1 Hero (+ logo strip) · 2 Problem · 3 Offer + services · 4 RiskBand
- * (the deal) · 5 How it works · 6 Comparison · 7 Team · 8 Pricing ·
- * 9 FAQ + Get started · Footer.
+ * In the order a visitor asks: what is it (Hero) · who trusts it (logos)
+ * · what do I get (Offer) · why Flowa · how does it work · what do I risk
+ * (the deal) · why not an SDR or agency · who does the work · what does
+ * it cost · what am I unsure about, and how do I start.
  */
 export default function App() {
   return (
@@ -24,10 +24,10 @@ export default function App() {
       <main id="main" tabIndex={-1} className="outline-none">
         <Hero />
         <ClientLogos />
-        <Problem />
         <Offer />
-        <RiskBand />
+        <WhyFlowa />
         <HowItWorks />
+        <RiskBand />
         <ComparisonTable />
         <Team />
         <Pricing />

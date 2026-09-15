@@ -23,33 +23,37 @@ float hash(vec3 p){p=fract(p*.3183099+.1);p*=17.;return fract(p.x*p.y*p.z*(p.x+p
 float noise(vec3 x){vec3 i=floor(x),f=fract(x);f=f*f*(3.-2.*f);
  return mix(mix(mix(hash(i),hash(i+vec3(1,0,0)),f.x),mix(hash(i+vec3(0,1,0)),hash(i+vec3(1,1,0)),f.x),f.y),
             mix(mix(hash(i+vec3(0,0,1)),hash(i+vec3(1,0,1)),f.x),mix(hash(i+vec3(0,1,1)),hash(i+vec3(1,1,1)),f.x),f.y),f.z);}
-float sdf(vec3 p){float t=uTime*.11;float d=length(p)-1.;
- float n=noise(p*1.5+vec3(t,t*.7,-t*.5))-.5;float n2=noise(p*3.1-vec3(t*.8,t*.4,t))-.5;
- return d+n*.26+n2*.06;}
+float sdf(vec3 p){float t=uTime*.07;float d=length(p)-1.;
+ float n=noise(p*1.4+vec3(t,t*.7,-t*.5))-.5;float n2=noise(p*3.+vec3(-t*.8,t*.4,t))-.5;
+ return d+n*.22+n2*.05;}
 vec3 nrm(vec3 p){vec2 e=vec2(.0025,0.);return normalize(vec3(sdf(p+e.xyy)-sdf(p-e.xyy),sdf(p+e.yxy)-sdf(p-e.yxy),sdf(p+e.yyx)-sdf(p-e.yyx)));}
 vec3 env(vec3 d){float y=d.y*.5+.5;
- vec3 deep=vec3(.79,.45,.12),warm=vec3(.93,.62,.28),cream=vec3(.98,.975,.965),slate=vec3(.43,.44,.47);
+ vec3 deep=vec3(.79,.45,.12),warm=vec3(.93,.62,.28),cream=vec3(.98,.975,.965),slate=vec3(.60,.64,.62);
  vec3 ink=vec3(.07,.066,.063),inkSoft=vec3(.16,.15,.14);
  vec3 c=mix(deep,warm,smoothstep(0.,.30,y));c=mix(c,mix(cream,inkSoft,uDark),smoothstep(.30,.50,y));c=mix(c,mix(slate,ink,uDark),smoothstep(.78,1.,y));
  c+=vec3(1.,.96,.88)*pow(max(dot(d,normalize(vec3(-.5,.85,.3))),0.),28.)*(.6+uPulse*.9);return c;}
+float grain(vec2 q){return hash(vec3(q*.9,floor(uTime*2.)))-.5;}
 void main(){
  vec2 uv=(gl_FragCoord.xy-.5*uRes)/min(uRes.x,uRes.y);
  vec3 ro=vec3(uMouse.x*.22,uMouse.y*.16,3.4);vec3 rd=normalize(vec3(uv,-1.02)-vec3(uMouse.x*.05,uMouse.y*.035,0.));
  float t=0.,d=1.,md=1.;bool hit=false;
  for(int i=0;i<72;i++){vec3 p=ro+rd*t;d=sdf(p);md=min(md,d);if(d<.0015){hit=true;break;}t+=d*.75;if(t>6.)break;}
- if(!hit){float a=1.-smoothstep(0.,.012,md);vec3 rim=vec3(.99,.86,.66);gl_FragColor=vec4(rim*a,a);return;}
+ float g=grain(gl_FragCoord.xy)*.07;
+ if(!hit){float a=(1.-smoothstep(0.,.34,md))*.62;vec3 halo=mix(vec3(.99,.86,.66),vec3(.96,.72,.42),smoothstep(0.,.2,md))+g;gl_FragColor=vec4(halo*a,a);return;}
  vec3 p=ro+rd*t;vec3 n=nrm(p);
  float fres=pow(1.-max(dot(-rd,n),0.),3.);
  vec3 r1=refract(rd,n,1./1.44),r2=refract(rd,n,1./1.47),r3=refract(rd,n,1./1.50);
  float t2=.02;for(int i=0;i<20;i++){float dd=-sdf(p+r2*t2);if(dd<.002)break;t2+=dd*.9;}
  float thick=clamp(t2/2.4,0.,1.);
  vec3 refr=vec3(env(r1).r,env(r2).g,env(r3).b);
- vec3 col=refr*mix(vec3(1.),vec3(.96,.76,.50),thick*.6);
+ vec3 col=refr*mix(vec3(1.),vec3(.96,.74,.46),thick*.75);
  col=mix(col,env(reflect(rd,n)),fres*.85);
- vec3 h=normalize(normalize(vec3(-.6,.9,.5))-rd);col+=vec3(1.,.97,.9)*pow(max(dot(n,h),0.),160.)*.8;
- h=normalize(normalize(vec3(.7,-.35,.6))-rd);col+=vec3(1.,.85,.6)*pow(max(dot(n,h),0.),70.)*.35;
+ vec3 h=normalize(normalize(vec3(-.6,.9,.5))-rd);col+=vec3(1.,.97,.9)*pow(max(dot(n,h),0.),70.)*.55;
+ h=normalize(normalize(vec3(.7,-.35,.6))-rd);col+=vec3(1.,.85,.6)*pow(max(dot(n,h),0.),40.)*.25;
  col+=vec3(1.,.9,.75)*pow(fres,2.)*(.3+uPulse*.5);
- gl_FragColor=vec4(col,1.);
+ col+=g;
+ float a=1.-fres*.35;
+ gl_FragColor=vec4(col*a,a);
 }`;
 
 /**

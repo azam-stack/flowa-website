@@ -1,6 +1,5 @@
 import { Logo } from "./Logo";
 import { Container } from "./Container";
-import { FluidObject } from "./FluidObject";
 import { nav, footer, finalCta, hero } from "@/content/site.en";
 
 const LINKS = [...nav.anchors.map((a) => ({ href: a.href, label: a.label })), { href: "#contact", label: nav.bookCall }];
@@ -10,18 +9,13 @@ export function Footer() {
     <footer className="border-t border-border bg-bg py-compact">
       <Container>
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between md:gap-10">
-          <div className="flex max-w-sm items-start gap-5">
-            <div className="-ml-3 -mt-3 h-24 w-24 shrink-0 sm:h-28 sm:w-28" aria-hidden="true">
-              <FluidObject still frame={16} className="h-full w-full" />
-            </div>
-            <div>
+          <div className="max-w-xs">
             <Logo />
             <p className="mt-4 text-xl font-bold leading-[1.05] tracking-tight text-[color:var(--flowa-text)]">
               {hero.h1[0]}
               <br />
               <span className="text-accent-display">{hero.h1[1]}</span>
             </p>
-            </div>
           </div>
 
           <div className="flex flex-wrap gap-x-12 gap-y-6">

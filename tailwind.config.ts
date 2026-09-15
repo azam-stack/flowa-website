@@ -58,8 +58,8 @@ export default {
         eyebrow: ["0.9375rem", { lineHeight: "1.4", fontWeight: "500" }],
       },
       spacing: {
-        /** Section rhythm (mobile→desktop): standard 48→96, band 64→112, compact 40→64. */
-        section: "clamp(3rem, 7vw, 6rem)",
+        /** Section rhythm (mobile→desktop): standard 56→112, band 64→112, compact 40→64. The page breathes. */
+        section: "clamp(3.5rem, 7.5vw, 7rem)",
         band: "clamp(4rem, 8vw, 7rem)",
         compact: "clamp(2.5rem, 5vw, 4rem)",
       },

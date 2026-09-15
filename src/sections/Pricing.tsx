@@ -4,7 +4,7 @@ import { Card } from "@/components/Card";
 import { Badge } from "@/components/Badge";
 import { LinkButton } from "@/components/Button";
 import { Reveal } from "@/components/Reveal";
-import { pricing, chapters } from "@/content/site.en";
+import { pricing } from "@/content/site.en";
 
 /**
  * Two modes, chosen in content (`pricing.mode`):
@@ -17,7 +17,7 @@ export function Pricing() {
   return (
     <Section id="pricing">
       <Container>
-        <SectionHeader eyebrow={pricing.eyebrow} title={pricing.h2} lead={pricing.body} chapter={chapters.pricing} />
+        <SectionHeader eyebrow={pricing.eyebrow} title={pricing.h2} lead={pricing.body} />
 
         {pricing.mode === "model" ? <ModelMode /> : <TiersMode />}
       </Container>
