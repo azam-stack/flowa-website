@@ -88,6 +88,19 @@
   transform: translateY(0);
 }
 
+/* Small state changes (error text, success panel): fade in, no movement. */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.fade-in {
+  animation: fade-in var(--dur) var(--ease) both;
+}
+
 /* Form field error: two 2px nudges, then still. */
 @keyframes field-shake {
   0%,

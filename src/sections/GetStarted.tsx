@@ -36,6 +36,7 @@ function validate(form: FormData): Errors {
 export function GetStarted() {
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Errors>({});
+  const [attempt, setAttempt] = useState(0);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -49,6 +50,7 @@ export function GetStarted() {
 
     const nextErrors = validate(form);
     setErrors(nextErrors);
+    setAttempt((n) => n + 1);
     if (Object.keys(nextErrors).length > 0) {
       const first = Object.keys(nextErrors)[0];
       document.getElementById(first)?.focus();
@@ -94,7 +96,7 @@ export function GetStarted() {
           <Reveal delay={120} id="contact" className="scroll-mt-24">
             <Card className="p-7 md:p-9">
               {status === "sent" || status === "mailto" ? (
-                <div className="flex min-h-[320px] flex-col items-start justify-center" role="status">
+                <div className="fade-in flex min-h-[320px] flex-col items-start justify-center" role="status">
                   <p className="text-h3 text-fg">{status === "sent" ? finalCta.successTitle : finalCta.mailtoTitle}</p>
                   <p className="mt-3 text-body text-muted">
                     {status === "sent" ? finalCta.successBody : finalCta.mailtoBody}{" "}
@@ -115,14 +117,14 @@ export function GetStarted() {
                       <label htmlFor="company_website">Company website</label>
                       <input id="company_website" name="company_website" type="text" tabIndex={-1} autoComplete="off" />
                     </div>
-                    <Field id="name" name="name" label={finalCta.fields.name} autoComplete="name" error={errors.name} />
-                    <Field id="company" name="company" label={finalCta.fields.company} autoComplete="organization" error={errors.company} />
-                    <Field id="email" name="email" type="email" label={finalCta.fields.email} autoComplete="email" inputMode="email" placeholder="you@company.com" error={errors.email} />
+                    <Field id="name" name="name" label={finalCta.fields.name} autoComplete="name" error={errors.name} attempt={attempt} />
+                    <Field id="company" name="company" label={finalCta.fields.company} autoComplete="organization" error={errors.company} attempt={attempt} />
+                    <Field id="email" name="email" type="email" label={finalCta.fields.email} autoComplete="email" inputMode="email" placeholder="you@company.com" error={errors.email} attempt={attempt} />
                     <Field id="phone" name="phone" type="tel" label={finalCta.fields.phone} autoComplete="tel" inputMode="tel" />
                     <TextareaField id="message" name="message" rows={4} label={finalCta.fields.message} placeholder={finalCta.fields.messagePlaceholder} className="sm:col-span-2" />
 
                     {status === "error" && (
-                      <p role="alert" className="rounded-field border border-error/40 bg-error/[0.06] px-4 py-3 text-small text-fg sm:col-span-2">
+                      <p role="alert" className="fade-in rounded-field border border-error/40 bg-error/[0.06] px-4 py-3 text-small text-fg sm:col-span-2">
                         {finalCta.errors.network}{" "}
                         <a href={`mailto:${finalCta.email}`} className="font-medium underline underline-offset-4">
                           {finalCta.email}

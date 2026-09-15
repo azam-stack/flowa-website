@@ -20,6 +20,11 @@ export function Nav() {
   const [activeId, setActiveId] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+  // One underline for the whole list; it glides to the active link rather
+  // than each link growing its own. Keeps its last position while fading
+  // out so it never jumps to x=0.
+  const [underline, setUnderline] = useState<{ left: number; width: number; visible: boolean }>({ left: 0, width: 0, visible: false });
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -59,6 +64,23 @@ export function Nav() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const list = listRef.current;
+    if (!list) return;
+    const update = () => {
+      const link = activeId ? list.querySelector<HTMLElement>(`a[data-section="${activeId}"]`) : null;
+      if (!link) {
+        setUnderline((u) => ({ ...u, visible: false }));
+        return;
+      }
+      // 14px = the link's horizontal padding (px-3.5), so the line spans the label only.
+      setUnderline({ left: link.offsetLeft + 14, width: Math.max(0, link.offsetWidth - 28), visible: true });
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, [activeId]);
+
   return (
     <>
       <a
@@ -81,29 +103,31 @@ export function Nav() {
             <Logo />
           </a>
 
-          <ul className="hidden items-center gap-1 lg:flex">
+          <ul ref={listRef} className="relative hidden items-center gap-1 lg:flex">
             {nav.anchors.map((item) => {
               const active = activeId === item.sectionId;
               return (
                 <li key={item.href}>
                   <a
                     href={item.href}
+                    data-section={item.sectionId}
                     aria-current={active ? "location" : undefined}
-                    className={`relative block rounded-lg px-3.5 py-2 text-sm font-medium transition-colors duration-150 ${active ? "text-fg" : "text-fg/70 hover:text-fg"}`}
+                    className={`block rounded-lg px-3.5 py-2 text-sm font-medium transition-colors duration-150 ${active ? "text-fg" : "text-fg/70 hover:text-fg"}`}
                   >
                     {item.label}
-                    <span
-                      aria-hidden="true"
-                      className={`absolute bottom-0.5 left-3.5 right-3.5 h-[2px] origin-left bg-accent transition-transform duration-200 ease-out motion-reduce:transition-none ${active ? "scale-x-100" : "scale-x-0"}`}
-                    />
                   </a>
                 </li>
               );
             })}
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute bottom-0.5 h-[2px] bg-accent transition-[left,width,opacity] duration-200 ease-out motion-reduce:transition-none"
+              style={{ left: underline.left, width: underline.width, opacity: underline.visible ? 1 : 0 }}
+            />
           </ul>
 
           <div className="hidden lg:block">
-            <LinkButton href="#contact" variant={heroCtaVisible ? "ghost" : "accent"} size="sm">
+            <LinkButton href="#contact" variant={heroCtaVisible ? "ghost" : "accent"} size="sm" className="duration-[240ms]">
               {nav.bookCall}
             </LinkButton>
           </div>
