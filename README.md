@@ -51,6 +51,10 @@ Nine sections, each answering one question, assembled in `src/App.tsx` in this o
 - **Shared components** (`src/components/`): `Section` + `SectionHeader` (one rhythm, one eyebrow style), `Card`, `Badge`, `Accordion`, `Field`/`TextareaField`, `Button`/`LinkButton`, `Reveal`, `TeamPortrait`, `ClientLogos`, `Logo`, `DecorativeBlob`, `Container`.
 - **Client logos** (`public/logos/`) are the clients' real marks, processed only to key out flat backgrounds; none is redrawn. The marquee measures its own width and pauses on hover, focus, when off-screen and when the tab is hidden.
 
+## Design tokens
+
+`src/index.css` holds the token system and is the single source of truth; `tailwind.config.ts` reads it (colours as rgb triplets, so `bg-accent/10` and `var(--color-accent)` are the same value). Families: colour (background, surface, text, border, accent, status), glass (opacity, blur, border), gradients (atmosphere, surface, accent, highlight, depth), light, shadow (subtle, medium, deep, glow), depth (stacking levels), blur, opacity, radius, border, focus, motion (five durations, five curves, four hierarchy presets: primary, secondary, micro, ambient) and interaction. Few colours, many materials. A value that appears twice becomes a token.
+
 ## Design system
 
 Tokens live in `tailwind.config.ts` (with the motion and orange variants as CSS variables in `src/index.css`):

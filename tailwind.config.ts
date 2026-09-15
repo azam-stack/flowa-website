@@ -17,16 +17,17 @@ export default {
   content: ["./index.html", "./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
+      /** Colours read the CSS tokens in src/index.css (rgb triplets), so opacity modifiers keep working. */
       colors: {
-        bg: "#FAF9F6",
-        fg: "#0C0C0B",
-        muted: "#6B675F",
-        border: "#E6E2D9",
-        card: "#FFFFFF",
+        bg: "rgb(var(--rgb-bg) / <alpha-value>)",
+        fg: "rgb(var(--rgb-fg) / <alpha-value>)",
+        muted: "rgb(var(--rgb-muted) / <alpha-value>)",
+        border: "rgb(var(--rgb-border) / <alpha-value>)",
+        card: "rgb(var(--rgb-card) / <alpha-value>)",
         accent: {
-          DEFAULT: "#EE9E47",
-          hover: "#D9822C",
-          fg: "#0C0C0B",
+          DEFAULT: "rgb(var(--rgb-accent) / <alpha-value>)",
+          hover: "rgb(var(--rgb-accent-hover) / <alpha-value>)",
+          fg: "rgb(var(--rgb-fg) / <alpha-value>)",
           /** Deepened for display-size type only — see index.css. */
           display: "var(--flowa-orange-display)",
           /** Deepened further still, for white text ON an orange fill. */
@@ -42,7 +43,7 @@ export default {
           fg: "#FAF9F6",
         },
         /** Form error colour — the only "status" colour on the site. */
-        error: "#B3362E",
+        error: "rgb(var(--rgb-error) / <alpha-value>)",
       },
       fontFamily: {
         sans: ["Inter Variable", "Inter", "ui-sans-serif", "system-ui", "sans-serif"],
@@ -70,13 +71,17 @@ export default {
         lead: "52ch",
       },
       borderRadius: {
-        /** Three radii: field (12) for inputs and small elements, card (20) for every card and large surface, full for pills. */
-        field: "12px",
-        card: "20px",
+        /** field (12) for inputs and small elements, card (20) for every card and large surface, panel (28) for the band, full for pills. */
+        field: "var(--radius-md)",
+        card: "var(--radius-lg)",
+        panel: "var(--radius-xl)",
       },
       boxShadow: {
+        subtle: "var(--shadow-subtle)",
         /** Only for things that float: the hero artefact, the mobile drawer. */
-        float: "0 1px 2px rgba(12,12,11,0.04), 0 24px 48px -20px rgba(12,12,11,0.16)",
+        float: "var(--shadow-medium)",
+        deep: "var(--shadow-deep)",
+        glow: "var(--shadow-glow)",
       },
       transitionTimingFunction: {
         flowa: "cubic-bezier(0.16, 1, 0.3, 1)",

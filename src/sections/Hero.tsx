@@ -21,8 +21,8 @@ const T = (ms: number) => ({ "--t": `${ms}ms` }) as React.CSSProperties;
 export function Hero() {
   const m = hero.card.meeting;
   return (
-    <section id="top" className="relative overflow-hidden pb-20 pt-32 md:pb-28 md:pt-40 lg:pt-44">
-      <Container className="relative">
+    <section id="top" className="atmosphere relative overflow-hidden pb-14 pt-32 md:pb-20 md:pt-40 lg:pt-44">
+      <Container className="relative z-[2]">
         <div className="grid grid-cols-1 gap-x-16 gap-y-10 lg:grid-cols-[1.02fr_0.98fr] lg:grid-rows-[auto_auto] lg:items-center">
           {/* heading */}
           <div className="min-w-0 lg:col-start-1 lg:row-start-1 lg:self-end">
@@ -52,7 +52,7 @@ export function Hero() {
               <FluidObject className="parallax parallax-slow h-full w-full" />
             </div>
             <FlowSystem />
-            <div className="hero-surface absolute bottom-[6%] left-0 w-[min(300px,80%)] rounded-card border border-border bg-card/[0.94] p-5 shadow-float backdrop-blur-md sm:p-6" style={T(700)}>
+            <div className="hero-surface flow-end absolute bottom-[6%] left-0 z-[3] w-[min(300px,80%)] rounded-card border border-border p-5 shadow-float backdrop-blur-md sm:p-6" style={{ ...T(700), background: "var(--surface-glass-strong)" }}>
               <div className="flex items-center justify-between gap-3">
                 <span className="text-[12px] font-medium text-muted">{hero.flow.end}</span>
                 <Badge variant="accent">{m.tag}</Badge>
@@ -84,6 +84,10 @@ export function Hero() {
               {hero.reassurance}
             </p>
           </div>
+        </div>
+        {/* the line continues into the next section */}
+        <div className="mt-12 flex justify-center md:mt-16" aria-hidden="true">
+          <span className="hero-connector block h-10 w-px bg-accent/60 md:h-14" style={T(1700)} />
         </div>
       </Container>
     </section>

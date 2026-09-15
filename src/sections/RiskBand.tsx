@@ -13,7 +13,7 @@ import { riskBand } from "@/content/site.en";
  */
 export function RiskBand() {
   return (
-    <Section tone="band" density="band" divider={false} className="relative overflow-hidden md:mx-4 md:rounded-[28px] lg:mx-6">
+    <Section tone="band" density="band" divider={false} className="band-depth relative overflow-hidden md:mx-4 md:rounded-panel lg:mx-6">
       <div className="parallax parallax-slow pointer-events-none absolute -bottom-40 -right-24 hidden h-[420px] w-[420px] lg:-bottom-64 lg:-left-20 lg:block lg:h-[520px] lg:w-[520px]" aria-hidden="true">
         <FluidObject tone="dark" className="h-full w-full" />
       </div>

@@ -36,7 +36,7 @@ export function FlowSystem() {
   return (
     <div className="pointer-events-none absolute inset-0" aria-hidden="true">
       <svg viewBox="0 0 100 100" className="absolute inset-0 hidden h-full w-full overflow-visible sm:block" preserveAspectRatio="none">
-        <path d={PATH} className="flow-path" pathLength={1} fill="none" stroke="currentColor" strokeWidth={1} vectorEffect="non-scaling-stroke" style={T(900)} />
+        <path d={PATH} className="flow-path" pathLength={1} fill="none" stroke="currentColor" strokeWidth={1.25} vectorEffect="non-scaling-stroke" style={T(900)} />
       </svg>
       <span className="flow-dot hidden sm:block" style={{ offsetPath: `path('${PATH}')` } as React.CSSProperties} />
       {f.nodes.map((n, i) => (
@@ -45,8 +45,8 @@ export function FlowSystem() {
           className={`flow-node hero-rise absolute -translate-x-1/2 -translate-y-1/2 ${i === 0 ? "hidden sm:block" : ""}`}
           style={{ "--x": `${POS[i].x}%`, "--y": `${POS[i].y}%`, "--sx": `${POS[i].sx}%`, "--sy": `${POS[i].sy}%`, ...T(1000 + i * 160) } as React.CSSProperties}
         >
-          <div className="parallax flex items-center gap-2.5 rounded-full border border-white/70 bg-card/[0.78] py-1.5 pl-2 pr-3.5 shadow-[0_1px_2px_rgba(12,12,11,0.04),0_10px_24px_-14px_rgba(12,12,11,0.25)] backdrop-blur-md" style={{ "--p": `${10 + i * 8}px` } as React.CSSProperties}>
-            <span className={`h-2 w-2 shrink-0 rounded-full ${i === 3 ? "bg-accent" : "bg-fg/20"}`} />
+          <div className="parallax flex items-center gap-2.5 rounded-full border py-1.5 pl-2 pr-3.5 shadow-subtle backdrop-blur-md" style={{ "--p": `${10 + i * 8}px`, background: "var(--surface-glass)", borderColor: "var(--glass-border-visible)" } as React.CSSProperties}>
+            <span className="flow-node-core h-2 w-2 shrink-0 rounded-full" style={{ background: i === 3 ? "var(--status-success)" : "var(--status-neutral)", "--at": `${2400 + i * 1350}ms` } as React.CSSProperties} />
             <span className="whitespace-nowrap">
               <span className="block text-[12px] font-semibold leading-tight text-fg">{n.label}</span>
               <span className="block text-[11px] leading-tight text-muted">{n.sub}</span>

@@ -5,33 +5,164 @@
 @tailwind utilities;
 
 @layer base {
+  /* ==================================================================
+     FLOWA design tokens — the single source of truth for the visual
+     language. Tailwind's theme (tailwind.config.ts) reads these, so a
+     class like `bg-accent/10` and a hand-written `var(--color-accent)`
+     are the same value. Few colours, many materials.
+     ================================================================== */
   :root {
+    /* --- colour (rgb triplets so Tailwind can apply opacity) --- */
+    --rgb-bg: 250 249 246;
+    --rgb-bg-secondary: 244 242 236;
+    --rgb-fg: 12 12 11;
+    --rgb-text-secondary: 74 71 68;
+    --rgb-muted: 107 103 95;
+    --rgb-border: 230 226 217;
+    --rgb-border-strong: 207 201 188;
+    --rgb-card: 255 255 255;
+    --rgb-accent: 238 158 71;
+    --rgb-accent-hover: 217 130 44;
+    --rgb-accent-strong: 201 116 30;
+    --rgb-accent-band: 168 94 20;
+    --rgb-ink: 18 17 16;
+    --rgb-error: 179 54 46;
+    --rgb-success: 17 102 73;
+
+    --color-bg-primary: rgb(var(--rgb-bg));
+    --color-bg-secondary: rgb(var(--rgb-bg-secondary));
+    --color-bg-elevated: rgb(var(--rgb-card));
+    --color-bg-void: rgb(var(--rgb-ink));
+    --color-surface: rgb(var(--rgb-card));
+    --color-surface-elevated: rgb(var(--rgb-card));
+    --color-surface-glass: rgb(var(--rgb-card) / 0.78);
+    --color-text-primary: rgb(var(--rgb-fg));
+    --color-text-secondary: rgb(var(--rgb-text-secondary));
+    --color-text-muted: rgb(var(--rgb-muted));
+    --color-border-subtle: rgb(var(--rgb-fg) / 0.06);
+    --color-border-default: rgb(var(--rgb-border));
+    --color-border-strong: rgb(var(--rgb-border-strong));
+    --color-accent: rgb(var(--rgb-accent));
+    --color-accent-soft: rgb(var(--rgb-accent) / 0.12);
+    --color-accent-strong: rgb(var(--rgb-accent-strong));
+    --color-success: rgb(var(--rgb-success));
+    --color-warning: rgb(var(--rgb-accent-band));
+    --color-error: rgb(var(--rgb-error));
+
+    /* legacy names still read by a few components */
     --flowa-text: #0c0c0b;
-    /* Same hue as the brand accent (#EE9E47), deepened for use at display
-       size: the brand orange itself is ~2.1:1 against the hero background
-       and fails WCAG even for large text. This clears 3:1 — display-only,
-       never for text under 20px bold. */
-    --flowa-orange-display: #c9741e;
-    /* Darker still, for white TEXT on an orange background. */
-    --flowa-band: #a85e14;
+    --flowa-orange-display: #c9741e; /* display-size orange text on the light bg (3.3:1) */
+    --flowa-band: #a85e14;           /* white text on an orange fill */
     --flowa-ink: #121110;
 
-    /* ------------------------------------------------------------------
-       Motion system. One language for the whole site, derived from the
-       reference study (docs in README → "Motion language"):
-       small amplitudes, long settles, nothing snaps, one living object.
-       ------------------------------------------------------------------ */
-    --dur-fast: 150ms;   /* hover, press, colour                          */
-    --dur: 240ms;        /* state changes, small reveals                  */
-    --dur-slow: 600ms;   /* rules drawing, surfaces settling              */
-    --dur-reveal: 800ms; /* content arriving on scroll                    */
-    --dur-hero: 1000ms;  /* the one load sequence                         */
-    --ease: cubic-bezier(0.16, 1, 0.3, 1);       /* expo-out: quick start, long settle */
-    --ease-soft: cubic-bezier(0.45, 0, 0.55, 1); /* sine in-out: continuous motion     */
-    --d1: 8px;   /* near: labels, small text        */
-    --d2: 16px;  /* mid: headings, rows             */
-    --d3: 28px;  /* far: surfaces (cards, tables)   */
+    /* --- status (qualification / meeting / opportunity UI) --- */
+    --status-neutral: rgb(var(--rgb-fg) / 0.2);
+    --status-active: rgb(var(--rgb-fg));
+    --status-progress: rgb(var(--rgb-accent-strong));
+    --status-success: rgb(var(--rgb-accent));
+    --status-warning: rgb(var(--rgb-accent-band));
+
+    /* --- surfaces & glass --- */
+    --glass-opacity-subtle: 0.6;
+    --glass-opacity-medium: 0.78;
+    --glass-opacity-strong: 0.94;
+    --glass-blur-subtle: 6px;
+    --glass-blur-medium: 12px;
+    --glass-blur-strong: 20px;
+    --glass-border-subtle: rgb(255 255 255 / 0.55);
+    --glass-border-visible: rgb(255 255 255 / 0.8);
+    --surface-subtle: rgb(var(--rgb-fg) / 0.03);
+    --surface-glass: rgb(var(--rgb-card) / var(--glass-opacity-medium));
+    --surface-glass-strong: rgb(var(--rgb-card) / var(--glass-opacity-strong));
+    --surface-elevated: rgb(var(--rgb-card));
+    --surface-highlight: rgb(var(--rgb-accent) / 0.06);
+
+    /* --- gradients: atmosphere, not decoration --- */
+    --gradient-atmosphere: radial-gradient(60% 55% at 78% 30%, rgb(var(--rgb-accent) / 0.1), rgb(var(--rgb-accent) / 0) 70%);
+    --gradient-surface: linear-gradient(180deg, rgb(var(--rgb-card)), rgb(var(--rgb-bg)));
+    --gradient-accent: linear-gradient(135deg, rgb(var(--rgb-accent)), rgb(var(--rgb-accent-strong)));
+    --gradient-highlight: linear-gradient(180deg, rgb(255 255 255 / 0.5), rgb(255 255 255 / 0));
+    --gradient-depth: radial-gradient(70% 60% at 20% 100%, rgb(var(--rgb-accent) / 0.08), rgb(var(--rgb-accent) / 0) 70%);
+
+    /* --- light --- */
+    --light-soft: 0 0 60px rgb(var(--rgb-accent) / 0.12);
+    --light-medium: 0 0 40px rgb(var(--rgb-accent) / 0.25);
+    --light-focus: 0 0 0 4px rgb(var(--rgb-accent) / 0.18), 0 0 18px rgb(var(--rgb-accent) / 0.6);
+    --light-accent: inset 0 1px 0 rgb(255 255 255 / 0.6);
+
+    /* --- shadow: large blur, low opacity --- */
+    --shadow-subtle: 0 1px 2px rgb(var(--rgb-fg) / 0.04), 0 10px 24px -14px rgb(var(--rgb-fg) / 0.25);
+    --shadow-medium: 0 1px 2px rgb(var(--rgb-fg) / 0.04), 0 24px 48px -20px rgb(var(--rgb-fg) / 0.16);
+    --shadow-deep: 0 2px 4px rgb(var(--rgb-fg) / 0.05), 0 40px 80px -30px rgb(var(--rgb-fg) / 0.28);
+    --shadow-glow: 0 0 0 1px rgb(var(--rgb-accent) / 0.35), 0 12px 40px -12px rgb(var(--rgb-accent) / 0.45);
+
+    /* --- depth (stacking) --- */
+    --depth-background: 0;
+    --depth-atmosphere: 1;
+    --depth-midground: 2;
+    --depth-surface: 3;
+    --depth-foreground: 4;
+    --depth-overlay: 50;
+
+    /* --- blur & opacity --- */
+    --blur-sm: 4px;
+    --blur-md: 12px;
+    --blur-lg: 24px;
+    --blur-xl: 40px;
+    --opacity-subtle: 0.06;
+    --opacity-muted: 0.4;
+    --opacity-medium: 0.6;
+    --opacity-visible: 0.88;
+    --opacity-solid: 1;
+
+    /* --- radius & border --- */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+    --radius-pill: 999px;
+    --border-subtle: 1px solid var(--color-border-subtle);
+    --border-default: 1px solid var(--color-border-default);
+    --border-strong: 1px solid var(--color-border-strong);
+    --border-highlight: 1px solid rgb(var(--rgb-accent) / 0.4);
+
+    /* --- focus --- */
+    --focus-ring: 2px solid var(--color-accent);
+    --focus-ring-offset: 2px;
+
+    /* --- motion: durations, curves, hierarchy --- */
+    --duration-instant: 80ms;
+    --duration-fast: 150ms;
+    --duration-normal: 240ms;
+    --duration-slow: 600ms;
+    --duration-slower: 800ms;
+    --dur-fast: var(--duration-fast);
+    --dur: var(--duration-normal);
+    --dur-slow: var(--duration-slow);
+    --dur-reveal: var(--duration-slower);
+    --dur-hero: 1000ms;
+    --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+    --ease-smooth: cubic-bezier(0.45, 0, 0.55, 1);
+    --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-fluid: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-spring: cubic-bezier(0.34, 1.3, 0.64, 1);
+    --ease: var(--ease-emphasized);
+    --ease-soft: var(--ease-smooth);
+    /* hierarchy: primary (hero, transformations) · secondary (UI, sections) · micro (hover) · ambient (atmosphere) */
+    --motion-primary: var(--dur-hero) var(--ease-emphasized);
+    --motion-secondary: var(--duration-slower) var(--ease-emphasized);
+    --motion-micro: var(--duration-normal) var(--ease-emphasized);
+    --motion-ambient: 9s var(--ease-smooth);
+    --d1: 8px;
+    --d2: 16px;
+    --d3: 28px;
     --stagger: 70ms;
+
+    /* --- interaction --- */
+    --interaction-hover: var(--surface-subtle);
+    --interaction-active: scale(0.98);
+    --interaction-focus: var(--focus-ring);
+    --interaction-disabled: var(--opacity-medium);
   }
   @media (max-width: 767px) {
     :root {
@@ -50,8 +181,8 @@
     font-family: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
   }
   :focus-visible {
-    outline: 2px solid theme("colors.accent.DEFAULT");
-    outline-offset: 2px;
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-ring-offset);
     border-radius: 4px;
   }
   ::selection {
@@ -196,7 +327,7 @@
 
 /* ---------- Flow system (hero): path draws, a point of light travels it ---------- */
 .flow-path {
-  color: rgba(201, 116, 30, 0.55);
+  color: rgb(var(--rgb-accent-strong) / 0.7);
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
   animation: flow-draw 1400ms var(--ease) both;
@@ -215,6 +346,23 @@
     top: var(--y);
   }
 }
+/* A node lights up as the point of light reaches it (same 9 s period). */
+@keyframes node-activate {
+  0%, 20%, 100% { background: var(--status-neutral); box-shadow: none; }
+  3%, 12% { background: var(--status-success); box-shadow: 0 0 0 3px rgb(var(--rgb-accent) / 0.25); }
+}
+.flow-node-core {
+  animation: node-activate var(--motion-ambient) infinite;
+  animation-delay: var(--at, 0ms);
+}
+@keyframes flow-end {
+  0%, 30%, 100% { box-shadow: var(--shadow-medium); }
+  4%, 16% { box-shadow: var(--shadow-medium), var(--shadow-glow); }
+}
+.flow-end {
+  animation: flow-end var(--motion-ambient) infinite;
+  animation-delay: 7800ms;
+}
 .flow-dot {
   position: absolute;
   top: 0;
@@ -224,7 +372,7 @@
   margin: -5px 0 0 -5px;
   border-radius: 999px;
   background: #ee9e47;
-  box-shadow: 0 0 0 4px rgba(238, 158, 71, 0.18), 0 0 18px rgba(238, 158, 71, 0.6);
+  box-shadow: var(--light-focus);
   offset-rotate: 0deg;
   animation: flow-travel 9s var(--ease-soft) 2400ms infinite;
   opacity: 0;
@@ -238,6 +386,34 @@
   60% { offset-distance: 100%; opacity: 1; }
   66% { offset-distance: 100%; opacity: 0; }
   100% { offset-distance: 100%; opacity: 0; }
+}
+
+/* ---------- Depth: atmosphere behind the hero, depth inside the band ---------- */
+.atmosphere::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: var(--depth-atmosphere);
+  pointer-events: none;
+  background: var(--gradient-atmosphere);
+}
+.band-depth::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: var(--depth-atmosphere);
+  pointer-events: none;
+  background: var(--gradient-depth);
+}
+/* The line continues: from the hero down into the next section. */
+.hero-connector {
+  transform-origin: top center;
+  animation: connector-draw var(--duration-slower) var(--ease-emphasized) both;
+  animation-delay: var(--t, 0ms);
+}
+@keyframes connector-draw {
+  from { transform: scaleY(0); }
+  to { transform: none; }
 }
 
 /* ---------- The deal: promise crossed out, result rises ---------- */
@@ -451,8 +627,13 @@
   .drift,
   .liquid,
   .liquid > div,
-  .flow-dot {
+  .flow-dot,
+  .flow-node-core,
+  .flow-end {
     animation: none;
+  }
+  .hero-connector {
+    transform: none;
   }
   .flow-path {
     stroke-dashoffset: 0;
