@@ -788,12 +788,48 @@
   .route-step { opacity: 1; transform: none; }
 }
 
-/* Pricing: the logo breaking through the grid. A soft lift, and a 1px settle on hover. */
-.pricing-logo img {
-  box-shadow: 0 1px 2px rgb(var(--rgb-fg) / 0.06), 0 14px 32px -14px rgb(var(--rgb-accent-band) / 0.55);
-  transition: transform var(--dur) var(--ease-emphasized), box-shadow var(--dur) var(--ease-emphasized);
+/* ---------- Pricing: the panel, the lifted column and the O ---------- */
+.pricing-panel {
+  background-image: linear-gradient(180deg, rgb(255 255 255 / 0.85), rgb(var(--rgb-card) / 0.55)), var(--gradient-depth);
 }
-.pricing-logo:hover img {
-  transform: translate(-1px, -1px);
-  box-shadow: 0 1px 2px rgb(var(--rgb-fg) / 0.06), 0 18px 36px -14px rgb(var(--rgb-accent-band) / 0.6);
+/* The recommended column: its own surface behind the grid, lifted a little above the rest. */
+.pricing-spot {
+  background: linear-gradient(180deg, rgb(var(--rgb-card)), rgb(var(--rgb-accent) / 0.07));
+  border: 1px solid rgb(var(--rgb-accent) / 0.45);
+  box-shadow: 0 1px 2px rgb(var(--rgb-fg) / 0.04), 0 30px 60px -28px rgb(var(--rgb-accent-band) / 0.5), inset 0 1px 0 rgb(255 255 255 / 0.8);
+}
+.pricing-spot::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  background: var(--gradient-accent);
+}
+/* The O: a physical object resting on the grid's corner, tilted, with its own light and shadow. */
+.o-mark {
+  display: block;
+  transform: rotate(-8deg);
+  transition: transform var(--dur-slow) var(--ease-emphasized);
+}
+.o-mark img {
+  filter: drop-shadow(0 2px 2px rgb(var(--rgb-fg) / 0.08)) drop-shadow(0 18px 28px rgb(var(--rgb-accent-band) / 0.35));
+  transition: filter var(--dur-slow) var(--ease-emphasized), transform var(--dur-slow) var(--ease-emphasized);
+}
+.o-mark-glow {
+  position: absolute;
+  inset: 10% -10% -20% -10%;
+  border-radius: 999px;
+  background: radial-gradient(closest-side, rgb(var(--rgb-accent) / 0.45), rgb(var(--rgb-accent) / 0));
+  filter: blur(14px);
+  transition: opacity var(--dur-slow) var(--ease-emphasized);
+}
+.pricing-panel:hover .o-mark {
+  transform: rotate(-6deg) translate(-1px, -2px);
+}
+.pricing-panel:hover .o-mark img {
+  filter: drop-shadow(0 2px 2px rgb(var(--rgb-fg) / 0.08)) drop-shadow(0 24px 34px rgb(var(--rgb-accent-band) / 0.42));
+}
+@media (prefers-reduced-motion: reduce) {
+  .o-mark, .o-mark img, .o-mark-glow { transition: none; }
 }
