@@ -80,13 +80,13 @@ export function OperatorSection() {
               <div className="parallax absolute left-0 top-[30%] hidden w-[min(250px,44%)] sm:block">
                 <ProspectCard name={p.name} role={p.role} company={p.company} icp={p.icp} decisionMaker status="Qualified" dark className="!p-3" />
               </div>
-              <div className="absolute bottom-[10%] right-[2%] max-w-[50%] rounded-card border border-white/15 bg-white/[0.08] p-3 text-white backdrop-blur-md">
+              <div className="absolute bottom-[10%] right-[2%] max-w-[50%] rounded-card border border-white/15 bg-riskband/90 p-3 text-white shadow-float backdrop-blur-md">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-white/60">Conversation · 10:14</p>
                 <p className="mt-1 text-[12px] leading-snug">“What would a trial month look like?”</p>
               </div>
               <span className="absolute left-[4%] top-[40%] rounded-full bg-accent px-2.5 py-1 text-[11px] font-semibold text-fg sm:left-[6%] sm:top-[12%]">Qualified · 09:30</span>
-              <span className="absolute bottom-[8%] left-[8%] rounded-full border border-white/20 bg-white/[0.08] px-2.5 py-1 text-[11px] font-medium text-white backdrop-blur-md">ICP 94%</span>
-              <span className="absolute bottom-[2%] left-1/2 -translate-x-1/2 text-[11px] text-white/50">{demo.label}</span>
+              <span className="absolute bottom-[8%] left-[8%] rounded-full border border-white/20 bg-riskband/90 px-2.5 py-1 text-[11px] font-medium text-white backdrop-blur-md">ICP 94%</span>
+              <span className="absolute bottom-[2%] left-1/2 -translate-x-1/2 rounded-full bg-riskband/80 px-2 py-0.5 text-[11px] text-white/70">{demo.label}</span>
             </div>
           </Reveal>
         </div>
