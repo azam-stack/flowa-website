@@ -179,7 +179,7 @@ export const offer = {
 export const riskBand = {
   /** The transformation: the first line gives way to the second. This is the band's only headline. */
   transform: ["You don't pay for promises.", "You start with proof."],
-  paragraph: "Every engagement starts with a Pilot: a £600 setup and £400 per booked meeting, with no long-term commitment. Once the model is proven on your market, you move to a fixed monthly package with a meeting commitment.",
+  paragraph: "Every engagement starts with a Pilot: try us out on your own market, pay per booked meeting and see the numbers for yourself, with no long-term commitment. Once the model is proven, you move to a fixed monthly package with a meeting commitment.",
   /** Confirmed commitments, rendered as a list once there are three. */
   checks: ["You set the qualification criteria before we start", "The Pilot is paid per booked meeting, not per activity", "Every package replaces no-shows"],
   checksSentence: "You set the qualification criteria before we start, the Pilot is paid per booked meeting, and every package replaces no-shows.",
