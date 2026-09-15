@@ -9,11 +9,10 @@ import { HowItWorks } from "@/sections/HowItWorks";
 import { ComparisonTable } from "@/sections/ComparisonTable";
 import { Team } from "@/sections/Team";
 import { Pricing } from "@/sections/Pricing";
-import { FAQ } from "@/sections/FAQ";
-import { FinalCTA } from "@/sections/FinalCTA";
+import { GetStarted } from "@/sections/GetStarted";
 
 /**
- * Nine sections, each answering one question (see the UI/UX plan, §8):
+ * Nine sections, each answering one question (UI/UX plan §8):
  * 1 Hero (+ logo strip) · 2 Problem · 3 Offer + services · 4 RiskBand
  * (the deal) · 5 How it works · 6 Comparison · 7 Team · 8 Pricing ·
  * 9 FAQ + Get started · Footer.
@@ -32,8 +31,7 @@ export default function App() {
         <ComparisonTable />
         <Team />
         <Pricing />
-        <FAQ />
-        <FinalCTA />
+        <GetStarted />
       </main>
       <Footer />
     </div>

@@ -73,6 +73,21 @@
   animation-delay: var(--enter-delay, 0ms);
 }
 
+/* Comparison table: the Flowa-column pills arrive one row after another
+   once the table has revealed (40ms apart, set inline as --pill-delay). */
+.table-pill {
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+  transition-delay: calc(200ms + var(--pill-delay, 0ms));
+}
+[data-inview="true"] .table-pill {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Form field error: two 2px nudges, then still. */
 @keyframes field-shake {
   0%,

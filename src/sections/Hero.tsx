@@ -5,26 +5,31 @@ import { DecorativeBlob } from "@/components/DecorativeBlob";
 import { hero } from "@/content/site.en";
 import { PipelineVisual } from "./PipelineVisual";
 
+/**
+ * Section 1. One orchestrated entrance on load (eyebrow → headline → sub
+ * → CTAs → artefact, 60ms apart) — the only load animation on the site.
+ * The primary CTA is near-black so the two-tone headline is the single
+ * orange element in the text column.
+ */
 export function Hero() {
   return (
-    <section id="top" className="relative flex min-h-[58vh] items-center overflow-hidden pb-8 pt-20 md:pt-24">
+    <section id="top" className="relative flex min-h-[60vh] items-center overflow-hidden pb-12 pt-28 md:pb-16 md:pt-36">
       <DecorativeBlob className="pointer-events-none absolute -bottom-24 -right-24 h-[520px] w-[520px] text-accent/[0.05]" />
       <Container className="relative">
-        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-10">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
           <div className="min-w-0">
-            <SectionLabel>{hero.eyebrow}</SectionLabel>
-            <h1
-              className="mt-4 text-balance font-extrabold text-[color:var(--flowa-text)] [letter-spacing:-0.035em] [line-height:0.94] text-[clamp(2.2rem,11vw,6.5rem)] lg:whitespace-nowrap lg:text-[clamp(2.2rem,3.5vw,2.85rem)]"
-              data-hero-h1
-            >
+            <div className="enter" style={{ "--enter-delay": "0ms" } as React.CSSProperties}>
+              <SectionLabel>{hero.eyebrow}</SectionLabel>
+            </div>
+            <h1 className="enter mt-4 text-display text-[color:var(--flowa-text)]" style={{ "--enter-delay": "60ms" } as React.CSSProperties} data-hero-h1>
               {hero.h1[0]}
               <br />
-              <span className="text-accent-display" data-hero-line="1">
-                {hero.h1[1]}
-              </span>
+              <span className="text-accent-display">{hero.h1[1]}</span>
             </h1>
-            <p className="mt-6 max-w-[52ch] text-lg leading-relaxed text-[#4A4744]">{hero.sub}</p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <p className="enter mt-6 max-w-lead text-lead text-[#4A4744]" style={{ "--enter-delay": "120ms" } as React.CSSProperties}>
+              {hero.sub}
+            </p>
+            <div className="enter mt-9 flex flex-col gap-3 sm:flex-row sm:items-center" style={{ "--enter-delay": "180ms" } as React.CSSProperties}>
               <LinkButton id="hero-cta" href="#contact" variant="primary" size="lg">
                 {hero.ctaPrimary}
               </LinkButton>
@@ -32,11 +37,15 @@ export function Hero() {
                 {hero.ctaSecondary}
               </LinkButton>
             </div>
-            <p className="mt-8 text-sm text-muted">{hero.reassurance}</p>
-            <p className="mt-2 text-sm text-muted">{hero.foundedBy}</p>
+            <div className="enter mt-8 flex flex-col gap-1.5 text-small text-muted" style={{ "--enter-delay": "240ms" } as React.CSSProperties}>
+              <p>{hero.reassurance}</p>
+              <p>{hero.foundedBy}</p>
+            </div>
           </div>
 
-          <PipelineVisual />
+          <div className="enter" style={{ "--enter-delay": "240ms" } as React.CSSProperties}>
+            <PipelineVisual />
+          </div>
         </div>
       </Container>
     </section>

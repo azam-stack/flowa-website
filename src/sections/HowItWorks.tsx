@@ -1,65 +1,18 @@
 import { useEffect, useRef, useState } from "react";
-import { Container } from "@/components/Container";
-import { Reveal } from "@/components/Reveal";
+import { Section, SectionHeader, Container } from "@/components/Section";
 import { howItWorks } from "@/content/site.en";
 
-// Card centres as % of row width for 4 equal columns, and the arc each
-// connects — alternating above/below the row per the restructure brief.
-const ARCS = [
-  { from: 12.5, to: 37.5, bow: -1 }, // 01 → 02, above
-  { from: 37.5, to: 62.5, bow: 1 }, // 02 → 03, below
-  { from: 62.5, to: 87.5, bow: -1 }, // 03 → 04, above
-];
-
-function ArcLayer({ drawn }: { drawn: boolean }) {
-  const pathRefs = useRef<(SVGPathElement | null)[]>([]);
-  const [lengths, setLengths] = useState<number[]>([]);
-
-  useEffect(() => {
-    setLengths(pathRefs.current.map((p) => p?.getTotalLength() ?? 300));
-  }, []);
-
-  return (
-    <svg
-      className="pointer-events-none absolute inset-x-0 top-1/2 hidden h-[120px] w-full -translate-y-1/2 lg:block"
-      viewBox="0 -20 100 80"
-      preserveAspectRatio="none"
-      aria-hidden="true"
-    >
-      {ARCS.map((arc, i) => {
-        const midY = 20 + arc.bow * 35;
-        const len = lengths[i] ?? 300;
-        return (
-          <path
-            key={i}
-            ref={(el) => (pathRefs.current[i] = el)}
-            d={`M ${arc.from} 20 Q ${(arc.from + arc.to) / 2} ${midY} ${arc.to} 20`}
-            stroke="#EE9E47"
-            strokeWidth={0.6}
-            strokeDasharray="2 2"
-            strokeLinecap="round"
-            fill="none"
-            vectorEffect="non-scaling-stroke"
-            style={{
-              strokeDasharray: len,
-              strokeDashoffset: drawn ? 0 : len,
-              transition: `stroke-dashoffset 700ms ease-out ${i * 200}ms`,
-            }}
-            className="motion-reduce:!transition-none"
-          />
-        );
-      })}
-    </svg>
-  );
-}
-
+/**
+ * Section 5. Four steps in one row, no cards. One line runs behind the
+ * step numbers and is drawn left-to-right when the section scrolls into
+ * view; the numbers fill in turn. On mobile the line runs vertically.
+ */
 export function HowItWorks() {
   const ref = useRef<HTMLDivElement>(null);
   const [drawn, setDrawn] = useState(false);
 
   useEffect(() => {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduceMotion) {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setDrawn(true);
       return;
     }
@@ -79,41 +32,49 @@ export function HowItWorks() {
   }, []);
 
   return (
-    <section id="how-it-works" className="border-t border-border py-12 md:py-14">
+    <Section id="how-it-works">
       <Container>
-        <Reveal>
-          <div className="flex items-center gap-3">
-            <span className="h-px w-6 bg-accent-display" aria-hidden="true" />
-            <p className="text-[15px] font-medium text-accent-display">{howItWorks.eyebrow}</p>
+        <SectionHeader eyebrow={howItWorks.eyebrow} title={howItWorks.h2} />
+
+        <div ref={ref} className="relative mt-14">
+          {/* Desktop connector: one line behind the numbers, drawn on reveal */}
+          <div className="pointer-events-none absolute left-0 right-0 top-5 hidden h-px lg:block" aria-hidden="true">
+            <div className="h-full bg-border" />
+            <div
+              className="absolute inset-y-0 left-0 bg-accent transition-[width] duration-[600ms] ease-flowa motion-reduce:transition-none"
+              style={{ width: drawn ? "100%" : "0%" }}
+            />
           </div>
-          <h2 className="mt-3 max-w-xl text-3xl font-extrabold leading-tight tracking-tight text-fg sm:text-4xl">{howItWorks.h2}</h2>
-        </Reveal>
+          {/* Mobile connector: vertical line down the left */}
+          <div className="pointer-events-none absolute bottom-5 left-5 top-5 w-px lg:hidden" aria-hidden="true">
+            <div className="h-full bg-border" />
+            <div
+              className="absolute inset-x-0 top-0 bg-accent transition-[height] duration-[600ms] ease-flowa motion-reduce:transition-none"
+              style={{ height: drawn ? "100%" : "0%" }}
+            />
+          </div>
 
-        <div ref={ref} className="relative mt-8">
-          <ArcLayer drawn={drawn} />
-
-          <div className="relative grid grid-cols-1 gap-6 lg:grid-cols-4 lg:gap-5">
+          <ol className="relative grid grid-cols-1 gap-10 lg:grid-cols-4 lg:gap-8">
             {howItWorks.steps.map((step, i) => (
-              <div key={step.n} className="relative">
-                {i > 0 && (
-                  <div className="mb-6 flex justify-center lg:hidden" aria-hidden="true">
-                    <span className="h-6 w-px border-l-2 border-dashed border-accent" />
-                  </div>
-                )}
-                <Reveal delay={i * 60}>
-                  <div className="relative overflow-hidden rounded-2xl border border-black/[0.06] bg-white p-6">
-                    <span className="pointer-events-none absolute left-6 top-4 text-[clamp(3rem,4vw,4.5rem)] font-extrabold leading-none text-accent/[0.15]" aria-hidden="true">
-                      {step.n}
-                    </span>
-                    <h3 className="relative mt-12 text-lg font-bold tracking-tight text-fg">{step.title}</h3>
-                    <p className="relative mt-2.5 text-[14px] leading-relaxed text-muted">{step.body}</p>
-                  </div>
-                </Reveal>
-              </div>
+              <li key={step.n} className="grid grid-cols-[2.5rem_1fr] gap-4 lg:block">
+                <span
+                  className={`relative z-10 flex h-10 w-10 items-center justify-center rounded-full border text-[15px] font-bold transition-[background-color,border-color,color] duration-fast ease-out motion-reduce:transition-none ${
+                    drawn ? "border-accent bg-accent text-accent-fg" : "border-border bg-bg text-muted"
+                  }`}
+                  style={{ transitionDelay: drawn ? `${200 + i * 80}ms` : "0ms" }}
+                  aria-hidden="true"
+                >
+                  {i + 1}
+                </span>
+                <div className="lg:mt-6">
+                  <h3 className="text-h3 text-fg">{step.title}</h3>
+                  <p className="mt-2.5 text-body text-muted">{step.body}</p>
+                </div>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </Container>
-    </section>
+    </Section>
   );
 }

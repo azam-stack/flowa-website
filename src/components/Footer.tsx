@@ -6,7 +6,7 @@ const LINKS = [...nav.anchors.map((a) => ({ href: a.href, label: a.label })), { 
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-bg py-8">
+    <footer className="border-t border-border bg-bg py-compact">
       <Container>
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div className="max-w-xs">
@@ -18,13 +18,13 @@ export function Footer() {
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-x-10 gap-y-6">
+          <div className="flex flex-wrap gap-x-12 gap-y-6">
             <div>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.1em] text-muted">{footer.navigationHeading}</p>
+              <p className="mb-3 text-[12px] font-semibold uppercase tracking-[0.1em] text-muted">{footer.navigationHeading}</p>
               <ul className="space-y-2">
                 {LINKS.map((l) => (
                   <li key={l.href}>
-                    <a href={l.href} className="text-sm text-fg/80 hover:text-fg">
+                    <a href={l.href} className="text-small text-fg/80 hover:text-fg">
                       {l.label}
                     </a>
                   </li>
@@ -32,16 +32,16 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.1em] text-muted">{footer.contactHeading}</p>
+              <p className="mb-3 text-[12px] font-semibold uppercase tracking-[0.1em] text-muted">{footer.contactHeading}</p>
               <ul className="space-y-2">
                 <li>
-                  <a href={`mailto:${finalCta.email}`} className="text-sm text-fg/80 hover:text-fg">
+                  <a href={`mailto:${finalCta.email}`} className="text-small text-fg/80 hover:text-fg">
                     {finalCta.email}
                   </a>
                 </li>
                 {footer.linkedinUrl && (
                   <li>
-                    <a href={footer.linkedinUrl} target="_blank" rel="noreferrer" className="text-sm text-fg/80 hover:text-fg">
+                    <a href={footer.linkedinUrl} target="_blank" rel="noreferrer" className="text-small text-fg/80 hover:text-fg">
                       {finalCta.linkedin}
                     </a>
                   </li>
@@ -51,8 +51,10 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-6 flex flex-col gap-2 border-t border-border pt-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Flowa. {footer.rights}</p>
+        <div className="mt-8 border-t border-border pt-6 text-[12px] text-muted">
+          <p>
+            © {new Date().getFullYear()} Flowa. {footer.rights}
+          </p>
         </div>
       </Container>
     </footer>

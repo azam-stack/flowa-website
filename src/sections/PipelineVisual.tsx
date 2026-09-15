@@ -27,7 +27,7 @@ export function PipelineVisual() {
 
   return (
     <div
-      className="relative overflow-hidden rounded-[28px] border border-border bg-card p-6 shadow-[0_1px_2px_rgba(12,12,11,0.04),0_24px_48px_-20px_rgba(12,12,11,0.16)] sm:p-8"
+      className="relative overflow-hidden rounded-card border border-border bg-card p-6 shadow-float sm:p-8"
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
     >
@@ -69,7 +69,7 @@ export function PipelineVisual() {
 
       <div className="mt-5 grid overflow-hidden transition-[grid-template-rows] duration-500 ease-out" style={{ gridTemplateRows: showMeeting ? "1fr" : "0fr" }}>
         <div className="overflow-hidden">
-          <div className="flex items-start justify-between gap-3 rounded-2xl border border-accent/20 bg-accent/[0.06] p-4">
+          <div className="flex items-start justify-between gap-3 rounded-field border border-accent/20 bg-accent/[0.06] p-4">
             <div>
               <p className="text-sm font-bold text-fg">{hero.card.meeting.company}</p>
               <p className="mt-0.5 text-[13px] text-muted">{hero.card.meeting.role}</p>

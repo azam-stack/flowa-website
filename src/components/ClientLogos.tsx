@@ -83,8 +83,8 @@ export function ClientLogos() {
 
   if (reducedMotion) {
     return (
-      <section aria-label="Our clients" className="border-y border-border py-10 md:py-12">
-        <p className="mb-6 text-center text-sm text-muted">{clientLogos.heading}</p>
+      <section aria-label="Our clients" className="border-y border-border py-10">
+        <p className="mb-6 text-center text-small text-muted">{clientLogos.heading}</p>
         <div className="mx-auto flex max-w-content flex-wrap items-center justify-center gap-x-12 gap-y-6 px-6 md:px-10">
           {clients.map((client) => (
             <LogoLink key={client.slug} client={client} />
@@ -98,8 +98,8 @@ export function ClientLogos() {
   const totalSets = setsPerHalf * 2;
 
   return (
-    <section aria-label="Our clients" className="border-y border-border py-10 md:py-12">
-      <p className="mb-6 text-center text-sm text-muted">{clientLogos.heading}</p>
+    <section aria-label="Our clients" className="border-y border-border py-10">
+      <p className="mb-6 text-center text-small text-muted">{clientLogos.heading}</p>
       <div
         ref={containerRef}
         className="overflow-hidden [-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_8%,black_92%,transparent_100%)] [mask-image:linear-gradient(to_right,transparent_0%,black_8%,black_92%,transparent_100%)]"
