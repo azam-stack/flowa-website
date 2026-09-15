@@ -26,13 +26,7 @@ export function Hero() {
         <div className="grid grid-cols-1 gap-x-16 gap-y-10 lg:grid-cols-[1.02fr_0.98fr] lg:grid-rows-[auto_auto] lg:items-center">
           {/* heading */}
           <div className="min-w-0 lg:col-start-1 lg:row-start-1 lg:self-end">
-            <p className="flex items-center gap-3 text-eyebrow text-muted">
-              <span className="hero-rule h-px w-6 shrink-0 bg-accent" style={T(0)} aria-hidden="true" />
-              <span className="hero-rise" style={T(40)}>
-                {hero.eyebrow}
-              </span>
-            </p>
-            <h1 className="mt-6 text-display text-[color:var(--flowa-text)]" data-hero-h1>
+            <h1 className="text-display text-[color:var(--flowa-text)]" data-hero-h1>
               <span className="hero-mask">
                 <span className="hero-line" style={T(120)}>
                   {hero.h1[0]}

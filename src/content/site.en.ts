@@ -90,7 +90,6 @@ export const nav = {
 } as const;
 
 export const hero = {
-  eyebrow: "B2B appointment setting — pay per meeting",
   h1: ["Creating meetings.", "That create opportunities."],
   sub: "Flowa fills your calendar with qualified sales meetings with the decision-makers you actually want to sell to — so your team spends its time in conversations, not hunting for them.",
   ctaPrimary: "Book a call",
