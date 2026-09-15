@@ -51,12 +51,12 @@ export function Team() {
       <Container>
         <SectionHeader eyebrow={peopleSection.eyebrow} title={peopleSection.h2} lead={peopleSection.intro} />
 
-        <Reveal delay={80} className="mt-8 grid grid-cols-1 gap-8 md:mt-12 md:grid-cols-2 md:gap-10">
+        <Reveal delay={120} stagger className="mt-8 grid grid-cols-1 gap-8 md:mt-12 md:grid-cols-2 md:gap-10">
           <FounderRow member={team.ahmed} />
           <FounderRow member={team.anton} />
         </Reveal>
 
-        <Reveal delay={120} className="mt-10 border-t border-border pt-8 md:mt-14 md:pt-12">
+        <Reveal delay={80} variant="far" className="mt-10 border-t border-border pt-8 md:mt-14 md:pt-12">
           <blockquote className="max-w-3xl text-[18px] font-medium leading-snug tracking-tight text-fg sm:text-[26px]">“{signedStatement.quote}”</blockquote>
           <p className="mt-4 text-small font-semibold text-muted md:mt-5">
             {attributedName}, {attributed.role}

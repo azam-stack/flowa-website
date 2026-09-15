@@ -50,7 +50,7 @@ export default {
       fontSize: {
         /** Type scale (plan §6). clamp() so each role has one token, not per-breakpoint overrides. */
         display: ["clamp(2.5rem, 5.2vw, 4rem)", { lineHeight: "1", letterSpacing: "-0.035em", fontWeight: "800" }],
-        h2: ["clamp(1.75rem, 3.4vw, 2.75rem)", { lineHeight: "1.1", letterSpacing: "-0.025em", fontWeight: "800" }],
+        h2: ["clamp(1.75rem, 3.4vw, 2.75rem)", { lineHeight: "1.1", letterSpacing: "-0.025em", fontWeight: "700" }],
         h3: ["clamp(1.125rem, 1.6vw, 1.375rem)", { lineHeight: "1.25", letterSpacing: "-0.01em", fontWeight: "700" }],
         lead: ["clamp(1rem, 1.3vw, 1.1875rem)", { lineHeight: "1.55" }],
         body: ["1rem", { lineHeight: "1.6" }],

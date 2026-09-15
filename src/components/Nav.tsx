@@ -112,7 +112,7 @@ export function Nav() {
                     href={item.href}
                     data-section={item.sectionId}
                     aria-current={active ? "location" : undefined}
-                    className={`block rounded-lg px-3.5 py-2 text-sm font-medium transition-colors duration-150 ${active ? "text-fg" : "text-fg/70 hover:text-fg"}`}
+                    className={`block rounded-lg px-3.5 py-2 text-sm font-medium transition-colors duration-150 hover:bg-fg/[0.04] ${active ? "text-fg" : "text-fg/70 hover:text-fg"}`}
                   >
                     {item.label}
                   </a>

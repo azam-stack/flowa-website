@@ -17,7 +17,7 @@ export function TeamPortrait({ name, role, srcBase, className = "" }: { name: st
     .toUpperCase();
 
   return (
-    <div className={`group relative w-full max-w-[210px] overflow-hidden rounded-2xl bg-fg/[0.04] p-2 transition-colors duration-200 hover:bg-fg/[0.06] ${className}`}>
+    <div className={`img-settle group relative w-full max-w-[210px] overflow-hidden rounded-2xl bg-fg/[0.04] p-2 transition-colors duration-200 hover:bg-fg/[0.06] ${className}`}>
       <div className="relative aspect-[4/5] w-full overflow-hidden rounded-xl bg-fg/[0.06]">
         {!errored ? (
           <picture>

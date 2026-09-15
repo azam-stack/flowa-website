@@ -20,18 +20,6 @@ export function Pricing() {
         <SectionHeader eyebrow={pricing.eyebrow} title={pricing.h2} lead={pricing.body} />
 
         {pricing.mode === "model" ? <ModelMode /> : <TiersMode />}
-
-        <Reveal delay={200}>
-          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border pt-5 md:mt-10 md:gap-x-8 md:gap-y-3 md:pt-6">
-            <p className="text-small font-semibold text-fg">{pricing.includedHeading}</p>
-            {pricing.included.map((item) => (
-              <span key={item} className="flex items-center gap-1.5 text-[13px] text-muted md:gap-2 md:text-small">
-                <Check size={15} className="shrink-0 text-accent" aria-hidden="true" />
-                {item}
-              </span>
-            ))}
-          </div>
-        </Reveal>
       </Container>
     </Section>
   );
@@ -41,8 +29,8 @@ function ModelMode() {
   const m = pricing.model;
   return (
     <div className="mt-8 grid grid-cols-1 gap-7 md:mt-12 lg:grid-cols-[1fr_0.8fr] lg:gap-16">
-      <Reveal delay={80}>
-        <ol className="flex flex-col divide-y divide-border border-y border-border">
+      <Reveal delay={120} variant="near">
+        <ol className="stagger flex flex-col divide-y divide-border border-y border-border">
           {m.points.map((point, i) => (
             <li key={point.title} className="grid grid-cols-[2.5rem_1fr] gap-4 py-4 md:py-5">
               <span className="text-[22px] font-extrabold leading-none text-accent-display" aria-hidden="true">
@@ -56,15 +44,33 @@ function ModelMode() {
           ))}
         </ol>
       </Reveal>
-      <Reveal delay={160}>
-        <Card className="flex h-full flex-col justify-center p-6 md:p-8">
+      <Reveal delay={200} variant="surface" className="lg:self-start">
+        <Card className="p-6 md:p-8">
           <p className="text-h3 text-fg">{m.quoteCta}</p>
           <p className="mt-2 text-body text-muted">{m.quoteHint}</p>
-          <LinkButton href="#contact" variant="primary" className="mt-5 w-full sm:w-auto md:mt-6">
+          <LinkButton href="#contact" variant="primary" magnetic className="mt-5 w-full sm:w-auto md:mt-6">
             {m.quoteCta}
           </LinkButton>
+          <Included className="mt-7 border-t border-border pt-6 md:mt-8" />
         </Card>
       </Reveal>
+    </div>
+  );
+}
+
+/** What every engagement includes — inside the quote card (model mode) or under the tiers. */
+function Included({ className = "" }: { className?: string }) {
+  return (
+    <div className={className}>
+      <p className="text-small font-semibold text-fg">{pricing.includedHeading}</p>
+      <ul className="mt-3 flex flex-col gap-2">
+        {pricing.included.map((item) => (
+          <li key={item} className="flex items-center gap-2 text-small text-muted">
+            <Check size={15} className="shrink-0 text-accent" aria-hidden="true" />
+            {item}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -93,10 +99,11 @@ function TiersMode() {
       </Reveal>
       <Reveal delay={200}>
         <div className="mt-6 flex justify-center">
-          <LinkButton href="#contact" variant="primary">
+          <LinkButton href="#contact" variant="primary" magnetic>
             {pricing.cta}
           </LinkButton>
         </div>
+        <Included className="mx-auto mt-10 max-w-md border-t border-border pt-6" />
       </Reveal>
     </>
   );

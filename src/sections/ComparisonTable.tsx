@@ -21,7 +21,7 @@ export function ComparisonTable() {
       </div>
 
       <div className="mx-auto mt-8 w-full max-w-bleed px-6 md:mt-12 md:px-10">
-        <Reveal delay={100} className="hidden overflow-hidden rounded-card border border-border md:block">
+        <Reveal delay={100} variant="surface" threshold={0.15} className="hidden overflow-hidden rounded-card border border-border md:block">
           <table className="w-full border-collapse text-left">
             <thead>
               <tr className="bg-riskband text-white">

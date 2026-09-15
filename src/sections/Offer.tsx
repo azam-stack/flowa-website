@@ -1,4 +1,3 @@
-import { ArrowRight } from "lucide-react";
 import { Section, SectionHeader, Container } from "@/components/Section";
 import { LinkButton } from "@/components/Button";
 import { Reveal } from "@/components/Reveal";
@@ -15,23 +14,20 @@ export function Offer() {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1fr] lg:gap-20">
           <div>
             <SectionHeader eyebrow={offer.eyebrow} title={offer.h2} lead={offer.body} />
-            <Reveal delay={120} className="mt-6 md:mt-8">
+            <Reveal delay={240} variant="near" className="mt-6 md:mt-8">
               <LinkButton href="#pricing" variant="ghost" arrow>
                 {offer.ctaSecondary}
               </LinkButton>
             </Reveal>
           </div>
 
-          <Reveal delay={80}>
+          <Reveal delay={120} variant="near">
             <p className="text-eyebrow text-muted">{offer.servicesHeading}</p>
-            <ul className="mt-3 divide-y divide-border border-y border-border">
+            <ul className="stagger mt-3 divide-y divide-border border-y border-border">
               {offer.services.map((service) => (
-                <li key={service.id} id={service.id} className="group flex items-start gap-4 py-4 md:py-5">
-                  <div className="min-w-0 flex-1">
-                    <h3 className="text-h3 text-fg">{service.title}</h3>
-                    <p className="mt-1 text-small text-muted md:mt-1.5 md:text-body">{service.description}</p>
-                  </div>
-                  <ArrowRight size={18} className="mt-1.5 hidden shrink-0 text-muted/60 md:block" aria-hidden="true" />
+                <li key={service.id} id={service.id} className="py-4 md:py-5">
+                  <h3 className="text-h3 text-fg">{service.title}</h3>
+                  <p className="mt-1 text-small text-muted md:mt-1.5 md:text-body">{service.description}</p>
                 </li>
               ))}
             </ul>

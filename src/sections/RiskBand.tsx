@@ -2,6 +2,7 @@ import { Check } from "lucide-react";
 import { Section, Container } from "@/components/Section";
 import { Reveal } from "@/components/Reveal";
 import { riskBand } from "@/content/site.en";
+import { DecorativeBlob } from "@/components/DecorativeBlob";
 
 /**
  * Section 4 — "the deal". Full-bleed near-black (not orange: flat #EE9E47
@@ -11,10 +12,13 @@ import { riskBand } from "@/content/site.en";
  */
 export function RiskBand() {
   return (
-    <Section tone="band" density="band" divider={false}>
+    <Section tone="band" density="band" divider={false} className="relative overflow-hidden md:mx-4 md:rounded-[28px] lg:mx-6">
+      <div className="parallax parallax-far pointer-events-none absolute -left-32 -top-40 h-[560px] w-[560px]" aria-hidden="true">
+        <DecorativeBlob className="drift h-full w-full text-white/[0.035]" />
+      </div>
       <Container>
-        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-20">
-          <Reveal>
+        <div className="relative grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-20">
+          <Reveal variant="far" className="parallax parallax-slow">
             <h2 className="text-h2 text-white">
               {riskBand.headline[0]}
               <br />
@@ -22,7 +26,7 @@ export function RiskBand() {
             </h2>
           </Reveal>
 
-          <Reveal delay={100}>
+          <Reveal delay={160} stagger>
             <p className="text-lead text-white/[0.88]">{riskBand.paragraph}</p>
 
             <ul className="mt-5 flex flex-col gap-4 md:mt-7 md:gap-5">

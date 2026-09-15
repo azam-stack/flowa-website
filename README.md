@@ -56,6 +56,21 @@ Tokens live in `tailwind.config.ts` (with the motion and orange variants as CSS 
 - **Buttons**: `primary` (near-black, orange on hover) is the default; `accent` (orange) only in the nav and on the form; `ghost` for secondary actions. One orange button in view at a time — the nav button turns orange only once the hero's own button has scrolled away.
 - **Motion** (`--dur-fast` 150 ms, `--dur` 240 ms, `--dur-reveal` 480 ms, `--ease` cubic-bezier(.16,1,.3,1)): hero entrance on load (the only load animation), section-level reveal, the how-it-works line drawing itself, comparison pills arriving row by row, a nav underline that glides between links, form feedback (field shake, fading error text, spinner, fading confirmation). `prefers-reduced-motion` collapses all of it to instant.
 
+## Motion language
+
+Derived from a frame-by-frame study of the reference clip in `cosmos_959700922.mp4` (20 s, 30 fps): one translucent object drifting over a warm-to-cool gradient. Measured, not eyeballed: mean per-frame change 0.3–0.7 (on a 0–255 scale), position drift within ±6 % of the frame, size within ±10 %, motion arriving in waves every 3–4 s, and the last frame within 1.5 of the first. The principles behind it, as applied here:
+
+1. **One living object.** The reference has one; the site has one — the logo's O drifts on a 40 s loop in the hero (and, faintly, inside the dark band). Nothing else moves on its own.
+2. **Small amplitudes, long settles.** Three distances (8 / 16 / 28 px), one expo-out curve, 600–1000 ms. Nothing snaps.
+3. **Depth by layering, not shadow.** Surfaces (table, cards) arrive from further back with a 3 % scale; labels arrive from nearer. Parallax on the hero O and the band headline (CSS scroll-driven, desktop only).
+4. **Rhythm in waves.** Each section arrives in beats: rule → eyebrow → heading → lead → rows, 70 ms apart, not all at once.
+5. **Reveal, don't fade.** The hero headline rises out of a line mask; the lead sharpens from blur; a rule draws in beside every eyebrow.
+6. **Whitespace is the material.** Two thirds of the reference frame is empty. Section rhythm and line lengths are kept generous; no decoration was added.
+7. **Interaction confirms.** Button labels slide up and are replaced by themselves; the primary calls to action lean a few pixels toward the pointer; arrows lead by 3 px.
+8. **Continuous take.** The dark band is an inset panel, the comparison header carries its ink forward, the how-it-works line draws through its steps. Sections hand over to each other.
+
+Not taken from the reference: its gradient, its glass material, its palette. Those would have made Flowa look like the clip.
+
 ## Measurements (production build)
 
 | | 1440 px | 390 px |

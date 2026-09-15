@@ -88,12 +88,12 @@ export function GetStarted() {
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-20">
           <div>
             <SectionHeader eyebrow={faq.eyebrow} title={faq.h2} />
-            <Reveal delay={80} className="mt-6 md:mt-8">
-              <Accordion items={faq.items.map((f) => ({ title: f.q, body: f.a }))} />
+            <Reveal delay={120} variant="near" className="mt-6 md:mt-8">
+              <Accordion className="stagger" items={faq.items.map((f) => ({ title: f.q, body: f.a }))} />
             </Reveal>
           </div>
 
-          <Reveal delay={120} id="contact" className="scroll-mt-24">
+          <Reveal delay={160} variant="surface" threshold={0.15} id="contact" className="scroll-mt-24">
             <Card className="p-5 sm:p-7 md:p-9">
               {status === "sent" || status === "mailto" ? (
                 <div className="fade-in flex min-h-[320px] flex-col items-start justify-center" role="status">
@@ -134,7 +134,7 @@ export function GetStarted() {
                     )}
 
                     <div className="sm:col-span-2">
-                      <Button type="submit" variant="accent" size="lg" className="w-full" loading={status === "sending"}>
+                      <Button type="submit" variant="accent" size="lg" magnetic className="w-full" loading={status === "sending"}>
                         {status === "sending" ? finalCta.sending : finalCta.submit}
                       </Button>
                       <p className="mt-3 text-[13px] text-muted">{finalCta.privacy}</p>
