@@ -4,6 +4,8 @@ import { asset } from "@/lib/asset";
 
 const PIXELS_PER_SECOND = 28;
 const INITIAL_SETS_PER_HALF = 3;
+/** Below this many clients a marquee only reveals how short the list is; a static row is shown instead. */
+const MARQUEE_FROM = 10;
 
 /**
  * Supersedes C1 of the restructure brief — Flowa now has real clients, so
@@ -82,11 +84,11 @@ export function ClientLogos() {
 
   if (clients.length === 0) return null;
 
-  if (reducedMotion) {
+  if (reducedMotion || clients.length < MARQUEE_FROM) {
     return (
       <section aria-label="Our clients" className="border-y border-border py-8 md:py-10">
-        <p className="mb-5 text-center text-small text-muted md:mb-6">{clientLogos.heading}</p>
-        <div className="mx-auto flex max-w-content flex-wrap items-center justify-center gap-x-12 gap-y-6 px-6 md:px-10">
+        <p className="mb-7 text-center text-small text-muted md:mb-8">{clientLogos.heading}</p>
+        <div className="mx-auto flex max-w-content flex-wrap items-center justify-center gap-x-10 gap-y-6 px-6 sm:gap-x-14 md:gap-x-[72px] md:px-10">
           {clients.map((client) => (
             <LogoLink key={client.slug} client={client} />
           ))}
@@ -103,7 +105,7 @@ export function ClientLogos() {
       <p className="mb-5 text-center text-small text-muted md:mb-6">{clientLogos.heading}</p>
       <div
         ref={containerRef}
-        className="overflow-hidden [-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_8%,black_92%,transparent_100%)] [mask-image:linear-gradient(to_right,transparent_0%,black_8%,black_92%,transparent_100%)]"
+        className="overflow-hidden [-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_14%,black_86%,transparent_100%)] [mask-image:linear-gradient(to_right,transparent_0%,black_14%,black_86%,transparent_100%)]"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         onFocus={() => setFocused(true)}
@@ -148,7 +150,7 @@ function LogoLink({ client, ariaHidden, onImgLoad }: { client: Client; ariaHidde
         alt={ariaHidden ? "" : client.name}
         onLoad={onImgLoad}
         style={{ transform: `scale(${scale})` }}
-        className="h-[22px] w-auto origin-center grayscale opacity-[0.55] transition-all duration-200 group-hover:grayscale-0 group-hover:opacity-100 md:h-7"
+        className="h-[22px] w-auto origin-center grayscale opacity-80 transition-all duration-200 group-hover:grayscale-0 group-hover:opacity-100 md:h-7"
       />
     </a>
   );

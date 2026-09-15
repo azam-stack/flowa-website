@@ -49,7 +49,7 @@ function ModelMode() {
           <p className="text-h3 text-fg">{m.quoteCta}</p>
           <p className="mt-2 text-body text-muted">{m.quoteHint}</p>
           <LinkButton href="#contact" variant="primary" magnetic className="mt-5 w-full sm:w-auto md:mt-6">
-            {m.quoteCta}
+            {m.quoteButton}
           </LinkButton>
           <Included className="mt-7 border-t border-border pt-6 md:mt-8" />
         </Card>

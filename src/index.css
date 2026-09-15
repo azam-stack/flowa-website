@@ -326,12 +326,19 @@
 }
 
 /* ---------- Flow system (hero): path draws, a point of light travels it ---------- */
-.flow-path {
-  color: rgb(var(--rgb-accent-strong) / 0.7);
+.flow-path,
+.flow-path-halo {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
   animation: flow-draw 1400ms var(--ease) both;
   animation-delay: var(--t, 0ms);
+}
+.flow-path {
+  stroke: rgb(var(--rgb-fg) / 0.55);
+}
+/* a pale halo under the line so it reads over the glow */
+.flow-path-halo {
+  stroke: rgb(var(--rgb-bg) / 0.6);
 }
 @keyframes flow-draw {
   to { stroke-dashoffset: 0; }
@@ -364,15 +371,6 @@
   animation-delay: 7800ms;
 }
 .flow-dot {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 10px;
-  height: 10px;
-  margin: -5px 0 0 -5px;
-  border-radius: 999px;
-  background: #ee9e47;
-  box-shadow: var(--light-focus);
   offset-rotate: 0deg;
   animation: flow-travel 9s var(--ease-soft) 2400ms infinite;
   opacity: 0;
@@ -405,22 +403,22 @@
   pointer-events: none;
   background: var(--gradient-depth);
 }
-/* The line continues: from the hero down into the next section. */
-.hero-connector {
-  transform-origin: top center;
-  animation: connector-draw var(--duration-slower) var(--ease-emphasized) both;
-  animation-delay: var(--t, 0ms);
+
+/* ---------- Ambient gradient (dark band) ---------- */
+.ambient-blob {
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+  animation-play-state: paused;
 }
-@keyframes connector-draw {
-  from { transform: scaleY(0); }
-  to { transform: none; }
+[data-active="true"] .ambient-blob {
+  animation-play-state: running;
 }
 
 /* ---------- The deal: promise crossed out, result rises ---------- */
 .transform-line {
   position: relative;
   display: inline;
-  background-image: linear-gradient(currentColor, currentColor);
+  background-image: linear-gradient(#fff, #fff); /* the rule stays full white while the words dim */
   background-repeat: no-repeat;
   background-size: 0% 2px;
   background-position: 0 58%;
@@ -428,7 +426,7 @@
 }
 [data-inview="true"] .transform-line {
   background-size: 100% 2px;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.55);
 }
 .transform-to {
   opacity: 0;
@@ -629,18 +627,16 @@
   .liquid > div,
   .flow-dot,
   .flow-node-core,
-  .flow-end {
+  .flow-end,
+  .ambient-blob {
     animation: none;
-  }
-  .hero-connector {
-    transform: none;
   }
   .flow-path {
     stroke-dashoffset: 0;
   }
   .transform-line {
     background-size: 100% 2px;
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.55);
   }
   .transform-to {
     opacity: 1;

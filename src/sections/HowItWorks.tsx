@@ -96,7 +96,7 @@ export function HowItWorks() {
   return (
     <Section id="how-it-works">
       <Container>
-        <SectionHeader eyebrow={howItWorks.eyebrow} title={howItWorks.h2} />
+        <SectionHeader eyebrow={howItWorks.eyebrow} title={howItWorks.h2} align="center" />
 
         <div ref={ref} data-inview={drawn ? "true" : "false"} className="relative mt-12 lg:mt-16">
           <div className="pointer-events-none absolute left-0 right-0 top-5 hidden h-px lg:block" aria-hidden="true">

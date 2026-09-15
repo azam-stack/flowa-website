@@ -83,6 +83,17 @@ export default {
         deep: "var(--shadow-deep)",
         glow: "var(--shadow-glow)",
       },
+      keyframes: {
+        /** Ambient blobs for the dark band: translate within ±8% of the band, scale 1–1.15, opacity 0.85–1. */
+        "drift-1": { "0%": { transform: "translate3d(0, 0, 0) scale(1)", opacity: "1" }, "100%": { transform: "translate3d(8%, 5%, 0) scale(1.15)", opacity: "0.85" } },
+        "drift-2": { "0%": { transform: "translate3d(0, 0, 0) scale(1.1)", opacity: "0.9" }, "100%": { transform: "translate3d(-8%, 6%, 0) scale(1)", opacity: "1" } },
+        "drift-3": { "0%": { transform: "translate3d(0, 0, 0) scale(1)", opacity: "0.85" }, "100%": { transform: "translate3d(6%, -8%, 0) scale(1.12)", opacity: "1" } },
+      },
+      animation: {
+        "drift-1": "drift-1 24s ease-in-out infinite alternate",
+        "drift-2": "drift-2 31s ease-in-out infinite alternate",
+        "drift-3": "drift-3 18s ease-in-out infinite alternate",
+      },
       transitionTimingFunction: {
         flowa: "cubic-bezier(0.16, 1, 0.3, 1)",
       },

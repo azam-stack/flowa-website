@@ -110,7 +110,8 @@ export const hero = {
    * card above. Conceptual, anonymised — the note says so.
    */
   flow: {
-    note: "Illustrative",
+    /** Shown inside the meeting card's label, after the word "Meeting". */
+    note: "illustrative",
     nodes: [
       { label: "Company", sub: "Matches your ICP" },
       { label: "Decision-maker", sub: "Head of Sales" },
@@ -163,15 +164,15 @@ export const hero = {
  */
 export type Client = { name: string; slug: string; url: string; scale?: number; format?: "svg" | "png" };
 export const clients: Client[] = [
-  { name: "Adversus", slug: "adversus", url: "https://adversus.io", format: "png", scale: 1 },
-  { name: "Generaxion", slug: "generaxion", url: "https://generaxion.com", format: "png", scale: 1 },
-  { name: "Lemon Marketing", slug: "lemon-marketing", url: "https://lemonmarketing.dk", format: "png", scale: 1 },
-  { name: "Datapeeps", slug: "datapeeps", url: "https://datapeeps.dk", format: "svg", scale: 1 },
-  { name: "Partner Team", slug: "partner-team", url: "https://partnerteam.dk", format: "png", scale: 1 },
+  { name: "Adversus", slug: "adversus", url: "https://adversus.io", format: "png", scale: 0.9 },
+  { name: "Generaxion", slug: "generaxion", url: "https://generaxion.com", format: "png", scale: 0.66 },
+  { name: "Lemon Marketing", slug: "lemon-marketing", url: "https://lemonmarketing.dk", format: "png", scale: 1.1 },
+  { name: "Datapeeps", slug: "datapeeps", url: "https://datapeeps.dk", format: "svg", scale: 1.2 },
+  { name: "Partner Team", slug: "partner-team", url: "https://partnerteam.dk", format: "png", scale: 1.25 },
 ];
 
 export const clientLogos = {
-  heading: "Companies that trust us",
+  heading: "Companies we've booked meetings for",
 } as const;
 
 /**
@@ -185,21 +186,6 @@ export const clientLogos = {
  * experience with an agency before") now opens the comparison section,
  * where it belongs.
  */
-/**
- * "Why Flowa" — four contrasts, each a claim about how Flowa works
- * against the thing it is not. Titles are set large; one line under each.
- */
-export const why = {
-  eyebrow: "Why Flowa",
-  h2: "Meetings that are actually worth taking.",
-  items: [
-    { title: "Qualified meetings. Not lists of leads.", body: "You get a meeting in the calendar with someone who fits your criteria, not a spreadsheet of names to chase." },
-    { title: "Decision-makers. Not whoever picks up.", body: "We speak with the people who can say yes, and we agree with you in advance who those are." },
-    { title: "Genuine interest. Not someone who agreed to a call.", body: "A meeting counts only when it meets the criteria we wrote down together." },
-    { title: "Paid on meetings. Not on activity.", body: "No retainer, no setup fee. If we don't book the meetings, you don't pay." },
-  ],
-} as const;
-
 /**
  * Section 3, "Offer" — the pitch on the left, the four services as a
  * list on the right. Each service has an id so the nav and footer can
@@ -227,12 +213,17 @@ export const offer = {
  * as plain strings — they render as additional checks.
  */
 export const riskBand = {
-  /** The transformation: the first line gives way to the second. */
+  /** The transformation: the first line gives way to the second. This is the band's only headline. */
   transform: ["You don't pay for promises.", "You pay when meetings are created."],
-  headline: ["If we don't book the meetings,", "you don't pay."],
   paragraph: "No retainers. No setup fees. No paying for activity, effort or a monthly report. You pay per qualified meeting and nothing else.",
+  /**
+   * Confirmed commitments. Rendered as a list only once there are three
+   * (the third is the no-show policy, TODO(founders)); until then the
+   * sentence below stands in, because a list of two looks unfinished.
+   */
   checks: ["You set the qualification criteria before we start", "You only pay for meetings that meet them"],
-  payoff: "We only get paid when your calendar fills. That's the deal.",
+  checksSentence: "You set the qualification criteria before we start, and you only pay for meetings that meet them.",
+  payoff: "Paid on meetings. Not on activity.",
 } as const;
 
 /**
@@ -360,6 +351,7 @@ export const pricing = {
     ],
     quoteCta: "Get a quote for your volume",
     quoteHint: "Takes a 20-minute call. We'll come back with a per-meeting price the same day.",
+    quoteButton: "Book a 20-minute call",
   },
   tiers: [
     { name: "Starter", price: PRICE_TBC, note: "For getting started", popular: false },
@@ -419,11 +411,11 @@ export const finalCta = {
     email: "That doesn't look like an email address.",
     network: "Something went wrong and your request wasn't sent. Try again, or write to us directly at",
   },
-  submit: "Send request",
+  submit: "Fill my calendar",
   sending: "Sending…",
   privacy: "We use what you send us only to reply to you. Nothing is shared or added to a list.",
   // Shown when the request was delivered to Flowa's form endpoint.
-  successTitle: "Sent — Ahmed or Anton will reply within one working day.",
+  successTitle: "On it — Ahmed or Anton will reply within one working day.",
   successBody: "You'll get a reply from",
   // Shown when no form endpoint is configured and the browser's email
   // client was opened instead — the honest version of "sent".

@@ -21,7 +21,7 @@ const T = (ms: number) => ({ "--t": `${ms}ms` }) as React.CSSProperties;
 export function Hero() {
   const m = hero.card.meeting;
   return (
-    <section id="top" className="atmosphere relative overflow-hidden pb-14 pt-32 md:pb-20 md:pt-40 lg:pt-44">
+    <section id="top" className="atmosphere relative overflow-hidden pb-16 pt-32 md:pb-24 md:pt-40 lg:pt-44">
       <Container className="relative z-[2]">
         <div className="grid grid-cols-1 gap-x-16 gap-y-10 lg:grid-cols-[1.02fr_0.98fr] lg:grid-rows-[auto_auto] lg:items-center">
           {/* heading */}
@@ -47,14 +47,19 @@ export function Hero() {
           </div>
 
           {/* visual system */}
-          <div className="relative mx-auto aspect-square w-full max-w-[400px] sm:max-w-[520px] lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:max-w-none">
-            <div className="hero-blur absolute -inset-[14%]" style={T(0)}>
+          <div className="relative mx-auto aspect-square w-full max-w-[400px] sm:max-w-[520px] lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:max-w-[560px] lg:justify-self-end">
+            {/* the light-form: background for the flow, not the subject */}
+            <div className="hero-blur absolute -right-[4%] top-[2%] h-[78%] w-[78%] opacity-75" style={T(0)}>
               <FluidObject className="parallax parallax-slow h-full w-full" />
             </div>
             <FlowSystem />
             <div className="hero-surface flow-end absolute bottom-[6%] left-0 z-[3] w-[min(300px,80%)] rounded-card border border-border p-5 shadow-float backdrop-blur-md sm:p-6" style={{ ...T(700), background: "var(--surface-glass-strong)" }}>
               <div className="flex items-center justify-between gap-3">
-                <span className="text-[12px] font-medium text-muted">{hero.flow.end}</span>
+                <span className="text-[12px] font-medium text-muted">
+                  <span className="text-fg">{hero.flow.end}</span>
+                  <span aria-hidden="true"> · </span>
+                  {hero.flow.note}
+                </span>
                 <Badge variant="accent">{m.tag}</Badge>
               </div>
               <p className="mt-3 text-[15px] font-semibold leading-snug text-fg">{m.company}</p>
@@ -84,10 +89,6 @@ export function Hero() {
               {hero.reassurance}
             </p>
           </div>
-        </div>
-        {/* the line continues into the next section */}
-        <div className="mt-12 flex justify-center md:mt-16" aria-hidden="true">
-          <span className="hero-connector block h-10 w-px bg-accent/60 md:h-14" style={T(1700)} />
         </div>
       </Container>
     </section>
