@@ -49,19 +49,19 @@ export default {
       },
       fontSize: {
         /** Type scale (plan §6). clamp() so each role has one token, not per-breakpoint overrides. */
-        display: ["clamp(2.75rem, 5.2vw, 4rem)", { lineHeight: "1", letterSpacing: "-0.035em", fontWeight: "800" }],
-        h2: ["clamp(2rem, 3.4vw, 2.75rem)", { lineHeight: "1.1", letterSpacing: "-0.025em", fontWeight: "800" }],
-        h3: ["1.375rem", { lineHeight: "1.25", letterSpacing: "-0.01em", fontWeight: "700" }],
-        lead: ["clamp(1.0625rem, 1.3vw, 1.1875rem)", { lineHeight: "1.55" }],
+        display: ["clamp(2.5rem, 5.2vw, 4rem)", { lineHeight: "1", letterSpacing: "-0.035em", fontWeight: "800" }],
+        h2: ["clamp(1.75rem, 3.4vw, 2.75rem)", { lineHeight: "1.1", letterSpacing: "-0.025em", fontWeight: "800" }],
+        h3: ["clamp(1.125rem, 1.6vw, 1.375rem)", { lineHeight: "1.25", letterSpacing: "-0.01em", fontWeight: "700" }],
+        lead: ["clamp(1rem, 1.3vw, 1.1875rem)", { lineHeight: "1.55" }],
         body: ["1rem", { lineHeight: "1.6" }],
         small: ["0.875rem", { lineHeight: "1.5" }],
         eyebrow: ["0.9375rem", { lineHeight: "1.4", fontWeight: "500" }],
       },
       spacing: {
-        /** Section rhythm: standard 64→96, band 80→112, compact 48→64. */
-        section: "clamp(4rem, 7vw, 6rem)",
-        band: "clamp(5rem, 8vw, 7rem)",
-        compact: "clamp(3rem, 5vw, 4rem)",
+        /** Section rhythm (mobile→desktop): standard 48→96, band 64→112, compact 40→64. */
+        section: "clamp(3rem, 7vw, 6rem)",
+        band: "clamp(4rem, 8vw, 7rem)",
+        compact: "clamp(2.5rem, 5vw, 4rem)",
       },
       maxWidth: {
         content: "1240px",

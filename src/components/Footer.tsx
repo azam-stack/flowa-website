@@ -8,7 +8,7 @@ export function Footer() {
   return (
     <footer className="border-t border-border bg-bg py-compact">
       <Container>
-        <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
+        <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between md:gap-10">
           <div className="max-w-xs">
             <Logo />
             <p className="mt-4 text-lg font-bold leading-[1.05] tracking-tight text-[color:var(--flowa-text)]">
@@ -21,7 +21,7 @@ export function Footer() {
           <div className="flex flex-wrap gap-x-12 gap-y-6">
             <div>
               <p className="mb-3 text-[12px] font-semibold uppercase tracking-[0.1em] text-muted">{footer.navigationHeading}</p>
-              <ul className="space-y-2">
+              <ul className="space-y-1.5 md:space-y-2">
                 {LINKS.map((l) => (
                   <li key={l.href}>
                     <a href={l.href} className="text-small text-fg/80 hover:text-fg">
@@ -51,7 +51,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-border pt-6 text-[12px] text-muted">
+        <div className="mt-6 border-t border-border pt-5 text-[12px] text-muted md:mt-8 md:pt-6">
           <p>
             © {new Date().getFullYear()} Flowa. {footer.rights}
           </p>

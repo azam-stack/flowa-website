@@ -32,7 +32,7 @@ export function Accordion({ items, defaultOpen = null, className = "" }: { items
                 aria-controls={panelId}
                 className="flex w-full items-center justify-between gap-4 py-4 text-left"
               >
-                <span className="text-[17px] font-semibold text-fg">{item.title}</span>
+                <span className="text-[16px] font-semibold text-fg md:text-[17px]">{item.title}</span>
                 <ChevronDown size={20} className={`shrink-0 transition-transform duration-[280ms] ease-flowa motion-reduce:transition-none ${isOpen ? "rotate-180 text-accent" : "text-muted"}`} aria-hidden="true" />
               </button>
             </h3>

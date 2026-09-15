@@ -20,7 +20,7 @@ export function ComparisonTable() {
         <SectionHeader eyebrow={comparisonTable.eyebrow} title={comparisonTable.h2} lead={comparisonTable.intro} />
       </div>
 
-      <div className="mx-auto mt-12 w-full max-w-bleed px-6 md:px-10">
+      <div className="mx-auto mt-8 w-full max-w-bleed px-6 md:mt-12 md:px-10">
         <Reveal delay={100} className="hidden overflow-hidden rounded-card border border-border md:block">
           <table className="w-full border-collapse text-left">
             <thead>
@@ -81,7 +81,7 @@ function MobileComparison() {
       </div>
       <dl className="mt-4 divide-y divide-border border-y border-border">
         {comparisonTable.rows.map((row) => (
-          <div key={row.label} className="flex items-start justify-between gap-4 py-4">
+          <div key={row.label} className="flex items-start justify-between gap-4 py-3.5">
             <dt className="text-small font-medium text-muted">{row.label}</dt>
             <dd className="max-w-[60%] text-right text-[15px] font-medium text-fg">{col === 2 ? <Badge variant="dark" check>{row.cells[2]}</Badge> : row.cells[col]}</dd>
           </div>

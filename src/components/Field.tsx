@@ -39,7 +39,7 @@ export function Field({ id, label, error, hint, className = "", attempt = 0, ...
       <label htmlFor={id} className="mb-1.5 block text-small font-medium text-fg">
         {label}
       </label>
-      <input ref={ref} id={id} aria-invalid={error ? true : undefined} aria-describedby={describedBy} className={controlClasses(!!error, "h-12")} {...input} />
+      <input ref={ref} id={id} aria-invalid={error ? true : undefined} aria-describedby={describedBy} className={controlClasses(!!error, "h-11 md:h-12")} {...input} />
       <FieldNote id={id} error={error} hint={hint} />
     </div>
   );

@@ -8,11 +8,11 @@ export function Problem() {
     <Section density="compact" divider={false}>
       <Container>
         <SectionHeader eyebrow={problem.eyebrow} title={problem.h2} />
-        <Reveal delay={80} className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
+        <Reveal delay={80} className="mt-8 grid grid-cols-1 gap-6 md:mt-12 md:grid-cols-3 md:gap-8">
           {problem.items.map((item) => (
-            <div key={item.title} className="border-t border-border pt-5">
+            <div key={item.title} className="border-t border-border pt-4 md:pt-5">
               <h3 className="text-h3 text-fg">{item.title}</h3>
-              <p className="mt-3 text-body text-muted">{item.body}</p>
+              <p className="mt-2 text-body text-muted md:mt-3">{item.body}</p>
             </div>
           ))}
         </Reveal>

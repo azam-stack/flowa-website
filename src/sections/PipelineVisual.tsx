@@ -27,11 +27,11 @@ export function PipelineVisual() {
 
   return (
     <div
-      className="relative overflow-hidden rounded-card border border-border bg-card p-6 shadow-float sm:p-8"
+      className="relative overflow-hidden rounded-card border border-border bg-card p-5 shadow-float sm:p-8"
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
     >
-      <div className="mb-6 flex items-center justify-between">
+      <div className="mb-4 flex items-center justify-between sm:mb-6">
         <span className="text-[13px] font-medium text-muted">{hero.card.label}</span>
       </div>
 
@@ -39,7 +39,7 @@ export function PipelineVisual() {
         {steps.map((stage, i) => {
           const state = i < activeStep ? "completed" : i === activeStep ? "active" : "upcoming";
           return (
-            <div key={stage} className="relative flex items-center gap-4 py-3">
+            <div key={stage} className="relative flex items-center gap-4 py-2 sm:py-3">
               <div className="relative flex h-8 w-8 shrink-0 items-center justify-center">
                 {i < steps.length - 1 && (
                   <span className="absolute left-1/2 top-8 h-[calc(100%+0.5rem)] w-px -translate-x-1/2 bg-border">
@@ -67,7 +67,7 @@ export function PipelineVisual() {
         })}
       </div>
 
-      <div className="mt-5 grid overflow-hidden transition-[grid-template-rows] duration-500 ease-out" style={{ gridTemplateRows: showMeeting ? "1fr" : "0fr" }}>
+      <div className="mt-4 grid overflow-hidden sm:mt-5 transition-[grid-template-rows] duration-500 ease-out" style={{ gridTemplateRows: showMeeting ? "1fr" : "0fr" }}>
         <div className="overflow-hidden">
           <div className="flex items-start justify-between gap-3 rounded-field border border-accent/20 bg-accent/[0.06] p-4">
             <div>
@@ -80,7 +80,7 @@ export function PipelineVisual() {
         </div>
       </div>
 
-      <p className="mt-4 text-[13px] leading-relaxed text-muted">{hero.card.caption}</p>
+      <p className="mt-3 text-[13px] leading-relaxed text-muted sm:mt-4">{hero.card.caption}</p>
     </div>
   );
 }

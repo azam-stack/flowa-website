@@ -85,16 +85,16 @@ export function GetStarted() {
   return (
     <Section id="faq">
       <Container>
-        <div className="grid grid-cols-1 gap-14 lg:grid-cols-[1fr_1.05fr] lg:gap-20">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-20">
           <div>
             <SectionHeader eyebrow={faq.eyebrow} title={faq.h2} />
-            <Reveal delay={80} className="mt-8">
+            <Reveal delay={80} className="mt-6 md:mt-8">
               <Accordion items={faq.items.map((f) => ({ title: f.q, body: f.a }))} />
             </Reveal>
           </div>
 
           <Reveal delay={120} id="contact" className="scroll-mt-24">
-            <Card className="p-7 md:p-9">
+            <Card className="p-5 sm:p-7 md:p-9">
               {status === "sent" || status === "mailto" ? (
                 <div className="fade-in flex min-h-[320px] flex-col items-start justify-center" role="status">
                   <p className="text-h3 text-fg">{status === "sent" ? finalCta.successTitle : finalCta.mailtoTitle}</p>
@@ -112,7 +112,7 @@ export function GetStarted() {
                   <h2 className="mt-2 text-h3 text-fg sm:text-[26px]">{finalCta.h2}</h2>
                   <p className="mt-2 text-body text-muted">{finalCta.body}</p>
 
-                  <form onSubmit={handleSubmit} noValidate className="mt-7 grid grid-cols-1 gap-5 sm:grid-cols-2">
+                  <form onSubmit={handleSubmit} noValidate className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:mt-7 md:gap-5">
                     <div className="hidden" aria-hidden="true">
                       <label htmlFor="company_website">Company website</label>
                       <input id="company_website" name="company_website" type="text" tabIndex={-1} autoComplete="off" />
@@ -143,7 +143,7 @@ export function GetStarted() {
                 </>
               )}
 
-              <div className="mt-8 flex flex-col gap-4 border-t border-border pt-6">
+              <div className="mt-6 flex flex-col gap-3 border-t border-border pt-5 md:mt-8 md:gap-4 md:pt-6">
                 <div className="flex items-center gap-3.5">
                   <picture>
                     <source srcSet={`${team.ahmed.photoBase}.avif`} type="image/avif" />

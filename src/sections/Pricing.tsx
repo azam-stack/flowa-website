@@ -22,10 +22,10 @@ export function Pricing() {
         {pricing.mode === "model" ? <ModelMode /> : <TiersMode />}
 
         <Reveal delay={200}>
-          <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-border pt-6">
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border pt-5 md:mt-10 md:gap-x-8 md:gap-y-3 md:pt-6">
             <p className="text-small font-semibold text-fg">{pricing.includedHeading}</p>
             {pricing.included.map((item) => (
-              <span key={item} className="flex items-center gap-2 text-small text-muted">
+              <span key={item} className="flex items-center gap-1.5 text-[13px] text-muted md:gap-2 md:text-small">
                 <Check size={15} className="shrink-0 text-accent" aria-hidden="true" />
                 {item}
               </span>
@@ -40,27 +40,27 @@ export function Pricing() {
 function ModelMode() {
   const m = pricing.model;
   return (
-    <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[1fr_0.8fr] lg:gap-16">
+    <div className="mt-8 grid grid-cols-1 gap-7 md:mt-12 lg:grid-cols-[1fr_0.8fr] lg:gap-16">
       <Reveal delay={80}>
         <ol className="flex flex-col divide-y divide-border border-y border-border">
           {m.points.map((point, i) => (
-            <li key={point.title} className="grid grid-cols-[2.5rem_1fr] gap-4 py-5">
+            <li key={point.title} className="grid grid-cols-[2.5rem_1fr] gap-4 py-4 md:py-5">
               <span className="text-[22px] font-extrabold leading-none text-accent-display" aria-hidden="true">
                 {i + 1}
               </span>
               <div>
                 <h3 className="text-h3 text-fg">{point.title}</h3>
-                <p className="mt-1.5 text-body text-muted">{point.body}</p>
+                <p className="mt-1 text-body text-muted md:mt-1.5">{point.body}</p>
               </div>
             </li>
           ))}
         </ol>
       </Reveal>
       <Reveal delay={160}>
-        <Card className="flex h-full flex-col justify-center p-7 md:p-8">
+        <Card className="flex h-full flex-col justify-center p-6 md:p-8">
           <p className="text-h3 text-fg">{m.quoteCta}</p>
           <p className="mt-2 text-body text-muted">{m.quoteHint}</p>
-          <LinkButton href="#contact" variant="primary" className="mt-6 w-full sm:w-auto">
+          <LinkButton href="#contact" variant="primary" className="mt-5 w-full sm:w-auto md:mt-6">
             {m.quoteCta}
           </LinkButton>
         </Card>

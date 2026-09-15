@@ -65,8 +65,8 @@ export function SectionHeader({
   return (
     <Reveal className={`${align === "center" ? "mx-auto text-center" : ""} max-w-2xl ${className}`}>
       <p className={`text-eyebrow ${dark ? "text-ink-muted" : "text-muted"}`}>{eyebrow}</p>
-      <h2 className={`mt-3 text-h2 ${dark ? "text-white" : "text-fg"}`}>{title}</h2>
-      {lead && <p className={`mt-5 max-w-lead text-lead ${dark ? "text-white/[0.88]" : "text-muted"} ${align === "center" ? "mx-auto" : ""}`}>{lead}</p>}
+      <h2 className={`mt-2 text-h2 md:mt-3 ${dark ? "text-white" : "text-fg"}`}>{title}</h2>
+      {lead && <p className={`mt-4 max-w-lead text-lead md:mt-5 ${dark ? "text-white/[0.88]" : "text-muted"} ${align === "center" ? "mx-auto" : ""}`}>{lead}</p>}
     </Reveal>
   );
 }

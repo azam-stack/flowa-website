@@ -12,16 +12,16 @@ import { team, peopleSection, signedStatement, signedStatementAttribution, type 
 function FounderRow({ member }: { member: TeamMember }) {
   const fullName = member.surname ? `${member.firstName} ${member.surname}` : member.firstName;
   return (
-    <div className="grid grid-cols-[132px_1fr] items-start gap-5 sm:grid-cols-[168px_1fr] sm:gap-7">
+    <div className="grid grid-cols-[112px_1fr] items-start gap-4 sm:grid-cols-[168px_1fr] sm:gap-7">
       <TeamPortrait name={fullName} role={member.role} srcBase={member.photoBase} className="max-w-none" />
       <div className="min-w-0">
         <h3 className="text-h3 text-fg">{fullName}</h3>
         <p className="mt-1 text-small font-medium text-muted">{member.role}</p>
         {member.bio && <p className="mt-3 text-body text-muted">{member.bio}</p>}
-        <p className="mt-4 text-[12px] font-semibold uppercase tracking-[0.08em] text-muted">{peopleSection.ownsHeading}</p>
+        <p className="mt-3 text-[12px] font-semibold uppercase md:mt-4 tracking-[0.08em] text-muted">{peopleSection.ownsHeading}</p>
         <ul className="mt-2 flex flex-wrap gap-2">
           {member.owns.map((line) => (
-            <li key={line} className="rounded-full border border-border bg-card px-3 py-1.5 text-[13px] font-medium text-fg">
+            <li key={line} className="rounded-full border border-border bg-card px-2.5 py-1 text-[12px] font-medium text-fg md:px-3 md:py-1.5 md:text-[13px]">
               {line}
             </li>
           ))}
@@ -51,14 +51,14 @@ export function Team() {
       <Container>
         <SectionHeader eyebrow={peopleSection.eyebrow} title={peopleSection.h2} lead={peopleSection.intro} />
 
-        <Reveal delay={80} className="mt-12 grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-10">
+        <Reveal delay={80} className="mt-8 grid grid-cols-1 gap-8 md:mt-12 md:grid-cols-2 md:gap-10">
           <FounderRow member={team.ahmed} />
           <FounderRow member={team.anton} />
         </Reveal>
 
-        <Reveal delay={120} className="mt-14 border-t border-border pt-12">
-          <blockquote className="max-w-3xl text-[22px] font-medium leading-snug tracking-tight text-fg sm:text-[26px]">“{signedStatement.quote}”</blockquote>
-          <p className="mt-5 text-small font-semibold text-muted">
+        <Reveal delay={120} className="mt-10 border-t border-border pt-8 md:mt-14 md:pt-12">
+          <blockquote className="max-w-3xl text-[18px] font-medium leading-snug tracking-tight text-fg sm:text-[26px]">“{signedStatement.quote}”</blockquote>
+          <p className="mt-4 text-small font-semibold text-muted md:mt-5">
             {attributedName}, {attributed.role}
           </p>
         </Reveal>
