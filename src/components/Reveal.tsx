@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
-/** Fade-up on scroll into view. Fires once. Uses a plain opacity/transform
- * transition (not a keyframe animation) — simpler and more reliable across
- * browsers than animation-fill-mode timing. */
+/**
+ * Fade-up when scrolled into view. Fires once. Used at section level —
+ * one reveal per section header/body, not one per card — so the page
+ * reads as content arriving, not as every element fading in on its own.
+ * 480ms on the site's easing curve; off under prefers-reduced-motion.
+ */
 export function Reveal({ children, delay = 0, className = "" }: { children: ReactNode; delay?: number; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
@@ -26,7 +29,7 @@ export function Reveal({ children, delay = 0, className = "" }: { children: Reac
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ease-out motion-reduce:transition-none ${inView ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"} ${className}`}
+      className={`transition-[opacity,transform] duration-reveal ease-flowa motion-reduce:transition-none ${inView ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"} ${className}`}
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}

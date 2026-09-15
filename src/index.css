@@ -9,22 +9,25 @@
     --flowa-text: #0c0c0b;
     /* Same hue as the brand accent (#EE9E47), deepened for use at display
        size: the brand orange itself is ~2.1:1 against the hero background
-       and fails WCAG even for large text. This clears 3:1. Display-only —
-       buttons, icons and the timeline keep the original accent colour. */
+       and fails WCAG even for large text. This clears 3:1 — display-only,
+       never for text under 24px. */
     --flowa-orange-display: #c9741e;
-    /* Darker still, for white TEXT on an orange background (RiskBand
-       heading isn't this — it's white on near-black — but the comparison
-       table's Flowa header cell and any future solid-orange band need
-       this: #C9741E only reaches 3.5:1 for body text and fails there. */
+    /* Darker still, for white TEXT on an orange background. */
     --flowa-band: #a85e14;
     --flowa-ink: #121110;
+    /* Motion tokens (plan §10). Everything on the page uses one of these. */
+    --dur-fast: 150ms;
+    --dur: 240ms;
+    --dur-reveal: 480ms;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
   }
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 88px;
   }
   body {
     @apply bg-bg text-fg antialiased;
-    font-family: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+    font-family: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
   }
   :focus-visible {
     outline: 2px solid theme("colors.accent.DEFAULT");
@@ -33,6 +36,14 @@
   }
   ::selection {
     background: theme("colors.accent.DEFAULT" / 25%);
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
   }
 }
 
@@ -45,6 +56,40 @@
   }
 }
 
+/* Hero entrance: one orchestrated sequence on load (plan §10). Elements
+   carry --enter-delay; nothing else on the site animates on load. */
+@keyframes enter-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.enter {
+  animation: enter-up var(--dur-reveal) var(--ease) both;
+  animation-delay: var(--enter-delay, 0ms);
+}
+
+/* Form field error: two 2px nudges, then still. */
+@keyframes field-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  75% {
+    transform: translateX(2px);
+  }
+}
+.field-shake {
+  animation: field-shake 240ms ease-out;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -53,8 +98,8 @@
   *::before,
   *::after {
     animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
 }
-
