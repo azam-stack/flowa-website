@@ -7,6 +7,7 @@ import { Button } from "@/components/Button";
 import { Field, TextareaField } from "@/components/Field";
 import { Reveal } from "@/components/Reveal";
 import { faq, finalCta, footer, team } from "@/content/site.en";
+import { asset } from "@/lib/asset";
 
 /**
  * Section 9 — "what am I unsure about, and how do I start?" FAQ on the
@@ -146,9 +147,9 @@ export function GetStarted() {
               <div className="mt-6 flex flex-col gap-3 border-t border-border pt-5 md:mt-8 md:gap-4 md:pt-6">
                 <div className="flex items-center gap-3.5">
                   <picture>
-                    <source srcSet={`${team.ahmed.photoBase}.avif`} type="image/avif" />
-                    <source srcSet={`${team.ahmed.photoBase}.webp`} type="image/webp" />
-                    <img src={`${team.ahmed.photoBase}.jpg`} alt={`${team.ahmed.firstName}, ${team.ahmed.role}`} width={48} height={48} loading="lazy" className="h-12 w-12 shrink-0 rounded-full object-cover grayscale" />
+                    <source srcSet={`${asset(team.ahmed.photoBase)}.avif`} type="image/avif" />
+                    <source srcSet={`${asset(team.ahmed.photoBase)}.webp`} type="image/webp" />
+                    <img src={`${asset(team.ahmed.photoBase)}.jpg`} alt={`${team.ahmed.firstName}, ${team.ahmed.role}`} width={48} height={48} loading="lazy" className="h-12 w-12 shrink-0 rounded-full object-cover grayscale" />
                   </picture>
                   <p className="text-small font-medium text-fg">{finalCta.responsePromise}</p>
                 </div>

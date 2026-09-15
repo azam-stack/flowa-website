@@ -3,6 +3,7 @@ import { Section, SectionHeader } from "@/components/Section";
 import { Badge } from "@/components/Badge";
 import { Reveal } from "@/components/Reveal";
 import { comparisonTable } from "@/content/site.en";
+import { asset } from "@/lib/asset";
 
 /**
  * Section 6 — the site's signature element. Commercial terms only, never
@@ -32,7 +33,7 @@ export function ComparisonTable() {
                 <th scope="col" className="px-6 py-5 text-small font-semibold">{comparisonTable.columns[1]}</th>
                 <th scope="col" className="relative bg-white/[0.06] px-6 py-5">
                   <span className="absolute inset-x-0 top-0 h-[3px] bg-accent" aria-hidden="true" />
-                  <img src="/flowa-wordmark-white.png" alt="Flowa" className="h-7 w-auto" />
+                  <img src={asset("flowa-wordmark-white.png")} alt="Flowa" className="h-7 w-auto" />
                 </th>
               </tr>
             </thead>

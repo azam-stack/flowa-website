@@ -3,6 +3,7 @@ import { Section, SectionHeader, Container } from "@/components/Section";
 import { Reveal } from "@/components/Reveal";
 import { TeamPortrait } from "@/components/TeamPortrait";
 import { team, peopleSection, signedStatement, signedStatementAttribution, type TeamMember } from "@/content/site.en";
+import { asset } from "@/lib/asset";
 
 /**
  * Section 7. Portrait beside name, role and what each founder owns —
@@ -13,7 +14,7 @@ function FounderRow({ member }: { member: TeamMember }) {
   const fullName = member.surname ? `${member.firstName} ${member.surname}` : member.firstName;
   return (
     <div className="grid grid-cols-[112px_1fr] items-start gap-4 sm:grid-cols-[168px_1fr] sm:gap-7">
-      <TeamPortrait name={fullName} role={member.role} srcBase={member.photoBase} className="max-w-none" />
+      <TeamPortrait name={fullName} role={member.role} srcBase={asset(member.photoBase)} className="max-w-none" />
       <div className="min-w-0">
         <h3 className="text-h3 text-fg">{fullName}</h3>
         <p className="mt-1 text-small font-medium text-muted">{member.role}</p>

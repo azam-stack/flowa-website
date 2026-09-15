@@ -14,6 +14,12 @@ npm run check:content  # the content check on its own
 
 `FlowaWebsite.app`, `start.command`, `start.sh` and `start.bat` are one-click launchers for non-developers: they open a terminal, install if needed, and start the dev server.
 
+### Live site (no terminal needed)
+
+Every push to `main` builds the site and publishes it to GitHub Pages via `.github/workflows/deploy.yml`. One-time setup in the repository: **Settings → Pages → Build and deployment → Source: GitHub Actions**. The site is then at https://azam-stack.github.io/flowa-website/ and updates itself a minute or two after each push.
+
+The workflow builds with `VITE_BASE=/flowa-website/` so assets resolve under the sub-path (every `public/` file referenced from code goes through `src/lib/asset.ts`). When the site moves to its own domain, set a custom domain under the same Pages settings and change `VITE_BASE` in the workflow to `/`. An optional `VITE_FORM_ENDPOINT` repository secret is passed to the build for form delivery.
+
 ### Form delivery
 
 The request form posts to `VITE_FORM_ENDPOINT` if that variable is set at build time (a Formspree/Basin-style URL that accepts JSON and returns 2xx). Then the page shows a true "sent" state or a real error with the direct email address. Without the variable, the form opens the visitor's email client with the details filled in, and the page says exactly that ("Your email client should have opened"), never "sent".

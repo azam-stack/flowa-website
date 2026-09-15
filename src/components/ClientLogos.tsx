@@ -1,5 +1,6 @@
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { clientLogos, clients, type Client } from "@/content/site.en";
+import { asset } from "@/lib/asset";
 
 const PIXELS_PER_SECOND = 28;
 const INITIAL_SETS_PER_HALF = 3;
@@ -143,7 +144,7 @@ function LogoLink({ client, ariaHidden, onImgLoad }: { client: Client; ariaHidde
       className="group shrink-0"
     >
       <img
-        src={`/logos/${client.slug}.${client.format ?? "svg"}`}
+        src={asset(`logos/${client.slug}.${client.format ?? "svg"}`)}
         alt={ariaHidden ? "" : client.name}
         onLoad={onImgLoad}
         style={{ transform: `scale(${scale})` }}
