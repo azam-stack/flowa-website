@@ -16,6 +16,7 @@ import { MobileDrawer } from "./nav/MobileDrawer";
  */
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const [progress, setProgress] = useState(0);
   const [heroCtaVisible, setHeroCtaVisible] = useState(true);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -27,7 +28,11 @@ export function Nav() {
   const [underline, setUnderline] = useState<{ left: number; width: number; visible: boolean }>({ left: 0, width: 0, visible: false });
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 24);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(max > 0 ? Math.min(1, window.scrollY / max) : 0);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -95,11 +100,17 @@ export function Nav() {
           scrolled ? "border-b border-border bg-bg/[0.86] backdrop-blur-[14px]" : "border-b border-transparent bg-transparent"
         }`}
       >
+        {/* The flow line: how far through the story the reader is. */}
+        <span
+          aria-hidden="true"
+          className={`absolute inset-x-0 bottom-0 h-[2px] origin-left bg-accent transition-opacity duration-200 ${scrolled ? "opacity-100" : "opacity-0"}`}
+          style={{ transform: `scaleX(${progress})` }}
+        />
         <nav
           aria-label="Primary"
           className={`mx-auto flex max-w-content items-center justify-between px-6 transition-[height] duration-200 md:px-10 ${scrolled ? "h-[68px]" : "h-[88px]"}`}
         >
-          <a href="#top" className="shrink-0" aria-label="Flowa — back to top">
+          <a href="#top" className="shrink-0 transition-transform duration-[240ms] ease-flowa hover:-translate-y-px motion-reduce:transition-none" aria-label="Flowa — back to top">
             <Logo />
           </a>
 

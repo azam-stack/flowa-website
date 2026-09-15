@@ -2,7 +2,7 @@ import { Linkedin } from "lucide-react";
 import { Section, SectionHeader, Container } from "@/components/Section";
 import { Reveal } from "@/components/Reveal";
 import { TeamPortrait } from "@/components/TeamPortrait";
-import { team, peopleSection, signedStatement, signedStatementAttribution, type TeamMember } from "@/content/site.en";
+import { team, peopleSection, signedStatement, signedStatementAttribution, chapters, type TeamMember } from "@/content/site.en";
 import { asset } from "@/lib/asset";
 
 /**
@@ -50,7 +50,7 @@ export function Team() {
   return (
     <Section id="team">
       <Container>
-        <SectionHeader eyebrow={peopleSection.eyebrow} title={peopleSection.h2} lead={peopleSection.intro} />
+        <SectionHeader eyebrow={peopleSection.eyebrow} title={peopleSection.h2} lead={peopleSection.intro} chapter={chapters.team} />
 
         <Reveal delay={120} stagger className="mt-8 grid grid-cols-1 gap-8 md:mt-12 md:grid-cols-2 md:gap-10">
           <FounderRow member={team.ahmed} />

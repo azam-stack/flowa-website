@@ -62,8 +62,8 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="relative pt-28 sm:pt-36 lg:pt-44">
-            <div className="hero-blur absolute -right-16 -top-10 h-[340px] w-[340px] sm:-right-24 sm:-top-16 sm:h-[500px] sm:w-[500px] lg:-right-40 lg:-top-24 lg:h-[760px] lg:w-[760px]" style={T(0)}>
+          <div className="relative pt-40 sm:pt-40 lg:pt-44">
+            <div className="hero-blur absolute -right-20 -top-20 h-[400px] w-[400px] sm:-right-24 sm:-top-20 sm:h-[520px] sm:w-[520px] lg:-right-40 lg:-top-24 lg:h-[760px] lg:w-[760px]" style={T(0)}>
               <FluidObject className="parallax parallax-slow h-full w-full" />
             </div>
             <div className="hero-surface parallax relative" style={T(360)}>

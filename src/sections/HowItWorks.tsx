@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Check } from "lucide-react";
 import { Section, SectionHeader, Container } from "@/components/Section";
-import { howItWorks } from "@/content/site.en";
+import { howItWorks, chapters } from "@/content/site.en";
 
 /**
  * Section 5 — the process as a system. Four stages on one line that is
@@ -39,10 +39,7 @@ export function HowItWorks() {
   return (
     <Section id="how-it-works">
       <Container>
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <SectionHeader eyebrow={howItWorks.eyebrow} title={howItWorks.h2} />
-          <span className="sys hidden text-muted lg:block">{howItWorks.system}</span>
-        </div>
+        <SectionHeader eyebrow={howItWorks.eyebrow} title={howItWorks.h2} chapter={chapters.howItWorks} />
 
         <div ref={ref} data-inview={drawn ? "true" : "false"} className="relative mt-10 lg:mt-14">
           {/* Desktop connector */}

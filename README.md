@@ -68,6 +68,16 @@ Two elements share one physical space. The **living object** (`components/FluidO
 
 The **pipeline interface** (`sections/PipelineVisual.tsx`) is layered over it: Flowa's process as a small live-looking panel — stage rail, four rows advancing Prospect → Contacted → Qualified → Meeting booked on a slow loop, and three metrics. Every row is illustrative (invented names, from `hero.pipeline` in the content file) and the panel's header says so; the metrics count the illustrative rows, nothing more.
 
+## Brand system
+
+What makes a Flowa page recognisable without the logo:
+
+- **The object.** The glass form appears three times: large in the hero over the page's off-white, in ink inside the dark band (rising from below the headline), and as a still mark beside the statement in the footer. It stands for the flow itself — prospects moving through a system towards a meeting — and it is tied to the system: when a row in the hero pipeline reaches "Meeting booked", the panel dispatches `flowa:booked` and the object brightens for a moment.
+- **The chapters.** Every section header carries a small label at its right, `02 / Need` through `09 / Opportunity`, with the hero as `01 / Flow`. Read in order they are the story the page tells: need, system, terms, process, comparison, people, pricing, opportunity. They live in `chapters` in the content file.
+- **The flow line.** A 2 px accent line under the navigation grows with scroll progress once the page has moved: momentum, always towards the meeting.
+- **Two typographic voices.** The brand voice (display, sentence case, two tones) and the system voice (`.sys`: 11 px, tracked uppercase, tabular figures) — never mixed in one line.
+- **Ruled grids, not cards.** Dense moments (modules, process, pipeline, comparison) are drawn with 1 px rules and one surface; cards are reserved for the three bounded objects (pipeline panel, quote card, form).
+
 ## System language
 
 Small technical labels (`.sys` in `index.css`: 11 px, semibold, tracked, uppercase, tabular figures) mark the dense, product-like moments: the hero label and panel, the services as modules (`Flowa / Modules`, each with a system name such as *Targeting* beside its plain title), the process as a system (`Flowa / Process`, each stage with the output it hands on). Editorial sections — Problem, the dark band, Team, FAQ — stay free of them, so the page alternates between open statements and dense interfaces.

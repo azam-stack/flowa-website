@@ -1,7 +1,7 @@
 import { Section, SectionHeader, Container } from "@/components/Section";
 import { LinkButton } from "@/components/Button";
 import { Reveal } from "@/components/Reveal";
-import { offer } from "@/content/site.en";
+import { offer, chapters } from "@/content/site.en";
 
 /**
  * Section 3. The pitch on the left; on the right the four services as
@@ -15,7 +15,7 @@ export function Offer() {
       <Container>
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
           <div>
-            <SectionHeader eyebrow={offer.eyebrow} title={offer.h2} lead={offer.body} />
+            <SectionHeader eyebrow={offer.eyebrow} title={offer.h2} lead={offer.body} chapter={chapters.offer} />
             <Reveal delay={240} variant="near" className="mt-6 md:mt-8">
               <LinkButton href="#pricing" variant="ghost" arrow>
                 {offer.ctaSecondary}

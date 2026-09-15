@@ -25,6 +25,7 @@ export function PipelineVisual() {
         if (i === -1) return p.rows.map((r) => r.stage);
         const next = [...prev];
         next[i] = prev[i] + 1;
+        if (next[i] === 3) window.dispatchEvent(new CustomEvent("flowa:booked"));
         return next;
       });
     }, TICK_MS);

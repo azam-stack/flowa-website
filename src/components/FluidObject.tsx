@@ -18,7 +18,7 @@ const VERT = `attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}`;
 
 const FRAG = `
 precision highp float;
-uniform vec2 uRes;uniform float uTime;uniform vec2 uMouse;
+uniform vec2 uRes;uniform float uTime;uniform vec2 uMouse;uniform float uPulse;uniform float uDark;
 float hash(vec3 p){p=fract(p*.3183099+.1);p*=17.;return fract(p.x*p.y*p.z*(p.x+p.y+p.z));}
 float noise(vec3 x){vec3 i=floor(x),f=fract(x);f=f*f*(3.-2.*f);
  return mix(mix(mix(hash(i),hash(i+vec3(1,0,0)),f.x),mix(hash(i+vec3(0,1,0)),hash(i+vec3(1,1,0)),f.x),f.y),
@@ -29,8 +29,9 @@ float sdf(vec3 p){float t=uTime*.11;float d=length(p)-1.;
 vec3 nrm(vec3 p){vec2 e=vec2(.0025,0.);return normalize(vec3(sdf(p+e.xyy)-sdf(p-e.xyy),sdf(p+e.yxy)-sdf(p-e.yxy),sdf(p+e.yyx)-sdf(p-e.yyx)));}
 vec3 env(vec3 d){float y=d.y*.5+.5;
  vec3 deep=vec3(.79,.45,.12),warm=vec3(.93,.62,.28),cream=vec3(.98,.975,.965),slate=vec3(.43,.44,.47);
- vec3 c=mix(deep,warm,smoothstep(0.,.30,y));c=mix(c,cream,smoothstep(.30,.50,y));c=mix(c,slate,smoothstep(.78,1.,y));
- c+=vec3(1.,.96,.88)*pow(max(dot(d,normalize(vec3(-.5,.85,.3))),0.),28.)*.6;return c;}
+ vec3 ink=vec3(.07,.066,.063),inkSoft=vec3(.16,.15,.14);
+ vec3 c=mix(deep,warm,smoothstep(0.,.30,y));c=mix(c,mix(cream,inkSoft,uDark),smoothstep(.30,.50,y));c=mix(c,mix(slate,ink,uDark),smoothstep(.78,1.,y));
+ c+=vec3(1.,.96,.88)*pow(max(dot(d,normalize(vec3(-.5,.85,.3))),0.),28.)*(.6+uPulse*.9);return c;}
 void main(){
  vec2 uv=(gl_FragCoord.xy-.5*uRes)/min(uRes.x,uRes.y);
  vec3 ro=vec3(uMouse.x*.22,uMouse.y*.16,3.4);vec3 rd=normalize(vec3(uv,-1.02)-vec3(uMouse.x*.05,uMouse.y*.035,0.));
@@ -47,11 +48,18 @@ void main(){
  col=mix(col,env(reflect(rd,n)),fres*.85);
  vec3 h=normalize(normalize(vec3(-.6,.9,.5))-rd);col+=vec3(1.,.97,.9)*pow(max(dot(n,h),0.),160.)*.8;
  h=normalize(normalize(vec3(.7,-.35,.6))-rd);col+=vec3(1.,.85,.6)*pow(max(dot(n,h),0.),70.)*.35;
- col+=vec3(1.,.9,.75)*pow(fres,2.)*.3;
+ col+=vec3(1.,.9,.75)*pow(fres,2.)*(.3+uPulse*.5);
  gl_FragColor=vec4(col,1.);
 }`;
 
-export function FluidObject({ className = "" }: { className?: string }) {
+/**
+ * `tone` — "light" over the page, "dark" inside the ink band. `still`
+ * renders one frame and stops (a brand mark, not a performance cost).
+ * The object also listens for `flowa:booked` (dispatched by the pipeline
+ * panel when a row reaches "Meeting booked") and brightens briefly: the
+ * flow and the system are one thing.
+ */
+export function FluidObject({ className = "", tone = "light", still = false, frame: stillFrame }: { className?: string; tone?: "light" | "dark"; still?: boolean; frame?: number }) {
   const ref = useRef<HTMLCanvasElement>(null);
   const [failed, setFailed] = useState(false);
 
@@ -91,6 +99,12 @@ export function FluidObject({ className = "" }: { className?: string }) {
     const uRes = gl.getUniformLocation(prog, "uRes");
     const uTime = gl.getUniformLocation(prog, "uTime");
     const uMouse = gl.getUniformLocation(prog, "uMouse");
+    const uPulse = gl.getUniformLocation(prog, "uPulse");
+    const uDark = gl.getUniformLocation(prog, "uDark");
+    gl.uniform1f(uDark, tone === "dark" ? 1 : 0);
+    let pulseAt = -10;
+    const onBooked = () => (pulseAt = performance.now());
+    window.addEventListener("flowa:booked", onBooked);
 
     const small = window.matchMedia("(max-width: 767px)").matches;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -124,6 +138,8 @@ export function FluidObject({ className = "" }: { className?: string }) {
     const draw = (t: number) => {
       mouse.x += (mouse.tx - mouse.x) * 0.04;
       mouse.y += (mouse.ty - mouse.y) * 0.04;
+      const age = (performance.now() - pulseAt) / 1400;
+      gl.uniform1f(uPulse, age < 1 ? Math.sin(age * Math.PI) : 0);
       gl.uniform1f(uTime, t);
       gl.uniform2f(uMouse, mouse.x, mouse.y);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
@@ -139,7 +155,7 @@ export function FluidObject({ className = "" }: { className?: string }) {
       last = now;
       draw((now - start) / 1000 + 7);
     };
-    if (reduced) draw(7);
+    if (reduced || still) draw(stillFrame ?? (tone === "dark" ? 11 : 7));
     else raf = requestAnimationFrame(frame);
 
     return () => {
@@ -147,9 +163,10 @@ export function FluidObject({ className = "" }: { className?: string }) {
       ro.disconnect();
       io.disconnect();
       window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("flowa:booked", onBooked);
       gl.getExtension("WEBGL_lose_context")?.loseContext();
     };
-  }, []);
+  }, [tone, still, stillFrame]);
 
   if (failed) return <LiquidForm className={className} />;
   return <canvas ref={ref} className={`pointer-events-none block ${className}`} aria-hidden="true" />;

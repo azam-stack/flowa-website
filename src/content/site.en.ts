@@ -90,8 +90,8 @@ export const nav = {
 } as const;
 
 export const hero = {
-  /** System-style label above the headline. */
-  system: "Flowa / B2B appointment setting",
+  /** System-style label above the headline; the first chapter of the page. */
+  system: "01 / Flow — B2B appointment setting",
   eyebrow: "B2B appointment setting — pay per meeting",
   h1: ["Creating meetings.", "That create opportunities."],
   sub: "Flowa fills your calendar with qualified sales meetings with the decision-makers you actually want to sell to — so your team spends its time in conversations, not hunting for them.",
@@ -195,6 +195,22 @@ export const clientLogos = {
  * experience with an agency before") now opens the comparison section,
  * where it belongs.
  */
+/**
+ * Chapter labels — one per section, top-right of its header on desktop.
+ * Together they read as the story: flow, need, system, terms, process,
+ * comparison, people, pricing, opportunity.
+ */
+export const chapters = {
+  problem: "02 / Need",
+  offer: "03 / System",
+  riskBand: "04 / Terms",
+  howItWorks: "05 / Process",
+  comparison: "06 / Comparison",
+  team: "07 / People",
+  pricing: "08 / Pricing",
+  getStarted: "09 / Opportunity",
+} as const;
+
 export const problem = {
   eyebrow: "Why Flowa",
   h2: "Outbound that nobody owns doesn't happen.",

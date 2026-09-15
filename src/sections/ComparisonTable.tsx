@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Section, SectionHeader } from "@/components/Section";
 import { Badge } from "@/components/Badge";
 import { Reveal } from "@/components/Reveal";
-import { comparisonTable } from "@/content/site.en";
+import { comparisonTable, chapters } from "@/content/site.en";
 import { asset } from "@/lib/asset";
 
 /**
@@ -18,7 +18,7 @@ export function ComparisonTable() {
   return (
     <Section>
       <div className="mx-auto w-full max-w-content px-6 md:px-10">
-        <SectionHeader eyebrow={comparisonTable.eyebrow} title={comparisonTable.h2} lead={comparisonTable.intro} />
+        <SectionHeader eyebrow={comparisonTable.eyebrow} title={comparisonTable.h2} lead={comparisonTable.intro} chapter={chapters.comparison} />
       </div>
 
       <div className="mx-auto mt-8 w-full max-w-bleed px-6 md:mt-12 md:px-10">

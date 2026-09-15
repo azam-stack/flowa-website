@@ -32,6 +32,7 @@
     --d2: 16px;  /* mid: headings, rows             */
     --d3: 28px;  /* far: surfaces (cards, tables)   */
     --stagger: 70ms;
+    --band-pad: clamp(4rem, 8vw, 7rem);
   }
   @media (max-width: 767px) {
     :root {
