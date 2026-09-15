@@ -62,17 +62,21 @@ Tokens live in `tailwind.config.ts` (with the motion and orange variants as CSS 
 - **Buttons**: `primary` (near-black, orange on hover) is the default; `accent` (orange) only in the nav and on the form; `ghost` for secondary actions. One orange button in view at a time — the nav button turns orange only once the hero's own button has scrolled away.
 - **Motion** (`--dur-fast` 150 ms, `--dur` 240 ms, `--dur-reveal` 480 ms, `--ease` cubic-bezier(.16,1,.3,1)): hero entrance on load (the only load animation), section-level reveal, the how-it-works line drawing itself, comparison pills arriving row by row, a nav underline that glides between links, form feedback (field shake, fading error text, spinner, fading confirmation). `prefers-reduced-motion` collapses all of it to instant.
 
-## The hero visual
+## The hero system
 
-One visual carries the page: the Flowa light-form (`components/FluidObject.tsx`), a soft, grainy, luminous body rendered in WebGL — a sphere deformed by slow noise, lit by a synthetic environment in Flowa's palette, with light refracted through it, a feathered edge and film grain, so it reads as light rather than an object. It moves slowly and never dramatically; it leans a few degrees with the pointer; it renders only while on screen, caps its pixel ratio, shows one still frame under `prefers-reduced-motion`, and falls back to a CSS form where WebGL is unavailable. Its physical quality comes from the reference clip (`cosmos_959700922.mp4`); its softness and grain from the two reference images (`inspoflowa1.webp`, `inspoflowa2.webp`). One quiet card rests on it — one qualified meeting, anonymised, from `hero.card.meeting` — because that is what the page is about.
+One system, three layers, recomposed by screen size (heading · visual · explanation on desktop; heading, visual, explanation on mobile):
 
-Nothing else on the page is decorated. Hierarchy comes from typography and whitespace: the statement set large, four "Why Flowa" contrasts set large, everything supporting set small. Product-style UI appears only where it explains something (the meeting card, the comparison table, the form).
+- **The light-form** (`components/FluidObject.tsx`): a soft, grainy, luminous body rendered in WebGL — a sphere deformed by slow noise, lit by a synthetic environment in Flowa's palette, light refracted through it, a feathered edge and film grain. It moves slowly, leans with the pointer, renders only while on screen, caps its pixel ratio, shows one still frame under `prefers-reduced-motion` and falls back to a CSS form without WebGL. Its physical quality comes from the reference clip (`cosmos_959700922.mp4`); its softness and grain from the two reference images (`inspoflowa1.webp`, `inspoflowa2.webp`). It returns once, in ink, rising from below the headline of the dark band.
+- **The flow** (`components/FlowSystem.tsx`): the states an opportunity passes through — Company, Decision-maker, Conversation, Qualified — as small glass chips along one line that draws itself, with a single point of light travelling it on a slow loop. Conceptual and anonymised; the note says so. On small screens the first state is dropped and the line is hidden.
+- **The meeting**: where the flow ends, one qualified meeting as a physical card (from `hero.card.meeting`).
+
+The same system continues down the page: the process shows, under each step, the kind of thing the step produces (a chosen company, an activity log, three criteria met, a calendar slot — illustrative, and the section says so); the dark band is the transformation moment, where "You don't pay for promises." is crossed out as "You pay when meetings are created." rises in its place. Everywhere else, hierarchy comes from typography and whitespace; product-style UI appears only where it explains something.
 
 ## Motion language
 
 Derived from a frame-by-frame study of the reference clip in `cosmos_959700922.mp4` (20 s, 30 fps): one translucent object drifting over a warm-to-cool gradient. Measured, not eyeballed: mean per-frame change 0.3–0.7 (on a 0–255 scale), position drift within ±6 % of the frame, size within ±10 %, motion arriving in waves every 3–4 s, and the last frame within 1.5 of the first. The principles behind it, as applied here:
 
-1. **One living object.** The reference has one; the site has one — the light-form in the hero, never still, never dramatic. Nothing else moves on its own.
+1. **One living object.** The reference has one; the site has one — the light-form in the hero (and once more, in ink, in the band), never still, never dramatic. The only other continuous motion is the point of light travelling the flow.
 2. **Small amplitudes, long settles.** Three distances (8 / 16 / 28 px), one expo-out curve, 600–1000 ms. Nothing snaps.
 3. **Depth by layering, not shadow.** Surfaces (table, cards) arrive from further back with a 3 % scale; labels arrive from nearer. Parallax on the hero O and the band headline (CSS scroll-driven, desktop only).
 4. **Rhythm in waves.** Each section arrives in beats: rule → eyebrow → heading → lead → rows, 70 ms apart, not all at once.

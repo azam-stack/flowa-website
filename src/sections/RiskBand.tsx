@@ -1,24 +1,34 @@
 import { Check } from "lucide-react";
 import { Section, Container } from "@/components/Section";
 import { Reveal } from "@/components/Reveal";
+import { FluidObject } from "@/components/FluidObject";
 import { riskBand } from "@/content/site.en";
 
 /**
- * Section 4 — "the deal". Full-bleed near-black (not orange: flat #EE9E47
- * under white text fails at every size). Headline and checks are
- * vertically centred so the band reads as one statement, not a heading
- * with a list beneath it.
+ * The deal, as a transformation: the page goes dark, the first line
+ * ("You don't pay for promises.") is crossed out as the second line
+ * ("You pay when meetings are created.") rises in its place, and the
+ * light-form returns in ink, rising from below. Then the model, stated
+ * plainly, with only the commitments that are confirmed.
  */
 export function RiskBand() {
   return (
     <Section tone="band" density="band" divider={false} className="relative overflow-hidden md:mx-4 md:rounded-[28px] lg:mx-6">
-      <Container>
-        <div className="relative grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-20">
-          <Reveal variant="far" className="parallax parallax-slow">
-            <h2 className="text-h2 text-white">
-              {riskBand.headline[0]}
-              <br />
-              <span className="text-accent">{riskBand.headline[1]}</span>
+      <div className="parallax parallax-slow pointer-events-none absolute -bottom-40 -right-24 hidden h-[420px] w-[420px] lg:-bottom-64 lg:-left-20 lg:block lg:h-[520px] lg:w-[520px]" aria-hidden="true">
+        <FluidObject tone="dark" className="h-full w-full" />
+      </div>
+      <Container className="relative">
+        <Reveal threshold={0.4} className="max-w-3xl">
+          <p className="transform-from text-h2 text-white/[0.92]">
+            <span className="transform-line">{riskBand.transform[0]}</span>
+          </p>
+          <p className="transform-to mt-2 text-h2 text-accent">{riskBand.transform[1]}</p>
+        </Reveal>
+
+        <div className="mt-14 grid grid-cols-1 gap-8 border-t border-white/15 pt-10 md:mt-20 md:pt-12 lg:grid-cols-2 lg:gap-20">
+          <Reveal variant="far">
+            <h2 className="text-[clamp(1.5rem,2.6vw,2.125rem)] font-bold leading-[1.15] tracking-[-0.02em] text-white">
+              {riskBand.headline[0]} {riskBand.headline[1]}
             </h2>
           </Reveal>
 

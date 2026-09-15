@@ -64,8 +64,8 @@ export default {
         compact: "clamp(2.5rem, 5vw, 4rem)",
       },
       maxWidth: {
-        content: "1240px",
-        bleed: "1320px",
+        content: "1320px",
+        bleed: "1400px",
         prose: "65ch",
         lead: "52ch",
       },

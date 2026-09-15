@@ -194,6 +194,76 @@
   animation-delay: var(--t, 0ms);
 }
 
+/* ---------- Flow system (hero): path draws, a point of light travels it ---------- */
+.flow-path {
+  color: rgba(201, 116, 30, 0.55);
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: flow-draw 1400ms var(--ease) both;
+  animation-delay: var(--t, 0ms);
+}
+@keyframes flow-draw {
+  to { stroke-dashoffset: 0; }
+}
+.flow-node {
+  left: var(--sx);
+  top: var(--sy);
+}
+@media (min-width: 640px) {
+  .flow-node {
+    left: var(--x);
+    top: var(--y);
+  }
+}
+.flow-dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 999px;
+  background: #ee9e47;
+  box-shadow: 0 0 0 4px rgba(238, 158, 71, 0.18), 0 0 18px rgba(238, 158, 71, 0.6);
+  offset-rotate: 0deg;
+  animation: flow-travel 9s var(--ease-soft) 2400ms infinite;
+  opacity: 0;
+}
+@supports not (offset-path: path("M0 0")) {
+  .flow-dot { display: none; }
+}
+@keyframes flow-travel {
+  0% { offset-distance: 0%; opacity: 0; }
+  6% { opacity: 1; }
+  60% { offset-distance: 100%; opacity: 1; }
+  66% { offset-distance: 100%; opacity: 0; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
+/* ---------- The deal: promise crossed out, result rises ---------- */
+.transform-line {
+  position: relative;
+  display: inline;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-size: 0% 2px;
+  background-position: 0 58%;
+  transition: background-size 900ms var(--ease) 500ms, color 900ms var(--ease) 500ms;
+}
+[data-inview="true"] .transform-line {
+  background-size: 100% 2px;
+  color: rgba(255, 255, 255, 0.4);
+}
+.transform-to {
+  opacity: 0;
+  transform: translateY(var(--d2));
+  transition: opacity 900ms var(--ease) 900ms, transform 900ms var(--ease) 900ms;
+}
+[data-inview="true"] .transform-to {
+  opacity: 1;
+  transform: none;
+}
+
 /* The one continuously living element: the logo's O drifts on a 40s
    loop with tiny amplitude. Never faster, never larger. */
 @keyframes drift {
@@ -380,8 +450,20 @@
   }
   .drift,
   .liquid,
-  .liquid > div {
+  .liquid > div,
+  .flow-dot {
     animation: none;
+  }
+  .flow-path {
+    stroke-dashoffset: 0;
+  }
+  .transform-line {
+    background-size: 100% 2px;
+    color: rgba(255, 255, 255, 0.4);
+  }
+  .transform-to {
+    opacity: 1;
+    transform: none;
   }
   .btn-label > span {
     transform: none !important;

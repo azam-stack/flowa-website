@@ -104,6 +104,21 @@ export const hero = {
     // An illustrative, anonymised example — not a real client or contact.
     meeting: { company: "Head of Sales, logistics company (120 people)", role: "Decision-maker · matches your ICP", when: "Tue 14 Oct, 10:00", tag: "Qualified" },
   },
+  /**
+   * The flow system in the hero: the states an opportunity passes through,
+   * shown as connected nodes over the light-form and ending in the meeting
+   * card above. Conceptual, anonymised — the note says so.
+   */
+  flow: {
+    note: "Illustrative",
+    nodes: [
+      { label: "Company", sub: "Matches your ICP" },
+      { label: "Decision-maker", sub: "Head of Sales" },
+      { label: "Conversation", sub: "Email and phone" },
+      { label: "Qualified", sub: "Meets your criteria" },
+    ],
+    end: "Meeting",
+  },
 } as const;
 
 /**
@@ -212,6 +227,8 @@ export const offer = {
  * as plain strings — they render as additional checks.
  */
 export const riskBand = {
+  /** The transformation: the first line gives way to the second. */
+  transform: ["You don't pay for promises.", "You pay when meetings are created."],
   headline: ["If we don't book the meetings,", "you don't pay."],
   paragraph: "No retainers. No setup fees. No paying for activity, effort or a monthly report. You pay per qualified meeting and nothing else.",
   checks: ["You set the qualification criteria before we start", "You only pay for meetings that meet them"],
@@ -226,11 +243,13 @@ export const riskBand = {
 export const howItWorks = {
   eyebrow: "How it works",
   h2: "From kickoff to your first qualified meeting",
+  /** Small stylised interface states under each step — illustrative, never a real prospect. */
+  illustrative: "Examples are illustrative.",
   steps: [
-    { n: "01", title: "Target", body: "We agree your ideal customer, the job titles worth talking to, and what counts as a qualified meeting." },
-    { n: "02", title: "Reach", body: "We build the list by hand and start the conversations — email and phone, written and made by us." },
-    { n: "03", title: "Qualify", body: "We separate genuine interest from a polite yes, against the criteria we wrote down together." },
-    { n: "04", title: "Book", body: "Qualified meetings go straight into your calendar, with the context you need before you join." },
+    { n: "01", title: "Target", body: "We agree your ideal customer, the job titles worth talking to, and what counts as a qualified meeting.", ui: { kind: "chips", items: ["Logistics · 120 people", "SaaS · 60 people", "Manufacturing · 250 people"], active: 0 } },
+    { n: "02", title: "Reach", body: "We build the list by hand and start the conversations — email and phone, written and made by us.", ui: { kind: "activity", items: ["Email sent · Tue 09:10", "Call · Wed 10:14", "Reply · Wed 15:02"] } },
+    { n: "03", title: "Qualify", body: "We separate genuine interest from a polite yes, against the criteria we wrote down together.", ui: { kind: "checks", items: ["Decision-maker", "Fits your ICP", "Genuine interest"] } },
+    { n: "04", title: "Book", body: "Qualified meetings go straight into your calendar, with the context you need before you join.", ui: { kind: "calendar", items: ["Tue 14 Oct", "10:00", "Qualified meeting"] } },
   ],
 } as const;
 
