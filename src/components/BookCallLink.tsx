@@ -9,8 +9,8 @@ import { track } from "@/lib/analytics";
  * here, so the destination is decided once: VITE_BOOKING_URL when a
  * booking tool is connected, otherwise the lead form on the current page.
  */
-export function bookingHref(): string {
-  return SITE_CONFIG.bookingUrl ?? SITE_CONFIG.contactAnchor;
+export function bookingHref(fallback: string = SITE_CONFIG.contactAnchor): string {
+  return SITE_CONFIG.bookingUrl ?? fallback;
 }
 
 type Props = Omit<ComponentProps<typeof LinkButton>, "href" | "children"> & {
@@ -18,11 +18,13 @@ type Props = Omit<ComponentProps<typeof LinkButton>, "href" | "children"> & {
   location: string;
   service?: string;
   children?: string;
+  /** Where to go without a booking tool, for pages that have no form of their own (default: the form on the current page). */
+  fallback?: string;
 };
 
-export function BookCallLink({ location, service, children, onClick, ...rest }: Props) {
-  const href = bookingHref();
-  const external = href !== SITE_CONFIG.contactAnchor;
+export function BookCallLink({ location, service, children, onClick, fallback, ...rest }: Props) {
+  const href = bookingHref(fallback);
+  const external = href === SITE_CONFIG.bookingUrl;
   return (
     <LinkButton
       href={href}

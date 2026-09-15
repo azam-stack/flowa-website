@@ -787,3 +787,13 @@
   .operator-line { stroke-dashoffset: 0; }
   .route-step { opacity: 1; transform: none; }
 }
+
+/* Pricing: the logo breaking through the grid. A soft lift, and a 1px settle on hover. */
+.pricing-logo img {
+  box-shadow: 0 1px 2px rgb(var(--rgb-fg) / 0.06), 0 14px 32px -14px rgb(var(--rgb-accent-band) / 0.55);
+  transition: transform var(--dur) var(--ease-emphasized), box-shadow var(--dur) var(--ease-emphasized);
+}
+.pricing-logo:hover img {
+  transform: translate(-1px, -1px);
+  box-shadow: 0 1px 2px rgb(var(--rgb-fg) / 0.06), 0 18px 36px -14px rgb(var(--rgb-accent-band) / 0.6);
+}
