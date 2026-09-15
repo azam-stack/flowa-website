@@ -10,7 +10,7 @@ import { asset } from "@/lib/asset";
 
 /**
  * The person behind the system. A dark panel, as in the reference the
- * founders supplied (manbelkins.png): the copy on the left, Ahmed's
+ * founders supplied (manbelkins.png): the copy on the left, Anton's
  * cutout on the right rising out of a warm light and cropped by the
  * panel's floor. What makes it Flowa's, not a stock composition, are the
  * objects of an engagement floating around him in dark glass: a meeting,
@@ -18,7 +18,7 @@ import { asset } from "@/lib/asset";
  * photo is the team portrait, cut out; the face is untouched.
  */
 export function OperatorSection() {
-  const a = team.ahmed;
+  const a = team.anton;
   const m = demo.meeting;
   const p = demo.prospects[2];
   return (
@@ -56,9 +56,9 @@ export function OperatorSection() {
               <div className="absolute inset-x-[5%] bottom-[-10%] top-[10%] rounded-full" style={{ background: "radial-gradient(50% 55% at 55% 70%, rgb(var(--rgb-accent) / 0.55), rgb(var(--rgb-accent-band) / 0.25) 45%, rgb(var(--rgb-accent) / 0) 75%)", filter: "blur(28px)" }} aria-hidden="true" />
               {/* portrait cutout, cropped by the panel's floor */}
               <picture>
-                <source srcSet={asset("images/operator/ahmed-cutout.webp")} type="image/webp" />
+                <source srcSet={asset("images/operator/anton-cutout.webp")} type="image/webp" />
                 <img
-                  src={asset("images/operator/ahmed-cutout.png")}
+                  src={asset("images/operator/anton-cutout.png")}
                   alt={`${a.firstName}, ${a.role}`}
                   width={480}
                   height={600}
