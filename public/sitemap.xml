@@ -31,6 +31,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://flowa.dk/pricing</loc>
+    <lastmod>2026-09-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://flowa.dk/cases</loc>
     <lastmod>2026-09-15</lastmod>
     <changefreq>monthly</changefreq>

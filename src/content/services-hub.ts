@@ -2,7 +2,7 @@
 export const servicesHub = {
   seo: {
     title: "B2B Sales Development Services | Flowa",
-    description: "Appointment setting, cold calling and cold email for B2B companies: the right prospects, relevant conversations, qualified interest and meetings that can become opportunities. Paid per qualified meeting.",
+    description: "Appointment setting, cold calling and cold email for B2B companies: the right prospects, relevant conversations, qualified interest and meetings that can become opportunities. Start with a Pilot, then scale into a fixed package.",
   },
   hero: {
     eyebrow: "Services",
@@ -25,7 +25,7 @@ export const servicesHub = {
   engine: {
     eyebrow: "The Flowa engine",
     heading: "Companies. People. Conversations. Qualification. Meetings. Opportunities.",
-    body: "This is the whole story. Every service is a different way of starting it; the qualification standard and the commercial model are the same on all of them.",
+    body: "This is the whole story. Every service is a different way of starting it; the qualification standard and the packages are the same on all of them.",
     stages: [
       { label: "Target", sub: "Companies" },
       { label: "Research", sub: "People" },

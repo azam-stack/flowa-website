@@ -2,6 +2,8 @@ import { Section, Container } from "./Section";
 import { Card } from "./Card";
 import { Reveal } from "./Reveal";
 import { LeadForm } from "./LeadForm";
+import { LinkButton } from "./Button";
+import { BookCallLink } from "./BookCallLink";
 import { finalCta, team } from "@/content/site.en";
 import { asset } from "@/lib/asset";
 
@@ -10,7 +12,7 @@ import { asset } from "@/lib/asset";
  * pitch on the left, the one lead form on the right. `id="contact"` so
  * the in-page booking fallback lands here on every page.
  */
-export function LeadCta({ eyebrow, heading, body, service }: { eyebrow: string; heading: string; body: string; service?: string }) {
+export function LeadCta({ eyebrow, heading, body, service, secondary }: { eyebrow: string; heading: string; body: string; service?: string; secondary?: { label: string; href: string } }) {
   return (
     <Section id="contact" className="scroll-mt-24">
       <Container>
@@ -23,6 +25,14 @@ export function LeadCta({ eyebrow, heading, body, service }: { eyebrow: string; 
               </p>
               <h2 className="far mt-2 text-h2 text-fg md:mt-3">{heading}</h2>
               <p className="mt-4 max-w-lead text-lead text-muted md:mt-5">{body}</p>
+              {secondary && (
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <BookCallLink location="lead-cta" service={service} variant="primary" />
+                  <LinkButton href={secondary.href} variant="ghost" arrow>
+                    {secondary.label}
+                  </LinkButton>
+                </div>
+              )}
               <div className="mt-8 flex items-center gap-3.5">
                 <picture>
                   <source srcSet={`${asset(team.ahmed.photoBase)}.avif`} type="image/avif" />

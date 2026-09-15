@@ -6,6 +6,7 @@ import { HomePage } from "@/pages/HomePage";
 import { ServicesHubPage } from "@/pages/ServicesHubPage";
 import { ServicePage } from "@/pages/ServicePage";
 import { CasesPage } from "@/pages/CasesPage";
+import { PricingPage } from "@/pages/PricingPage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { getService } from "@/content/services";
 
@@ -28,6 +29,7 @@ export default function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/services" element={<ServicesHubPage />} />
             <Route path="/services/:slug" element={<ServiceRoute />} />
+            <Route path="/pricing" element={<PricingPage />} />
             <Route path="/cases" element={<CasesPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

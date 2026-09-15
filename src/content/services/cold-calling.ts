@@ -12,9 +12,9 @@ export const coldCalling: ServiceDefinition = {
   status: "live",
   seo: {
     title: "B2B Cold Calling | Flowa",
-    description: "Structured B2B cold calling by the two founders: researched lists, a script built around your ICP, qualification on every call and follow-up until a conversation resolves. Paid per qualified meeting.",
+    description: "Structured B2B cold calling by the two founders: researched lists, a script built around your ICP, qualification on every call and follow-up until a conversation resolves. Phone booking is part of the Plus and Scale packages.",
     ogTitle: "B2B Cold Calling — direct conversations, real opportunities",
-    ogDescription: "Researched lists, structured calling and qualification built around your ICP. You pay per qualified meeting, not per dial.",
+    ogDescription: "Researched lists, structured calling and qualification built around your ICP. Available on the Plus and Scale packages.",
   },
   hero: {
     eyebrow: "Cold calling",
@@ -76,13 +76,14 @@ export const coldCalling: ServiceDefinition = {
     demoLabel: "Example campaign",
     period: "4 weeks",
   },
+  pricingNote: { text: "Phone booking is available on Plus and Scale.", cta: "Compare packages" },
   faq: {
     eyebrow: "Questions",
     heading: "Cold calling, answered",
     items: [
       { q: "How are prospects selected?", a: "From the ICP we define together: industries, company sizes and the roles worth talking to. We build the list by hand and check each contact before it goes into a calling block, rather than buying a list and dialling through it." },
       { q: "How do you prepare the script?", a: "We draft it with you around your offer, the problems it solves and the objections you already hear. Then it changes: what real conversations say back goes into the next version. It is a structure for a conversation, not a text to read out." },
-      { q: "How many calls are made?", a: "As many as the list and your target volume need. Each prospect gets a structured sequence of four to six touches across calls, voicemails and emails, on a set cadence. You are not charged per call, so volume is a means, not the product." },
+      { q: "How many calls are made?", a: "As many as the list and your target volume need. Each prospect gets a structured sequence of four to six touches across calls, voicemails and emails, on a set cadence. The packages are priced on meetings, not calls, so volume is a means, not the product." },
       { q: "How is call quality measured?", a: "Every call is logged with its outcome, the objection if there was one and the next action. You see the funnel from attempts to connections to conversations to qualified meetings, with notes, every week." },
       { q: "What happens after a conversation?", a: "A prospect who passes the qualification criteria is booked into your calendar with the notes from the call. Someone who is interested but not now goes into follow-up with a date. Someone who is the wrong person points us to the right one." },
     ],

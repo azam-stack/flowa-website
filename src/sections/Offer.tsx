@@ -19,7 +19,7 @@ export function Offer() {
           <div>
             <SectionHeader eyebrow={offer.eyebrow} title={offer.h2} lead={offer.body} />
             <Reveal delay={240} variant="near" className="mt-7 md:mt-9">
-              <LinkButton href="#pricing" variant="ghost" arrow>
+              <LinkButton href={offer.ctaSecondaryHref} variant="ghost" arrow>
                 {offer.ctaSecondary}
               </LinkButton>
             </Reveal>

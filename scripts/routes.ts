@@ -6,6 +6,7 @@
 import { meta, faq } from "@/content/site.en";
 import { servicesHub } from "@/content/services-hub";
 import { casesPage } from "@/content/cases";
+import { pricingPage } from "@/content/pricing";
 import { liveServices, servicePath } from "@/content/services";
 import { faqJsonLd, serviceJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
@@ -22,5 +23,6 @@ export const routes: RouteMeta[] = [
     ogDescription: s.seo.ogDescription,
     jsonLd: [serviceJsonLd({ name: s.name, description: s.seo.description, path: servicePath(s.slug) }), faqJsonLd(s.faq.items), breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Services", path: "/services" }, { name: s.name, path: servicePath(s.slug) }])],
   })),
+  { path: "/pricing", title: pricingPage.seo.title, description: pricingPage.seo.description, jsonLd: [faqJsonLd(pricingPage.faq.items), breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Pricing", path: "/pricing" }])] },
   { path: "/cases", title: casesPage.seo.title, description: casesPage.seo.description, jsonLd: [breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Cases", path: "/cases" }])] },
 ];

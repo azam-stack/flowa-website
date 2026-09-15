@@ -11,7 +11,7 @@ export const coldEmail: ServiceDefinition = {
   status: "live",
   seo: {
     title: "B2B Cold Email | Flowa",
-    description: "Cold email that starts conversations, not spam: hand-built prospect lists, relevant messaging, structured follow-up and every reply handled by a person. Paid per qualified meeting.",
+    description: "Cold email that starts conversations, not spam: hand-built prospect lists, relevant messaging, structured follow-up and every reply handled by a person. Included in every Flowa package.",
     ogTitle: "B2B Cold Email — conversations, not spam",
     ogDescription: "Reach the right B2B prospects with relevant messaging, structured follow-up and a clear path from reply to meeting.",
   },
@@ -71,6 +71,7 @@ export const coldEmail: ServiceDefinition = {
       { intent: "Not interested", steps: ["Reason recorded", "Close"], outcome: "Closed, with a reason you can see" },
     ],
   },
+  pricingNote: { text: "Email outreach is included across every Flowa package.", cta: "See pricing" },
   faq: {
     eyebrow: "Questions",
     heading: "Cold email, answered",

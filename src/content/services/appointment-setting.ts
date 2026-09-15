@@ -13,9 +13,9 @@ export const appointmentSetting: ServiceDefinition = {
   status: "live",
   seo: {
     title: "B2B Appointment Setting | Flowa",
-    description: "Qualified sales meetings with decision-makers who fit your ICP, qualified by hand before they reach your calendar. No cure, no pay: you pay per qualified meeting.",
+    description: "Qualified sales meetings with decision-makers who fit your ICP, qualified by hand before they reach your calendar. Start with a £600 Pilot at £400 per booked meeting, then scale into a fixed package.",
     ogTitle: "B2B Appointment Setting — qualified meetings, paid per meeting",
-    ogDescription: "Flowa finds the right companies, reaches the decision-makers, qualifies genuine interest and books the meeting. You pay only for meetings that meet your criteria.",
+    ogDescription: "Flowa finds the right companies, reaches the decision-makers, qualifies genuine interest and books the meeting. Start with a Pilot and pay per booked meeting.",
   },
   hero: {
     eyebrow: "Appointment setting",
@@ -30,7 +30,7 @@ export const appointmentSetting: ServiceDefinition = {
     items: [
       { value: "100%", label: "of booked meetings qualified by hand", description: "A person checks every meeting against your written criteria before it is booked.", sourceType: "process" },
       { value: "2", label: "people who ever speak to your market", description: "Ahmed and Anton. No call centre, no rotating pod.", sourceType: "process" },
-      { value: "3–5", label: "written qualification criteria per engagement", description: "Agreed with you before outreach starts; a meeting that misses them is not invoiced.", sourceType: "process" },
+      { value: "3–5", label: "written qualification criteria per engagement", description: "Agreed with you before outreach starts; a meeting that misses them does not count.", sourceType: "process" },
       { value: "<24h", label: "to handle a reply or a qualification question", description: "The response time we plan the working day around.", sourceType: "target" },
       { value: "30+", label: "qualified meetings a month at full volume", description: "The monthly volume we scale an engagement toward, agreed per client.", sourceType: "target" },
       { value: null, label: "meetings booked to date", sourceType: "verified" },
@@ -51,7 +51,7 @@ export const appointmentSetting: ServiceDefinition = {
   qualification: {
     eyebrow: "What makes a meeting qualified?",
     heading: "A booked meeting isn't automatically a qualified meeting.",
-    body: "Five checks, written down with you before we start. A prospect has to pass all of them before the meeting is booked, and only a meeting that passes is invoiced.",
+    body: "Five checks, written down with you before we start. A prospect has to pass all of them before the meeting is booked, and only a meeting that passes counts.",
     criteria: [
       { n: "01", title: "Right company", body: "Does the company fit the agreed ICP: industry, size, situation?", state: "ICP match" },
       { n: "02", title: "Right person", body: "Is the contact a relevant decision-maker or stakeholder for what you sell?", state: "Decision-maker" },
@@ -74,7 +74,7 @@ export const appointmentSetting: ServiceDefinition = {
       { label: "Follow-up", status: "current", body: "Structured follow-up on every open conversation until it resolves." },
       { label: "Calendar", status: "supporting", body: "Qualified meetings go straight into your calendar with context." },
       { label: "CRM", status: "supporting", body: "Meeting details handed over cleanly, so your pipeline stays accurate." },
-      { label: "Meeting", status: "current", body: "The outcome you pay for. Nothing before it is invoiced." },
+      { label: "Meeting", status: "current", body: "The outcome every package is measured on." },
     ],
     legend: { current: "Current service", supporting: "Supporting workflow", future: "Planned" },
   },
@@ -91,16 +91,17 @@ export const appointmentSetting: ServiceDefinition = {
     ],
   },
   operator: true,
+  pricingNote: { text: "Find the right package for your outbound goals.", cta: "View pricing" },
   faq: {
     eyebrow: "Questions",
     heading: "Appointment setting, answered",
     items: [
-      { q: "What counts as a qualified meeting?", a: "A meeting that passes the criteria we write down with you before we start: the company fits your ICP, the contact is a relevant decision-maker or stakeholder, there is a relevant problem and genuine interest, and the prospect has explicitly agreed to a meeting. A meeting that misses a criterion is not invoiced." },
+      { q: "What counts as a qualified meeting?", a: "A meeting that passes the criteria we write down with you before we start: the company fits your ICP, the contact is a relevant decision-maker or stakeholder, there is a relevant problem and genuine interest, and the prospect has explicitly agreed to a meeting. A meeting that misses a criterion does not count." },
       { q: "Who do you contact?", a: "The decision-makers and stakeholders you define with us: specific roles at companies that match your ICP. We build the list by hand, and Ahmed and Anton are the only people who speak to your market on your behalf." },
       { q: "How do you define our ICP?", a: "In the first working session. We go through the industries, company sizes, roles and situations where your offer lands best, and we write the result down together with the qualification criteria. That document is the reference for everything that follows." },
       { q: "What happens if a prospect cancels?", a: "We contact them and work to rebook. A meeting that does not take place is not treated as delivered. The exact rebooking and no-show terms are agreed in writing before we start." },
-      { q: "Do you guarantee meetings?", a: "No, and we would be wary of anyone who does. What we guarantee is the commercial model: you pay only for meetings that meet your criteria, and nothing for activity. If we do not think we can fill your calendar, we say so before we start." },
-      { q: "How does no cure, no pay work?", a: "There is no retainer, no setup fee and no charge for leads, calls or emails. Each qualified meeting has an agreed price. No qualified meetings, no invoice." },
+      { q: "Do you guarantee meetings?", a: "On the fixed packages, yes: Core, Plus and Scale include a meeting guarantee whose terms depend on the agreed ICP, market and campaign scope and are written into your proposal. The Pilot is performance-based, paid per booked meeting, and does not include a guarantee. If we do not think we can fill your calendar, we say so before we start." },
+      { q: "How does pricing work?", a: "You start with a Pilot: a £600 setup and £400 per booked meeting, with no long-term commitment. Once the model is proven, you move to a fixed monthly package sized to your volume: Core, Plus or Scale. See the pricing page for the full comparison." },
     ],
   },
   related: {
@@ -114,6 +115,6 @@ export const appointmentSetting: ServiceDefinition = {
   cta: {
     eyebrow: "Get started",
     heading: "Ready for meetings with people who can actually buy?",
-    body: "Tell us about your ideal customer. Ahmed or Anton will reply within one working day with a per-meeting price for your volume.",
+    body: "Tell us about your ideal customer. Ahmed or Anton will reply within one working day with a recommended starting package.",
   },
 };

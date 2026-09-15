@@ -6,7 +6,7 @@ import { HowItWorks } from "@/sections/HowItWorks";
 import { WhoWeHelp } from "@/sections/WhoWeHelp";
 import { ComparisonTable } from "@/sections/ComparisonTable";
 import { Team } from "@/sections/Team";
-import { Pricing } from "@/sections/Pricing";
+import { PricingOverview } from "@/components/pricing/PricingOverview";
 import { GetStarted } from "@/sections/GetStarted";
 import { useSeo, faqJsonLd } from "@/lib/seo";
 import { meta, faq } from "@/content/site.en";
@@ -29,7 +29,7 @@ export function HomePage() {
       <RiskBand />
       <ComparisonTable />
       <Team />
-      <Pricing />
+      <PricingOverview />
       <GetStarted />
     </>
   );

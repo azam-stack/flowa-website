@@ -206,6 +206,17 @@ export function ServicePage({ service }: { service: ServiceDefinition }) {
         </Container>
       </Section>
 
+      <section aria-label="Pricing" className="border-t border-border py-compact">
+        <Container>
+          <Reveal className="flex flex-col gap-5 rounded-card border border-border bg-card p-6 md:flex-row md:items-center md:justify-between md:p-8">
+            <p className="text-h3 text-fg">{s.pricingNote.text}</p>
+            <LinkButton href="/pricing" variant="primary" arrow className="shrink-0" onClick={() => track("cta_click", { cta: s.pricingNote.cta, location: "service-pricing-note", service: s.slug })}>
+              {s.pricingNote.cta}
+            </LinkButton>
+          </Reveal>
+        </Container>
+      </section>
+
       <FaqSection eyebrow={s.faq.eyebrow} heading={s.faq.heading} items={s.faq.items} service={s.slug} />
       <LeadCta eyebrow={s.cta.eyebrow} heading={s.cta.heading} body={s.cta.body} service={s.slug} />
       <RelatedServices heading={s.related.heading} slugs={s.related.slugs} extra={s.related.extra} />

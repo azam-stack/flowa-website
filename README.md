@@ -1,6 +1,6 @@
 # Flowa — website
 
-Marketing website for Flowa (B2B appointment setting, cold calling and cold email, paid per qualified meeting). Vite + React 18 + TypeScript + Tailwind 3 + React Router. The site is static (GitHub Pages); the lead form posts to a small Cloudflare Worker in `backend/`. Copy is English (en-GB); the market/language/currency decision is still open (see "Decisions that are still the founders'").
+Marketing website for Flowa (B2B appointment setting, cold calling and cold email; a per-meeting Pilot, then fixed monthly packages). Vite + React 18 + TypeScript + Tailwind 3 + React Router. The site is static (GitHub Pages); the lead form posts to a small Cloudflare Worker in `backend/`. Copy is English (en-GB); the market/language/currency decision is still open (see "Decisions that are still the founders'").
 
 ## Routes
 
@@ -11,11 +11,14 @@ Marketing website for Flowa (B2B appointment setting, cold calling and cold emai
 | `/services/appointment-setting` | Service page | `src/content/services/appointment-setting.ts` |
 | `/services/cold-calling` | Service page | `src/content/services/cold-calling.ts` |
 | `/services/cold-email` | Service page | `src/content/services/cold-email.ts` |
+| `/pricing` | Pricing | `src/content/pricing.ts` |
 | `/cases` | Cases | `src/content/cases.ts` |
 
 Every service page is the same template (`src/pages/ServicePage.tsx`) rendering one `ServiceDefinition` (`src/content/types.ts`). To add a service (LinkedIn outreach, lead research, multichannel), add a data file and register it in `src/content/services/index.ts`; the route, the mega-menu, the hub card, the footer, the related-services links, the sitemap and the prerendered HTML follow. The content modules import nothing from React, so they can move to a CMS without touching components.
 
 **Honesty is in the types.** A `Stat` carries `sourceType: "verified" | "benchmark" | "target" | "process"` and the page prints the provenance beside every number (`SourceBadge`); a `value: null` stat is pending a real figure and is not rendered; only verified numeric stats count up. A `CaseStudy` renders metrics and its testimonial only when `verified: true`; `caseStudies` is empty until a client approves a write-up. Every product-style visualisation uses the generic demo data in `src/content/demo.ts` and is labelled illustrative. `scripts/check-content.mjs` fails the build on placeholders, benchmarks without a source, placeholder stat values and unverified "verified" cases.
+
+**Pricing.** `src/content/pricing.ts` is the one source of truth for the Pilot → Core → Plus → Scale model: `packages` (setup, monthly or per-meeting price, meetings a year, model, badge, CTA), `pricingFeatures` (one row per feature with a boolean per package and an optional precise note), and the page copy. `components/pricing/PricingTable.tsx` renders it as a semantic table from `lg` (plan cards as the header, the recommended column marked, icon-led rows, ticks and crosses with "Included" / "Not included" for screen readers, notes that open on click or keyboard) and as stacked package cards with a disclosure below `lg`. The home page's `PricingOverview` reads the same data. Scale has no public price (`monthly: null`, "On request"); the content check refuses any internal figure in public content and any LinkedIn row in the table. The reference the founders supplied (`belkinstabel.png`) set the structure.
 
 **Direct loads.** `scripts/prerender-routes.mjs` runs after the Vite build and writes one HTML file per route with its title, description, canonical, Open Graph/Twitter tags and JSON-LD (Service, FAQPage, BreadcrumbList; Organization and WebSite are in `index.html`), plus `404.html` as the SPA fallback and `sitemap.xml`. `src/lib/seo.ts` keeps the live document in step during client-side navigation.
 
@@ -61,12 +64,12 @@ Sections, each answering one question, assembled in `src/pages/HomePage.tsx` in 
 | 5 | `sections/RiskBand.tsx` | What do I risk? (the deal) | — |
 | 6 | `sections/ComparisonTable.tsx` | Why you and not an SDR or an agency? | — |
 | 7 | `sections/Team.tsx` | Who does the work? | `#team` |
-| 8 | `sections/Pricing.tsx` | What does it cost? | `#pricing` |
+| 8 | `components/pricing/PricingOverview.tsx` | What does it cost? (four packages, link to /pricing) | `#pricing` |
 | 9 | `sections/GetStarted.tsx` | What am I unsure about, and how do I start? (FAQ + form) | `#faq`, `#contact` |
 | — | `components/Footer.tsx` | | |
 
 - **`src/content/site.en.ts`** is the only place copy lives. No component hard-codes a user-facing string. A `site.da.ts` with the same shape is the path to a Danish version.
-- **`scripts/check-content.mjs`** runs before every build and fails it if any string in the content file contains a bracketed placeholder, if pricing is in `tiers` mode while a price is still `£TBC` or a tier is marked popular without a `popularBasis`, or if the FAQPage JSON-LD in `index.html` differs from `faq.items`. Missing content is omitted from the page by the components, never shown as a note to the founders.
+- **`scripts/check-content.mjs`** runs before every build and fails it if any string in a content module contains a bracketed placeholder, if an internal pricing figure appears in public content, if Scale carries a public price, if a benchmark has no source, or if a case is marked verified without content. Missing content is omitted from the page by the components, never shown as a note to the founders.
 - **Navigation**: Services (mega-menu: the three services, the four steps, three reasons; hover intent, arrow keys, Escape) · How it works · Who we help · Cases · About + Book a call. One underline glides to the current route or, on the home page, the section in view. The mobile drawer (`components/nav/MobileDrawer.tsx`) traps focus, closes on Escape and returns focus.
 - **Service-page components** (`src/components/`): `StatsBand` + `SourceBadge`, `FlowaEngine` (the recurring pipeline strip), `ProcessFlow` (five steps on a line that keeps moving), `QualificationModel` (interactive five-criteria pipeline), `ChannelSystem` (current / supporting / planned nodes), `Pillars` (people, process, performance micro-systems), `ReplyRouting`, `ReportingPanel` (funnel from `CampaignMetrics`, labelled demo data), `OperatorSection` (Ahmed's cutout inside a glass composition; the team portraits themselves are untouched), `ProspectCard`, `MeetingCard`, `ServiceCard`, `CaseStudies`, `FaqSection`, `RelatedServices`, `LeadCta`. Hero visualisations: `PipelineVisual`, `DialerVisual`, `EmailVisual`, all lazy-loaded, all gated by IntersectionObserver and tab visibility, all static in their final state under `prefers-reduced-motion`.
 - **Shared components** (`src/components/`): `Section` + `SectionHeader` (one rhythm, one eyebrow style), `Card`, `Badge`, `Accordion`, `Field`/`TextareaField`, `Button`/`LinkButton`, `Reveal`, `TeamPortrait`, `ClientLogos`, `Logo`, `DecorativeBlob`, `Container`.
@@ -127,8 +130,8 @@ Nothing below is shown as a placeholder — each is omitted until it exists.
 
 1. **Market, language and currency.** Domain `.dk`, Danish clients and founders, en-GB copy, `£` in the pricing types, UK keywords in `index.html`. Pick DK-first, UK-first or bilingual; then set `lang`, `hreflang`, meta keywords, `areaServed` in the Service JSON-LD and the currency together.
 2. **Form endpoint and booking link** — deploy `backend/` and set `VITE_CONTACT_ENDPOINT`; set `VITE_BOOKING_URL` once a booking tool exists.
-3. **Prices.** `pricing.mode` is `"model"` (how pricing works + a quote call to action). Switch to `"tiers"` only when `pricing.tiers[*].price` holds real figures; the build refuses `£TBC` in that mode. `popularBasis` must name the data behind a "most chosen" badge, or the badge doesn't render.
-4. **No-show / cancellation policy** (`riskBand.checks` shows two confirmed checks; add the third when the policy exists, and a matching FAQ entry).
+3. **Pricing terms.** The packages, prices, guarantee wording, notice period and FAQ answers in `src/content/pricing.ts` follow the pricing brief; keep them in step with the contract as it evolves.
+4. **No-show policy detail.** "No-show replacement" is on every package; the exact mechanism is described only as far as the brief states it.
 5. **Founder bios and LinkedIn URLs** (`team.ahmed`, `team.anton`: `surname`, `bio`, `linkedin` are `null`; `footer.linkedinUrl` too). When the URLs exist, also add `sameAs` to the founders in the Organization JSON-LD.
 6. **A time-to-first-meeting figure** for the how-it-works heading, only if it holds on every engagement.
 7. **Verified figures.** Every statistic on the service pages is a process fact or a Flowa target and says so. Stats with `value: null` (meetings booked to date, lead-to-meeting rate, connection rate, reply rate, qualified-response rate, meetings generated) render as soon as a measured figure replaces the null with `sourceType: "verified"`.

@@ -114,6 +114,8 @@ export type ServiceDefinition = {
   reporting?: { eyebrow: string; heading: string; body: string; metrics: CampaignMetrics; demoLabel: string; period: string };
   replyRouting?: { eyebrow: string; heading: string; body: string; routes: ReplyRoute[] };
   operator?: boolean;
+  /** One line about where this service sits in the packages, with a link to /pricing. */
+  pricingNote: { text: string; cta: string };
   faq: { eyebrow: string; heading: string; items: FAQItem[] };
   related: { heading: string; slugs: string[]; extra: { label: string; href: string }[] };
   cta: { eyebrow: string; heading: string; body: string };

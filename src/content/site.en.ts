@@ -1,10 +1,8 @@
 /**
  * Single source of truth for every user-facing string on the site (en-GB).
  * No component should hard-code copy — import from here instead. A future
- * site.da.ts (or any other locale) can mirror this shape.
- *
- * `£TBC` marks prices that were DKK in the v1 brief and must NOT be
- * auto-converted — the founder sets the real GBP figures.
+ * site.da.ts (or any other locale) can mirror this shape. Pricing lives in
+ * src/content/pricing.ts; service pages in src/content/services.
  *
  * RESTRUCTURE NOTE: the homepage was cut to 11 sections per the WINGM-model
  * restructure brief. Deleted exports (problems, valueProps, services,
@@ -13,8 +11,6 @@
  * need the old copy. `team`, `signedStatement*`, `peopleSection` are
  * frozen (section 7, "Founders") and were not touched by this pass.
  */
-
-export const PRICE_TBC = "£TBC" as const;
 
 /**
  * Primary navigation. Route links ("/services", "/cases") and section
@@ -28,6 +24,7 @@ export const nav = {
     { key: "services", label: "Services", href: "/services", menu: true },
     { key: "how-it-works", label: "How it works", href: "/#how-it-works" },
     { key: "who-we-help", label: "Who we help", href: "/#who-we-help" },
+    { key: "pricing", label: "Pricing", href: "/pricing" },
     { key: "cases", label: "Cases", href: "/cases" },
     { key: "about", label: "About", href: "/#team" },
   ],
@@ -47,7 +44,7 @@ export const nav = {
     ],
     whyHeading: "Why Flowa",
     why: [
-      { title: "No cure. No pay.", body: "You pay per qualified meeting. Nothing else.", href: "/#pricing" },
+      { title: "Start with proof.", body: "A £600 Pilot at £400 per booked meeting, then a fixed package.", href: "/pricing" },
       { title: "Qualified meetings.", body: "Five written checks before anything is booked.", href: "/services/appointment-setting#qualification" },
       { title: "Human conversations.", body: "Two founders. No call centre, no rotating pod.", href: "/#team" },
     ],
@@ -59,7 +56,7 @@ export const hero = {
   sub: "Flowa fills your calendar with qualified sales meetings with the decision-makers you actually want to sell to — so your team spends its time in conversations, not hunting for them.",
   ctaPrimary: "Book a call",
   ctaSecondary: "See how it works",
-  reassurance: "No lock-in. You only pay for meetings that meet your criteria.",
+  reassurance: "Start with a Pilot: £600 setup, then £400 per booked meeting. No long-term commitment.",
   foundedBy: "Founded and run by Ahmed and Anton.",
   card: {
     label: "From first contact to booked meeting",
@@ -160,6 +157,7 @@ export const offer = {
   h2: "Everything that fills your calendar, in one service.",
   body: "Appointment setting, lead research, outbound campaigns and sales development — one team, one point of contact, one invoice. You don't buy a list or a tool. You buy a calendar full of qualified meetings.",
   ctaSecondary: "See pricing",
+  ctaSecondaryHref: "/pricing",
   explore: "Read more",
   servicesHeading: "What we do",
   services: [
@@ -180,16 +178,12 @@ export const offer = {
  */
 export const riskBand = {
   /** The transformation: the first line gives way to the second. This is the band's only headline. */
-  transform: ["You don't pay for promises.", "You pay when meetings are created."],
-  paragraph: "No retainers. No setup fees. No paying for activity, effort or a monthly report. You pay per qualified meeting and nothing else.",
-  /**
-   * Confirmed commitments. Rendered as a list only once there are three
-   * (the third is the no-show policy, TODO(founders)); until then the
-   * sentence below stands in, because a list of two looks unfinished.
-   */
-  checks: ["You set the qualification criteria before we start", "You only pay for meetings that meet them"],
-  checksSentence: "You set the qualification criteria before we start, and you only pay for meetings that meet them.",
-  payoff: "Paid on meetings. Not on activity.",
+  transform: ["You don't pay for promises.", "You start with proof."],
+  paragraph: "Every engagement starts with a Pilot: a £600 setup and £400 per booked meeting, with no long-term commitment. Once the model is proven on your market, you move to a fixed monthly package with a meeting commitment.",
+  /** Confirmed commitments, rendered as a list once there are three. */
+  checks: ["You set the qualification criteria before we start", "The Pilot is paid per booked meeting, not per activity", "Every package replaces no-shows"],
+  checksSentence: "You set the qualification criteria before we start, the Pilot is paid per booked meeting, and every package replaces no-shows.",
+  payoff: "Performance-led to start. Predictable once proven.",
 } as const;
 
 /**
@@ -222,9 +216,9 @@ export const comparisonTable = {
   mobileHint: "Pick a column to compare",
   columns: ["Hiring an SDR", "A traditional outbound agency", "Flowa"],
   rows: [
-    { label: "Cost model", cells: ["Salary, tools, management overhead", "Monthly retainer regardless of output", "Per qualified meeting"] },
-    { label: "Your risk if it doesn't work", cells: ["You've hired someone", "You've paid the retainer", "You've paid nothing"] },
-    { label: "Minimum commitment", cells: ["Employment contract", "Typically 3–6 months", "None"] },
+    { label: "Cost model", cells: ["Salary, tools, management overhead", "Monthly retainer regardless of output", "Pilot per meeting, then a fixed package"] },
+    { label: "Your risk if it doesn't work", cells: ["You've hired someone", "You've paid the retainer", "A £600 setup and the meetings you got"] },
+    { label: "Minimum commitment", cells: ["Employment contract", "Typically 3–6 months", "None on the Pilot, one month's notice after"] },
     { label: "Who does the work", cells: ["One junior, learning your market", "A rotating pod you rarely meet", "Ahmed and Anton. Every time"] },
     { label: "What you're buying", cells: ["Capacity", "Activity and reports", "Meetings"] },
     { label: "Getting started", cells: ["Recruit, onboard, train", "Onboarding, then a shared queue", "We start on your list in week one"] },
@@ -293,58 +287,17 @@ export const peopleSection = {
 } as const;
 
 /**
- * Section 8, "Pricing" — two modes.
- *
- * `mode: "model"` (current): explains how pricing works and asks for a
- * quote. Used while there are no confirmed per-meeting prices — a tier
- * grid without numbers tells the visitor nothing.
- *
- * `mode: "tiers"`: renders `tiers` with real prices. Switch to it only
- * when every `price` below is a real figure (the build fails on `£TBC`
- * in tiers mode — see scripts/check-content.mjs). `popular` is only
- * shown when `popularBasis` names the data it rests on.
- */
-export const pricing = {
-  mode: "model" as "model" | "tiers",
-  eyebrow: "Pricing",
-  h2: "Price per qualified meeting",
-  body: "No flat fee per lead or per activity — you pay exclusively for meetings that meet the criteria we agree together. Price per meeting falls as volume grows.",
-  model: {
-    points: [
-      { title: "One price per qualified meeting", body: "Agreed before we start, written into the criteria. No retainer, no setup fee, no charge for activity." },
-      { title: "The price falls as volume grows", body: "The more meetings a month you want, the less each one costs. We quote for the volume you actually need." },
-      { title: "A meeting that doesn't meet the criteria isn't invoiced", body: "Qualification is decided against the written criteria, not our opinion on the day." },
-    ],
-    quoteCta: "Get a quote for your volume",
-    quoteHint: "Takes a 20-minute call. We'll come back with a per-meeting price the same day.",
-    quoteButton: "Book a 20-minute call",
-  },
-  tiers: [
-    { name: "Starter", price: PRICE_TBC, note: "For getting started", popular: false },
-    { name: "Growth", price: PRICE_TBC, note: "For a steady flow of meetings", popular: false },
-    { name: "Scale", price: PRICE_TBC, note: "For high, sustained volume", popular: false },
-  ],
-  /** e.g. "based on clients in 2025" — required before any tier can show "Most chosen". */
-  popularBasis: null as string | null,
-  popularLabel: "Most chosen",
-  perMeeting: "per qualified meeting",
-  cta: "Book a call",
-  includedHeading: "Every engagement includes",
-  included: ["Strategy & ICP definition", "Targeted research", "Direct outreach", "Qualification against your criteria", "Meetings delivered to your calendar"],
-} as const;
-
-/**
  * Section 9, "Faq" — only questions with real answers ship. Two more are
  * ready to add the moment the founders confirm them: "What happens if a
  * meeting is cancelled or a prospect doesn't show?" (no-show policy) and
- * "Is there a minimum term?" (notice/contract terms). Keep index.html's
- * FAQPage JSON-LD in sync with this list.
+ * "Is there a minimum term?" (notice/contract terms). The FAQPage JSON-LD is
+ * generated from this list at build time.
  */
 export const faq = {
   eyebrow: "Questions",
   h2: "Frequently asked questions",
   items: [
-    { q: "How does no cure, no pay work?", a: "You only pay for meetings that meet the criteria we agree in advance — no meetings, no invoice. There's no charge for leads, calls or activity." },
+    { q: "How does pricing work?", a: "You start with a Pilot: a £600 setup and £400 per booked meeting, with no long-term commitment. Once the model is proven, you move to a fixed monthly package: Core (£1,200 a month, 45+ meetings a year), Plus (£2,200 a month, 100+) or Scale (on request, 170+). The fixed packages include a meeting guarantee and carry one month's notice." },
     { q: "Who contacts our prospects?", a: "Ahmed and Anton. No one else speaks to your market on your behalf — no call centre, no rotating team of junior SDRs." },
     { q: "What counts as a qualified meeting?", a: "We agree this with you concretely before we start — typically based on role or decision-making authority, genuine interest, and a match with your ICP. The criteria are written down, so there's no ambiguity later." },
     { q: "How quickly can we start?", a: "After an initial call we agree strategy and ICP, after which onboarding can typically begin within a short timeframe. The exact timeline depends on your industry and complexity." },
@@ -399,6 +352,7 @@ export const footer = {
     { label: "About", href: "/#team" },
     { label: "How it works", href: "/#how-it-works" },
     { label: "Who we help", href: "/#who-we-help" },
+    { label: "Pricing", href: "/pricing" },
     { label: "Cases", href: "/cases" },
     { label: "Contact", href: "#contact" },
   ],
@@ -499,6 +453,6 @@ export const leadForm = {
 
 export const meta = {
   title: "Flowa — Creating meetings. That create opportunities.",
-  description: "Flowa helps B2B companies get qualified sales meetings with the decision-makers they actually want to sell to. No cure, no pay — you only pay for meetings that meet your criteria.",
-  keywords: "B2B appointment setting, appointment setting agency UK, B2B lead generation London, qualified sales meetings, outbound agency UK, cold email agency, pay per qualified meeting",
+  description: "Flowa helps B2B companies get qualified sales meetings with the decision-makers they actually want to sell to. Start with a £600 Pilot at £400 per booked meeting, then scale into a fixed package.",
+  keywords: "B2B appointment setting, appointment setting agency UK, B2B lead generation London, qualified sales meetings, outbound agency UK, cold email agency, outbound pricing",
 } as const;
