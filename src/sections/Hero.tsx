@@ -1,6 +1,6 @@
 import { Container } from "@/components/Container";
 import { LinkButton } from "@/components/Button";
-import { DecorativeBlob } from "@/components/DecorativeBlob";
+import { LiquidForm } from "@/components/LiquidForm";
 import { hero } from "@/content/site.en";
 import { PipelineVisual } from "./PipelineVisual";
 
@@ -20,10 +20,7 @@ const T = (ms: number) => ({ "--t": `${ms}ms` }) as React.CSSProperties;
 
 export function Hero() {
   return (
-    <section id="top" className="relative flex min-h-[60vh] items-center overflow-hidden pb-12 pt-28 md:pb-16 md:pt-36">
-      <div className="parallax parallax-slow pointer-events-none absolute -bottom-24 -right-24 h-[520px] w-[520px]" aria-hidden="true">
-        <DecorativeBlob className="drift h-full w-full text-accent/[0.05]" />
-      </div>
+    <section id="top" className="relative flex min-h-[60vh] items-center overflow-hidden pb-16 pt-28 md:pb-20 md:pt-36">
       <Container className="relative">
         <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
           <div className="min-w-0">
@@ -66,8 +63,13 @@ export function Hero() {
             </div>
           </div>
 
-          <div className="hero-surface" style={T(320)}>
-            <PipelineVisual />
+          <div className="relative">
+            <div className="hero-blur absolute -right-12 -top-8 h-[240px] w-[240px] sm:-right-16 sm:-top-20 sm:h-[400px] sm:w-[400px] lg:-right-28 lg:-top-32 lg:h-[560px] lg:w-[560px]" style={T(80)}>
+              <LiquidForm className="parallax parallax-slow inset-0" />
+            </div>
+            <div className="hero-surface relative" style={T(320)}>
+              <PipelineVisual />
+            </div>
           </div>
         </div>
       </Container>
