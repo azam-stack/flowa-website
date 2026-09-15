@@ -12,6 +12,8 @@
      are the same value. Few colours, many materials.
      ================================================================== */
   :root {
+    /* the band's vertical padding (mirrors tailwind `py-band`), so a panel can bleed into it */
+    --band-pad: clamp(4rem, 8vw, 7rem);
     /* --- colour (rgb triplets so Tailwind can apply opacity) --- */
     --rgb-bg: 250 249 246;
     --rgb-bg-secondary: 244 242 236;
@@ -768,9 +770,8 @@
 [data-inview="true"] .operator-line {
   stroke-dashoffset: 0;
 }
-.operator-portrait {
-  -webkit-mask-image: linear-gradient(180deg, #000 82%, transparent 100%);
-  mask-image: linear-gradient(180deg, #000 82%, transparent 100%);
+.operator-line-dark {
+  stroke: rgb(255 255 255 / 0.35);
 }
 
 @media (prefers-reduced-motion: reduce) {
