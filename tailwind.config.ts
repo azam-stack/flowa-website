@@ -84,7 +84,8 @@ export default {
       transitionDuration: {
         fast: "150ms",
         DEFAULT: "240ms",
-        reveal: "480ms",
+        slow: "600ms",
+        reveal: "800ms",
       },
     },
   },

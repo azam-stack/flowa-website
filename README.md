@@ -62,20 +62,30 @@ Tokens live in `tailwind.config.ts` (with the motion and orange variants as CSS 
 - **Buttons**: `primary` (near-black, orange on hover) is the default; `accent` (orange) only in the nav and on the form; `ghost` for secondary actions. One orange button in view at a time — the nav button turns orange only once the hero's own button has scrolled away.
 - **Motion** (`--dur-fast` 150 ms, `--dur` 240 ms, `--dur-reveal` 480 ms, `--ease` cubic-bezier(.16,1,.3,1)): hero entrance on load (the only load animation), section-level reveal, the how-it-works line drawing itself, comparison pills arriving row by row, a nav underline that glides between links, form feedback (field shake, fading error text, spinner, fading confirmation). `prefers-reduced-motion` collapses all of it to instant.
 
+## The hero
+
+Two elements share one physical space. The **living object** (`components/FluidObject.tsx`) is a raymarched glass form in WebGL — one sphere deformed by slow 3D noise, lit by a synthetic environment in Flowa's palette that is refracted through the body with a slight chromatic split, reflected at the rim and given two highlights. It never stops moving, leans a few degrees with the pointer, renders only while on screen and the tab is visible, caps its pixel ratio (1.5 desktop, 1 mobile, 30 fps on small screens), shows one still frame under `prefers-reduced-motion`, and falls back to a CSS form (`LiquidForm.tsx`) where WebGL is unavailable. About 4 KB of shader, no library.
+
+The **pipeline interface** (`sections/PipelineVisual.tsx`) is layered over it: Flowa's process as a small live-looking panel — stage rail, four rows advancing Prospect → Contacted → Qualified → Meeting booked on a slow loop, and three metrics. Every row is illustrative (invented names, from `hero.pipeline` in the content file) and the panel's header says so; the metrics count the illustrative rows, nothing more.
+
+## System language
+
+Small technical labels (`.sys` in `index.css`: 11 px, semibold, tracked, uppercase, tabular figures) mark the dense, product-like moments: the hero label and panel, the services as modules (`Flowa / Modules`, each with a system name such as *Targeting* beside its plain title), the process as a system (`Flowa / Process`, each stage with the output it hands on). Editorial sections — Problem, the dark band, Team, FAQ — stay free of them, so the page alternates between open statements and dense interfaces.
+
 ## Motion language
 
 Derived from a frame-by-frame study of the reference clip in `cosmos_959700922.mp4` (20 s, 30 fps): one translucent object drifting over a warm-to-cool gradient. Measured, not eyeballed: mean per-frame change 0.3–0.7 (on a 0–255 scale), position drift within ±6 % of the frame, size within ±10 %, motion arriving in waves every 3–4 s, and the last frame within 1.5 of the first. The principles behind it, as applied here:
 
-1. **One living object.** The reference has one; the site has one — the logo's O drifts on a 40 s loop in the hero (and, faintly, inside the dark band). Nothing else moves on its own.
+1. **One living object.** The reference has one; the site has one — the glass form in the hero, never still. The logo's O drifts faintly inside the dark band; nothing else moves on its own.
 2. **Small amplitudes, long settles.** Three distances (8 / 16 / 28 px), one expo-out curve, 600–1000 ms. Nothing snaps.
 3. **Depth by layering, not shadow.** Surfaces (table, cards) arrive from further back with a 3 % scale; labels arrive from nearer. Parallax on the hero O and the band headline (CSS scroll-driven, desktop only).
 4. **Rhythm in waves.** Each section arrives in beats: rule → eyebrow → heading → lead → rows, 70 ms apart, not all at once.
-5. **Reveal, don't fade.** The hero headline rises out of a line mask; the lead sharpens from blur; a rule draws in beside every eyebrow.
+5. **Reveal, don't fade.** The object forms first, from blur; the hero headline rises out of a line mask; the lead sharpens; a rule draws in beside every eyebrow.
 6. **Whitespace is the material.** Two thirds of the reference frame is empty. Section rhythm and line lengths are kept generous; no decoration was added.
 7. **Interaction confirms.** Button labels slide up and are replaced by themselves; the primary calls to action lean a few pixels toward the pointer; arrows lead by 3 px.
 8. **Continuous take.** The dark band is an inset panel, the comparison header carries its ink forward, the how-it-works line draws through its steps. Sections hand over to each other.
 
-Not taken from the reference: its gradient, its glass material, its palette. Those would have made Flowa look like the clip.
+Taken from the reference: the object — a translucent body with light passing through it, deforming slowly. Not taken: its gradient background and its palette; the object is rendered in Flowa's orange, cream and slate over the site's own off-white.
 
 ## Measurements (production build)
 

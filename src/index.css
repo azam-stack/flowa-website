@@ -67,6 +67,29 @@
   }
 }
 
+/* ---------- System typography: small technical labels ---------- */
+.sys {
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+@keyframes dot-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(238, 158, 71, 0.45); }
+  60% { box-shadow: 0 0 0 5px rgba(238, 158, 71, 0); }
+}
+.dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #ee9e47;
+  animation: dot-pulse 2.4s var(--ease-soft) infinite;
+}
+
 /* ---------- Scroll reveal (IntersectionObserver sets data-inview) ---------- */
 .reveal {
   opacity: 0;
@@ -380,7 +403,8 @@
   }
   .drift,
   .liquid,
-  .liquid > div {
+  .liquid > div,
+  .dot {
     animation: none;
   }
   .btn-label > span {
