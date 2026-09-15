@@ -49,7 +49,7 @@ export const packages: Package[] = [
     model: "performance",
     badge: "Start here",
     cta: "Start with a Pilot",
-    adds: ["Pay per booked meeting", "£600 setup, no long-term commitment", "Email outreach", "No meeting guarantee, no phone, no strategy sessions"],
+    adds: ["Pay per booked meeting", "No long-term commitment", "Email outreach", "No meeting guarantee, no phone, no strategy sessions"],
     summary: { tagline: "Test the model.", bestFor: "Test", outreach: "Email" },
   },
   {
@@ -142,7 +142,7 @@ export function setupLabel(p: Package): string {
 export const pricingPage = {
   seo: {
     title: "Pricing | Flowa",
-    description: "Start with a £600 Pilot and pay £400 per booked meeting. Then move to a fixed package: Core (£1,200/month, 45+ meetings a year), Plus (£2,200/month, 100+) or Scale (on request, 170+).",
+    description: "Start with a Pilot and pay only per booked meeting. Then move to a fixed package: Core (£1,200/month, 45+ meetings a year), Plus (£2,200/month, 100+) or Scale (on request, 170+).",
   },
   hero: {
     eyebrow: "Pricing",
@@ -153,11 +153,12 @@ export const pricingPage = {
     intro: "Four ways to build your outbound engine.",
     rows: { price: "Price", meetings: "Meetings", bestFor: "Best for", outreach: "Outreach", guarantee: "Meeting guarantee" },
     setup: "setup",
+    perMeetingNote: "You only pay per booked meeting",
     perYear: "/ year",
     included: "Included",
     notIncluded: "Not included",
     recommended: "Most popular",
-    footnote: "Prices exclude VAT. Fixed packages carry a meeting commitment and one month's notice; guarantee terms are defined in your proposal.",
+    footnote: "Prices exclude VAT. The Pilot starts with a one-time onboarding fee, confirmed in your proposal. Fixed packages carry a meeting commitment and one month's notice; guarantee terms are defined in your proposal.",
     logoAlt: "Flowa",
   },
   includes: {
@@ -184,7 +185,7 @@ export const pricingPage = {
     eyebrow: "The Pilot",
     heading: "Not ready to commit? Don't.",
     body: "Start with the Pilot. Pay per booked meeting, prove the model and decide what scaling looks like once you know the numbers.",
-    terms: "£600 setup, £400 per booked meeting, no long-term commitment. The Pilot is performance-based and does not include a meeting guarantee.",
+    terms: "You only pay per booked meeting, with no long-term commitment. A one-time onboarding fee, confirmed in your proposal, gets the Pilot started. The Pilot is performance-based and does not include a meeting guarantee.",
   },
   guarantee: {
     line: "Meeting guarantee included on Core, Plus and Scale.",
@@ -194,7 +195,7 @@ export const pricingPage = {
     eyebrow: "Questions",
     heading: "Pricing, answered",
     items: [
-      { q: "Why start with the Pilot?", a: "Because it lets you see the model work on your market before you commit to a monthly package. The Pilot is a £600 setup and £400 per booked meeting, with no long-term commitment. You learn your real numbers first." },
+      { q: "Why start with the Pilot?", a: "Because it lets you see the model work on your market before you commit to a monthly package. The Pilot is paid per booked meeting, with no long-term commitment. You learn your real numbers first." },
       { q: "What happens after the Pilot?", a: "You decide. With the Pilot's numbers in hand, most clients move to a fixed package, Core, Plus or Scale, sized to the volume they want. Staying on a per-meeting basis for longer is also possible; we agree it with you." },
       { q: "How does the meeting guarantee work?", a: "Core, Plus and Scale include a meeting guarantee. Its terms depend on the agreed ICP, market and campaign scope and are defined in your proposal, so you know the exact commitment before you sign. The Pilot is performance-based and does not include a guarantee." },
       { q: "What's included?", a: "On every package: ICP workshop and buyer profile, manual research and verification, domain setup and deliverability, copywriting and continuous testing, CRM integration, meeting booking and calendar management, no-show recovery, a live dashboard and ownership of your data. Plus adds phone booking, competitor exclusivity and a monthly strategy session; Scale adds multiple ICPs and markets, named target accounts and a weekly strategy session." },
@@ -215,7 +216,8 @@ export const pricingPage = {
 export const pricingOverview = {
   eyebrow: "Pricing",
   h2: "Start with proof. Scale with confidence.",
-  body: "A £600 Pilot at £400 per booked meeting to prove the model, then a fixed package sized to your volume.",
+  body: "Try us out with a Pilot, paid only per booked meeting, then move to a fixed package sized to your volume.",
   compare: "Compare packages",
   setup: "setup",
+  perMeeting: "Pay per meeting",
 } as const;

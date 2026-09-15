@@ -13,7 +13,7 @@ export const appointmentSetting: ServiceDefinition = {
   status: "live",
   seo: {
     title: "B2B Appointment Setting | Flowa",
-    description: "Qualified sales meetings with decision-makers who fit your ICP, qualified by hand before they reach your calendar. Start with a £600 Pilot at £400 per booked meeting, then scale into a fixed package.",
+    description: "Qualified sales meetings with decision-makers who fit your ICP, qualified by hand before they reach your calendar. Start with a Pilot paid per booked meeting, then scale into a fixed package.",
     ogTitle: "B2B Appointment Setting — qualified meetings, paid per meeting",
     ogDescription: "Flowa finds the right companies, reaches the decision-makers, qualifies genuine interest and books the meeting. Start with a Pilot and pay per booked meeting.",
   },
@@ -101,7 +101,7 @@ export const appointmentSetting: ServiceDefinition = {
       { q: "How do you define our ICP?", a: "In the first working session. We go through the industries, company sizes, roles and situations where your offer lands best, and we write the result down together with the qualification criteria. That document is the reference for everything that follows." },
       { q: "What happens if a prospect cancels?", a: "We contact them and work to rebook. A meeting that does not take place is not treated as delivered. The exact rebooking and no-show terms are agreed in writing before we start." },
       { q: "Do you guarantee meetings?", a: "On the fixed packages, yes: Core, Plus and Scale include a meeting guarantee whose terms depend on the agreed ICP, market and campaign scope and are written into your proposal. The Pilot is performance-based, paid per booked meeting, and does not include a guarantee. If we do not think we can fill your calendar, we say so before we start." },
-      { q: "How does pricing work?", a: "You start with a Pilot: a £600 setup and £400 per booked meeting, with no long-term commitment. Once the model is proven, you move to a fixed monthly package sized to your volume: Core, Plus or Scale. See the pricing page for the full comparison." },
+      { q: "How does pricing work?", a: "You start with a Pilot, paid per booked meeting with no long-term commitment. Once the model is proven, you move to a fixed monthly package sized to your volume: Core, Plus or Scale. See the pricing page for the full comparison." },
     ],
   },
   related: {

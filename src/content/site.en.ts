@@ -44,7 +44,7 @@ export const nav = {
     ],
     whyHeading: "Why Flowa",
     why: [
-      { title: "Start with proof.", body: "A £600 Pilot at £400 per booked meeting, then a fixed package.", href: "/pricing" },
+      { title: "Start with proof.", body: "Try us out with a Pilot, paid per booked meeting, then a fixed package.", href: "/pricing" },
       { title: "Qualified meetings.", body: "Five written checks before anything is booked.", href: "/services/appointment-setting#qualification" },
       { title: "Human conversations.", body: "Two founders. No call centre, no rotating pod.", href: "/#team" },
     ],
@@ -56,7 +56,7 @@ export const hero = {
   sub: "Flowa fills your calendar with qualified sales meetings with the decision-makers you actually want to sell to — so your team spends its time in conversations, not hunting for them.",
   ctaPrimary: "Book a call",
   ctaSecondary: "See how it works",
-  reassurance: "Start with a Pilot: £600 setup, then £400 per booked meeting. No long-term commitment.",
+  reassurance: "Start with a Pilot: you only pay per booked meeting. No long-term commitment.",
   foundedBy: "Founded and run by Ahmed and Anton.",
   card: {
     label: "From first contact to booked meeting",
@@ -217,7 +217,7 @@ export const comparisonTable = {
   columns: ["Hiring an SDR", "A traditional outbound agency", "Flowa"],
   rows: [
     { label: "Cost model", cells: ["Salary, tools, management overhead", "Monthly retainer regardless of output", "Pilot per meeting, then a fixed package"] },
-    { label: "Your risk if it doesn't work", cells: ["You've hired someone", "You've paid the retainer", "A £600 setup and the meetings you got"] },
+    { label: "Your risk if it doesn't work", cells: ["You've hired someone", "You've paid the retainer", "Only the Pilot meetings you got"] },
     { label: "Minimum commitment", cells: ["Employment contract", "Typically 3–6 months", "None on the Pilot, one month's notice after"] },
     { label: "Who does the work", cells: ["One junior, learning your market", "A rotating pod you rarely meet", "Ahmed and Anton. Every time"] },
     { label: "What you're buying", cells: ["Capacity", "Activity and reports", "Meetings"] },
@@ -297,7 +297,7 @@ export const faq = {
   eyebrow: "Questions",
   h2: "Frequently asked questions",
   items: [
-    { q: "How does pricing work?", a: "You start with a Pilot: a £600 setup and £400 per booked meeting, with no long-term commitment. Once the model is proven, you move to a fixed monthly package: Core (£1,200 a month, 45+ meetings a year), Plus (£2,200 a month, 100+) or Scale (on request, 170+). The fixed packages include a meeting guarantee and carry one month's notice." },
+    { q: "How does pricing work?", a: "You start with a Pilot, paid per booked meeting with no long-term commitment. Once the model is proven, you move to a fixed monthly package: Core (£1,200 a month, 45+ meetings a year), Plus (£2,200 a month, 100+) or Scale (on request, 170+). The fixed packages include a meeting guarantee and carry one month's notice." },
     { q: "Who contacts our prospects?", a: "Ahmed and Anton. No one else speaks to your market on your behalf — no call centre, no rotating team of junior SDRs." },
     { q: "What counts as a qualified meeting?", a: "We agree this with you concretely before we start — typically based on role or decision-making authority, genuine interest, and a match with your ICP. The criteria are written down, so there's no ambiguity later." },
     { q: "How quickly can we start?", a: "After an initial call we agree strategy and ICP, after which onboarding can typically begin within a short timeframe. The exact timeline depends on your industry and complexity." },
@@ -453,6 +453,6 @@ export const leadForm = {
 
 export const meta = {
   title: "Flowa — Creating meetings. That create opportunities.",
-  description: "Flowa helps B2B companies get qualified sales meetings with the decision-makers they actually want to sell to. Start with a £600 Pilot at £400 per booked meeting, then scale into a fixed package.",
+  description: "Flowa helps B2B companies get qualified sales meetings with the decision-makers they actually want to sell to. Start with a Pilot paid per booked meeting, then scale into a fixed package.",
   keywords: "B2B appointment setting, appointment setting agency UK, B2B lead generation London, qualified sales meetings, outbound agency UK, cold email agency, outbound pricing",
 } as const;

@@ -2,7 +2,7 @@ import { Section, SectionHeader, Container } from "../Section";
 import { LinkButton } from "../Button";
 import { Reveal } from "../Reveal";
 import { SmartLink } from "../SmartLink";
-import { packages, pricingOverview, gbp, ongoingLabel } from "@/content/pricing";
+import { packages, pricingOverview, ongoingLabel } from "@/content/pricing";
 
 /** The home page's pricing section: the four packages at a glance, one link to /pricing. Reads the same data as the pricing page. */
 export function PricingOverview() {
@@ -17,7 +17,7 @@ export function PricingOverview() {
               <p className="text-[12px] font-bold uppercase tracking-[0.12em] text-muted">{p.name}</p>
               <p className="mt-2 text-[22px] font-extrabold tracking-[-0.02em] text-fg">{ongoingLabel(p)}</p>
               <p className="mt-1 text-[13px] text-muted">
-                {p.setup > 0 ? `${gbp(p.setup)} ${pricingOverview.setup} · ` : ""}
+                {p.perMeeting ? `${pricingOverview.perMeeting} · ` : ""}
                 {p.meetingsPerYear} meetings / year
               </p>
               <p className="mt-3 text-[14px] font-medium text-fg">{p.tagline}</p>

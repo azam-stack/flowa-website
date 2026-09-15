@@ -6,7 +6,7 @@ import { BookCallLink } from "@/components/BookCallLink";
 import { Reveal } from "@/components/Reveal";
 import { PricingTable } from "@/components/pricing/PricingTable";
 import { FaqSection } from "@/components/FaqSection";
-import { packages, pricingPage, gbp, ongoingLabel } from "@/content/pricing";
+import { packages, pricingPage, ongoingLabel } from "@/content/pricing";
 import { useSeo, faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
 const T = (ms: number) => ({ "--t": `${ms}ms` }) as React.CSSProperties;
@@ -90,7 +90,7 @@ export function PricingPage() {
             <Reveal delay={120} variant="near" className="lg:pt-2">
               <p className="max-w-lead text-lead text-muted">{c.pilot.body}</p>
               <p className="mt-6 text-[22px] font-extrabold tracking-[-0.02em] text-fg md:text-[26px]">
-                {gbp(pilot.setup)} {c.table.setup} <span className="mx-2 font-medium text-muted">+</span> {ongoingLabel(pilot)}
+                {ongoingLabel(pilot)} <span className="ml-2 text-[15px] font-medium text-muted">{c.table.perMeetingNote.toLowerCase()}</span>
               </p>
               <p className="mt-3 max-w-lead text-small text-muted">{c.pilot.terms}</p>
               <p className="mt-6 border-t border-border pt-5 text-small text-muted">
