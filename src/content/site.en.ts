@@ -16,7 +16,19 @@
 
 export const PRICE_TBC = "£TBC" as const;
 
+/**
+ * Anchor navigation. Every link points at a section that exists on this
+ * page — the mega-menu (src/components/nav/) is kept in the codebase but
+ * unmounted until there are real sub-pages for it to point at.
+ */
 export const nav = {
+  anchors: [
+    { label: "Services", href: "#offer", sectionId: "offer" },
+    { label: "How it works", href: "#how-it-works", sectionId: "how-it-works" },
+    { label: "Pricing", href: "#pricing", sectionId: "pricing" },
+    { label: "Team", href: "#team", sectionId: "team" },
+    { label: "FAQ", href: "#faq", sectionId: "faq" },
+  ],
   links: {
     services: "Services",
     industries: "Industries",
@@ -24,6 +36,9 @@ export const nav = {
     pricing: "Pricing",
   },
   bookCall: "Book a call",
+  skipToContent: "Skip to content",
+  menuOpen: "Open menu",
+  menuClose: "Close menu",
   servicesPanel: {
     coreHeading: "Core services",
     core: [
@@ -75,7 +90,7 @@ export const nav = {
 } as const;
 
 export const hero = {
-  eyebrow: "B2B appointment setting — you pay per meeting, not per activity",
+  eyebrow: "B2B appointment setting — pay per meeting",
   h1: ["Creating meetings.", "That create opportunities."],
   sub: "Flowa fills your calendar with qualified sales meetings with the decision-makers you actually want to sell to — so your team spends its time in conversations, not hunting for them.",
   ctaPrimary: "Book a call",
@@ -86,7 +101,8 @@ export const hero = {
     label: "From first contact to booked meeting",
     steps: ["Prospects", "Conversations", "Qualified meetings", "Opportunities"],
     caption: "You only ever see meetings that meet your criteria. We filter out everything else before it reaches your calendar.",
-    meeting: { company: "[Company name]", role: "[Decision-maker's role]", when: "Tue 14 Oct, 10:00", tag: "Matches your criteria" },
+    // An illustrative, anonymised example — not a real client or contact.
+    meeting: { company: "Head of Sales, logistics company (120 people)", role: "Decision-maker · matches your ICP", when: "Tue 14 Oct, 10:00", tag: "Qualified" },
   },
 } as const;
 
@@ -148,6 +164,12 @@ export const clientLogos = {
  * four-card ValueProps grid into one section, capped at four items per
  * the restructure brief (1.3).
  */
+/**
+ * Section 2, "Problem" — three points, set as text columns rather than
+ * icon cards. The fourth point from the earlier version ("a bad
+ * experience with an agency before") now opens the comparison section,
+ * where it belongs.
+ */
 export const problem = {
   eyebrow: "Why Flowa",
   h2: "Outbound that nobody owns doesn't happen.",
@@ -155,52 +177,40 @@ export const problem = {
     { title: "Unpredictable pipeline", body: "Deals dry up the moment prospecting stops being someone's job." },
     { title: "Reps prospecting instead of selling", body: "Your best closers spend the week finding people to talk to, not talking to them." },
     { title: "No one owns outbound", body: "It's everyone's job a little and no one's job properly. So it doesn't happen." },
-    { title: "A bad experience with an agency before", body: "Vague reporting, unqualified leads, and a contract that was hard to leave." },
   ],
 } as const;
 
 /**
- * Section 3, "Offer" — replaces the old four-card Services grid. The four
- * service names are folded into one sentence rather than four cards, per
- * the restructure brief (1.3).
+ * Section 3, "Offer" — the pitch on the left, the four services as a
+ * list on the right. Each service has an id so the nav and footer can
+ * point at it.
  */
 export const offer = {
   eyebrow: "What you get",
   h2: "Everything that fills your calendar, in one service.",
   body: "Appointment setting, lead research, outbound campaigns and sales development — one team, one point of contact, one invoice. You don't buy a list or a tool. You buy a calendar full of qualified meetings.",
+  ctaSecondary: "See pricing",
+  servicesHeading: "The four things we do",
+  services: [
+    { id: "appointment-setting", title: "Appointment setting", description: "Qualified meetings with decision-makers, booked straight into your calendar." },
+    { id: "lead-research", title: "Lead research", description: "Hand-verified lists of companies that match your ICP." },
+    { id: "outbound-campaigns", title: "Outbound campaigns", description: "Cold email and phone, built on data that's actually checked." },
+    { id: "sales-development", title: "Sales development", description: "An outbound function that runs without you hiring for it." },
+  ],
 } as const;
 
 /**
  * Section 4, "RiskBand" — copy is verbatim from the restructure brief
- * (2.1). Check 3 is a required bracketed placeholder, not an oversight —
- * see PART 6, item 1 of the brief.
+ * (2.1). Only confirmed commitments appear in `checks`: nothing here is a
+ * placeholder. TODO(founders): once the no-show policy and any further
+ * promises (reply time, who is on the account) are confirmed, add them
+ * as plain strings — they render as additional checks.
  */
 export const riskBand = {
   headline: ["If we don't book the meetings,", "you don't pay."],
   paragraph: "No retainers. No setup fees. No paying for activity, effort or a monthly report. You pay per qualified meeting and nothing else.",
-  checks: [
-    "You set the qualification criteria before we start",
-    "You only pay for meetings that meet them",
-    // TODO(founders): confirm the no-show policy — see PART 6, item 1 of the restructure brief.
-    "[NO-SHOW POLICY — founders to confirm]",
-  ],
+  checks: ["You set the qualification criteria before we start", "You only pay for meetings that meet them"],
   payoff: "We only get paid when your calendar fills. That's the deal.",
-} as const;
-
-/**
- * Attached to the base of the Hero (section 1) — not its own section.
- * Every figure here is a promise the founders need to confirm before
- * launch — see PART 6, item 3 of the restructure brief.
- */
-export const commitmentsBar = {
-  items: [
-    // TODO(founders): confirm this is a promise Flowa will keep.
-    { figure: "24h", label: "Reply to any question, on any working day" },
-    // TODO(founders): confirm this is a promise Flowa will keep.
-    { figure: "2", label: "People on your account. The two who own the company" },
-    // TODO(founders): confirm this is a promise Flowa will keep.
-    { figure: "0", label: "Retainers, setup fees and lock-in" },
-  ],
 } as const;
 
 /**
@@ -227,6 +237,8 @@ export const howItWorks = {
 export const comparisonTable = {
   eyebrow: "Comparison",
   h2: "Why not hire an SDR, or use a traditional agency?",
+  intro: "If you've tried an agency before, you probably remember vague reporting, unqualified leads and a contract that was hard to leave. Here's how the three options differ on the terms that matter.",
+  mobileHint: "Pick a column to compare",
   columns: ["Hiring an SDR", "A traditional outbound agency", "Flowa"],
   rows: [
     { label: "Cost model", cells: ["Salary, tools, management overhead", "Monthly retainer regardless of output", "Per qualified meeting"] },
@@ -299,24 +311,53 @@ export const peopleSection = {
   bioPending: "Bio coming soon.",
 } as const;
 
+/**
+ * Section 8, "Pricing" — two modes.
+ *
+ * `mode: "model"` (current): explains how pricing works and asks for a
+ * quote. Used while there are no confirmed per-meeting prices — a tier
+ * grid without numbers tells the visitor nothing.
+ *
+ * `mode: "tiers"`: renders `tiers` with real prices. Switch to it only
+ * when every `price` below is a real figure (the build fails on `£TBC`
+ * in tiers mode — see scripts/check-content.mjs). `popular` is only
+ * shown when `popularBasis` names the data it rests on.
+ */
 export const pricing = {
+  mode: "model" as "model" | "tiers",
   eyebrow: "Pricing",
   h2: "Price per qualified meeting",
   body: "No flat fee per lead or per activity — you pay exclusively for meetings that meet the criteria we agree together. Price per meeting falls as volume grows.",
+  model: {
+    points: [
+      { title: "One price per qualified meeting", body: "Agreed before we start, written into the criteria. No retainer, no setup fee, no charge for activity." },
+      { title: "The price falls as volume grows", body: "The more meetings a month you want, the less each one costs. We quote for the volume you actually need." },
+      { title: "A meeting that doesn't meet the criteria isn't invoiced", body: "Qualification is decided against the written criteria, not our opinion on the day." },
+    ],
+    quoteCta: "Get a quote for your volume",
+    quoteHint: "Takes a 20-minute call. We'll come back with a per-meeting price the same day.",
+  },
   tiers: [
-    { name: "Bronze", price: PRICE_TBC, note: "For getting started", popular: false },
-    { name: "Silver", price: PRICE_TBC, note: "For a steady flow of meetings", popular: false },
-    { name: "Gold", price: PRICE_TBC, note: "Our most chosen plan", popular: true },
-    { name: "Platinum", price: PRICE_TBC, note: "For high, sustained volume", popular: false },
+    { name: "Starter", price: PRICE_TBC, note: "For getting started", popular: false },
+    { name: "Growth", price: PRICE_TBC, note: "For a steady flow of meetings", popular: false },
+    { name: "Scale", price: PRICE_TBC, note: "For high, sustained volume", popular: false },
   ],
+  /** e.g. "based on clients in 2025" — required before any tier can show "Most chosen". */
+  popularBasis: null as string | null,
+  popularLabel: "Most chosen",
   perMeeting: "per qualified meeting",
   cta: "Book a call",
-  includedHeading: "Every plan includes",
+  includedHeading: "Every engagement includes",
   included: ["Strategy & ICP definition", "Targeted research", "Direct outreach", "Qualification against your criteria", "Meetings delivered to your calendar"],
 } as const;
 
-/** Section 9, "Faq" — trimmed to six questions per the restructure brief
- * acceptance test (Part 4). */
+/**
+ * Section 9, "Faq" — only questions with real answers ship. Two more are
+ * ready to add the moment the founders confirm them: "What happens if a
+ * meeting is cancelled or a prospect doesn't show?" (no-show policy) and
+ * "Is there a minimum term?" (notice/contract terms). Keep index.html's
+ * FAQPage JSON-LD in sync with this list.
+ */
 export const faq = {
   eyebrow: "Questions",
   h2: "Frequently asked questions",
@@ -324,8 +365,6 @@ export const faq = {
     { q: "How does no cure, no pay work?", a: "You only pay for meetings that meet the criteria we agree in advance — no meetings, no invoice. There's no charge for leads, calls or activity." },
     { q: "Who contacts our prospects?", a: "Ahmed and Anton. No one else speaks to your market on your behalf — no call centre, no rotating team of junior SDRs." },
     { q: "What counts as a qualified meeting?", a: "We agree this with you concretely before we start — typically based on role or decision-making authority, genuine interest, and a match with your ICP. The criteria are written down, so there's no ambiguity later." },
-    { q: "What happens if a meeting is cancelled or a prospect doesn't show?", a: "[Placeholder — insert Flowa's actual policy for cancelled or no-show meetings here.]" },
-    { q: "Is there a minimum term?", a: "[Placeholder — insert Flowa's actual notice/contract terms here.]" },
     { q: "How quickly can we start?", a: "After an initial call we agree strategy and ICP, after which onboarding can typically begin within a short timeframe. The exact timeline depends on your industry and complexity." },
   ],
 } as const;
@@ -346,14 +385,26 @@ export const finalCta = {
   fields: {
     name: "Name",
     company: "Company",
-    email: "Email",
-    phone: "Phone",
-    message: "What can we help you with?",
-    messagePlaceholder: "Briefly tell us about your goals and target audience",
+    email: "Work email",
+    phone: "Phone (optional)",
+    message: "What are you selling, and to whom?",
+    messagePlaceholder: "A sentence on your product and the decision-makers you want to meet",
   },
-  submit: "Book a call",
-  successTitle: "Thanks — we'll come back to you within one working day.",
-  successBody: "If your email client didn't open automatically, write to us directly at",
+  errors: {
+    required: "Please fill this in.",
+    email: "That doesn't look like an email address.",
+    network: "Something went wrong and your request wasn't sent. Try again, or write to us directly at",
+  },
+  submit: "Send request",
+  sending: "Sending…",
+  privacy: "We use what you send us only to reply to you. Nothing is shared or added to a list.",
+  // Shown when the request was delivered to Flowa's form endpoint.
+  successTitle: "Sent — Ahmed or Anton will reply within one working day.",
+  successBody: "You'll get a reply from",
+  // Shown when no form endpoint is configured and the browser's email
+  // client was opened instead — the honest version of "sent".
+  mailtoTitle: "We've opened your email client with the details filled in.",
+  mailtoBody: "Press send there and it reaches us. If nothing opened, write to us directly at",
   responsePromise: "You'll hear back from Ahmed or Anton within one working day.",
 } as const;
 
@@ -361,6 +412,8 @@ export const footer = {
   navigationHeading: "Navigation",
   contactHeading: "Contact",
   rights: "All rights reserved.",
+  /** TODO(founders): LinkedIn company page URL. The link is omitted while null. */
+  linkedinUrl: null as string | null,
 } as const;
 
 export const meta = {

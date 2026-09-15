@@ -12,7 +12,7 @@ function TeamCard({ member }: { member: TeamMember }) {
       <TeamPortrait name={fullName} role={member.role} srcBase={member.photoBase} />
       <h3 className="mt-6 text-xl font-extrabold tracking-tight text-fg">{fullName}</h3>
       <p className="mt-1 text-sm font-medium text-accent-hover">{member.role}</p>
-      <p className="mt-4 max-w-sm text-[15px] leading-relaxed text-muted">{member.bio ?? peopleSection.bioPending}</p>
+      {member.bio && <p className="mt-4 max-w-sm text-[15px] leading-relaxed text-muted">{member.bio}</p>}
 
       <p className="mt-6 text-xs font-semibold uppercase tracking-[0.08em] text-muted">{peopleSection.ownsHeading}</p>
       <div className="mt-2 w-full max-w-sm border-t border-border">

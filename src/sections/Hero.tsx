@@ -24,13 +24,13 @@ export function Hero() {
               </span>
             </h1>
             <p className="mt-6 max-w-[52ch] text-lg leading-relaxed text-[#4A4744]">{hero.sub}</p>
-            <div className="mt-9 flex flex-col gap-5 sm:flex-row sm:items-center">
-              <LinkButton href="#contact" variant="accent">
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <LinkButton id="hero-cta" href="#contact" variant="primary" size="lg">
                 {hero.ctaPrimary}
               </LinkButton>
-              <a href="#how-it-works" className="group inline-flex items-center text-[15px] font-semibold text-fg">
-                <span className="border-b-[1.5px] border-transparent pb-0.5 transition-colors group-hover:border-fg">{hero.ctaSecondary}</span>
-              </a>
+              <LinkButton href="#how-it-works" variant="ghost" size="lg" arrow>
+                {hero.ctaSecondary}
+              </LinkButton>
             </div>
             <p className="mt-8 text-sm text-muted">{hero.reassurance}</p>
             <p className="mt-2 text-sm text-muted">{hero.foundedBy}</p>

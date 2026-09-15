@@ -2,11 +2,7 @@ import { Logo } from "./Logo";
 import { Container } from "./Container";
 import { nav, footer, finalCta, hero } from "@/content/site.en";
 
-const LINKS = [
-  { href: "#offer", label: nav.links.services },
-  { href: "#team", label: nav.links.about },
-  { href: "#contact", label: nav.bookCall },
-];
+const LINKS = [...nav.anchors.map((a) => ({ href: a.href, label: a.label })), { href: "#contact", label: nav.bookCall }];
 
 export function Footer() {
   return (
@@ -43,11 +39,13 @@ export function Footer() {
                     {finalCta.email}
                   </a>
                 </li>
-                <li>
-                  <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" className="text-sm text-fg/80 hover:text-fg">
-                    {finalCta.linkedin}
-                  </a>
-                </li>
+                {footer.linkedinUrl && (
+                  <li>
+                    <a href={footer.linkedinUrl} target="_blank" rel="noreferrer" className="text-sm text-fg/80 hover:text-fg">
+                      {finalCta.linkedin}
+                    </a>
+                  </li>
+                )}
               </ul>
             </div>
           </div>
