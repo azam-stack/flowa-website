@@ -11,7 +11,7 @@ export function Footer() {
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between md:gap-10">
           <div className="max-w-xs">
             <Logo />
-            <p className="mt-4 text-lg font-bold leading-[1.05] tracking-tight text-[color:var(--flowa-text)]">
+            <p className="mt-4 text-xl font-bold leading-[1.05] tracking-tight text-[color:var(--flowa-text)]">
               {hero.h1[0]}
               <br />
               <span className="text-accent-display">{hero.h1[1]}</span>

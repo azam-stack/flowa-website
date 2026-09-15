@@ -1,3 +1,5 @@
+> **Superseded (September 2026).** This report documents the WINGM-model restructure that produced the 11-section page. The page has since been rebuilt in six phases under the UI/UX audit and redesign plan — see `README.md` for the current structure, measurements and what still needs founder input. Numbers and file lists below describe the state *at the time of the restructure* and are kept as a record, not as a description of the current build. Points that no longer hold: the mega-menu is now archived under `archive/` (anchor navigation replaced it), `CommitmentsBar`, `FAQ.tsx` and `FinalCTA.tsx` no longer exist (FAQ and the form are one section, `GetStarted.tsx`), the bracketed placeholders listed in §4 have been removed and a build check now refuses them, and `Team.tsx` is no longer frozen.
+
 # Restructure report (Part 5 of the WINGM-model restructure brief)
 
 ## 1. Final section count and render order

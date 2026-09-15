@@ -54,7 +54,7 @@ export function PipelineVisual() {
                     state === "active"
                       ? "border-accent bg-accent text-accent-fg"
                       : state === "completed"
-                        ? "border-transparent bg-accent/[0.12] text-accent-hover"
+                        ? "border-transparent bg-accent/[0.12] text-fg"
                         : "border-border bg-bg text-muted"
                   }`}
                 >

@@ -21,7 +21,7 @@ export default function App() {
   return (
     <div className="min-h-screen overflow-x-hidden bg-bg text-fg">
       <Nav />
-      <main id="main">
+      <main id="main" tabIndex={-1} className="outline-none">
         <Hero />
         <ClientLogos />
         <Problem />

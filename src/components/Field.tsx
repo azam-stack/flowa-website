@@ -1,7 +1,7 @@
 import { useEffect, useRef, type InputHTMLAttributes, type TextareaHTMLAttributes } from "react";
 
 const CONTROL =
-  "w-full rounded-field border bg-bg px-4 text-body text-fg placeholder:text-muted/70 transition-[border-color,box-shadow] duration-fast focus:outline-none focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/30 motion-reduce:transition-none";
+  "w-full rounded-field border bg-bg px-4 text-body text-fg placeholder:text-muted transition-[border-color,box-shadow] duration-fast focus:outline-none focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/30 motion-reduce:transition-none";
 
 function controlClasses(error: boolean, extra: string) {
   return `${CONTROL} ${error ? "border-error" : "border-border"} ${extra}`;

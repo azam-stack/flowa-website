@@ -5,6 +5,7 @@
 // from the page, never shown as a note to the founders.
 import { pathToFileURL } from "node:url";
 import path from "node:path";
+import fs from "node:fs";
 
 const file = path.resolve(process.cwd(), "src/content/site.en.ts");
 const content = await import(pathToFileURL(file).href);
@@ -36,10 +37,30 @@ if (content.pricing?.mode === "tiers") {
   }
 }
 
+// The FAQPage JSON-LD in index.html must say exactly what the FAQ section
+// says — search engines show the structured answers, visitors see the
+// rendered ones, and the two drift silently otherwise.
+const html = fs.readFileSync(path.resolve(process.cwd(), "index.html"), "utf8");
+const faqLd = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+  .map((m) => JSON.parse(m[1]))
+  .find((d) => d["@type"] === "FAQPage");
+if (!faqLd) {
+  problems.push("index.html: no FAQPage JSON-LD block found");
+} else {
+  const ld = faqLd.mainEntity.map((q) => [q.name, q.acceptedAnswer.text]);
+  const site = content.faq.items.map((f) => [f.q, f.a]);
+  if (JSON.stringify(ld) !== JSON.stringify(site)) {
+    problems.push(`index.html FAQPage JSON-LD (${ld.length} items) does not match faq.items in site.en.ts (${site.length} items) — update the JSON-LD`);
+    site.forEach(([q, a], i) => {
+      if (!ld[i] || ld[i][0] !== q || ld[i][1] !== a) problems.push(`  faq.items[${i}] "${q}" differs`);
+    });
+  }
+}
+
 if (problems.length) {
   console.error("\nContent check failed — placeholders must be omitted, not shipped:\n");
   for (const p of problems) console.error("  •", p);
   console.error("");
   process.exit(1);
 }
-console.log("content ok: no placeholders in src/content/site.en.ts");
+console.log("content ok: no placeholders in src/content/site.en.ts; FAQ JSON-LD in sync");
