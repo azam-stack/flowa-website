@@ -16,7 +16,7 @@ const POS = [
   { x: 6, y: 26, sx: 50, sy: 8 },
   { x: 30, y: 9, sx: 24, sy: 8 },
   { x: 64, y: 13, sx: 60, sy: 18 },
-  { x: 84, y: 40, sx: 66, sy: 31 },
+  { x: 84, y: 40, sx: 66, sy: 28 },
 ];
 const END = { x: 34, y: 80 };
 /** One smooth line through the states: cubic segments with horizontal tangents. */
