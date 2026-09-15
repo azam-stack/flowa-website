@@ -105,11 +105,10 @@ The plan's mobile target was 7 500 px. The remaining ~1 400 px cannot be found w
 Nothing below is shown as a placeholder — each is omitted until it exists.
 
 1. **Market, language and currency.** Domain `.dk`, Danish clients and founders, en-GB copy, `£` in the pricing types, UK keywords in `index.html`. Pick DK-first, UK-first or bilingual; then set `lang`, `hreflang`, meta keywords, `areaServed` in the Service JSON-LD and the currency together.
-2. **A `@flowa.dk` email** in place of `flowameetings@gmail.com` (`finalCta.email`).
-3. **Form endpoint** — see "Form delivery".
-4. **Prices.** `pricing.mode` is `"model"` (how pricing works + a quote call to action). Switch to `"tiers"` only when `pricing.tiers[*].price` holds real figures; the build refuses `£TBC` in that mode. `popularBasis` must name the data behind a "most chosen" badge, or the badge doesn't render.
-5. **No-show / cancellation policy** (`riskBand.checks` shows two confirmed checks; add the third when the policy exists, and a matching FAQ entry).
-6. **Founder bios and LinkedIn URLs** (`team.ahmed`, `team.anton`: `surname`, `bio`, `linkedin` are `null`; `footer.linkedinUrl` too). When the URLs exist, also add `sameAs` to the founders in the Organization JSON-LD.
+2. **Form endpoint** — see "Form delivery".
+3. **Prices.** `pricing.mode` is `"model"` (how pricing works + a quote call to action). Switch to `"tiers"` only when `pricing.tiers[*].price` holds real figures; the build refuses `£TBC` in that mode. `popularBasis` must name the data behind a "most chosen" badge, or the badge doesn't render.
+4. **No-show / cancellation policy** (`riskBand.checks` shows two confirmed checks; add the third when the policy exists, and a matching FAQ entry).
+5. **Founder bios and LinkedIn URLs** (`team.ahmed`, `team.anton`: `surname`, `bio`, `linkedin` are `null`; `footer.linkedinUrl` too). When the URLs exist, also add `sameAs` to the founders in the Organization JSON-LD.
 7. **A time-to-first-meeting figure** for the how-it-works heading, only if it holds on every engagement.
 
 ## SEO and sharing

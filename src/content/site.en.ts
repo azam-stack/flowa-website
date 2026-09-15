@@ -395,7 +395,7 @@ export const finalCta = {
   eyebrow: "Get started",
   h2: "Ready to fill your calendar?",
   body: "Tell us about your ideal customer and we'll come back to you within one working day to find a time that works.",
-  email: "flowameetings@gmail.com",
+  email: "info@flowa.dk",
   linkedin: "Flowa on LinkedIn",
   fields: {
     name: "Name",
