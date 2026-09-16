@@ -1,7 +1,7 @@
 # Builds the site and publishes it to GitHub Pages on every push to main.
 # One-time setup in the repository: Settings → Pages → Build and deployment
-# → Source: "GitHub Actions". The site then lives at
-# https://azam-stack.github.io/flowa-website/ (or the custom domain, once set).
+# → Source: "GitHub Actions", and Custom domain: flowa.dk (public/CNAME ships
+# with the build). The site then lives at https://flowa.dk/.
 name: Deploy to GitHub Pages
 
 on:
@@ -30,9 +30,9 @@ jobs:
       - run: npm ci
       - run: npm run build
         env:
-          # Sub-path when served from <user>.github.io/<repo>/. Set to "/"
-          # (or remove) once the site runs on its own domain.
-          VITE_BASE: /flowa-website/
+          # The site is served at the domain root (public/CNAME = flowa.dk).
+          # Use "/flowa-website/" instead to preview at <user>.github.io/<repo>/.
+          VITE_BASE: /
           # Lead endpoint (backend/ worker), booking link and analytics sink (see README).
           VITE_CONTACT_ENDPOINT: ${{ vars.VITE_CONTACT_ENDPOINT }}
           VITE_BOOKING_URL: ${{ vars.VITE_BOOKING_URL }}

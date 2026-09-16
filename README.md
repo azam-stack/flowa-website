@@ -36,9 +36,9 @@ npm run check:content  # the content check on its own
 
 ### Live site (no terminal needed)
 
-Every push to `main` builds the site and publishes it to GitHub Pages via `.github/workflows/deploy.yml`. One-time setup in the repository: **Settings → Pages → Build and deployment → Source: GitHub Actions**. The site is then at https://azam-stack.github.io/flowa-website/ and updates itself a minute or two after each push.
+Every push to `main` builds the site and publishes it to GitHub Pages via `.github/workflows/deploy.yml`. One-time setup in the repository: **Settings → Pages → Build and deployment → Source: GitHub Actions**, then **Custom domain: flowa.dk** and **Enforce HTTPS** once the DNS check passes. The site is then at https://flowa.dk/ and updates itself a minute or two after each push.
 
-The workflow builds with `VITE_BASE=/flowa-website/` so assets resolve under the sub-path (every `public/` file referenced from code goes through `src/lib/asset.ts`). When the site moves to its own domain, set a custom domain under the same Pages settings and change `VITE_BASE` in the workflow to `/`. The workflow passes the repository variables `VITE_CONTACT_ENDPOINT`, `VITE_BOOKING_URL` and `VITE_ANALYTICS_ENDPOINT` to the build (Settings → Secrets and variables → Actions → Variables); each is optional.
+`public/CNAME` (`flowa.dk`) ships with every build and the workflow builds with `VITE_BASE=/`, so assets resolve at the domain root. DNS at the registrar: four `A` records on the apex (`185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`) and a `CNAME` for `www` pointing at `azam-stack.github.io`. Leave the domain's `MX` records untouched: the founders' email runs on the same domain. To preview under `azam-stack.github.io/flowa-website/` again, set `VITE_BASE` back to `/flowa-website/` and remove the custom domain. The workflow passes the repository variables `VITE_CONTACT_ENDPOINT`, `VITE_BOOKING_URL` and `VITE_ANALYTICS_ENDPOINT` to the build (Settings → Secrets and variables → Actions → Variables); each is optional.
 
 ### Form delivery, booking and analytics
 
