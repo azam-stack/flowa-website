@@ -9,7 +9,7 @@ export function PricingOverview() {
   return (
     <Section id="pricing">
       <Container>
-        <SectionHeader eyebrow={pricingOverview.eyebrow} title={pricingOverview.h2} lead={pricingOverview.body} />
+        <SectionHeader title={pricingOverview.h2} lead={pricingOverview.body} />
         <Reveal delay={120} stagger className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 md:mt-12 lg:grid-cols-4">
           {packages.map((p) => (
             <SmartLink key={p.id} href="/pricing" className={`group relative flex flex-col rounded-card border p-5 transition-[transform,border-color] duration-[240ms] ease-flowa hover:-translate-y-0.5 motion-reduce:transition-none ${p.recommended ? "border-accent/60 bg-accent/[0.06] hover:border-accent" : "border-border bg-card hover:border-fg"}`}>

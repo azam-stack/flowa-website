@@ -17,7 +17,7 @@ export function Offer() {
       <Container>
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1fr] lg:gap-24">
           <div>
-            <SectionHeader eyebrow={offer.eyebrow} title={offer.h2} lead={offer.body} />
+            <SectionHeader title={offer.h2} lead={offer.body} />
             <Reveal delay={240} variant="near" className="mt-7 md:mt-9">
               <LinkButton href={offer.ctaSecondaryHref} variant="ghost" arrow>
                 {offer.ctaSecondary}
@@ -26,8 +26,7 @@ export function Offer() {
           </div>
 
           <Reveal delay={120} variant="near" className="lg:pt-2">
-            <p className="text-eyebrow text-muted">{offer.servicesHeading}</p>
-            <ul className="stagger mt-4 divide-y divide-border border-y border-border">
+            <ul className="stagger divide-y divide-border border-y border-border">
               {offer.services.map((service, i) => (
                 <li key={service.id} id={service.id} className="grid grid-cols-[2.5rem_1fr] gap-4 py-6">
                   <span className="pt-1 text-small font-semibold tabular-nums text-accent-display" aria-hidden="true">

@@ -65,11 +65,7 @@ export function ServicePage({ service }: { service: ServiceDefinition }) {
                 <span aria-hidden="true"> / </span>
                 <span className="text-fg">{s.name}</span>
               </nav>
-              <p className="hero-rise flex items-center gap-3 text-eyebrow text-muted" style={T(40)}>
-                <span className="hero-rule h-px w-6 shrink-0 bg-accent" style={T(0)} aria-hidden="true" />
-                {s.hero.eyebrow}
-              </p>
-              <h1 className="mt-5 text-display text-[color:var(--flowa-text)]">
+              <h1 className="mt-4 text-display text-[color:var(--flowa-text)]">
                 <span className="hero-mask">
                   <span className="hero-line" style={T(120)}>
                     {s.hero.headline}
@@ -113,7 +109,7 @@ export function ServicePage({ service }: { service: ServiceDefinition }) {
       {s.qualification && (
         <Section id="qualification" className="scroll-mt-20">
           <Container>
-            <SectionHeader eyebrow={s.qualification.eyebrow} title={s.qualification.heading} lead={s.qualification.body} />
+            <SectionHeader title={s.qualification.heading} lead={s.qualification.body} />
             <Reveal delay={160} className="mt-10 md:mt-14">
               <QualificationModel criteria={s.qualification.criteria} states={s.qualification.states} />
             </Reveal>
@@ -124,7 +120,7 @@ export function ServicePage({ service }: { service: ServiceDefinition }) {
       {s.system && (
         <Section>
           <Container>
-            <SectionHeader eyebrow={s.system.eyebrow} title={s.system.heading} lead={s.system.body} />
+            <SectionHeader title={s.system.heading} lead={s.system.body} />
             <Reveal delay={160} className="mt-10 md:mt-12">
               <ChannelSystem nodes={s.system.nodes} legend={s.system.legend} />
             </Reveal>
@@ -135,7 +131,7 @@ export function ServicePage({ service }: { service: ServiceDefinition }) {
       {s.pillars && (
         <Section>
           <Container>
-            <SectionHeader eyebrow={s.pillars.eyebrow} title={s.pillars.heading} />
+            <SectionHeader title={s.pillars.heading} />
             <Reveal delay={160} className="mt-10 md:mt-12">
               <Pillars items={s.pillars.items} />
             </Reveal>
@@ -145,7 +141,7 @@ export function ServicePage({ service }: { service: ServiceDefinition }) {
 
       <Section id="process" className="scroll-mt-20">
         <Container>
-          <SectionHeader eyebrow={s.process.eyebrow} title={s.process.heading} lead={s.process.body} align="center" />
+          <SectionHeader title={s.process.heading} lead={s.process.body} align="center" />
           <Reveal delay={160} className="mt-12 lg:mt-16">
             <ProcessFlow steps={s.process.steps} />
           </Reveal>
@@ -155,7 +151,7 @@ export function ServicePage({ service }: { service: ServiceDefinition }) {
       {s.replyRouting && (
         <Section>
           <Container>
-            <SectionHeader eyebrow={s.replyRouting.eyebrow} title={s.replyRouting.heading} lead={s.replyRouting.body} />
+            <SectionHeader title={s.replyRouting.heading} lead={s.replyRouting.body} />
             <Reveal delay={160} className="mt-10 md:mt-12">
               <ReplyRouting routes={s.replyRouting.routes} />
             </Reveal>
@@ -167,7 +163,7 @@ export function ServicePage({ service }: { service: ServiceDefinition }) {
         <Section>
           <Container>
             <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-              <SectionHeader eyebrow={s.reporting.eyebrow} title={s.reporting.heading} lead={s.reporting.body} />
+              <SectionHeader title={s.reporting.heading} lead={s.reporting.body} />
               <Reveal delay={160} variant="surface">
                 <ReportingPanel metrics={s.reporting.metrics} label={s.reporting.demoLabel} period={s.reporting.period} />
               </Reveal>
@@ -194,7 +190,7 @@ export function ServicePage({ service }: { service: ServiceDefinition }) {
 
       <Section>
         <Container>
-          <SectionHeader eyebrow={casesPage.hero.eyebrow} title={relevantCases.length ? `${s.name} cases` : casesPage.hero.headline} lead={casesPage.hero.sub} />
+          <SectionHeader title={relevantCases.length ? `${s.name} cases` : casesPage.hero.headline} lead={casesPage.hero.sub} />
           <Reveal delay={160} className="mt-8 md:mt-12">
             <CaseStudies cases={relevantCases} />
           </Reveal>
@@ -217,8 +213,8 @@ export function ServicePage({ service }: { service: ServiceDefinition }) {
         </Container>
       </section>
 
-      <FaqSection eyebrow={s.faq.eyebrow} heading={s.faq.heading} items={s.faq.items} service={s.slug} />
-      <LeadCta eyebrow={s.cta.eyebrow} heading={s.cta.heading} body={s.cta.body} service={s.slug} />
+      <FaqSection heading={s.faq.heading} items={s.faq.items} service={s.slug} />
+      <LeadCta heading={s.cta.heading} body={s.cta.body} service={s.slug} />
       <RelatedServices heading={s.related.heading} slugs={s.related.slugs} extra={s.related.extra} />
     </>
   );

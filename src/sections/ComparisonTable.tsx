@@ -18,7 +18,7 @@ export function ComparisonTable() {
   return (
     <Section>
       <div className="mx-auto w-full max-w-content px-6 md:px-10">
-        <SectionHeader eyebrow={comparisonTable.eyebrow} title={comparisonTable.h2} lead={comparisonTable.intro} />
+        <SectionHeader title={comparisonTable.h2} lead={comparisonTable.intro} />
       </div>
 
       <div className="mx-auto mt-8 w-full max-w-bleed px-6 md:mt-12 md:px-10">

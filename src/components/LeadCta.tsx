@@ -12,18 +12,14 @@ import { asset } from "@/lib/asset";
  * pitch on the left, the one lead form on the right. `id="contact"` so
  * the in-page booking fallback lands here on every page.
  */
-export function LeadCta({ eyebrow, heading, body, service, secondary }: { eyebrow: string; heading: string; body: string; service?: string; secondary?: { label: string; href: string } }) {
+export function LeadCta({ heading, body, service, secondary }: { heading: string; body: string; service?: string; secondary?: { label: string; href: string } }) {
   return (
     <Section id="contact" className="scroll-mt-24">
       <Container>
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
           <div>
             <Reveal stagger>
-              <p className="flex items-center gap-3 text-eyebrow text-muted">
-                <span className="rule h-px w-6 shrink-0 bg-accent" aria-hidden="true" />
-                {eyebrow}
-              </p>
-              <h2 className="far mt-2 text-h2 text-fg md:mt-3">{heading}</h2>
+              <h2 className="far text-h2 text-fg">{heading}</h2>
               <p className="mt-4 max-w-lead text-lead text-muted md:mt-5">{body}</p>
               {secondary && (
                 <div className="mt-6 flex flex-wrap gap-3">

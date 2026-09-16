@@ -19,11 +19,7 @@ export function CasesPage() {
       <section id="top" className="atmosphere relative overflow-hidden pb-12 pt-32 md:pb-16 md:pt-40 lg:pt-44">
         <Container className="relative z-[2]">
           <div className="max-w-3xl">
-            <p className="hero-rise flex items-center gap-3 text-eyebrow text-muted" style={T(40)}>
-              <span className="hero-rule h-px w-6 shrink-0 bg-accent" style={T(0)} aria-hidden="true" />
-              {c.hero.eyebrow}
-            </p>
-            <h1 className="mt-5 text-display text-[color:var(--flowa-text)]">
+            <h1 className="text-display text-[color:var(--flowa-text)]">
               <span className="hero-mask">
                 <span className="hero-line" style={T(120)}>
                   {c.hero.headline}
@@ -45,7 +41,7 @@ export function CasesPage() {
           </Reveal>
         </Container>
       </Section>
-      <LeadCta eyebrow={c.cta.eyebrow} heading={c.cta.heading} body={c.cta.body} service="cases" />
+      <LeadCta heading={c.cta.heading} body={c.cta.body} service="cases" />
     </>
   );
 }

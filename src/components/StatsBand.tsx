@@ -23,7 +23,7 @@ export function StatsBand({ heading, items, dark = false }: { heading: string; i
   const cols = shown.length >= 5 ? "lg:grid-cols-5" : shown.length === 4 ? "lg:grid-cols-4" : "lg:grid-cols-3";
   return (
     <div ref={ref}>
-      <p className={`text-eyebrow ${dark ? "text-white/70" : "text-muted"}`}>{heading}</p>
+      <h3 className={`text-h3 ${dark ? "text-white" : "text-fg"}`}>{heading}</h3>
       <Reveal stagger className={`mt-5 grid grid-cols-2 gap-px overflow-hidden rounded-card border ${dark ? "border-white/15 bg-white/15" : "border-border bg-border"} ${cols}`}>
         {shown.map((stat) => (
           <div key={stat.label} className={`flex flex-col gap-2 p-5 md:p-6 ${dark ? "bg-riskband" : "bg-card"}`}>

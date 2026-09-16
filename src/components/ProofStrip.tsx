@@ -29,11 +29,7 @@ export function ProofStrip({ compact = false }: { compact?: boolean }) {
       <Container>
         <div ref={ref} className="grid grid-cols-1 gap-8 lg:grid-cols-[0.75fr_1.25fr] lg:items-center lg:gap-16">
           <Reveal stagger>
-            <p className="flex items-center gap-3 text-eyebrow text-muted">
-              <span className="rule h-px w-6 shrink-0 bg-accent" aria-hidden="true" />
-              {proof.eyebrow}
-            </p>
-            <h2 className="far mt-2 text-h2 text-fg md:mt-3">{proof.heading}</h2>
+            <h2 className="far text-h2 text-fg">{proof.heading}</h2>
             {!compact && <p className="mt-4 max-w-lead text-body text-muted">{proof.body}</p>}
           </Reveal>
           <Reveal delay={160} variant="near">

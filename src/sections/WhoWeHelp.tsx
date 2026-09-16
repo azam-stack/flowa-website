@@ -10,7 +10,7 @@ export function WhoWeHelp() {
       <Container>
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1fr] lg:gap-24">
           <div>
-            <SectionHeader eyebrow={whoWeHelp.eyebrow} title={whoWeHelp.h2} lead={whoWeHelp.intro} />
+            <SectionHeader title={whoWeHelp.h2} lead={whoWeHelp.intro} />
             <Reveal delay={200} variant="near" className="mt-7 rounded-card border border-border bg-card p-5 md:mt-9">
               <p className="text-[12px] font-semibold uppercase tracking-[0.1em] text-muted">{whoWeHelp.soFarHeading}</p>
               <ul className="mt-2 flex flex-wrap gap-2">
@@ -23,8 +23,7 @@ export function WhoWeHelp() {
             </Reveal>
           </div>
           <Reveal delay={120} variant="near" className="lg:pt-2">
-            <p className="text-eyebrow text-muted">{whoWeHelp.fitHeading}</p>
-            <ul className="stagger mt-4 divide-y divide-border border-y border-border">
+            <ul className="stagger divide-y divide-border border-y border-border">
               {whoWeHelp.fit.map((f) => (
                 <li key={f.title} className="grid grid-cols-[2rem_1fr] gap-3 py-5">
                   <span className="mt-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-accent/[0.18]">

@@ -20,7 +20,7 @@ export function GetStarted() {
       <Container>
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-20">
           <div>
-            <SectionHeader eyebrow={faq.eyebrow} title={faq.h2} />
+            <SectionHeader title={faq.h2} />
             <Reveal delay={120} variant="near" className="mt-6 md:mt-8">
               <Accordion className="stagger" items={faq.items.map((f) => ({ title: f.q, body: f.a }))} onOpen={(item) => track("faq_open", { question: item.title })} />
             </Reveal>
@@ -28,8 +28,7 @@ export function GetStarted() {
 
           <Reveal delay={160} variant="surface" threshold={0.15} id="contact" className="scroll-mt-24">
             <Card className="p-5 sm:p-7 md:p-9">
-              <p className="text-eyebrow text-muted">{finalCta.eyebrow}</p>
-              <h2 className="mt-2 text-h3 text-fg sm:text-[26px]">{finalCta.h2}</h2>
+              <h2 className="text-h3 text-fg sm:text-[26px]">{finalCta.h2}</h2>
               <p className="mt-2 text-body text-muted">{finalCta.body}</p>
               <div className="mt-6 md:mt-7">
                 <LeadForm compact />

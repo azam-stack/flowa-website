@@ -50,7 +50,7 @@ export function Team() {
   return (
     <Section id="team">
       <Container>
-        <SectionHeader eyebrow={peopleSection.eyebrow} title={peopleSection.h2} lead={peopleSection.intro} />
+        <SectionHeader title={peopleSection.h2} lead={peopleSection.intro} />
 
         <Reveal delay={120} stagger className="mt-8 grid grid-cols-1 gap-8 md:mt-12 md:grid-cols-2 md:gap-10">
           <FounderRow member={team.ahmed} />

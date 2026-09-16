@@ -9,7 +9,7 @@ export function RelatedServices({ heading, slugs, extra }: { heading: string; sl
   return (
     <section aria-label={heading} className="border-t border-border py-compact">
       <Container>
-        <p className="text-eyebrow text-muted">{heading}</p>
+        <h2 className="text-h3 text-fg">{heading}</h2>
         <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {related.map((s) => (
             <li key={s.slug}>

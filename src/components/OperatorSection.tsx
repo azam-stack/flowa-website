@@ -27,11 +27,7 @@ export function OperatorSection() {
       <Container className="relative" style={{ zIndex: 2 }}>
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1fr_1fr] lg:gap-12">
           <Reveal stagger>
-            <p className="flex items-center gap-3 text-eyebrow text-white/70">
-              <span className="rule h-px w-6 shrink-0 bg-accent" aria-hidden="true" />
-              {operator.eyebrow}
-            </p>
-            <h2 className="far mt-2 text-h2 text-white md:mt-3">{operator.h2}</h2>
+            <h2 className="far text-h2 text-white">{operator.h2}</h2>
             <p className="mt-4 max-w-lead text-lead text-white/[0.88] md:mt-5">{operator.body}</p>
             <div className="mt-6 md:mt-8">
               <p className="text-[15px] font-semibold text-white">{a.firstName}</p>

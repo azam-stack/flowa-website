@@ -28,11 +28,7 @@ export function PricingPage() {
       <section id="top" className="relative pb-6 pt-32 md:pb-8 md:pt-40 lg:pt-44">
         <Container>
           <div className="max-w-3xl">
-            <p className="hero-rise flex items-center gap-3 text-eyebrow text-muted" style={T(40)}>
-              <span className="hero-rule h-px w-6 shrink-0 bg-accent" style={T(0)} aria-hidden="true" />
-              {c.hero.eyebrow}
-            </p>
-            <h1 className="mt-5 text-display text-[color:var(--flowa-text)]">
+            <h1 className="text-display text-[color:var(--flowa-text)]">
               <span className="hero-mask">
                 <span className="hero-line" style={T(120)}>
                   {c.hero.headline[0]}
@@ -53,10 +49,7 @@ export function PricingPage() {
 
       <section id="packages" className="scroll-mt-20 pb-section pt-10 md:pt-14">
         <Container>
-          <p className="hero-rise text-eyebrow text-muted" style={T(520)}>
-            {c.table.intro}
-          </p>
-          <div className="hero-surface mt-10 md:mt-12" style={T(600)}>
+          <div className="hero-surface" style={T(520)}>
             <PricingTable />
           </div>
         </Container>
@@ -65,7 +58,7 @@ export function PricingPage() {
       <Section>
         <Container>
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-            <SectionHeader eyebrow={c.includes.eyebrow} title={c.includes.heading} lead={c.includes.body} />
+            <SectionHeader title={c.includes.heading} lead={c.includes.body} />
             <Reveal delay={120} variant="near" className="lg:pt-2">
               <ul className="stagger grid grid-cols-1 gap-x-10 sm:grid-cols-2">
                 {c.includes.items.map((item) => (
@@ -86,7 +79,7 @@ export function PricingPage() {
       <Section>
         <Container>
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-            <SectionHeader eyebrow={c.pilot.eyebrow} title={c.pilot.heading} />
+            <SectionHeader title={c.pilot.heading} />
             <Reveal delay={120} variant="near" className="lg:pt-2">
               <p className="max-w-lead text-lead text-muted">{c.pilot.body}</p>
               <p className="mt-6 text-[22px] font-extrabold tracking-[-0.02em] text-fg md:text-[26px]">
@@ -101,13 +94,12 @@ export function PricingPage() {
         </Container>
       </Section>
 
-      <FaqSection eyebrow={c.faq.eyebrow} heading={c.faq.heading} items={c.faq.items} service="pricing" />
+      <FaqSection heading={c.faq.heading} items={c.faq.items} service="pricing" />
 
       <Section>
         <Container>
           <Reveal className="mx-auto max-w-2xl text-center">
-            <p className="text-[12px] font-bold uppercase tracking-[0.14em] text-accent-display">{c.cta.eyebrow}</p>
-            <h2 className="mt-4 text-h2 text-fg">{c.cta.heading}</h2>
+            <h2 className="text-h2 text-fg">{c.cta.heading}</h2>
             <p className="mx-auto mt-4 max-w-lead text-lead text-muted">{c.cta.body}</p>
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
               <BookCallLink id="hero-cta" location="pricing-cta" service="pricing" fallback={FALLBACK} size="lg" magnetic className="w-full sm:w-auto" />

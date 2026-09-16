@@ -28,11 +28,7 @@ export function ServicesHubPage() {
         </div>
         <Container className="relative z-[2]">
           <div className="max-w-3xl">
-            <p className="hero-rise flex items-center gap-3 text-eyebrow text-muted" style={T(40)}>
-              <span className="hero-rule h-px w-6 shrink-0 bg-accent" style={T(0)} aria-hidden="true" />
-              {h.hero.eyebrow}
-            </p>
-            <h1 className="mt-5 text-display text-[color:var(--flowa-text)]">
+            <h1 className="text-display text-[color:var(--flowa-text)]">
               <span className="hero-mask">
                 <span className="hero-line" style={T(120)}>
                   {h.hero.headline}
@@ -58,7 +54,7 @@ export function ServicesHubPage() {
 
       <Section id="services" className="scroll-mt-20">
         <Container>
-          <SectionHeader eyebrow={h.cards.eyebrow} title={h.cards.heading} lead={h.cards.body} />
+          <SectionHeader title={h.cards.heading} lead={h.cards.body} />
           <Reveal delay={120} stagger className="mt-8 grid grid-cols-1 gap-5 md:mt-12 lg:grid-cols-3">
             {liveServices.map((s, i) => (
               <div key={s.slug} className="far h-full">
@@ -71,7 +67,7 @@ export function ServicesHubPage() {
 
       <Section>
         <Container>
-          <SectionHeader eyebrow={h.engine.eyebrow} title={h.engine.heading} lead={h.engine.body} />
+          <SectionHeader title={h.engine.heading} lead={h.engine.body} />
           <Reveal delay={160} className="mt-10 md:mt-14">
             <FlowaEngine stages={[...h.engine.stages]} />
           </Reveal>
@@ -80,7 +76,7 @@ export function ServicesHubPage() {
 
       <ProofStrip compact />
       <RiskBand showNodes />
-      <LeadCta eyebrow={h.cta.eyebrow} heading={h.cta.heading} body={h.cta.body} service="services" />
+      <LeadCta heading={h.cta.heading} body={h.cta.body} service="services" />
     </>
   );
 }
