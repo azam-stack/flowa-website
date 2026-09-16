@@ -4,6 +4,7 @@ import { LinkButton } from "@/components/Button";
 import { BookCallLink } from "@/components/BookCallLink";
 import { Reveal } from "@/components/Reveal";
 import { ServiceCard } from "@/components/ServiceCard";
+import { ProofStrip } from "@/components/ProofStrip";
 import { FlowaEngine } from "@/components/FlowaEngine";
 import { FluidObject } from "@/components/FluidObject";
 import { RiskBand } from "@/sections/RiskBand";
@@ -77,6 +78,7 @@ export function ServicesHubPage() {
         </Container>
       </Section>
 
+      <ProofStrip compact />
       <RiskBand showNodes />
       <LeadCta eyebrow={h.cta.eyebrow} heading={h.cta.heading} body={h.cta.body} service="services" />
     </>

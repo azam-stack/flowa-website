@@ -1,6 +1,7 @@
 import { Container } from "@/components/Container";
 import { Section } from "@/components/Section";
 import { ClientLogos } from "@/components/ClientLogos";
+import { ProofStrip } from "@/components/ProofStrip";
 import { CaseStudies } from "@/components/CaseStudies";
 import { Reveal } from "@/components/Reveal";
 import { LeadCta } from "@/components/LeadCta";
@@ -36,6 +37,7 @@ export function CasesPage() {
         </Container>
       </section>
       <ClientLogos />
+      <ProofStrip compact />
       <Section>
         <Container>
           <Reveal>

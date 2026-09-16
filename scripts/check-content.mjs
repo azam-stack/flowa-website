@@ -18,7 +18,8 @@ export * as hub from "@/content/services-hub";
 export * as cases from "@/content/cases";
 export * as demo from "@/content/demo";
 export { services } from "@/content/services";
-export * as pricing from "@/content/pricing";`,
+export * as pricing from "@/content/pricing";
+export * as proof from "@/content/proof";`,
 );
 await build({
   entryPoints: [path.join(root, "node_modules", ".flowa-content-entry.ts")],
@@ -49,6 +50,7 @@ function walk(value, trail) {
 
 for (const [name, value] of Object.entries(content.site)) walk(value, `site.${name}`);
 walk(content.pricing, "pricing");
+walk(content.proof, "proof");
 walk(content.hub, "servicesHub");
 walk(content.cases, "cases");
 walk(content.demo, "demo");

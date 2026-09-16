@@ -1,4 +1,5 @@
 import { ClientLogos } from "@/components/ClientLogos";
+import { ProofStrip } from "@/components/ProofStrip";
 import { Hero } from "@/sections/Hero";
 import { Offer } from "@/sections/Offer";
 import { RiskBand } from "@/sections/RiskBand";
@@ -23,6 +24,7 @@ export function HomePage() {
     <>
       <Hero />
       <ClientLogos />
+      <ProofStrip />
       <Offer />
       <HowItWorks />
       <WhoWeHelp />
