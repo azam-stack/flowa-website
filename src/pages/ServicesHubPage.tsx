@@ -6,7 +6,7 @@ import { Reveal } from "@/components/Reveal";
 import { ServiceCard } from "@/components/ServiceCard";
 import { ProofStrip } from "@/components/ProofStrip";
 import { FlowaEngine } from "@/components/FlowaEngine";
-import { FluidObject } from "@/components/FluidObject";
+import { LogoForm } from "@/components/LogoForm";
 import { RiskBand } from "@/sections/RiskBand";
 import { LeadCta } from "@/components/LeadCta";
 import { servicesHub } from "@/content/services-hub";
@@ -23,8 +23,8 @@ export function ServicesHubPage() {
   return (
     <>
       <section id="top" className="atmosphere relative overflow-hidden pb-14 pt-32 md:pb-20 md:pt-40 lg:pt-44">
-        <div className="hero-blur pointer-events-none absolute -right-[6%] top-[8%] h-[520px] w-[520px] opacity-60 md:h-[640px] md:w-[640px]" style={T(0)} aria-hidden="true">
-          <FluidObject className="parallax parallax-slow h-full w-full" />
+        <div className="hero-blur pointer-events-none absolute -right-[6%] top-[8%] h-[520px] w-[520px] md:h-[640px] md:w-[640px] xl:-right-[12%]" style={T(0)} aria-hidden="true">
+          <LogoForm className="parallax parallax-slow opacity-30 xl:opacity-100" />
         </div>
         <Container className="relative z-[2]">
           <div className="max-w-3xl">

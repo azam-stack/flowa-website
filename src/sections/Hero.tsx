@@ -1,7 +1,7 @@
 import { Container } from "@/components/Container";
 import { LinkButton } from "@/components/Button";
 import { Badge } from "@/components/Badge";
-import { FluidObject } from "@/components/FluidObject";
+import { LogoForm } from "@/components/LogoForm";
 import { FlowSystem } from "@/components/FlowSystem";
 import { hero } from "@/content/site.en";
 
@@ -12,7 +12,7 @@ import { hero } from "@/content/site.en";
  * the right spanning both rows. Mobile: heading, then the visual, then
  * the explanation and the primary call to action.
  *
- * The visual is one system: the light-form (WebGL), the flow of states
+ * The visual is one system: the logo form (the wordmark's O, alive), the flow of states
  * an opportunity passes through (FlowSystem) and, where the flow ends,
  * one qualified meeting as a physical card.
  */
@@ -42,9 +42,9 @@ export function Hero() {
 
           {/* visual system */}
           <div className="relative mx-auto aspect-square w-full max-w-[400px] sm:max-w-[520px] lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:max-w-[560px] lg:justify-self-end">
-            {/* the light-form: background for the flow, not the subject */}
-            <div className="hero-blur absolute -right-[4%] top-[2%] h-[78%] w-[78%] opacity-75" style={T(0)}>
-              <FluidObject className="parallax parallax-slow h-full w-full" />
+            {/* the logo form: background for the flow, not the subject */}
+            <div className="hero-blur absolute -right-[4%] top-[2%] h-[78%] w-[78%]" style={T(0)}>
+              <LogoForm className="parallax parallax-slow" />
             </div>
             <FlowSystem />
             <div className="hero-surface flow-end absolute bottom-[6%] left-0 z-[3] w-[min(300px,80%)] rounded-card border border-border p-5 shadow-float backdrop-blur-md sm:p-6" style={{ ...T(700), background: "var(--surface-glass-strong)" }}>

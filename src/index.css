@@ -444,74 +444,71 @@
   will-change: transform;
 }
 
-/* ---------- Liquid form: the hero's living object ----------
-   Shape: a border-radius that never stops morphing (18 s). Light: warm
-   highlight top-left, cool shade bottom-right, a thin bright rim. Drift:
-   a few percent, 26 s. All amplitudes small; nothing ever snaps. */
-@keyframes liquid-morph {
-  0%   { border-radius: 58% 42% 46% 54% / 52% 46% 54% 48%; transform: rotate(0deg) scale(1); }
-  25%  { border-radius: 46% 54% 58% 42% / 44% 58% 42% 56%; transform: rotate(6deg) scale(1.04); }
-  50%  { border-radius: 52% 48% 40% 60% / 58% 40% 60% 42%; transform: rotate(-4deg) scale(0.97); }
-  75%  { border-radius: 42% 58% 52% 48% / 50% 54% 46% 50%; transform: rotate(5deg) scale(1.02); }
-  100% { border-radius: 58% 42% 46% 54% / 52% 46% 54% 48%; transform: rotate(0deg) scale(1); }
+/* ---------- Logo form: the hero's living object ----------
+   The wordmark's O, filled in Flowa's orange, with a soft glow and an
+   outline echo. Contour morphing is written from JavaScript (LogoForm);
+   everything here runs on the compositor: the glow breathes (11 s), the
+   whole form drifts a couple of percent (29 s) and turns a few degrees
+   (23 s), on periods that never line up, so nothing reads as a loop. */
+@keyframes logo-form-breathe {
+  0%   { transform: scale(0.96); opacity: 0.8; }
+  50%  { transform: scale(1.04); opacity: 1; }
+  100% { transform: scale(0.96); opacity: 0.8; }
 }
-@keyframes liquid-drift {
-  0%   { translate: 0 0; }
-  33%  { translate: -2.5% 3%; }
-  66%  { translate: 2% -2%; }
-  100% { translate: 0 0; }
+@keyframes logo-form-drift {
+  0%   { transform: translate(0, 0); }
+  33%  { transform: translate(-2%, 2.4%); }
+  66%  { transform: translate(1.8%, -1.6%); }
+  100% { transform: translate(0, 0); }
 }
-.liquid {
-  position: absolute;
-  pointer-events: none;
-  animation: liquid-drift 26s var(--ease-soft) infinite;
-  will-change: translate;
+@keyframes logo-form-turn {
+  0%   { transform: rotate(-3deg); }
+  100% { transform: rotate(3deg); }
 }
-.liquid > div {
+.logo-form {
   position: absolute;
   inset: 0;
-  animation: liquid-morph 18s var(--ease-soft) infinite;
 }
-.liquid-glow {
-  inset: -18%;
-  border-radius: 50% !important;
-  animation: none !important;
-  background: radial-gradient(closest-side, rgba(238, 158, 71, 0.22), rgba(238, 158, 71, 0) 70%);
+.logo-form svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
 }
-.liquid-core {
-  background:
-    radial-gradient(closest-side at 46% 44%, rgba(252, 236, 214, 0.55) 0%, rgba(247, 205, 150, 0.72) 42%, rgba(240, 168, 86, 0.92) 70%, #ee9e47 86%, #c9741e 100%);
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.35),
-    inset 0 0 60px rgba(255, 255, 255, 0.35),
-    0 70px 90px -60px rgba(168, 94, 20, 0.5);
+.logo-form-glow {
+  position: absolute;
+  inset: -20%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(var(--rgb-accent) / 0.36), rgb(var(--rgb-accent) / 0.14) 42%, rgb(var(--rgb-accent) / 0) 72%);
+  animation: logo-form-breathe 11s var(--ease-soft) infinite;
+  transition: filter 500ms var(--ease);
+  will-change: transform, opacity;
 }
-/* the cool band the reference shows through the object's lower half: light bending */
-.liquid-shade {
-  background:
-    radial-gradient(78% 22% at 50% 66%, rgba(110, 112, 121, 0.62), rgba(110, 112, 121, 0) 100%),
-    radial-gradient(60% 14% at 55% 88%, rgba(201, 116, 30, 0.5), rgba(201, 116, 30, 0) 100%);
-  mix-blend-mode: multiply;
-  animation-delay: -3s;
+.logo-form-glow.is-lit {
+  filter: brightness(1.15) saturate(1.1);
 }
-.liquid-highlight {
-  background:
-    radial-gradient(40% 24% at 30% 18%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0) 100%),
-    radial-gradient(28% 8% at 34% 90%, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0) 100%),
-    radial-gradient(10% 18% at 90% 55%, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0) 100%);
-  mix-blend-mode: screen;
-  animation-delay: -1.5s;
+.logo-form-drift {
+  animation: logo-form-drift 29s var(--ease-soft) infinite;
+  will-change: transform;
 }
-.liquid-rim {
-  box-shadow:
-    inset 2px 3px 4px rgba(255, 255, 255, 0.9),
-    inset -3px -4px 6px rgba(255, 255, 255, 0.5),
-    inset -16px -22px 40px rgba(110, 112, 121, 0.3),
-    inset 0 0 0 2px rgba(238, 158, 71, 0.35);
-  animation-delay: -0.5s;
+.logo-form-turn {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: logo-form-turn 23s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.logo-form-body {
+  filter: drop-shadow(0 24px 40px rgb(var(--rgb-accent-band) / 0.18));
+}
+.logo-form-echo {
+  fill: none;
+  stroke: rgb(var(--rgb-accent) / 0.42);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
 }
 @media (max-width: 767px) {
-  .liquid > div { animation-duration: 24s; }
+  .logo-form-body { filter: none; }
 }
 
 /* ---------- Scroll-linked movement (CSS scroll-driven, desktop only) ---------- */
@@ -616,8 +613,9 @@
     transition-delay: 0ms !important;
   }
   .drift,
-  .liquid,
-  .liquid > div,
+  .logo-form-glow,
+  .logo-form-drift,
+  .logo-form-turn,
   .flow-dot,
   .flow-node-core,
   .flow-end,
