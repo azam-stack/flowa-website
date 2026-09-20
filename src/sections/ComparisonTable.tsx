@@ -12,7 +12,8 @@ import { asset } from "@/lib/asset";
  * and the table bleeds slightly past the content width.
  *
  * Under md the table becomes a column switcher (SDR / Agency / Flowa)
- * instead of six stacked cards.
+ * instead of five stacked cards. Two honest lines sit under the table:
+ * where the SDR and agency figures come from, and who Flowa is not for.
  */
 export function ComparisonTable() {
   return (
@@ -57,6 +58,11 @@ export function ComparisonTable() {
         </Reveal>
 
         <MobileComparison />
+
+        <Reveal delay={160} className="mt-5 max-w-lead md:mt-6">
+          <p className="text-small text-muted">{comparisonTable.footnote}</p>
+          <p className="mt-2 text-small font-medium text-fg">{comparisonTable.notFor}</p>
+        </Reveal>
       </div>
     </Section>
   );

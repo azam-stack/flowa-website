@@ -212,17 +212,21 @@ export const howItWorks = {
 export const comparisonTable = {
   eyebrow: "Comparison",
   h2: "Why not hire an SDR, or use a traditional agency?",
-  intro: "If you've tried an agency before, you probably remember vague reporting, unqualified leads and a contract that was hard to leave. Here's how the three options differ on the terms that matter.",
+  intro: "If you've tried an agency before, you probably remember vague reporting, unqualified leads and a contract that was hard to leave. Here's how the three options differ on the questions that matter.",
   mobileHint: "Pick a column to compare",
   columns: ["Hiring an SDR", "A traditional outbound agency", "Flowa"],
+  /** Outcome and risk first, price last. Every cell: same voice, same shape. */
   rows: [
-    { label: "Cost model", cells: ["Salary, tools, management overhead", "Monthly retainer regardless of output", "Pilot per meeting, then a fixed package"] },
-    { label: "Your risk if it doesn't work", cells: ["You've hired someone", "You've paid the retainer", "Only the Pilot meetings you got"] },
-    { label: "Minimum commitment", cells: ["Employment contract", "Typically 3–6 months", "None on the Pilot, one month's notice after"] },
-    { label: "Who does the work", cells: ["One junior, learning your market", "A rotating pod you rarely meet", "Ahmed and Anton. Every time"] },
-    { label: "What you're buying", cells: ["Capacity", "Activity and reports", "Meetings"] },
-    { label: "Getting started", cells: ["Recruit, onboard, train", "Onboarding, then a shared queue", "We start on your list in week one"] },
+    { label: "What are you actually buying?", cells: ["Hours of outreach. Meetings not counted.", "Activity reports. Meetings not guaranteed.", "Meetings with decision-makers in your ICP. Nothing else counted."] },
+    { label: "What do you lose if it doesn't work?", cells: ["Six months of salary and time.", "The full retainer, for the whole term.", "Nothing. No meetings, no invoice."] },
+    { label: "What happens to a no-show or off-ICP meeting?", cells: ["Logged as activity. Nobody replaces it.", "Logged as a lead. Rarely replaced.", "Replaced. Not counted, not billed."] },
+    { label: "Who actually does the work?", cells: ["One junior hire, learning your market.", "A rotating pod you rarely meet.", "Ahmed and Anton. Every time."] },
+    { label: "What does it cost you before a single meeting?", cells: ["£40K+ salary, £5K tools, three months' ramp.", "A £3–6K retainer, 3–6 months signed.", "One onboarding fee. Then per meeting booked."] },
   ],
+  /** The SDR and agency figures are market ranges, not quotes. */
+  footnote: "SDR and agency figures are typical UK market ranges, not quotes.",
+  /** Who Flowa is not for. Honest, one line, under the table. */
+  notFor: "Flowa is not for everyone. We take on a small number of accounts at a time, so if you need high-volume outreach, we are the wrong fit.",
 } as const;
 
 /**
