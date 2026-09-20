@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Check, Minus } from "lucide-react";
-import { packages, pricingPage, ongoingLabel, pricingFeatures, type Package } from "@/content/pricing";
+import { packages, pricingPage, ongoingLabel, setupLabel, pricingFeatures, type Package } from "@/content/pricing";
 import { BookCallLink } from "../BookCallLink";
 import { asset } from "@/lib/asset";
 
@@ -26,6 +26,11 @@ function Price({ p, size = "lg" }: { p: Package; size?: "lg" | "md" }) {
       {p.perMeeting && <span className="mb-1 block text-[13px] font-medium text-muted">{t.perMeetingNote}</span>}
       <span className={`font-extrabold leading-none tracking-[-0.03em] text-fg ${big}`}>{amount}</span>
       {unit && <span className="ml-1.5 whitespace-nowrap text-[14px] font-medium text-muted">/ {unit}</span>}
+      {p.setup > 0 && (
+        <span className="mt-1.5 block text-[13px] text-muted">
+          + {setupLabel(p)} {t.setup}
+        </span>
+      )}
     </span>
   );
 }

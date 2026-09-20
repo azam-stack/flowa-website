@@ -49,29 +49,29 @@ export const packages: Package[] = [
     model: "performance",
     badge: "Start here",
     cta: "Start with a Pilot",
-    adds: ["Pay per booked meeting", "No long-term commitment", "Email outreach", "No meeting guarantee and no strategy sessions"],
-    summary: { tagline: "Test the model.", bestFor: "Test", outreach: "Email" },
+    adds: ["Pay per booked meeting", "No long-term commitment", "Email and LinkedIn outreach", "Named target accounts (ABM)", "No meeting guarantee and no strategy sessions"],
+    summary: { tagline: "Test the model.", bestFor: "Test", outreach: "Email + LinkedIn" },
   },
   {
     id: "core",
     name: "Core",
     tagline: "Let's make outbound consistent.",
     positioning: "Build a consistent outbound engine.",
-    bestFor: "Best for consistent email-led outbound.",
+    bestFor: "Best for consistent outbound.",
     setup: 0,
     monthly: 1200,
     meetingsPerYear: "45+",
     model: "monthly",
     cta: "Talk about Core",
-    adds: ["Fixed monthly model", "Meeting guarantee", "Email-led outbound"],
-    summary: { tagline: "Build consistency.", bestFor: "Consistency", outreach: "Email" },
+    adds: ["Fixed monthly model", "Meeting guarantee", "Email and LinkedIn outreach"],
+    summary: { tagline: "Build consistency.", bestFor: "Consistency", outreach: "Email + LinkedIn" },
   },
   {
     id: "plus",
     name: "Plus",
-    tagline: "Let's add strategic support.",
-    positioning: "Add stronger strategic support.",
-    bestFor: "Best for scaling outbound.",
+    tagline: "Let's target the accounts we want.",
+    positioning: "Add named target accounts and stronger strategic support.",
+    bestFor: "Best for going after named accounts.",
     setup: 0,
     monthly: 2200,
     meetingsPerYear: "100+",
@@ -79,13 +79,8 @@ export const packages: Package[] = [
     badge: "Most popular",
     recommended: true,
     cta: "Talk about Plus",
-    // TODO(founders): Plus differentiator. Phone booking was what Plus added
-    // over Core; Flowa no longer does phone outreach, so the channel-level
-    // reason to move from Core to Plus is undecided. Until it is agreed, Plus
-    // lists only what is certain. Do not ship a bracketed placeholder here:
-    // scripts/check-content.mjs fails the build on one, by design.
-    adds: ["Competitor exclusivity", "Monthly strategy session"],
-    summary: { tagline: "Add support.", bestFor: "Growth", outreach: "Email" },
+    adds: ["Named target accounts (ABM)", "Competitor exclusivity", "Monthly strategy session"],
+    summary: { tagline: "Target by name.", bestFor: "Growth", outreach: "Email + LinkedIn" },
   },
   {
     id: "scale",
@@ -99,8 +94,8 @@ export const packages: Package[] = [
     meetingsPerYear: "170+",
     model: "monthly",
     cta: "Let's talk",
-    adds: ["Multiple ICPs and markets", "Named target accounts (ABM)", "Weekly strategy session"],
-    summary: { tagline: "Expand the system.", bestFor: "Scale", outreach: "Email + ABM" },
+    adds: ["Multiple ICPs and markets", "Weekly strategy session"],
+    summary: { tagline: "Expand the system.", bestFor: "Scale", outreach: "Email + LinkedIn" },
   },
 ];
 
@@ -114,16 +109,26 @@ export type PricingFeature = {
   note?: string;
 } & FeatureAvailability;
 
+/**
+ * The full feature matrix. The lean table on /pricing renders only the
+ * meeting-guarantee row from this list; the rest is the reference the
+ * proposal and the FAQ answer are written from, so it must stay true
+ * even where it is not currently drawn.
+ *
+ * LinkedIn outreach is a channel on every package. Named target
+ * accounts are included on the Pilot, Plus and Scale, but not on Core.
+ */
 export const pricingFeatures: PricingFeature[] = [
   { id: "signal-prospecting", name: "Signal-based prospecting", icon: "radar", pilot: true, core: true, plus: true, scale: true },
   { id: "cold-email", name: "Cold email outreach", icon: "mail", pilot: true, core: true, plus: true, scale: true },
+  { id: "linkedin", name: "LinkedIn outreach", icon: "linkedin", pilot: true, core: true, plus: true, scale: true },
   { id: "no-show", name: "No-show replacement", icon: "refresh", pilot: true, core: true, plus: true, scale: true },
   { id: "founder-access", name: "Direct access to founders", icon: "users", pilot: true, core: true, plus: true, scale: true },
   { id: "meeting-guarantee", name: "Meeting guarantee", icon: "shield", pilot: false, core: true, plus: true, scale: true, note: "Meeting guarantee terms depend on the agreed ICP, market and campaign scope. See your proposal for the exact commitment." },
   { id: "exclusivity", name: "Competitor exclusivity", icon: "lock", pilot: false, core: false, plus: true, scale: true, note: "For clients investing at the Plus level and above, Flowa can reserve agreed target segments against direct competitors." },
   { id: "monthly-strategy", name: "Monthly strategy session", icon: "calendar", pilot: false, core: false, plus: true, scale: true },
   { id: "multiple-icps", name: "Multiple ICPs & markets", icon: "globe", pilot: false, core: false, plus: false, scale: true },
-  { id: "abm", name: "Named target accounts (ABM)", icon: "target", pilot: false, core: false, plus: false, scale: true, note: "Give Flowa a defined list of strategic accounts and we'll build the outbound motion around them." },
+  { id: "abm", name: "Named target accounts (ABM)", icon: "target", pilot: true, core: false, plus: true, scale: true, note: "Give Flowa a defined list of strategic accounts and we'll build the outbound motion around them." },
   { id: "weekly-strategy", name: "Weekly strategy session", icon: "calendar-clock", pilot: false, core: false, plus: false, scale: true },
 ];
 
@@ -156,21 +161,22 @@ export const pricingPage = {
   table: {
     intro: "Four ways to build your outbound engine.",
     rows: { price: "Price", meetings: "Meetings", bestFor: "Best for", outreach: "Outreach", guarantee: "Meeting guarantee" },
-    setup: "setup",
+    setup: "one-time setup",
     perMeetingNote: "You only pay per booked meeting",
     perYear: "/ year",
     included: "Included",
     notIncluded: "Not included",
     recommended: "Most popular",
-    footnote: "Prices exclude VAT. The Pilot starts with a one-time onboarding fee, confirmed in your proposal. Fixed packages carry a meeting commitment and one month's notice; guarantee terms are defined in your proposal.",
+    footnote: "Prices exclude VAT. The Pilot starts with a one-time £600 onboarding fee. Fixed packages carry a meeting commitment and one month's notice; guarantee terms are defined in your proposal.",
     logoAlt: "Flowa",
   },
   includes: {
     eyebrow: "What's included",
     heading: "Every Flowa engagement includes",
-    body: "The package sets the volume, the channels and the strategic depth. The foundation is the same on all four.",
+    body: "The package sets the volume, the guarantee and the strategic depth. The channels and the foundation are the same on all four.",
     items: [
       "ICP workshop and buyer profile",
+      "Email and LinkedIn outreach",
       "Manual research and verification",
       "Domain setup and deliverability",
       "Copywriting and continuous testing",
@@ -188,8 +194,8 @@ export const pricingPage = {
   pilot: {
     eyebrow: "The Pilot",
     heading: "Not ready to commit? Don't.",
-    body: "Start with the Pilot. Pay per booked meeting, prove the model and decide what scaling looks like once you know the numbers.",
-    terms: "You only pay per booked meeting, with no long-term commitment. A one-time onboarding fee, confirmed in your proposal, gets the Pilot started. The Pilot is performance-based and does not include a meeting guarantee.",
+    body: "Start with the Pilot. Pay per booked meeting, name the accounts you want us to go after, and decide what scaling looks like once you know the numbers.",
+    terms: "A one-time £600 onboarding fee gets the Pilot started. After that you only pay per booked meeting, with no long-term commitment. The Pilot is performance-based and does not include a meeting guarantee.",
   },
   guarantee: {
     line: "Meeting guarantee included on Core, Plus and Scale.",
@@ -202,7 +208,7 @@ export const pricingPage = {
       { q: "Why start with the Pilot?", a: "Because it lets you see the model work on your market before you commit to a monthly package. The Pilot is paid per booked meeting, with no long-term commitment. You learn your real numbers first." },
       { q: "What happens after the Pilot?", a: "You decide. With the Pilot's numbers in hand, most clients move to a fixed package, Core, Plus or Scale, sized to the volume they want. Staying on a per-meeting basis for longer is also possible; we agree it with you." },
       { q: "How does the meeting guarantee work?", a: "Core, Plus and Scale include a meeting guarantee. Its terms depend on the agreed ICP, market and campaign scope and are defined in your proposal, so you know the exact commitment before you sign. The Pilot is performance-based and does not include a guarantee." },
-      { q: "What's included?", a: "On every package: ICP workshop and buyer profile, manual research and verification, domain setup and deliverability, copywriting and continuous testing, CRM integration, meeting booking and calendar management, no-show recovery, a live dashboard and ownership of your data. Plus adds competitor exclusivity and a monthly strategy session; Scale adds multiple ICPs and markets, named target accounts and a weekly strategy session." },
+      { q: "What's included?", a: "On every package: ICP workshop and buyer profile, email and LinkedIn outreach, manual research and verification, domain setup and deliverability, copywriting and continuous testing, CRM integration, meeting booking and calendar management, no-show recovery, a live dashboard and ownership of your data. Plus adds named target accounts, competitor exclusivity and a monthly strategy session; Scale adds multiple ICPs and markets and a weekly strategy session." },
       { q: "Can we change packages later?", a: "Yes. Moving between packages is agreed in writing. The fixed packages carry one month's notice, so a change takes effect from the next period." },
       { q: "Who owns the data?", a: "You do. The prospect lists, contact data and campaign information generated through the engagement are yours, on every package." },
       { q: "Can you integrate with our CRM?", a: "Yes. CRM integration is part of every engagement: Flowa activity and booked meetings are connected to the sales infrastructure you already use." },
@@ -222,6 +228,6 @@ export const pricingOverview = {
   h2: "Start with proof. Scale with confidence.",
   body: "Try us out with a Pilot, paid only per booked meeting, then move to a fixed package sized to your volume.",
   compare: "Compare packages",
-  setup: "setup",
+  setup: "one-time setup",
   perMeeting: "Pay per meeting",
 } as const;

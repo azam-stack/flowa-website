@@ -75,9 +75,11 @@ if (scale && scale.monthly !== null) problems.push("pricing: Scale must not carr
 for (const p of content.pricing.packages) {
   if (typeof p.setup !== "number" || (p.monthly !== null && typeof p.monthly !== "number")) problems.push(`pricing: ${p.id} has a malformed price`);
 }
+// LinkedIn used to be refused here: it was a planned service, not a current one, so
+// it had no place in the package table. It is a live channel on every package now,
+// so the only rule left is that every feature states its availability on all four.
 for (const f of content.pricing.pricingFeatures) {
   for (const id of ["pilot", "core", "plus", "scale"]) if (typeof f[id] !== "boolean") problems.push(`pricing feature ${f.id}: missing ${id}`);
-  if (/linkedin/i.test(f.name)) problems.push(`pricing feature ${f.id}: LinkedIn is not part of the package table`);
 }
 
 // Statistics: a benchmark must name its source; a verified stat must have a value or be null (pending), never a placeholder word.
