@@ -222,7 +222,7 @@ export const comparisonTable = {
     { label: "What do you lose if it doesn't work?", cells: ["Six months of salary and time.", "The full retainer, for the whole term.", "Nothing. No meetings, no invoice."] },
     { label: "What happens to a no-show or off-ICP meeting?", cells: ["Logged as activity. Nobody replaces it.", "Logged as a lead. Rarely replaced.", "Replaced. Not counted, not billed."] },
     { label: "Who actually does the work?", cells: ["One junior hire, learning your market.", "A rotating pod you rarely meet.", "Ahmed and Anton. Every time."] },
-    { label: "What does it cost you before a single meeting?", cells: ["£40K+ salary, £5K tools, three months' ramp.", "A £3–6K retainer, 3–6 months signed.", "One onboarding fee. Then per meeting booked."] },
+    { label: "What does it cost you before a single meeting?", cells: ["£40K+ salary, £5K tools, three months' ramp.", "A £3–6K retainer, 3–6 months signed.", "A setup fee. Then per meeting booked."] },
   ],
   /** The SDR and agency figures are market ranges, not quotes. */
   footnote: "SDR and agency figures are typical UK market ranges, not quotes.",

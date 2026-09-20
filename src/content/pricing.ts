@@ -162,13 +162,13 @@ export const pricingPage = {
   table: {
     intro: "Four ways to build your outbound engine.",
     rows: { price: "Price", meetings: "Meetings", bestFor: "Best for", outreach: "Outreach", guarantee: "Meeting guarantee" },
-    setup: "one-time setup",
+    setup: "setup fee",
     perMeetingNote: "You only pay per booked meeting",
     perYear: "/ year",
     included: "Included",
     notIncluded: "Not included",
     recommended: "Most popular",
-    footnote: "Prices exclude VAT. The Pilot starts with a one-time £600 onboarding fee. Fixed packages carry a meeting commitment and one month's notice; guarantee terms are defined in your proposal.",
+    footnote: "Prices exclude VAT. The Pilot starts with a £600 setup fee. Fixed packages carry a meeting commitment and one month's notice; guarantee terms are defined in your proposal.",
     logoAlt: "Flowa",
   },
   includes: {
@@ -196,7 +196,7 @@ export const pricingPage = {
     eyebrow: "The Pilot",
     heading: "Not ready to commit? Don't.",
     body: "Start with the Pilot. Pay per booked meeting, name the accounts you want us to go after, and decide what scaling looks like once you know the numbers.",
-    terms: "A one-time £600 onboarding fee gets the Pilot started. After that you only pay per booked meeting, with no long-term commitment. The Pilot is performance-based and does not include a meeting guarantee.",
+    terms: "A £600 setup fee gets the Pilot started. After that you only pay per booked meeting, with no long-term commitment. The Pilot is performance-based and does not include a meeting guarantee.",
   },
   guarantee: {
     line: "Meeting guarantee included on Core, Plus and Scale.",
@@ -229,6 +229,6 @@ export const pricingOverview = {
   h2: "Start with proof. Scale with confidence.",
   body: "Try us out with a Pilot, paid only per booked meeting, then move to a fixed package sized to your volume.",
   compare: "Compare packages",
-  setup: "one-time setup",
+  setup: "setup fee",
   perMeeting: "Pay per meeting",
 } as const;
