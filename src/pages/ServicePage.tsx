@@ -26,7 +26,7 @@ import { useSeo, serviceJsonLd, faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 import { track } from "@/lib/analytics";
 
 const PipelineVisual = lazy(() => import("@/components/PipelineVisual").then((m) => ({ default: m.PipelineVisual })));
-const DialerVisual = lazy(() => import("@/components/DialerVisual").then((m) => ({ default: m.DialerVisual })));
+const LinkedInVisual = lazy(() => import("@/components/LinkedInVisual").then((m) => ({ default: m.LinkedInVisual })));
 const EmailVisual = lazy(() => import("@/components/EmailVisual").then((m) => ({ default: m.EmailVisual })));
 const OperatorSection = lazy(() => import("@/components/OperatorSection").then((m) => ({ default: m.OperatorSection })));
 
@@ -35,7 +35,7 @@ const T = (ms: number) => ({ "--t": `${ms}ms` }) as React.CSSProperties;
 /**
  * The service-page template. Every section reads the service's data and
  * renders only what the service defines: the same components produce the
- * appointment-setting, cold-calling and cold-email pages, and any service
+ * appointment-setting, linkedin-outreach and cold-email pages, and any service
  * added to the registry.
  */
 export function ServicePage({ service }: { service: ServiceDefinition }) {
@@ -91,7 +91,7 @@ export function ServicePage({ service }: { service: ServiceDefinition }) {
             <div className="hero-surface min-w-0" style={T(500)}>
               <Suspense fallback={<div className="aspect-[4/3] w-full rounded-card border border-border bg-card/60" aria-hidden="true" />}>
                 {s.hero.visual === "pipeline" && <PipelineVisual />}
-                {s.hero.visual === "dialer" && <DialerVisual />}
+                {s.hero.visual === "linkedin" && <LinkedInVisual />}
                 {s.hero.visual === "email" && <EmailVisual />}
               </Suspense>
               <p className="mt-3 text-center text-[12px] text-muted lg:text-right">{demo.label}. Not a real prospect or client.</p>

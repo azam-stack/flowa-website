@@ -17,5 +17,19 @@ export const demo = {
     preview: "Lars, most logistics teams we speak to have one SDR covering three markets. If that sounds familiar, worth a 20-minute call?",
     followUp: "Follow-up 2 of 3 · Thu 09:10",
   },
-  call: { status: ["Research", "Ready to call", "Dialling", "Connected", "Conversation", "Qualified", "Meeting booked"], nextAction: ["Verify contact", "Dial", "Ringing", "Opening", "Qualify", "Propose time", "Handover"] },
+  /**
+   * The LinkedIn sequence shown on the LinkedIn outreach page. Phone
+   * outreach is no longer a Flowa service, so there is no call state
+   * here: the sequence is connection, message, reply, meeting.
+   */
+  linkedin: {
+    status: ["Research", "Connection sent", "Accepted", "Message sent", "Reply", "Qualified", "Meeting booked"],
+    nextAction: ["Verify contact", "Wait", "Write message", "Wait", "Answer", "Propose a time", "Handover"],
+    thread: [
+      { from: "flowa", text: "Connection request · no note" },
+      { from: "prospect", text: "Accepted · Tue 11:20" },
+      { from: "flowa", text: "Saw you are opening a UK office. Worth twenty minutes on how you are covering it?" },
+      { from: "prospect", text: "We have one SDR covering three markets. What would a trial month look like?" },
+    ],
+  },
 } as const;

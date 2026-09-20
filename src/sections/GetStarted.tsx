@@ -22,7 +22,7 @@ export function GetStarted() {
           <div>
             <SectionHeader title={faq.h2} />
             <Reveal delay={120} variant="near" className="mt-6 md:mt-8">
-              <Accordion className="stagger" items={faq.items.map((f) => ({ title: f.q, body: f.a }))} onOpen={(item) => track("faq_open", { question: item.title })} />
+              <Accordion className="stagger" items={faq.items.map((f) => ({ title: f.q, body: f.a, link: "link" in f ? f.link : undefined }))} onOpen={(item) => track("faq_open", { question: item.title })} />
             </Reveal>
           </div>
 

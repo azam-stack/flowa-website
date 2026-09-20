@@ -12,7 +12,7 @@ export function FaqSection({ heading, items, service, id = "faq" }: { heading: s
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
           <SectionHeader title={heading} />
           <Reveal delay={120} variant="near">
-            <Accordion className="stagger" items={items.map((f) => ({ title: f.q, body: f.a }))} onOpen={(item) => track("faq_open", { question: item.title, service })} />
+            <Accordion className="stagger" items={items.map((f) => ({ title: f.q, body: f.a, link: f.link }))} onOpen={(item) => track("faq_open", { question: item.title, service })} />
           </Reveal>
         </div>
       </Container>

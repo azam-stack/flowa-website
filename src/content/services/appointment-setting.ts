@@ -29,7 +29,7 @@ export const appointmentSetting: ServiceDefinition = {
     heading: "What an engagement is built on",
     items: [
       { value: "100%", label: "of booked meetings qualified by hand", description: "A person checks every meeting against your written criteria before it is booked.", sourceType: "process" },
-      { value: "2", label: "people who ever speak to your market", description: "Ahmed and Anton. No call centre, no rotating pod.", sourceType: "process" },
+      { value: "2", label: "people who ever speak to your market", description: "Ahmed and Anton. No outsourced team, no rotating pod.", sourceType: "process" },
       { value: "3–5", label: "written qualification criteria per engagement", description: "Agreed with you before outreach starts; a meeting that misses them does not count.", sourceType: "process" },
       { value: "<24h", label: "to handle a reply or a qualification question", description: "The response time we plan the working day around.", sourceType: "target" },
       { value: "30+", label: "qualified meetings a month at full volume", description: "The monthly volume we scale an engagement toward, agreed per client.", sourceType: "target" },
@@ -41,7 +41,7 @@ export const appointmentSetting: ServiceDefinition = {
     body: "One pipeline, every engagement. Appointment setting runs the whole of it: from the target list to the opportunity in your pipeline.",
     stages: [
       { label: "Target", sub: "ICP and criteria" },
-      { label: "Reach", sub: "Email and phone" },
+      { label: "Reach", sub: "Email and LinkedIn" },
       { label: "Conversation", sub: "With the decision-maker" },
       { label: "Qualify", sub: "Against your criteria" },
       { label: "Book", sub: "Into your calendar" },
@@ -64,11 +64,11 @@ export const appointmentSetting: ServiceDefinition = {
   system: {
     eyebrow: "One system",
     heading: "One system. Every step between prospect and opportunity.",
-    body: "Appointment setting is not one channel. It is research, outreach, qualification and follow-up run as one system, with phone and email as the channels we work today.",
+    body: "Appointment setting is not one channel. It is research, outreach, qualification and follow-up run as one system, with email and LinkedIn as the channels we work today.",
     nodes: [
       { label: "Research", status: "current", body: "Hand-built lists of companies and people who fit your ICP." },
-      { label: "Cold calling", status: "current", body: "The core outreach mechanism: direct conversations with decision-makers." },
-      { label: "Cold email", status: "current", body: "Targeted sequences that open conversations and support the calls." },
+      { label: "LinkedIn outreach", status: "current", body: "A connection and a message written one to one, where decision-makers already are." },
+      { label: "Cold email", status: "current", body: "Targeted sequences that open conversations and carry the first reason to reply." },
       { label: "LinkedIn", status: "future", body: "Not part of the current service. Planned as an optional channel." },
       { label: "Qualification", status: "current", body: "Every conversation checked against your written criteria." },
       { label: "Follow-up", status: "current", body: "Structured follow-up on every open conversation until it resolves." },
@@ -85,7 +85,7 @@ export const appointmentSetting: ServiceDefinition = {
     steps: [
       { n: "01", title: "Define", body: "We define the ICP, target market, decision-makers and qualification criteria with you, in writing." },
       { n: "02", title: "Research", body: "We identify the companies and the people who fit the target, by hand." },
-      { n: "03", title: "Reach", body: "We start relevant conversations through the agreed outreach channel: phone, email or both." },
+      { n: "03", title: "Reach", body: "We start relevant conversations through the agreed outreach channel: email, LinkedIn or both." },
       { n: "04", title: "Qualify", body: "We separate genuine opportunities from noise against the criteria we wrote down together." },
       { n: "05", title: "Book", body: "Qualified prospects enter your calendar with the context you need before you join." },
     ],
@@ -106,7 +106,7 @@ export const appointmentSetting: ServiceDefinition = {
   },
   related: {
     heading: "Related",
-    slugs: ["cold-calling", "cold-email"],
+    slugs: ["linkedin-outreach", "cold-email"],
     extra: [
       { label: "How Flowa works", href: "/#how-it-works" },
       { label: "Cases", href: "/cases" },

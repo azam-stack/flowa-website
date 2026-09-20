@@ -49,7 +49,7 @@ export const packages: Package[] = [
     model: "performance",
     badge: "Start here",
     cta: "Start with a Pilot",
-    adds: ["Pay per booked meeting", "No long-term commitment", "Email outreach", "No meeting guarantee, no phone, no strategy sessions"],
+    adds: ["Pay per booked meeting", "No long-term commitment", "Email outreach", "No meeting guarantee and no strategy sessions"],
     summary: { tagline: "Test the model.", bestFor: "Test", outreach: "Email" },
   },
   {
@@ -69,9 +69,9 @@ export const packages: Package[] = [
   {
     id: "plus",
     name: "Plus",
-    tagline: "Let's add phone and strategic support.",
-    positioning: "Add phone booking and stronger strategic support.",
-    bestFor: "Best for scaling across email and phone.",
+    tagline: "Let's add strategic support.",
+    positioning: "Add stronger strategic support.",
+    bestFor: "Best for scaling outbound.",
     setup: 0,
     monthly: 2200,
     meetingsPerYear: "100+",
@@ -79,8 +79,13 @@ export const packages: Package[] = [
     badge: "Most popular",
     recommended: true,
     cta: "Talk about Plus",
-    adds: ["Phone booking", "Competitor exclusivity", "Monthly strategy session"],
-    summary: { tagline: "Add reach.", bestFor: "Growth", outreach: "Email + Phone" },
+    // TODO(founders): Plus differentiator. Phone booking was what Plus added
+    // over Core; Flowa no longer does phone outreach, so the channel-level
+    // reason to move from Core to Plus is undecided. Until it is agreed, Plus
+    // lists only what is certain. Do not ship a bracketed placeholder here:
+    // scripts/check-content.mjs fails the build on one, by design.
+    adds: ["Competitor exclusivity", "Monthly strategy session"],
+    summary: { tagline: "Add support.", bestFor: "Growth", outreach: "Email" },
   },
   {
     id: "scale",
@@ -95,7 +100,7 @@ export const packages: Package[] = [
     model: "monthly",
     cta: "Let's talk",
     adds: ["Multiple ICPs and markets", "Named target accounts (ABM)", "Weekly strategy session"],
-    summary: { tagline: "Expand the system.", bestFor: "Scale", outreach: "Email + Phone + ABM" },
+    summary: { tagline: "Expand the system.", bestFor: "Scale", outreach: "Email + ABM" },
   },
 ];
 
@@ -115,7 +120,6 @@ export const pricingFeatures: PricingFeature[] = [
   { id: "no-show", name: "No-show replacement", icon: "refresh", pilot: true, core: true, plus: true, scale: true },
   { id: "founder-access", name: "Direct access to founders", icon: "users", pilot: true, core: true, plus: true, scale: true },
   { id: "meeting-guarantee", name: "Meeting guarantee", icon: "shield", pilot: false, core: true, plus: true, scale: true, note: "Meeting guarantee terms depend on the agreed ICP, market and campaign scope. See your proposal for the exact commitment." },
-  { id: "phone", name: "Phone booking", icon: "phone", pilot: false, core: false, plus: true, scale: true },
   { id: "exclusivity", name: "Competitor exclusivity", icon: "lock", pilot: false, core: false, plus: true, scale: true, note: "For clients investing at the Plus level and above, Flowa can reserve agreed target segments against direct competitors." },
   { id: "monthly-strategy", name: "Monthly strategy session", icon: "calendar", pilot: false, core: false, plus: true, scale: true },
   { id: "multiple-icps", name: "Multiple ICPs & markets", icon: "globe", pilot: false, core: false, plus: false, scale: true },
@@ -198,7 +202,7 @@ export const pricingPage = {
       { q: "Why start with the Pilot?", a: "Because it lets you see the model work on your market before you commit to a monthly package. The Pilot is paid per booked meeting, with no long-term commitment. You learn your real numbers first." },
       { q: "What happens after the Pilot?", a: "You decide. With the Pilot's numbers in hand, most clients move to a fixed package, Core, Plus or Scale, sized to the volume they want. Staying on a per-meeting basis for longer is also possible; we agree it with you." },
       { q: "How does the meeting guarantee work?", a: "Core, Plus and Scale include a meeting guarantee. Its terms depend on the agreed ICP, market and campaign scope and are defined in your proposal, so you know the exact commitment before you sign. The Pilot is performance-based and does not include a guarantee." },
-      { q: "What's included?", a: "On every package: ICP workshop and buyer profile, manual research and verification, domain setup and deliverability, copywriting and continuous testing, CRM integration, meeting booking and calendar management, no-show recovery, a live dashboard and ownership of your data. Plus adds phone booking, competitor exclusivity and a monthly strategy session; Scale adds multiple ICPs and markets, named target accounts and a weekly strategy session." },
+      { q: "What's included?", a: "On every package: ICP workshop and buyer profile, manual research and verification, domain setup and deliverability, copywriting and continuous testing, CRM integration, meeting booking and calendar management, no-show recovery, a live dashboard and ownership of your data. Plus adds competitor exclusivity and a monthly strategy session; Scale adds multiple ICPs and markets, named target accounts and a weekly strategy session." },
       { q: "Can we change packages later?", a: "Yes. Moving between packages is agreed in writing. The fixed packages carry one month's notice, so a change takes effect from the next period." },
       { q: "Who owns the data?", a: "You do. The prospect lists, contact data and campaign information generated through the engagement are yours, on every package." },
       { q: "Can you integrate with our CRM?", a: "Yes. CRM integration is part of every engagement: Flowa activity and booked meetings are connected to the sales infrastructure you already use." },

@@ -37,7 +37,7 @@ export const coldEmail: ServiceDefinition = {
   },
   engine: {
     heading: "The Flowa engine, in the inbox",
-    body: "The same pipeline as every Flowa engagement. Email is the reach step; qualification and booking are the same as on the phone.",
+    body: "The same pipeline as every Flowa engagement. Email is the reach step; qualification and booking are the same on every channel.",
     stages: [
       { label: "Target", sub: "ICP and criteria" },
       { label: "Research", sub: "Hand-built list" },
@@ -85,7 +85,7 @@ export const coldEmail: ServiceDefinition = {
   },
   related: {
     heading: "Related",
-    slugs: ["appointment-setting", "cold-calling"],
+    slugs: ["appointment-setting", "linkedin-outreach"],
     extra: [{ label: "Cases", href: "/cases" }],
   },
   cta: {

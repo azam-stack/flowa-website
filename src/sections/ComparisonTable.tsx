@@ -4,6 +4,8 @@ import { Badge } from "@/components/Badge";
 import { Reveal } from "@/components/Reveal";
 import { comparisonTable } from "@/content/site.en";
 import { asset } from "@/lib/asset";
+import { SmartLink } from "@/components/SmartLink";
+import { ArrowRight } from "lucide-react";
 
 /**
  * Section 6 — the site's signature element. Commercial terms only, never
@@ -17,7 +19,7 @@ import { asset } from "@/lib/asset";
  */
 export function ComparisonTable() {
   return (
-    <Section>
+    <Section id="comparison" className="scroll-mt-20">
       <div className="mx-auto w-full max-w-content px-6 md:px-10">
         <SectionHeader title={comparisonTable.h2} lead={comparisonTable.intro} />
       </div>
@@ -62,6 +64,10 @@ export function ComparisonTable() {
         <Reveal delay={160} className="mt-5 max-w-lead md:mt-6">
           <p className="text-small text-muted">{comparisonTable.footnote}</p>
           <p className="mt-2 text-small font-medium text-fg">{comparisonTable.notFor}</p>
+          <SmartLink href={comparisonTable.engineLink.href} className="group mt-4 inline-flex items-center gap-1.5 text-small font-semibold text-fg">
+            {comparisonTable.engineLink.label}
+            <ArrowRight size={14} className="transition-transform duration-[240ms] ease-flowa group-hover:translate-x-[3px]" aria-hidden="true" />
+          </SmartLink>
         </Reveal>
       </div>
     </Section>

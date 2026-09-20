@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Check, Mail, Phone, MessageSquare } from "lucide-react";
+import { Check, Mail, Linkedin, MessageSquare } from "lucide-react";
 import { Section, SectionHeader, Container } from "@/components/Section";
 import { howItWorks } from "@/content/site.en";
 
@@ -26,7 +26,7 @@ function StepUI({ ui, i, drawn }: { ui: Step["ui"]; i: number; drawn: boolean })
     );
   }
   if (ui.kind === "activity") {
-    const icons = [Mail, Phone, MessageSquare];
+    const icons = [Mail, Linkedin, MessageSquare];
     return (
       <ul className={`${base} flex flex-col gap-2`}>
         {ui.items.map((item, k) => {

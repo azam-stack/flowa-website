@@ -35,6 +35,12 @@ export function Offer() {
                   <div>
                     <h3 className="text-h3 text-fg">{service.title}</h3>
                     <p className="mt-1.5 text-body text-muted">{service.description}</p>
+                    {"link" in service && service.link && (
+                      <SmartLink href={service.link.href} className="group mt-2 inline-flex items-center gap-1.5 text-small font-semibold text-fg">
+                        {service.link.label}
+                        <ArrowRight size={14} className="transition-transform duration-[240ms] ease-flowa group-hover:translate-x-[3px]" aria-hidden="true" />
+                      </SmartLink>
+                    )}
                     {getService(service.id) && (
                       <SmartLink href={servicePath(service.id)} className="group mt-2 inline-flex items-center gap-1.5 text-small font-semibold text-fg">
                         {offer.explore}

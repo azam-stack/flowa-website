@@ -1,39 +1,32 @@
-import { useEffect, useState } from "react";
-import { Phone, Check } from "lucide-react";
+import { Linkedin, Check } from "lucide-react";
 import { useCycle } from "@/hooks/useCycle";
 import { demo } from "@/content/demo";
 import { MeetingCard } from "./MeetingCard";
 
 /**
- * The cold-calling hero: one prospect moving from research to a booked
- * meeting through a call interface. Status, duration, qualification and
- * next action all change with the stage. It is a Flowa system, not a
- * call-centre dashboard: one prospect, one conversation, one outcome.
+ * The LinkedIn outreach hero: one prospect moving from research to a
+ * booked meeting through a sequence, not a blast. Connection, message,
+ * reply, qualification, meeting — each stage changes the status, the
+ * thread and the next action, so the panel reads as one conversation
+ * being worked rather than a dashboard of activity counts.
+ *
+ * Replaces the earlier call-session visual: phone outreach is no longer
+ * a Flowa service.
  */
-const STATUS = demo.call.status;
-const NEXT = demo.call.nextAction;
-const CONNECTED_FROM = 3;
+const STATUS = demo.linkedin.status;
+const NEXT = demo.linkedin.nextAction;
+const THREAD = demo.linkedin.thread;
+/** From this step the thread starts filling in, one entry per step. */
+const THREAD_FROM = 1;
 
-export function DialerVisual() {
+export function LinkedInVisual() {
   const { ref, step, active, reduced } = useCycle<HTMLDivElement>(STATUS.length, 1900, { holdLastMs: 3400 });
-  const p = demo.prospects[1];
+  const p = demo.prospects[2];
   const m = demo.meeting;
-  const [seconds, setSeconds] = useState(0);
-  const connected = step >= CONNECTED_FROM && step < STATUS.length - 1;
-
-  useEffect(() => {
-    if (step < CONNECTED_FROM) setSeconds(0);
-    if (!connected || !active || reduced) return;
-    const t = window.setInterval(() => setSeconds((s) => s + 1), 1000);
-    return () => window.clearInterval(t);
-  }, [connected, active, reduced, step]);
-
-  const dur = reduced ? 402 : seconds + (step >= CONNECTED_FROM ? (step - CONNECTED_FROM) * 57 : 0);
-  const mm = String(Math.floor(dur / 60)).padStart(2, "0");
-  const ss = String(dur % 60).padStart(2, "0");
+  const shown = Math.max(0, Math.min(THREAD.length, step - THREAD_FROM + 1));
+  const connected = step >= 2 && step < STATUS.length - 1;
   const checks = ["Fits the ICP", "Decision-maker", "Relevant problem", "Genuine interest", "Meeting agreed"];
   const passed = step <= 3 ? 0 : step === 4 ? 2 : step === 5 ? 4 : 5;
-  const dialling = step === 2;
 
   return (
     <div ref={ref} className="relative w-full" aria-hidden="true">
@@ -45,7 +38,7 @@ export function DialerVisual() {
               {connected && !reduced && <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />}
               <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
             </span>
-            Call session
+            Sequence
           </span>
           <span className="text-[11px] text-muted">{demo.label}</span>
         </div>
@@ -67,12 +60,12 @@ export function DialerVisual() {
                 <dd className="font-semibold text-accent-display">{p.icp}%</dd>
               </div>
               <div>
-                <dt className="text-muted">Call status</dt>
+                <dt className="text-muted">Stage</dt>
                 <dd className="font-medium text-fg">{STATUS[step]}</dd>
               </div>
               <div>
-                <dt className="text-muted">Duration</dt>
-                <dd className="font-medium tabular-nums text-fg">{step >= CONNECTED_FROM ? `${mm}:${ss}` : "—"}</dd>
+                <dt className="text-muted">Written by</dt>
+                <dd className="font-medium text-fg">A person</dd>
               </div>
             </dl>
 
@@ -95,21 +88,27 @@ export function DialerVisual() {
           </div>
 
           <div className="flex flex-col">
-            <div className={`relative flex flex-1 flex-col items-center justify-center rounded-card border p-5 text-center transition-[background-color,border-color] duration-slow ${connected ? "border-accent/40 bg-accent/[0.06]" : "border-border bg-bg/60"}`}>
-              <span className={`relative flex h-14 w-14 items-center justify-center rounded-full ${connected || dialling ? "bg-fg text-bg" : "bg-fg/[0.06] text-fg"}`}>
-                {dialling && !reduced && <span className="absolute inset-0 animate-ping rounded-full bg-fg/30" />}
-                <Phone size={20} className="relative" />
+            <div className={`relative flex flex-1 flex-col rounded-card border p-4 transition-[background-color,border-color] duration-slow ${connected ? "border-accent/40 bg-accent/[0.06]" : "border-border bg-bg/60"}`}>
+              <span className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.1em] text-fg">
+                <Linkedin size={14} className="text-accent-display" />
+                {STATUS[step]}
               </span>
-              <p className="mt-3 text-[13px] font-bold uppercase tracking-[0.1em] text-fg">{STATUS[step]}</p>
-              {connected && (
-                <span className="mt-3 flex h-6 items-end gap-[3px]">
-                  {Array.from({ length: 14 }, (_, k) => (
-                    <span key={k} className="wave block w-[3px] rounded-full bg-accent" style={{ animationDelay: `${k * 90}ms`, animationPlayState: active && !reduced ? "running" : "paused" }} />
-                  ))}
-                </span>
-              )}
+
+              <ul className="mt-3 flex flex-col gap-2">
+                {THREAD.map((t, k) => (
+                  <li
+                    key={t.text}
+                    className={`rounded-field px-2.5 py-2 text-[12px] leading-snug transition-opacity duration-slow ${
+                      k < shown ? "opacity-100" : "opacity-0"
+                    } ${t.from === "flowa" ? "bg-fg text-bg" : "bg-fg/[0.05] text-fg"}`}
+                  >
+                    {t.text}
+                  </li>
+                ))}
+              </ul>
+
               {step === STATUS.length - 1 && (
-                <div className="mt-3 w-full text-left">
+                <div className="mt-3">
                   <MeetingCard time={m.time} day={m.day} title={m.title} company={m.company} person={m.person} tags={m.tags} settled className="!p-3" />
                 </div>
               )}

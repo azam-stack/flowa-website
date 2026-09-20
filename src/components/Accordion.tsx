@@ -1,9 +1,12 @@
 import { useId, useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ArrowRight } from "lucide-react";
+import { SmartLink } from "./SmartLink";
 
 export interface AccordionItem {
   title: string;
   body: string;
+  /** Optional single text link under the answer. */
+  link?: { label: string; href: string };
 }
 
 /**
@@ -47,7 +50,14 @@ export function Accordion({ items, defaultOpen = null, className = "", onOpen }:
               style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
             >
               <div className="overflow-hidden">
-                <p className="max-w-prose pb-5 text-body text-muted">{item.body}</p>
+                <p className="max-w-prose pb-3 text-body text-muted">{item.body}</p>
+                {item.link && (
+                  <SmartLink href={item.link.href} className="group mb-5 inline-flex items-center gap-1.5 text-small font-semibold text-fg">
+                    {item.link.label}
+                    <ArrowRight size={14} className="transition-transform duration-[240ms] ease-flowa group-hover:translate-x-[3px]" aria-hidden="true" />
+                  </SmartLink>
+                )}
+                {!item.link && <div className="pb-2" />}
               </div>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { Check, Phone, Mail, Building2 } from "lucide-react";
+import { Check, Linkedin, Mail, Building2 } from "lucide-react";
 import { ProspectCard } from "./ProspectCard";
 import { MeetingCard } from "./MeetingCard";
 import { useCycle } from "@/hooks/useCycle";
@@ -81,7 +81,7 @@ export function PipelineVisual() {
                   <Mail size={12} /> Email 1 sent · Mon 09:10
                 </li>
                 <li className="flex items-center gap-2 text-muted">
-                  <Phone size={12} /> Call · connected · 6:42
+                  <Linkedin size={12} /> LinkedIn · Wed 10:14
                 </li>
                 <li className="rounded-field bg-fg/[0.04] p-2.5 text-fg">“We have one SDR covering three markets. What would a trial month look like?”</li>
               </ul>

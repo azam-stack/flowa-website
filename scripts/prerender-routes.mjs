@@ -27,7 +27,7 @@ await build({
   define: { "import.meta.env": JSON.stringify({ BASE_URL: base + "/", DEV: false, PROD: true, MODE: "production" }) },
   logLevel: "silent",
 });
-const { routes } = await import(pathToFileURL(tmp).href);
+const { routes, redirects } = await import(pathToFileURL(tmp).href);
 
 const shell = fs.readFileSync(path.join(dist, "index.html"), "utf8");
 
@@ -77,6 +77,24 @@ for (const r of routes) {
   fs.writeFileSync(target, html);
   count++;
 }
+// Retired URLs: a static stand-in for a 301. Canonical points at the new page,
+// robots is noindex, and a meta refresh moves anyone who lands on it.
+for (const r of redirects ?? []) {
+  const to = canonical(r.to);
+  const head = [
+    `<title>Moved — Flowa</title>`,
+    `<meta name="robots" content="noindex, follow" />`,
+    `<link rel="canonical" href="${to}" />`,
+    `<meta http-equiv="refresh" content="0; url=${base}${r.to}" />`,
+  ]
+    .map((t) => `    ${t}`)
+    .join("\n");
+  const html = shell.replace(/<!-- route-head -->[\s\S]*?<!-- \/route-head -->/, `<!-- route-head -->\n${head}\n    <!-- /route-head -->`);
+  const target = path.join(dist, r.from.replace(/^\//, ""), "index.html");
+  fs.mkdirSync(path.dirname(target), { recursive: true });
+  fs.writeFileSync(target, html);
+}
+
 // SPA fallback for paths that are not prerendered (GitHub Pages serves 404.html with a 404 status; the router then renders the right page or its own 404).
 fs.writeFileSync(path.join(dist, "404.html"), render({ path: "/", title: "Flowa", description: routes[0].description }));
 
@@ -87,4 +105,4 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://w
 fs.writeFileSync(path.join(dist, "sitemap.xml"), sitemap);
 fs.writeFileSync(path.join(root, "public", "sitemap.xml"), sitemap);
 fs.rmSync(tmp, { force: true });
-console.log(`prerender: ${count} routes written, 404.html and sitemap.xml updated`);
+console.log(`prerender: ${count} routes written, ${(redirects ?? []).length} redirect(s), 404.html and sitemap.xml updated`);

@@ -1,6 +1,6 @@
 import type { ServiceDefinition } from "../types";
 import { appointmentSetting } from "./appointment-setting";
-import { coldCalling } from "./cold-calling";
+import { linkedinOutreach } from "./linkedin-outreach";
 import { coldEmail } from "./cold-email";
 
 /**
@@ -8,11 +8,15 @@ import { coldEmail } from "./cold-email";
  * the hub, the footer, related-service lists. To add a service, add its
  * data file and register it here; the routes, menus and pages follow.
  *
- * Planned services (LinkedIn outreach, lead research as a standalone
- * page, multichannel outreach) can be registered with `status: "planned"`
- * once their content exists; nothing is listed until it is real.
+ * Cold calling was retired when Flowa stopped doing phone outreach. Its
+ * URL is kept alive as a redirect to /why-flowa (scripts/routes.ts), and
+ * LinkedIn outreach took its place in the line-up.
+ *
+ * Planned services (lead research as a standalone page, multichannel
+ * outreach) can be registered with `status: "planned"` once their
+ * content exists; nothing is listed until it is real.
  */
-export const services: ServiceDefinition[] = [appointmentSetting, coldCalling, coldEmail];
+export const services: ServiceDefinition[] = [appointmentSetting, linkedinOutreach, coldEmail];
 
 export const liveServices = services.filter((s) => s.status === "live");
 

@@ -715,6 +715,62 @@
   color: rgb(var(--rgb-fg));
 }
 
+/* ---------- Why Flowa: the engine spine ----------
+   Same language as the process line, turned vertical: the accent fills
+   downward as the list arrives, a dash marches along it, a point of
+   light travels it, each node lights in turn and the arc to each
+   interface card draws itself. All of it is driven by the two data
+   attributes on the list, so it costs no animation frames. */
+.why-engine-fill {
+  height: 0;
+  transition: height 1600ms var(--ease-emphasized);
+}
+.why-engine[data-inview="true"] .why-engine-fill { height: 100%; }
+.why-engine-dash {
+  background-image: linear-gradient(180deg, rgb(var(--rgb-bg)) 0 50%, transparent 50% 100%);
+  background-size: 1px 14px;
+  opacity: 0;
+  animation: why-engine-march 1.2s linear infinite;
+  animation-play-state: paused;
+}
+.why-engine[data-inview="true"] .why-engine-dash { opacity: 0.55; }
+.why-engine[data-active="true"] .why-engine-dash { animation-play-state: running; }
+@keyframes why-engine-march {
+  from { background-position: 0 0; }
+  to { background-position: 0 14px; }
+}
+.why-engine-dot {
+  top: 0;
+  opacity: 0;
+  animation: why-engine-travel 7s var(--ease-smooth) infinite;
+  animation-play-state: paused;
+}
+.why-engine[data-inview="true"] .why-engine-dot { opacity: 1; }
+.why-engine[data-active="true"] .why-engine-dot { animation-play-state: running; }
+@keyframes why-engine-travel {
+  0% { top: 0; opacity: 0; }
+  8% { opacity: 1; }
+  88% { top: calc(100% - 7px); opacity: 1; }
+  100% { top: calc(100% - 7px); opacity: 0; }
+}
+.why-engine-node {
+  transition: background-color var(--dur-fast) ease-out, border-color var(--dur-fast) ease-out, color var(--dur-fast) ease-out;
+  transition-delay: calc(200ms + var(--i, 0) * 160ms);
+}
+.why-engine[data-inview="true"] .why-engine-node {
+  background-color: rgb(var(--rgb-accent));
+  border-color: rgb(var(--rgb-accent));
+  color: rgb(var(--rgb-fg));
+}
+.why-engine-arc {
+  color: rgb(var(--rgb-accent) / 0.5);
+  stroke-dasharray: 3 4;
+  stroke-dashoffset: 60;
+  transition: stroke-dashoffset 900ms var(--ease-smooth);
+  transition-delay: calc(400ms + var(--i, 0) * 160ms);
+}
+.why-engine[data-inview="true"] .why-engine-arc { stroke-dashoffset: 0; }
+
 /* Pipeline hero: three points drifting between spine and object. */
 @keyframes particle-drift {
   0% { transform: translate(0, 0); opacity: 0; }
@@ -767,12 +823,16 @@
   .engine-line::after,
   .process-dash,
   .process-dot,
+  .why-engine-dash,
+  .why-engine-dot,
   .particle,
   .wave,
   .route-step {
     animation: none;
   }
   .process-dot { left: calc(100% - 7px); opacity: 1; }
+  .why-engine-dot { top: calc(100% - 7px); opacity: 1; }
+  .why-engine-arc { stroke-dashoffset: 0; }
   .operator-line { stroke-dashoffset: 0; }
   .route-step { opacity: 1; transform: none; }
 }

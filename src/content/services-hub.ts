@@ -2,7 +2,7 @@
 export const servicesHub = {
   seo: {
     title: "B2B Sales Development Services | Flowa",
-    description: "Appointment setting, cold calling and cold email for B2B companies: the right prospects, relevant conversations, qualified interest and meetings that can become opportunities. Start with a Pilot, then scale into a fixed package.",
+    description: "Appointment setting, LinkedIn outreach and cold email for B2B companies: the right prospects, relevant conversations, qualified interest and meetings that can become opportunities. Start with a Pilot, then scale into a fixed package.",
   },
   hero: {
     eyebrow: "Services",
@@ -18,7 +18,7 @@ export const servicesHub = {
     /** Card copy per service slug: the one-line promise. */
     promise: {
       "appointment-setting": "Qualified conversations with the people who can actually buy.",
-      "cold-calling": "Direct conversations. Faster feedback. More opportunities.",
+      "linkedin-outreach": "Decision-makers reached where they already are.",
       "cold-email": "Targeted outbound email designed to start relevant conversations.",
     } as Record<string, string>,
   },

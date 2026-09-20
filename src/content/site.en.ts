@@ -22,6 +22,7 @@
 export const nav = {
   primary: [
     { key: "services", label: "Services", href: "/services", menu: true },
+    { key: "why-flowa", label: "Why Flowa", href: "/why-flowa" },
     { key: "how-it-works", label: "How it works", href: "/#how-it-works" },
     { key: "who-we-help", label: "Who we help", href: "/#who-we-help" },
     { key: "pricing", label: "Pricing", href: "/pricing" },
@@ -76,7 +77,7 @@ export const hero = {
     nodes: [
       { label: "Company", sub: "Matches your ICP" },
       { label: "Decision-maker", sub: "Head of Sales" },
-      { label: "Conversation", sub: "Email and phone" },
+      { label: "Conversation", sub: "Email and LinkedIn" },
       { label: "Qualified", sub: "Meets your criteria" },
     ],
     end: "Meeting",
@@ -155,15 +156,15 @@ export const clientLogos = {
 export const offer = {
   eyebrow: "What you get",
   h2: "Everything that fills your calendar, in one service.",
-  body: "Appointment setting, lead research, outbound campaigns and sales development — one team, one point of contact, one invoice. You don't buy a list or a tool. You buy a calendar full of qualified meetings.",
+  body: "Appointment setting, signal-based research, outbound campaigns and sales development — one team, one point of contact, one invoice. You don't buy a list or a tool. You buy a calendar full of qualified meetings.",
   ctaSecondary: "See pricing",
   ctaSecondaryHref: "/pricing",
   explore: "Read more",
   servicesHeading: "What we do",
   services: [
     { id: "appointment-setting", title: "Appointment setting", description: "Qualified meetings with decision-makers, booked straight into your calendar." },
-    { id: "lead-research", title: "Lead research", description: "Hand-verified lists of companies that match your ICP." },
-    { id: "cold-calling", title: "Cold calling", description: "Direct conversations with decision-makers, made by the founders." },
+    { id: "lead-research", title: "Signal-based lead research", description: "Companies showing a reason to talk now, verified before anyone is contacted.", link: { label: "How the engine works", href: "/why-flowa" } },
+    { id: "linkedin-outreach", title: "LinkedIn outreach", description: "A connection and a message written one to one, where decision-makers already are." },
     { id: "cold-email", title: "Cold email", description: "Targeted sequences built on data that's actually checked, every reply handled by a person." },
     { id: "sales-development", title: "Sales development", description: "An outbound function that runs without you hiring for it." },
   ],
@@ -198,7 +199,7 @@ export const howItWorks = {
   illustrative: "Examples are illustrative.",
   steps: [
     { n: "01", title: "Target", body: "We agree your ideal customer, the job titles worth talking to, and what counts as a qualified meeting.", ui: { kind: "chips", items: ["Logistics · 120 people", "SaaS · 60 people", "Manufacturing · 250 people"], active: 0 } },
-    { n: "02", title: "Reach", body: "We build the list by hand and start the conversations — email and phone, written and made by us.", ui: { kind: "activity", items: ["Email sent · Tue 09:10", "Call · Wed 10:14", "Reply · Wed 15:02"] } },
+    { n: "02", title: "Reach", body: "We start the conversations on email and LinkedIn: AI-researched, human-verified, written and approved by us.", ui: { kind: "activity", items: ["Email sent · Tue 09:10", "LinkedIn · Wed 10:14", "Reply · Wed 15:02"] } },
     { n: "03", title: "Qualify", body: "We separate genuine interest from a polite yes, against the criteria we wrote down together.", ui: { kind: "checks", items: ["Decision-maker", "Fits your ICP", "Genuine interest"] } },
     { n: "04", title: "Book", body: "Qualified meetings go straight into your calendar, with the context you need before you join.", ui: { kind: "calendar", items: ["Tue 14 Oct", "10:00", "Qualified meeting"] } },
   ],
@@ -227,6 +228,8 @@ export const comparisonTable = {
   footnote: "SDR and agency figures are typical UK market ranges, not quotes.",
   /** Who Flowa is not for. Honest, one line, under the table. */
   notFor: "Flowa is not for everyone. We take on a small number of accounts at a time, so if you need high-volume outreach, we are the wrong fit.",
+  /** The one text link out of this section: the engine behind the meetings. */
+  engineLink: { label: "See how our AI finds them", href: "/why-flowa" },
 } as const;
 
 /**
@@ -268,7 +271,7 @@ export const team: { ahmed: TeamMember; anton: TeamMember } = {
     photoBase: "/images/team/anton",
     linkedin: null,
     bio: null,
-    owns: ["Campaign strategy", "Calls and conversations", "Booking and follow-up"],
+    owns: ["Campaign strategy", "LinkedIn and conversations", "Booking and follow-up"],
   },
 } as const;
 
@@ -285,7 +288,7 @@ export const signedStatement = {
 export const peopleSection = {
   eyebrow: "The team",
   h2: "The two people behind every Flowa campaign",
-  intro: "No pods, no offshore team, no rotating SDRs. These are the people who research your market, write your outreach, make the calls and book the meetings.",
+  intro: "No pods, no offshore team, no rotating SDRs. These are the people who research your market, write your outreach, run the conversations and book the meetings.",
   ownsHeading: "What they own",
   bioPending: "Bio coming soon.",
 } as const;
@@ -302,9 +305,14 @@ export const faq = {
   h2: "Frequently asked questions",
   items: [
     { q: "How does pricing work?", a: "You start with a Pilot, paid per booked meeting with no long-term commitment. Once the model is proven, you move to a fixed monthly package: Core (£1,200 a month, 45+ meetings a year), Plus (£2,200 a month, 100+) or Scale (on request, 170+). The fixed packages include a meeting guarantee and carry one month's notice." },
-    { q: "Who contacts our prospects?", a: "Ahmed and Anton. No one else speaks to your market on your behalf — no call centre, no rotating team of junior SDRs." },
+    { q: "Who contacts our prospects?", a: "Ahmed and Anton. No one else speaks to your market on your behalf: no outsourced team, no rotating junior SDRs." },
     { q: "What counts as a qualified meeting?", a: "We agree this with you concretely before we start — typically based on role or decision-making authority, genuine interest, and a match with your ICP. The criteria are written down, so there's no ambiguity later." },
     { q: "How quickly can we start?", a: "After an initial call we agree strategy and ICP, after which onboarding can typically begin within a short timeframe. The exact timeline depends on your industry and complexity." },
+    {
+      q: "Do you use AI?",
+      a: "Yes, for research. Our engine reads your market daily and works out which companies have a reason to talk now, then a person writes and approves every message that goes out.",
+      link: { label: "See how the engine works", href: "/why-flowa" },
+    },
   ],
 } as const;
 
@@ -401,7 +409,7 @@ export const whoWeHelp = {
 export const operator = {
   eyebrow: "The person behind the system",
   h2: "Real expertise behind every meeting.",
-  body: "Every list, every sequence and every qualification decision on your engagement is made by a founder, not handed to a pod. Ahmed builds the targeting and the outreach; Anton makes the calls and books the meetings. The system is theirs, and so is the accountability.",
+  body: "Every list, every sequence and every qualification decision on your engagement is made by a founder, not handed to a pod. Ahmed builds the targeting and the outreach; Anton runs the conversations and books the meetings. The system is theirs, and so is the accountability.",
   note: "That is also why Flowa takes on a limited number of clients at a time.",
 } as const;
 
@@ -458,5 +466,5 @@ export const leadForm = {
 export const meta = {
   title: "Flowa — Creating meetings. That create opportunities.",
   description: "Flowa helps B2B companies get qualified sales meetings with the decision-makers they actually want to sell to. Start with a Pilot paid per booked meeting, then scale into a fixed package.",
-  keywords: "B2B appointment setting, appointment setting agency UK, B2B lead generation London, qualified sales meetings, outbound agency UK, cold email agency, outbound pricing",
+  keywords: "B2B appointment setting, appointment setting agency UK, LinkedIn outreach, intent-based lead generation, AI lead research, B2B lead generation London, qualified sales meetings, outbound agency UK, cold email agency, outbound pricing",
 } as const;

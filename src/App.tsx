@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useParams } from "react-router-dom";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { ScrollManager } from "@/components/ScrollManager";
@@ -7,6 +7,7 @@ import { ServicesHubPage } from "@/pages/ServicesHubPage";
 import { ServicePage } from "@/pages/ServicePage";
 import { CasesPage } from "@/pages/CasesPage";
 import { PricingPage } from "@/pages/PricingPage";
+import { WhyFlowaPage } from "@/pages/WhyFlowaPage";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { getService } from "@/content/services";
 
@@ -28,7 +29,13 @@ export default function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/services" element={<ServicesHubPage />} />
+            {/* Cold calling is no longer a service. The page is retired, not deleted:
+                the URL keeps working and sends people to the page that replaced it.
+                GitHub Pages cannot issue a real 301, so the prerendered HTML carries
+                a canonical and a meta refresh and the router redirects in-app. */}
+            <Route path="/services/cold-calling" element={<Navigate to="/why-flowa" replace />} />
             <Route path="/services/:slug" element={<ServiceRoute />} />
+            <Route path="/why-flowa" element={<WhyFlowaPage />} />
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/cases" element={<CasesPage />} />
             <Route path="*" element={<NotFoundPage />} />

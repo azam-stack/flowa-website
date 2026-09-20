@@ -27,7 +27,8 @@ export type Stat = {
   source?: string;
 };
 
-export type FAQItem = { q: string; a: string };
+/** `link` renders as a single text link under the answer; used to point at a page that explains in depth rather than repeating it here. */
+export type FAQItem = { q: string; a: string; link?: { label: string; href: string } };
 
 export type ProcessStep = { n: string; title: string; body: string };
 
@@ -85,7 +86,7 @@ export type ServiceSeo = {
   ogDescription?: string;
 };
 
-export type ServiceHeroVisual = "pipeline" | "dialer" | "email";
+export type ServiceHeroVisual = "pipeline" | "linkedin" | "email";
 
 export type ServiceDefinition = {
   slug: string;
