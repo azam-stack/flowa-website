@@ -78,7 +78,7 @@ export const linkedinOutreach: ServiceDefinition = {
       { intent: "Not interested", steps: ["Reason recorded", "Suppressed"], outcome: "Closed, and never contacted again" },
     ],
   },
-  pricingNote: { text: "LinkedIn outreach runs alongside email on Flowa engagements.", cta: "See pricing" },
+  pricingNote: { text: "LinkedIn outreach is included on the Pilot, Plus and Scale.", cta: "See pricing" },
   faq: {
     eyebrow: "Questions",
     heading: "LinkedIn outreach, answered",

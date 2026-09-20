@@ -57,20 +57,20 @@ export const packages: Package[] = [
     name: "Core",
     tagline: "Let's make outbound consistent.",
     positioning: "Build a consistent outbound engine.",
-    bestFor: "Best for consistent outbound.",
+    bestFor: "Best for consistent email outbound.",
     setup: 0,
     monthly: 1200,
     meetingsPerYear: "45+",
     model: "monthly",
     cta: "Talk about Core",
-    adds: ["Fixed monthly model", "Meeting guarantee", "Email and LinkedIn outreach"],
-    summary: { tagline: "Build consistency.", bestFor: "Consistency", outreach: "Email + LinkedIn" },
+    adds: ["Fixed monthly model", "Meeting guarantee", "Email outreach"],
+    summary: { tagline: "Build consistency.", bestFor: "Consistency", outreach: "Email" },
   },
   {
     id: "plus",
     name: "Plus",
     tagline: "Let's target the accounts we want.",
-    positioning: "Add named target accounts and stronger strategic support.",
+    positioning: "Add LinkedIn outreach, named target accounts and stronger strategic support.",
     bestFor: "Best for going after named accounts.",
     setup: 0,
     monthly: 2200,
@@ -79,7 +79,7 @@ export const packages: Package[] = [
     badge: "Most popular",
     recommended: true,
     cta: "Talk about Plus",
-    adds: ["Named target accounts (ABM)", "Competitor exclusivity", "Monthly strategy session"],
+    adds: ["LinkedIn outreach", "Named target accounts (ABM)", "Competitor exclusivity", "Monthly strategy session"],
     summary: { tagline: "Target by name.", bestFor: "Growth", outreach: "Email + LinkedIn" },
   },
   {
@@ -115,13 +115,14 @@ export type PricingFeature = {
  * proposal and the FAQ answer are written from, so it must stay true
  * even where it is not currently drawn.
  *
- * LinkedIn outreach is a channel on every package. Named target
- * accounts are included on the Pilot, Plus and Scale, but not on Core.
+ * LinkedIn outreach and named target accounts follow the same pattern:
+ * included on the Pilot, Plus and Scale, but not on Core. The Pilot
+ * shows the full model; Core is the email-led package.
  */
 export const pricingFeatures: PricingFeature[] = [
   { id: "signal-prospecting", name: "Signal-based prospecting", icon: "radar", pilot: true, core: true, plus: true, scale: true },
   { id: "cold-email", name: "Cold email outreach", icon: "mail", pilot: true, core: true, plus: true, scale: true },
-  { id: "linkedin", name: "LinkedIn outreach", icon: "linkedin", pilot: true, core: true, plus: true, scale: true },
+  { id: "linkedin", name: "LinkedIn outreach", icon: "linkedin", pilot: true, core: false, plus: true, scale: true },
   { id: "no-show", name: "No-show replacement", icon: "refresh", pilot: true, core: true, plus: true, scale: true },
   { id: "founder-access", name: "Direct access to founders", icon: "users", pilot: true, core: true, plus: true, scale: true },
   { id: "meeting-guarantee", name: "Meeting guarantee", icon: "shield", pilot: false, core: true, plus: true, scale: true, note: "Meeting guarantee terms depend on the agreed ICP, market and campaign scope. See your proposal for the exact commitment." },
@@ -173,10 +174,10 @@ export const pricingPage = {
   includes: {
     eyebrow: "What's included",
     heading: "Every Flowa engagement includes",
-    body: "The package sets the volume, the guarantee and the strategic depth. The channels and the foundation are the same on all four.",
+    body: "The package sets the volume, the channels and the strategic depth. The foundation is the same on all four.",
     items: [
       "ICP workshop and buyer profile",
-      "Email and LinkedIn outreach",
+      "Email outreach",
       "Manual research and verification",
       "Domain setup and deliverability",
       "Copywriting and continuous testing",
@@ -208,7 +209,7 @@ export const pricingPage = {
       { q: "Why start with the Pilot?", a: "Because it lets you see the model work on your market before you commit to a monthly package. The Pilot is paid per booked meeting, with no long-term commitment. You learn your real numbers first." },
       { q: "What happens after the Pilot?", a: "You decide. With the Pilot's numbers in hand, most clients move to a fixed package, Core, Plus or Scale, sized to the volume they want. Staying on a per-meeting basis for longer is also possible; we agree it with you." },
       { q: "How does the meeting guarantee work?", a: "Core, Plus and Scale include a meeting guarantee. Its terms depend on the agreed ICP, market and campaign scope and are defined in your proposal, so you know the exact commitment before you sign. The Pilot is performance-based and does not include a guarantee." },
-      { q: "What's included?", a: "On every package: ICP workshop and buyer profile, email and LinkedIn outreach, manual research and verification, domain setup and deliverability, copywriting and continuous testing, CRM integration, meeting booking and calendar management, no-show recovery, a live dashboard and ownership of your data. Plus adds named target accounts, competitor exclusivity and a monthly strategy session; Scale adds multiple ICPs and markets and a weekly strategy session." },
+      { q: "What's included?", a: "On every package: ICP workshop and buyer profile, email outreach, manual research and verification, domain setup and deliverability, copywriting and continuous testing, CRM integration, meeting booking and calendar management, no-show recovery, a live dashboard and ownership of your data. The Pilot also includes LinkedIn outreach and named target accounts, so you see the full model while you test it. Core is email-led; Plus adds LinkedIn outreach, named target accounts, competitor exclusivity and a monthly strategy session; Scale adds multiple ICPs and markets and a weekly strategy session." },
       { q: "Can we change packages later?", a: "Yes. Moving between packages is agreed in writing. The fixed packages carry one month's notice, so a change takes effect from the next period." },
       { q: "Who owns the data?", a: "You do. The prospect lists, contact data and campaign information generated through the engagement are yours, on every package." },
       { q: "Can you integrate with our CRM?", a: "Yes. CRM integration is part of every engagement: Flowa activity and booked meetings are connected to the sales infrastructure you already use." },
