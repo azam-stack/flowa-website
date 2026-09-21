@@ -30,12 +30,8 @@
  * The CVR number below has a valid mod-11 checksum, which is how a
  * Danish CVR is verified, so it is at least not a typo.
  *
- * TODO(founders): `address` is missing its postcode and city. A
- * registered address used for legal notice needs both. Supply them and
- * add a line to the array; a street and a country alone is thin.
- *
  * Every row renders only when it is non-null, so nothing half-finished
- * is ever published.
+ * is ever published. All of them are filled now.
  */
 export const legalEntity = {
   tradingName: "Flowa",
@@ -45,7 +41,7 @@ export const legalEntity = {
   /** Danish CVR number. */
   cvr: "43159992" as string | null,
   /** Registered postal address, one line per row. */
-  address: ["Bernhardt Jensens Boulevard 87", "Denmark"] as string[] | null,
+  address: ["Bernhardt Jensens Boulevard 87", "8000 Aarhus C", "Denmark"] as string[] | null,
   country: "Denmark",
   email: "info@flowa.dk",
   /** Danish supervisory authority. */
