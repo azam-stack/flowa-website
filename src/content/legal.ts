@@ -23,23 +23,29 @@
 
 /**
  * Who the controller is. Flowa is a Danish sole trader, so the
- * controller is a named individual, not a company.
+ * controller is a named individual, not a company. These details
+ * satisfy GDPR Article 13(1)(a), which requires the controller's
+ * identity and contact details.
  *
- * TODO(founders): supply `ownerName`, `cvr` and `address`. GDPR Article
- * 13(1)(a) requires the controller's identity and contact details, so
- * until these are filled the privacy page names only the trading name
- * and the contact address. Each row renders only when it is non-null,
- * so nothing false or half-finished is ever published.
+ * The CVR number below has a valid mod-11 checksum, which is how a
+ * Danish CVR is verified, so it is at least not a typo.
+ *
+ * TODO(founders): `address` is missing its postcode and city. A
+ * registered address used for legal notice needs both. Supply them and
+ * add a line to the array; a street and a country alone is thin.
+ *
+ * Every row renders only when it is non-null, so nothing half-finished
+ * is ever published.
  */
 export const legalEntity = {
   tradingName: "Flowa",
   form: "Sole trader (enkeltmandsvirksomhed) established in Denmark",
   /** The owner's full legal name, exactly as registered. */
-  ownerName: null as string | null,
+  ownerName: "Ahmad Reda Zamzam" as string | null,
   /** Danish CVR number. */
-  cvr: null as string | null,
+  cvr: "43159992" as string | null,
   /** Registered postal address, one line per row. */
-  address: null as string[] | null,
+  address: ["Bernhardt Jensens Boulevard 87", "Denmark"] as string[] | null,
   country: "Denmark",
   email: "info@flowa.dk",
   /** Danish supervisory authority. */
@@ -84,7 +90,7 @@ export const privacyPolicy: LegalDoc = {
     {
       heading: "Who is responsible for your data",
       blocks: [
-        p("Flowa is the data controller. Flowa is a sole trader established in Denmark, so the controller is the individual who owns the business rather than a company."),
+        p("Flowa is the data controller. Flowa is a sole trader established in Denmark, which means the controller is Ahmad Reda Zamzam, the individual who owns the business, rather than a company. The registered details are at the bottom of this page."),
         p("You can reach us about anything in this policy, including any request about your own data, at info@flowa.dk."),
       ],
     },
