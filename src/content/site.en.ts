@@ -345,6 +345,19 @@ export const finalCta = {
   submit: "Fill my calendar",
   sending: "Sending…",
   privacy: "We use what you send us only to reply to you. Nothing is shared or added to a list.",
+  /**
+   * Informed submission. The lawful basis for handling an enquiry is
+   * taking steps before a contract and our legitimate interest in
+   * replying, not consent, so ticking this is a record that the person
+   * was told what happens, not the thing that makes it lawful.
+   */
+  consent: {
+    before: "I have read the ",
+    linkLabel: "privacy policy",
+    linkHref: "/privacy",
+    after: " and I am happy for Flowa to use these details to reply to my enquiry.",
+    error: "Please confirm this before sending.",
+  },
   // Shown when the request was delivered to Flowa's form endpoint.
   successTitle: "On it — Ahmed or Anton will reply within one working day.",
   successBody: "You'll get a reply from",
@@ -368,12 +381,13 @@ export const footer = {
     { label: "Cases", href: "/cases" },
     { label: "Contact", href: "#contact" },
   ],
-  /**
-   * Privacy and terms pages. Empty until the founders supply the legal
-   * text; the column is omitted while empty rather than linking to a
-   * page that does not exist. TODO(founders).
-   */
-  legal: [] as { label: string; href: string }[],
+  /** Privacy, cookies, terms and refunds. Rendered from src/content/legal.ts. */
+  legal: [
+    { label: "Privacy policy", href: "/privacy" },
+    { label: "Cookie policy", href: "/cookies" },
+    { label: "Terms of use", href: "/terms" },
+    { label: "Refund policy", href: "/refunds" },
+  ] as { label: string; href: string }[],
   cta: { heading: "Ready to create more opportunities?", body: "Tell us who you sell to. Ahmed or Anton will reply within one working day." },
   rights: "All rights reserved.",
   /** TODO(founders): LinkedIn company page URL. The link is omitted while null. */
@@ -456,6 +470,19 @@ export const leadForm = {
   sending: "Sending…",
   retry: "Try again",
   privacy: "We use what you send us only to reply to you. Nothing is shared or added to a list.",
+  /**
+   * Informed submission. The lawful basis for handling an enquiry is
+   * taking steps before a contract and our legitimate interest in
+   * replying, not consent, so ticking this is a record that the person
+   * was told what happens, not the thing that makes it lawful.
+   */
+  consent: {
+    before: "I have read the ",
+    linkLabel: "privacy policy",
+    linkHref: "/privacy",
+    after: " and I am happy for Flowa to use these details to reply to my enquiry.",
+    error: "Please confirm this before sending.",
+  },
   successTitle: "On it. Ahmed or Anton will reply within one working day.",
   successBody: "You'll get a reply from",
   mailtoTitle: "We've opened your email client with the details filled in.",

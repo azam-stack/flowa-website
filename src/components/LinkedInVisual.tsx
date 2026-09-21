@@ -57,7 +57,7 @@ export function LinkedInVisual() {
               </div>
               <div>
                 <dt className="text-muted">ICP match</dt>
-                <dd className="font-semibold text-accent-display">{p.icp}%</dd>
+                <dd className="font-semibold text-accent-text">{p.icp}%</dd>
               </div>
               <div>
                 <dt className="text-muted">Stage</dt>
@@ -90,7 +90,7 @@ export function LinkedInVisual() {
           <div className="flex flex-col">
             <div className={`relative flex flex-1 flex-col rounded-card border p-4 transition-[background-color,border-color] duration-slow ${connected ? "border-accent/40 bg-accent/[0.06]" : "border-border bg-bg/60"}`}>
               <span className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.1em] text-fg">
-                <Linkedin size={14} className="text-accent-display" />
+                <Linkedin size={14} className="text-accent-text" />
                 {STATUS[step]}
               </span>
 

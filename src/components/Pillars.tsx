@@ -19,7 +19,7 @@ function PeopleSystem() {
       ))}
       <span className="absolute left-1/2 top-1/2 h-px w-10 -translate-x-1/2 -translate-y-1/2 bg-border" />
       <span className={`absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-accent transition-transform duration-[900ms] ease-flowa motion-reduce:transition-none ${step === 0 ? "-translate-x-[24px]" : step === 1 ? "translate-x-[18px]" : "-translate-x-[3px]"}`} />
-      <span className={`absolute -top-1 left-1/2 -translate-x-1/2 rounded-full bg-accent/[0.14] px-2 py-0.5 text-[10px] font-semibold text-accent-display transition-opacity duration-slow ${step === 2 ? "opacity-100" : "opacity-0"}`}>Conversation</span>
+      <span className={`absolute -top-1 left-1/2 -translate-x-1/2 rounded-full bg-accent/[0.14] px-2 py-0.5 text-[10px] font-semibold text-accent-text transition-opacity duration-slow ${step === 2 ? "opacity-100" : "opacity-0"}`}>Conversation</span>
     </div>
   );
 }
@@ -60,7 +60,7 @@ export function Pillars({ items }: { items: Pillar[] }) {
       {items.map((p) => (
         <li key={p.title} className="rounded-card border border-border bg-card p-6 md:p-7">
           <div className="rounded-field bg-bg/80 px-4">{p.visual === "people" ? <PeopleSystem /> : p.visual === "process" ? <ProcessSystem /> : <PerformanceSystem />}</div>
-          <p className="mt-5 text-[12px] font-bold uppercase tracking-[0.12em] text-accent-display">{p.title}</p>
+          <p className="mt-5 text-[12px] font-bold uppercase tracking-[0.12em] text-accent-text">{p.title}</p>
           <p className="mt-2 text-body text-fg">{p.body}</p>
         </li>
       ))}

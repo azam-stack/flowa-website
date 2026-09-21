@@ -20,7 +20,7 @@ export function CaseStudies({ cases }: { cases: CaseStudy[] }) {
         <ol className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {casesPage.empty.fields.map((f, i) => (
             <li key={f} className="flex items-center gap-3 rounded-field border border-dashed border-border px-4 py-3 text-[14px] text-fg">
-              <span className="text-[12px] font-semibold tabular-nums text-accent-display">0{i + 1}</span>
+              <span className="text-[12px] font-semibold tabular-nums text-accent-text">0{i + 1}</span>
               {f}
             </li>
           ))}

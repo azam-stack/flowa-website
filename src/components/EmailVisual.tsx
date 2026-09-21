@@ -50,9 +50,9 @@ export function EmailVisual() {
           </div>
 
           <div className={`mt-4 flex items-start gap-2 transition-[opacity,transform] duration-slow ease-flowa motion-reduce:transition-none ${replied ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"}`}>
-            <CornerDownLeft size={14} className="mt-1 shrink-0 text-accent-display" />
+            <CornerDownLeft size={14} className="mt-1 shrink-0 text-accent-text" />
             <div className="flex-1 rounded-card border border-accent/30 bg-accent/[0.08] p-3">
-              <p className="text-[11px] font-semibold text-accent-display">Reply · {p.name} · Tue 09:41</p>
+              <p className="text-[11px] font-semibold text-accent-text">Reply · {p.name} · Tue 09:41</p>
               <p className="mt-1 text-[13px] text-fg">“Sounds relevant. Thursday morning works if you can do 09:30.”</p>
             </div>
           </div>

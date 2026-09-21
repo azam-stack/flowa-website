@@ -30,6 +30,8 @@ export default {
           fg: "rgb(var(--rgb-fg) / <alpha-value>)",
           /** Deepened for display-size type only — see index.css. */
           display: "var(--flowa-orange-display)",
+          /** Small orange text. Use this below 24px (or below 18.66px bold); `display` fails WCAG AA there. */
+          text: "var(--flowa-orange-text)",
           /** Deepened further still, for white text ON an orange fill. */
           band: "var(--flowa-band)",
         },

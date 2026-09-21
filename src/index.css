@@ -53,7 +53,8 @@
 
     /* legacy names still read by a few components */
     --flowa-text: #0c0c0b;
-    --flowa-orange-display: #c9741e; /* display-size orange text on the light bg (3.3:1) */
+    --flowa-orange-display: #c9741e; /* display-size orange text only: 3.3:1, which WCAG allows at >=24px or >=18.66px bold */
+    --flowa-orange-text: #a25d18;    /* orange for small text: 4.56:1 on the darkest background we use */
     --flowa-band: #a85e14;           /* white text on an orange fill */
     --flowa-ink: #121110;
 

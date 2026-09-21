@@ -54,7 +54,7 @@ function Outreach({ p }: { p: Package }) {
 function GuaranteeMark({ on }: { on: boolean }) {
   return on ? (
     <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-accent/[0.16]">
-      <Check size={15} strokeWidth={3} className="text-accent-display" aria-hidden="true" />
+      <Check size={15} strokeWidth={3} className="text-accent-text" aria-hidden="true" />
       <span className="sr-only">{t.included}</span>
     </span>
   ) : (
@@ -111,7 +111,7 @@ function DesktopTable() {
             {packages.map((p) => (
               <th key={p.id} ref={p.recommended ? recRef : undefined} scope="col" className={`relative w-[21%] px-6 pb-7 pt-14 align-bottom ${cell}`}>
                 {p.recommended && (
-                  <span className="absolute left-6 top-5 inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-accent-display">
+                  <span className="absolute left-6 top-5 inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-accent-text">
                     <span className="h-1.5 w-1.5 rounded-full bg-accent" />
                     {t.recommended}
                   </span>
@@ -203,7 +203,7 @@ function MobileSummaries() {
             <div className="flex items-baseline justify-between gap-3">
               <h3 className="text-[22px] font-extrabold tracking-[-0.02em] text-fg">{p.name}</h3>
               {p.recommended && (
-                <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-accent-display">
+                <span className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-accent-text">
                   <span className="h-1.5 w-1.5 rounded-full bg-accent" />
                   {t.recommended}
                 </span>

@@ -59,7 +59,7 @@ export function QualificationModel({ criteria, states }: { criteria: Qualificati
                 aria-pressed={ok}
                 className="grid w-full grid-cols-[2.5rem_1fr_auto] items-start gap-4 py-4 text-left transition-colors duration-fast hover:bg-fg/[0.02] md:py-5"
               >
-                <span className={`text-small font-semibold tabular-nums ${ok ? "text-accent-display" : "text-muted"}`} aria-hidden="true">
+                <span className={`text-small font-semibold tabular-nums ${ok ? "text-accent-text" : "text-muted"}`} aria-hidden="true">
                   {c.n}
                 </span>
                 <span>
@@ -78,7 +78,7 @@ export function QualificationModel({ criteria, states }: { criteria: Qualificati
       <div className="lg:sticky lg:top-28 lg:self-start" aria-live="polite">
         <ol className="flex flex-wrap items-center gap-1.5" aria-label="Prospect state">
           {states.map((s, i) => (
-            <li key={s} className={`rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.08em] transition-colors duration-slow ${i === stateIdx ? "bg-fg text-bg" : i < stateIdx ? "bg-accent/[0.16] text-accent-display" : "bg-fg/[0.04] text-muted"}`}>
+            <li key={s} className={`rounded-full px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.08em] transition-colors duration-slow ${i === stateIdx ? "bg-fg text-bg" : i < stateIdx ? "bg-accent/[0.16] text-accent-text" : "bg-fg/[0.04] text-muted"}`}>
               {s}
             </li>
           ))}

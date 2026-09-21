@@ -66,7 +66,7 @@ export function PipelineVisual() {
                   <p className="text-[12px] text-muted">
                     {p.industry} · {p.location} · 180 people
                   </p>
-                  <p className="mt-2 inline-flex items-center gap-1 rounded-full bg-accent/[0.14] px-2 py-0.5 text-[11px] font-semibold text-accent-display">ICP {p.icp}%</p>
+                  <p className="mt-2 inline-flex items-center gap-1 rounded-full bg-accent/[0.14] px-2 py-0.5 text-[11px] font-semibold text-accent-text">ICP {p.icp}%</p>
                 </div>
               </div>
             </Panel>

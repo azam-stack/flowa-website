@@ -8,6 +8,8 @@ import { ServicePage } from "@/pages/ServicePage";
 import { CasesPage } from "@/pages/CasesPage";
 import { PricingPage } from "@/pages/PricingPage";
 import { WhyFlowaPage } from "@/pages/WhyFlowaPage";
+import { LegalPage } from "@/pages/LegalPage";
+import { legalDocs } from "@/content/legal";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { getService } from "@/content/services";
 
@@ -38,6 +40,10 @@ export default function App() {
             <Route path="/why-flowa" element={<WhyFlowaPage />} />
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/cases" element={<CasesPage />} />
+            {/* Privacy, cookies, terms and refunds all render from one template. */}
+            {legalDocs.map((doc) => (
+              <Route key={doc.slug} path={`/${doc.slug}`} element={<LegalPage doc={doc} />} />
+            ))}
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>

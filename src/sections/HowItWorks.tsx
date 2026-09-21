@@ -59,7 +59,7 @@ function StepUI({ ui, i, drawn }: { ui: Step["ui"]; i: number; drawn: boolean })
     <div className={`${base} flex items-center justify-between gap-3`}>
       <span className="text-muted">
         {ui.items[0]}
-        <span className="mx-1.5 text-border">·</span>
+        <span className="mx-1.5 text-border" aria-hidden="true">·</span>
         {ui.items[1]}
       </span>
       <span className={`rounded-full px-2.5 py-1 font-semibold transition-colors duration-slow ${drawn ? "bg-accent text-accent-fg" : "bg-fg/[0.05] text-muted"}`} style={delay}>

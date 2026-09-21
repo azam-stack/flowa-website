@@ -20,7 +20,8 @@ export * as demo from "@/content/demo";
 export { services } from "@/content/services";
 export * as pricing from "@/content/pricing";
 export * as proof from "@/content/proof";
-export * as whyFlowa from "@/content/why-flowa";`,
+export * as whyFlowa from "@/content/why-flowa";
+export * as legal from "@/content/legal";`,
 );
 await build({
   entryPoints: [path.join(root, "node_modules", ".flowa-content-entry.ts")],
@@ -56,6 +57,7 @@ walk(content.hub, "servicesHub");
 walk(content.cases, "cases");
 walk(content.demo, "demo");
 walk(content.whyFlowa, "whyFlowa");
+walk(content.legal, "legal");
 walk(content.services, "services");
 
 // Pricing: one public source of truth. Scale has no public price, and no internal

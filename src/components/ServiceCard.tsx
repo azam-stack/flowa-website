@@ -22,7 +22,7 @@ export function ServiceCard({ service, promise, explore, index }: { service: Ser
     >
       <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full opacity-70 transition-opacity duration-slow group-hover:opacity-100" style={{ background: "radial-gradient(closest-side, rgb(var(--rgb-accent) / 0.22), rgb(var(--rgb-accent) / 0))" }} aria-hidden="true" />
       <div ref={ref} data-active={active ? "true" : "false"} className="relative p-6 md:p-7">
-        <p className="text-[12px] font-bold uppercase tracking-[0.12em] text-accent-display">{service.name}</p>
+        <p className="text-[12px] font-bold uppercase tracking-[0.12em] text-accent-text">{service.name}</p>
         <p className="mt-2 text-h3 text-fg">{promise}</p>
         <ol className="mini-system relative mt-6 flex items-start justify-between gap-1" aria-label={`${service.name} stages`}>
           <span className="absolute left-3 right-3 top-[9px] h-px bg-border" aria-hidden="true" />

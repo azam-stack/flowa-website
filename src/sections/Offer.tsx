@@ -29,7 +29,7 @@ export function Offer() {
             <ul className="stagger divide-y divide-border border-y border-border">
               {offer.services.map((service, i) => (
                 <li key={service.id} id={service.id} className="grid grid-cols-[2.5rem_1fr] gap-4 py-6">
-                  <span className="pt-1 text-small font-semibold tabular-nums text-accent-display" aria-hidden="true">
+                  <span className="pt-1 text-small font-semibold tabular-nums text-accent-text" aria-hidden="true">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div>

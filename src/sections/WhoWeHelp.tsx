@@ -27,7 +27,7 @@ export function WhoWeHelp() {
               {whoWeHelp.fit.map((f) => (
                 <li key={f.title} className="grid grid-cols-[2rem_1fr] gap-3 py-5">
                   <span className="mt-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-accent/[0.18]">
-                    <Check size={13} className="text-accent-display" strokeWidth={2.5} aria-hidden="true" />
+                    <Check size={13} className="text-accent-text" strokeWidth={2.5} aria-hidden="true" />
                   </span>
                   <div>
                     <h3 className="text-h3 text-fg">{f.title}</h3>

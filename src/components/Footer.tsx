@@ -2,6 +2,7 @@ import { Logo } from "./Logo";
 import { Container } from "./Container";
 import { SmartLink } from "./SmartLink";
 import { BookCallLink } from "./BookCallLink";
+import { legalEntity } from "@/content/legal";
 import { footer, finalCta, hero } from "@/content/site.en";
 import { liveServices, servicePath } from "@/content/services";
 
@@ -30,7 +31,7 @@ export function Footer() {
             <p className="mt-4 text-xl font-bold leading-[1.05] tracking-tight text-[color:var(--flowa-text)]">
               {hero.h1[0]}
               <br />
-              <span className="text-accent-display">{hero.h1[1]}</span>
+              <span className="text-accent-text">{hero.h1[1]}</span>
             </p>
           </div>
           <div className="grid grid-cols-2 gap-x-10 gap-y-8 sm:grid-cols-3 md:gap-x-14 lg:gap-x-20">
@@ -93,7 +94,10 @@ export function Footer() {
         </div>
         <div className="mt-8 border-t border-border pt-5 text-[12px] text-muted md:mt-10 md:pt-6">
           <p>
-            © {new Date().getFullYear()} Flowa. {footer.rights}
+            © {new Date().getFullYear()} {legalEntity.tradingName}. {footer.rights}
+          </p>
+          <p className="text-muted">
+            {[legalEntity.ownerName, legalEntity.form, legalEntity.cvr && `CVR ${legalEntity.cvr}`, legalEntity.address?.join(", ")].filter(Boolean).join(" · ")}
           </p>
         </div>
       </Container>

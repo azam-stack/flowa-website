@@ -44,7 +44,7 @@ export function ServicesMenu({ open, onNavigate }: { open: boolean; onNavigate: 
           {m.howItWorks.map((item, i) => (
             <li key={item.label}>
               <SmartLink href={item.href} onClick={onNavigate} role="menuitem" className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-fg/80 transition-colors hover:bg-accent/[0.06] hover:text-fg">
-                <span className="text-[11px] font-semibold tabular-nums text-accent-display" aria-hidden="true">
+                <span className="text-[11px] font-semibold tabular-nums text-accent-text" aria-hidden="true">
                   0{i + 1}
                 </span>
                 {item.label}

@@ -63,7 +63,7 @@ export function PricingPage() {
               <ul className="stagger grid grid-cols-1 gap-x-10 sm:grid-cols-2">
                 {c.includes.items.map((item) => (
                   <li key={item} className="flex items-start gap-3 border-b border-border py-3.5 text-body text-fg">
-                    <Check size={16} strokeWidth={2.5} className="mt-1.5 shrink-0 text-accent-display" aria-hidden="true" />
+                    <Check size={16} strokeWidth={2.5} className="mt-1.5 shrink-0 text-accent-text" aria-hidden="true" />
                     {item}
                   </li>
                 ))}

@@ -47,7 +47,7 @@ export function ProspectCard(p: ProspectCardProps) {
           </p>
         </div>
         {typeof p.icp === "number" && (
-          <span className={`shrink-0 rounded-full px-2 py-1 text-[11px] font-semibold tabular-nums ${p.icp >= 80 ? "bg-accent/[0.18] text-accent-display" : "bg-fg/[0.06]"}`}>ICP {p.icp}%</span>
+          <span className={`shrink-0 rounded-full px-2 py-1 text-[11px] font-semibold tabular-nums ${p.icp >= 80 ? "bg-accent/[0.18] text-accent-text" : "bg-fg/[0.06]"}`}>ICP {p.icp}%</span>
         )}
       </div>
       {(p.industry || p.location) && (
@@ -75,7 +75,7 @@ export function ProspectCard(p: ProspectCardProps) {
             </li>
           )}
           {p.channel && <li className={`rounded-full border px-2 py-1 text-[11px] font-medium ${p.dark ? "border-white/20" : "border-border"}`}>{p.channel}</li>}
-          {p.intent && <li className="rounded-full bg-accent/[0.14] px-2 py-1 text-[11px] font-semibold text-accent-display">{p.intent}</li>}
+          {p.intent && <li className="rounded-full bg-accent/[0.14] px-2 py-1 text-[11px] font-semibold text-accent-text">{p.intent}</li>}
           {p.status && <li className={`rounded-full px-2 py-1 text-[11px] font-semibold ${p.dark ? "bg-white text-fg" : "bg-fg text-bg"}`}>{p.status}</li>}
         </ul>
       )}

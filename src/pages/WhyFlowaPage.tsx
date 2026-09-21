@@ -112,7 +112,7 @@ export function WhyFlowaPage() {
                   <p className="mt-2 text-[17px] font-semibold leading-snug text-fg">{item.signal}</p>
                 </div>
                 <div className="mt-auto border-t border-border pt-4">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-accent-display">{c.signals.meaningLabel}</p>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.1em] text-accent-text">{c.signals.meaningLabel}</p>
                   <p className="mt-2 text-body text-muted">{item.meaning}</p>
                 </div>
               </article>

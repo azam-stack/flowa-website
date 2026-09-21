@@ -5,6 +5,7 @@
  */
 import { meta, faq } from "@/content/site.en";
 import { whyFlowa } from "@/content/why-flowa";
+import { legalDocs } from "@/content/legal";
 import { servicesHub } from "@/content/services-hub";
 import { casesPage } from "@/content/cases";
 import { pricingPage } from "@/content/pricing";
@@ -27,6 +28,12 @@ export const routes: RouteMeta[] = [
   })),
   { path: "/pricing", title: pricingPage.seo.title, description: pricingPage.seo.description, jsonLd: [faqJsonLd(pricingPage.faq.items), breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Pricing", path: "/pricing" }])] },
   { path: "/cases", title: casesPage.seo.title, description: casesPage.seo.description, jsonLd: [breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Cases", path: "/cases" }])] },
+  ...legalDocs.map((d) => ({
+    path: `/${d.slug}`,
+    title: d.seo.title,
+    description: d.seo.description,
+    jsonLd: [breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: d.title, path: `/${d.slug}` }])],
+  })),
 ];
 
 /**

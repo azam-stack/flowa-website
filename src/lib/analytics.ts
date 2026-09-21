@@ -33,27 +33,35 @@ declare global {
 const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"] as const;
 export type Utm = Partial<Record<(typeof UTM_KEYS)[number], string>>;
 
-const UTM_STORAGE = "flowa:utm";
+/**
+ * UTM parameters from the landing URL, held in memory for as long as the
+ * page is open so a form submitted after some browsing still carries
+ * them.
+ *
+ * This deliberately does NOT write to sessionStorage. Storing marketing
+ * attribution on a visitor's device is not "strictly necessary" for a
+ * service they asked for, so under ePrivacy and the UK's PECR it would
+ * need consent, and a consent banner for this one thing is a bad trade.
+ * Keeping it in memory means the site needs no banner at all. The cost
+ * is that a full page reload loses the attribution, which is fine.
+ */
+let utmMemo: Utm | null = null;
 
-/** UTM parameters from the landing URL, remembered for the session so a later form submit still carries them. */
 export function getUtm(): Utm {
   if (typeof window === "undefined") return {};
+  if (utmMemo) return utmMemo;
+  const fresh: Utm = {};
   try {
     const params = new URLSearchParams(window.location.search);
-    const fresh: Utm = {};
     for (const k of UTM_KEYS) {
       const v = params.get(k);
       if (v) fresh[k] = v.slice(0, 200);
     }
-    if (Object.keys(fresh).length) {
-      sessionStorage.setItem(UTM_STORAGE, JSON.stringify(fresh));
-      return fresh;
-    }
-    const stored = sessionStorage.getItem(UTM_STORAGE);
-    return stored ? (JSON.parse(stored) as Utm) : {};
   } catch {
-    return {};
+    /* a malformed query string must never break the page */
   }
+  utmMemo = fresh;
+  return fresh;
 }
 
 export function track(event: AnalyticsEvent, props: EventProps = {}): void {

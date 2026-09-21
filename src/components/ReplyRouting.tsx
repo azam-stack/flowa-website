@@ -47,7 +47,7 @@ export function ReplyRouting({ routes }: { routes: ReplyRoute[] }) {
       <div className="rounded-card border border-border bg-card p-5 md:p-7" role="tabpanel" aria-live="polite">
         <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted">Route</p>
         <ol key={sel} className="mt-3 flex flex-wrap items-center gap-2">
-          <li className="rounded-full bg-accent/[0.14] px-3 py-1.5 text-[13px] font-semibold text-accent-display">Reply: {r.intent}</li>
+          <li className="rounded-full bg-accent/[0.14] px-3 py-1.5 text-[13px] font-semibold text-accent-text">Reply: {r.intent}</li>
           {r.steps.map((s, i) => (
             <li key={s} className="route-step flex items-center gap-2" style={{ "--i": i + 1 } as React.CSSProperties}>
               <ArrowRight size={14} className="text-muted" aria-hidden="true" />

@@ -1,6 +1,7 @@
 import { useRef, useState, type FormEvent } from "react";
 import { Button } from "./Button";
 import { Field, SelectField, TextareaField } from "./Field";
+import { SmartLink } from "./SmartLink";
 import { leadForm, finalCta } from "@/content/site.en";
 import { COMPANY_SIZES, TIMINGS, leadDedupeKey, type LeadErrorCode, type LeadErrors, type LeadField } from "@/lib/lead-schema";
 import { buildLead, submitLead, type SubmitResult } from "@/lib/leads";
@@ -24,6 +25,25 @@ const FIELD_ORDER: LeadField[] = ["firstName", "lastName", "email", "phone", "co
 const MIN_FILL_MS = 1500;
 const DEDUPE_STORAGE = "flowa:lead-sent";
 
+/**
+ * A short, non-reversible fingerprint of the dedupe key. The key itself
+ * is "email|company", and keeping that in session storage would leave a
+ * readable email address on the visitor's device for no good reason.
+ * Two 32-bit FNV-1a accumulators with different offsets give a 64-bit
+ * hex digest: not cryptography, but far past the collision risk that
+ * matters for at most ten entries.
+ */
+function fingerprint(value: string): string {
+  let a = 0x811c9dc5;
+  let b = 0x01000193;
+  for (let i = 0; i < value.length; i++) {
+    const c = value.charCodeAt(i);
+    a = Math.imul(a ^ c, 0x01000193) >>> 0;
+    b = Math.imul(b ^ (c + i), 0x85ebca6b) >>> 0;
+  }
+  return a.toString(16).padStart(8, "0") + b.toString(16).padStart(8, "0");
+}
+
 function message(code: LeadErrorCode): string {
   return leadForm.errors[code] ?? leadForm.errors.required;
 }
@@ -34,6 +54,8 @@ export function LeadForm({ service, compact = false }: { service?: string; compa
   const [failure, setFailure] = useState<Extract<SubmitResult, { status: "error" }> | null>(null);
   const [duplicate, setDuplicate] = useState(false);
   const [attempt, setAttempt] = useState(0);
+  const [consented, setConsented] = useState(false);
+  const [consentError, setConsentError] = useState(false);
   const started = useRef<number | null>(null);
   const inFlight = useRef(false);
   const formRef = useRef<HTMLFormElement>(null);
@@ -60,6 +82,13 @@ export function LeadForm({ service, compact = false }: { service?: string; compa
       return;
     }
 
+    if (!consented) {
+      setConsentError(true);
+      setStatus("idle");
+      document.getElementById("lead-consent")?.focus();
+      return;
+    }
+
     const lead = buildLead(fields, service);
     setAttempt((n) => n + 1);
 
@@ -69,7 +98,7 @@ export function LeadForm({ service, compact = false }: { service?: string; compa
     } catch {
       sentKeys = [];
     }
-    const key = leadDedupeKey(lead);
+    const key = fingerprint(leadDedupeKey(lead));
     if (sentKeys.includes(key)) {
       setDuplicate(true);
       setErrors({});
@@ -180,6 +209,36 @@ export function LeadForm({ service, compact = false }: { service?: string; compa
           )}
         </div>
       )}
+
+      <div className="sm:col-span-2">
+        <label htmlFor="lead-consent" className="flex cursor-pointer items-start gap-3 text-[13px] leading-snug text-muted">
+          <input
+            id="lead-consent"
+            name="consent"
+            type="checkbox"
+            checked={consented}
+            onChange={(e) => {
+              setConsented(e.target.checked);
+              if (e.target.checked) setConsentError(false);
+            }}
+            aria-invalid={consentError || undefined}
+            aria-describedby={consentError ? "lead-consent-error" : undefined}
+            className="mt-0.5 h-[18px] w-[18px] shrink-0 cursor-pointer rounded-[4px] border border-border accent-[color:var(--color-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--color-accent)]"
+          />
+          <span>
+            {leadForm.consent.before}
+            <SmartLink href={leadForm.consent.linkHref} className="font-medium text-fg underline underline-offset-4">
+              {leadForm.consent.linkLabel}
+            </SmartLink>
+            {leadForm.consent.after}
+          </span>
+        </label>
+        {consentError && (
+          <p id="lead-consent-error" role="alert" className="mt-2 text-[13px] font-medium text-error">
+            {leadForm.consent.error}
+          </p>
+        )}
+      </div>
 
       <div className="sm:col-span-2">
         <Button type="submit" variant="accent" size="lg" magnetic className="w-full" loading={status === "sending"}>
