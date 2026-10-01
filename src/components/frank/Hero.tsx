@@ -51,7 +51,7 @@ export function Hero() {
               </h1>
               <p className="mx-auto mt-6 max-w-[640px] text-sub text-ink-2">{h.sub}</p>
               <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-                <Btn href={SITE_CONFIG.bookingUrl} size="lg" trackLabel="hero_book_demo">
+                <Btn href={SITE_CONFIG.bookCallHref} size="lg" trackLabel="hero_book_demo">
                   {h.demo}
                 </Btn>
                 <button

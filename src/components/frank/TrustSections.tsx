@@ -45,7 +45,7 @@ export function EngagementTimeline() {
           <p className="min-w-0 flex-1 text-body text-ink-2">
             <span className="font-semibold text-ink">Ahmed Zamzam and Anton Busk</span> run your campaign themselves. No account managers, no hand-offs.
           </p>
-          <Btn href={SITE_CONFIG.bookingUrl} trackLabel="engagement_book_call">
+          <Btn href={SITE_CONFIG.bookCallHref} trackLabel="engagement_book_call">
             Book a call
           </Btn>
         </Reveal>

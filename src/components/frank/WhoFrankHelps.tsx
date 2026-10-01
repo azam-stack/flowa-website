@@ -46,7 +46,7 @@ export function WhoFrankHelps() {
           </div>
         </Reveal>
         <div className="mt-10 flex justify-center">
-          <Btn href={SITE_CONFIG.bookingUrl} size="lg" trackLabel="fit_book_call">
+          <Btn href={SITE_CONFIG.bookCallHref} size="lg" trackLabel="fit_book_call">
             {w.cta}
           </Btn>
         </div>

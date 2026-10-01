@@ -15,7 +15,7 @@ type Placed = Parameters<typeof SphereGroup>[0]["items"];
  * above it, then a full-width grid band with a layered product vignette on
  * the left and floating Flowa "o" shapes on the right, and an optional caption.
  */
-export function StatementBand({ headline, cta, ctaHref = SITE_CONFIG.bookingUrl, illustration, spheres, caption, trackLabel }: { headline: string; cta: string; ctaHref?: string; illustration: ReactNode; spheres: Placed; caption?: string; trackLabel: string }) {
+export function StatementBand({ headline, cta, ctaHref = SITE_CONFIG.bookCallHref, illustration, spheres, caption, trackLabel }: { headline: string; cta: string; ctaHref?: string; illustration: ReactNode; spheres: Placed; caption?: string; trackLabel: string }) {
   return (
     <Section>
       <Container>
@@ -42,7 +42,7 @@ export function StatementBand({ headline, cta, ctaHref = SITE_CONFIG.bookingUrl,
 }
 
 /** Final CTA band (brief §4.12): centred H2, eyebrow and the black button. */
-export function FinalCta({ eyebrow, h2, cta, ctaHref = SITE_CONFIG.bookingUrl, trackLabel }: { eyebrow?: string; h2: string; cta: string; ctaHref?: string; trackLabel: string }) {
+export function FinalCta({ eyebrow, h2, cta, ctaHref = SITE_CONFIG.bookCallHref, trackLabel }: { eyebrow?: string; h2: string; cta: string; ctaHref?: string; trackLabel: string }) {
   return (
     <Section>
       <Container>

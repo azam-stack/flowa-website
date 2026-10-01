@@ -1,3 +1,4 @@
+import { SmartLink } from "@/components/SmartLink";
 import { Container } from "@/components/Container";
 import { Reveal } from "@/components/Reveal";
 import { home } from "@/content/frank/home";
@@ -29,9 +30,9 @@ export function ContactBand({ h2 = home.contact.h2, sub = home.contact.sub, pose
             <p className="mt-4 max-w-lead text-sub text-white/75">{sub}</p>
             {calendar && (
               <div className="mt-8">
-                <a href={SITE_CONFIG.bookingUrl} target="_blank" rel="noopener noreferrer" onClick={() => track("cta_click", { label: "book_call_calendar" })} className="btn h-14 bg-brand px-7 text-[17px] text-ink hover:bg-brand-strong">
+                <SmartLink href={SITE_CONFIG.bookCallHref} onClick={() => track("cta_click", { label: "book_call_calendar" })} className="btn h-14 bg-brand px-7 text-[17px] text-ink hover:bg-brand-strong">
                   <Calendar size={18} /> {calendar.cta}
-                </a>
+                </SmartLink>
                 <p className="mt-3 text-small text-white/70">{calendar.note}</p>
                 <p className="mt-6 text-[15px] text-white/85">{calendar.orForm}</p>
               </div>

@@ -61,7 +61,7 @@ export const pricing = {
     bodyBefore: "Ahmed or Anton will send your quote to ",
     bodyAfter: " within one working day.",
     sooner: "Want to talk sooner? Book a call →",
-    soonerHref: SITE_CONFIG.bookingUrl,
+    soonerHref: SITE_CONFIG.bookCallHref,
     /** Shown instead of "We're on it." when no draft endpoint is configured and the email client was opened. */
     mailtoTitle: "We've opened your email client with your answers filled in.",
     mailtoBody: "Press send there and Ahmed or Anton will reply with your quote within one working day. If nothing opened, write to us at",

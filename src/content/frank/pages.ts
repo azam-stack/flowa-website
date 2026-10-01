@@ -163,8 +163,10 @@ export const contactPage = {
     h1Light: "Book a ",
     h1Bold: "call",
     calendarCta: "Pick a time in our calendar",
-    calendarNote: "A 20-minute intro call on Microsoft Teams with Ahmed and Anton. No slides.",
-    orForm: "Or send us a message and we will reply within one working day.",
+    points: ["20 minutes on Microsoft Teams", "Who you want to meet, and whether we can book them", "No slides, no hard sell"],
+    formH2: "Rather write to us?",
+    calendarNote: "Pick a time that suits you. A 20-minute intro call on Microsoft Teams with Ahmed and Anton.",
+    orForm: "Send us a message and Ahmed or Anton will reply within one working day.",
   },
   contact: {
     seo: { title: "Contact | Flowa", description: "Talk to Ahmed or Anton. Tell us who you sell to and we will reply within one working day." },

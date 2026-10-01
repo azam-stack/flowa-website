@@ -79,7 +79,7 @@ function HowAccordion() {
                   <p className="max-w-lead pb-4 text-body text-ink-2">{s.body}</p>
                   <div className="pb-7">
                     {isOpen && (
-                      <Btn href={SITE_CONFIG.bookingUrl} size="sm" trackLabel={`frank_how_${s.title.toLowerCase()}`}>
+                      <Btn href={SITE_CONFIG.bookCallHref} size="sm" trackLabel={`frank_how_${s.title.toLowerCase()}`}>
                         Book a call
                       </Btn>
                     )}
@@ -124,7 +124,7 @@ export function FrankPage() {
                 </h1>
                 <p className="mt-6 max-w-[520px] text-sub text-ink-2">{t.sub}</p>
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-                  <Btn href={SITE_CONFIG.bookingUrl} size="lg" trackLabel="frank_hero_book_demo">
+                  <Btn href={SITE_CONFIG.bookCallHref} size="lg" trackLabel="frank_hero_book_demo">
                     Book a call
                   </Btn>
                   <button

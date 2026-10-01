@@ -50,7 +50,7 @@ export const nav = {
   pricing: { label: "Pricing", href: "/pricing" },
   /** Hidden until Flowa provides a URL: while `href` is null the link is not rendered at all. */
   clientDashboard: { label: "Client dashboard", href: null as string | null },
-  demo: { label: "Book a call", href: SITE_CONFIG.bookingUrl },
+  demo: { label: "Book a call", href: SITE_CONFIG.bookCallHref },
   menuOpen: "Open menu",
   menuClose: "Close menu",
   skipToContent: "Skip to content",
@@ -61,7 +61,7 @@ export const chat = {
   meta: "Frank · now",
   placeholder: "Ask Frank anything",
   bookMeeting: "Book a call",
-  bookMeetingHref: SITE_CONFIG.bookingUrl,
+  bookMeetingHref: SITE_CONFIG.bookCallHref,
   send: "Send",
   open: "Open chat with Frank",
   close: "Close chat",
@@ -69,7 +69,7 @@ export const chat = {
   quickReplies: [
     { label: "How does Frank work?", href: "/how-it-works" },
     { label: "What does it cost?", href: "/pricing" },
-    { label: "Book a call", href: SITE_CONFIG.bookingUrl },
+    { label: "Book a call", href: SITE_CONFIG.bookCallHref },
   ],
 } as const;
 
@@ -119,7 +119,7 @@ export const footer = {
 /** Shared call-to-action labels. */
 export const cta = {
   demo: "Book a call",
-  demoHref: SITE_CONFIG.bookingUrl,
+  demoHref: SITE_CONFIG.bookCallHref,
   quote: "Get my quote",
   contact: "Get in touch",
 } as const;

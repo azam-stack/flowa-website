@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { SITE_CONFIG } from "@/config/site";
+import { SmartLink } from "@/components/SmartLink";
 import { track } from "@/lib/analytics";
 import { FrankAvatar } from "./FrankAvatar";
 import { Send } from "./Icons";
@@ -70,9 +71,9 @@ export function AskBox({ className = "" }: { className?: string }) {
             <div className="swap-up max-w-[90%] rounded-[16px] rounded-bl-[4px] bg-soft px-4 py-3 text-[14px] leading-relaxed text-ink-2">
               {answer}
               {handoff && (
-                <a href={SITE_CONFIG.bookingUrl} target="_blank" rel="noopener noreferrer" className="mt-3 block w-fit rounded-pill bg-ink px-4 py-2 text-[13px] font-medium text-white">
+                <SmartLink href={SITE_CONFIG.bookCallHref} className="mt-3 block w-fit rounded-pill bg-ink px-4 py-2 text-[13px] font-medium text-white">
                   Book a call
-                </a>
+                </SmartLink>
               )}
             </div>
           )}
