@@ -8,6 +8,9 @@
     <meta name="description" content="Flowa books qualified B2B meetings. Our AI agent Frank finds companies with a real reason to buy; Ahmed and Anton approve every message and book the meeting." />
     <!-- /route-head -->
     <meta name="theme-color" content="#F6F6F3" />
+    <!-- Security: only this site's own files may run; the page may only talk to the Ask backend and the form service. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; media-src 'self'; connect-src 'self' https://flowa-contact.a-zam.workers.dev https://formsubmit.co; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co; upgrade-insecure-requests" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
 
     <link rel="icon" href="/favicon.png" type="image/png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
