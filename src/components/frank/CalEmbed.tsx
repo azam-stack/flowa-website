@@ -69,9 +69,9 @@ export function CalEmbed({ className = "" }: { className?: string }) {
       });
       Cal.ns[NS]("ui", {
         theme: "light",
-        hideEventTypeDetails: false,
+        hideEventTypeDetails: true,
         layout: "month_view",
-        cssVarsPerTheme: { light: { "cal-brand": "#0C0C0B" } },
+        cssVarsPerTheme: { light: { "cal-brand": "#0C0C0B", "cal-bg": "#FFFFFF", "cal-border-booker": "rgba(12,12,11,0.08)" } },
       });
     } catch {
       setFailed(true);
@@ -83,7 +83,7 @@ export function CalEmbed({ className = "" }: { className?: string }) {
   }, []);
   return (
     <div className={className}>
-      <div ref={ref} className="min-h-[640px] w-full overflow-hidden rounded-frame border border-ink bg-white" />
+      <div ref={ref} className="min-h-[520px] w-full" />
       {failed && (
         <p className="mt-3 text-small text-muted">
           The calendar didn't load.{" "}
