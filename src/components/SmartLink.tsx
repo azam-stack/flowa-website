@@ -1,5 +1,6 @@
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 import { Link } from "react-router-dom";
+import { warmCal } from "@/components/frank/CalEmbed";
 
 /** A route in this app: "/pricing", "/#quote". Anything else is a plain anchor. */
 export function isRouteHref(href: string): boolean {
@@ -13,8 +14,9 @@ export function isRouteHref(href: string): boolean {
  */
 export function SmartLink({ href, children, ...rest }: { href: string; children: ReactNode } & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href">) {
   if (isRouteHref(href)) {
+    const warm = href.startsWith("/book-a-call") ? { onMouseEnter: () => warmCal(), onFocus: () => warmCal(), onTouchStart: () => warmCal() } : {};
     return (
-      <Link to={href} {...rest}>
+      <Link to={href} {...warm} {...rest}>
         {children}
       </Link>
     );

@@ -24,7 +24,7 @@ export const routes: RouteMeta[] = [
   { path: "/cases", title: casesPage.seo.title, description: casesPage.seo.description, jsonLd: [crumb("Cases", "/cases")] },
   { path: "/about", title: aboutPage.seo.title, description: aboutPage.seo.description, jsonLd: [crumb("About", "/about")] },
   { path: "/pricing", title: pricing.seo.title, description: pricing.seo.description, jsonLd: [faqJsonLd(pricing.faq.items), crumb("Pricing", "/pricing")] },
-  { path: "/demo", title: contactPage.demo.seo.title, description: contactPage.demo.seo.description, jsonLd: [crumb("Book a demo", "/demo")] },
+  { path: "/book-a-call", title: contactPage.demo.seo.title, description: contactPage.demo.seo.description, jsonLd: [crumb("Book a call", "/book-a-call")] },
   { path: "/contact", title: contactPage.contact.seo.title, description: contactPage.contact.seo.description, jsonLd: [crumb("Contact", "/contact")] },
   { path: "/faq", title: faqPage.seo.title, description: faqPage.seo.description, jsonLd: [faqJsonLd([...home.faq.items, ...pricing.faq.items]), crumb("FAQ", "/faq")] },
   ...legalDocs.map((d) => ({ path: `/${d.slug}`, title: d.seo.title, description: d.seo.description, jsonLd: [crumb(d.title, `/${d.slug}`)] })),
@@ -39,6 +39,7 @@ export const routes: RouteMeta[] = [
 export type RouteRedirect = { from: string; to: string };
 
 export const redirects: RouteRedirect[] = [
+  { from: "/demo", to: "/book-a-call" },
   { from: "/why-flowa", to: "/signals" },
   { from: "/services/cold-email", to: "/channels/email" },
   { from: "/services/linkedin-outreach", to: "/channels/linkedin" },

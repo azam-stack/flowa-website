@@ -9,13 +9,13 @@ import { contactPage } from "@/content/frank/pages";
 import { breadcrumbJsonLd, useSeo } from "@/lib/seo";
 
 /**
- * /demo: "Book a call" with the Cal.com calendar inline, so visitors see
+ * /book-a-call: "Book a call" with the Cal.com calendar inline, so visitors see
  * the free times and book without leaving the site; the message form sits
  * underneath. /contact: the contact band as a full page.
  */
 export function ContactPage({ mode }: { mode: "demo" | "contact" }) {
   const t = contactPage[mode];
-  const path = `/${mode}`;
+  const path = mode === "demo" ? "/book-a-call" : "/contact";
   useSeo({ title: t.seo.title, description: t.seo.description, path, jsonLd: [breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: mode === "demo" ? "Book a call" : "Contact", path }])] });
   if (mode === "contact") return <ContactBand as="h1" h2={`${t.h1Light}${t.h1Bold}`} sub={contactPage.sub} pose="wave" idPrefix={mode} id="top" />;
   const d = contactPage.demo;

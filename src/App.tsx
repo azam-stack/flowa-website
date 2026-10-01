@@ -44,7 +44,7 @@ export default function App() {
             <Route path="/cases" element={<CasesPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/pricing" element={<PricingPage />} />
-            <Route path="/demo" element={<ContactPage mode="demo" />} />
+            <Route path="/book-a-call" element={<ContactPage mode="demo" />} />
             <Route path="/contact" element={<ContactPage mode="contact" />} />
             <Route path="/faq" element={<FaqPage />} />
             {/* Privacy, cookies, terms and refunds all render from one template, wording unchanged. */}
