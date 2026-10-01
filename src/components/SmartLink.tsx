@@ -1,11 +1,15 @@
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { isRouteHref } from "./Button";
+
+/** A route in this app: "/pricing", "/#quote". Anything else is a plain anchor. */
+export function isRouteHref(href: string): boolean {
+  return href.startsWith("/") && !href.startsWith("//");
+}
 
 /**
- * One link component for content-driven hrefs: routes ("/cases",
- * "/#team") use the router so the app never reloads; anchors ("#contact"),
- * mailto and external URLs render as plain anchors.
+ * One link component for content-driven hrefs: routes use the router so
+ * the app never reloads; anchors ("#quote"), mailto and external URLs
+ * render as plain anchors (external ones in a new tab).
  */
 export function SmartLink({ href, children, ...rest }: { href: string; children: ReactNode } & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href">) {
   if (isRouteHref(href)) {

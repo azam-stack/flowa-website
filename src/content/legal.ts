@@ -68,7 +68,7 @@ export type LegalDoc = {
 };
 
 /** Last substantive review of these documents. Update when the text changes. */
-export const legalUpdated = "21 September 2026";
+export const legalUpdated = "1 October 2026";
 
 const p = (text: string): LegalBlock => ({ kind: "p", text });
 const list = (items: string[]): LegalBlock => ({ kind: "list", items });
@@ -101,7 +101,7 @@ export const privacyPolicy: LegalDoc = {
     {
       heading: "When you send us an enquiry",
       blocks: [
-        p("The contact form asks for your name, work email and company, which we need in order to reply. Job title, phone number, company size, industry, website, preferred timing and a description of what you are looking for are optional. Please do not send us anything sensitive through the form."),
+        p("The contact form asks for your first name, your work email and what you would like to discuss, which we need in order to reply. The quote form on the pricing page asks what kind of company you are, how big your team is, what you want Frank to do and your work email, which we need in order to send you a quote. Both forms also record the page you sent them from and the time, and any campaign parameters in the link you arrived on. Please do not send us anything sensitive through either form."),
         p("We use what you send us to answer your enquiry and, if it goes further, to prepare a proposal. Our lawful basis is Article 6(1)(b) of the GDPR, taking steps at your request before entering a contract, and Article 6(1)(f), our legitimate interest in responding to people who ask to hear from us."),
         p("We do not add enquiries to a marketing list, we do not sell or share them, and we do not use them to train anything."),
       ],
@@ -135,6 +135,9 @@ export const privacyPolicy: LegalDoc = {
         p("We keep the list of suppliers short and we do not sell data to anyone. The processors we use are:"),
         list([
           "GitHub, for hosting this website",
+          "FormSubmit, which receives enquiries from the contact form and the quote form and emails them to us",
+          "Cal.com, if you book a call through our booking link",
+          "Cloudflare Workers AI, which answers questions typed into the \"Ask a question\" box. Questions are not stored by us and should not contain personal data",
           "Cloudflare, for the service that receives enquiries from the contact form, where one is configured",
           "Resend, for sending us an internal notification when an enquiry arrives",
           "Microsoft, for our own email",
@@ -225,8 +228,8 @@ export const termsOfUse: LegalDoc = {
     {
       heading: "The website is information, not an offer",
       blocks: [
-        p("Everything on this site, including prices and package contents, is published for information. It is an invitation to talk, not a binding offer. A contract exists only when we have both agreed a written proposal."),
-        p("We try hard to keep the site accurate and current. We do not promise that it is free of errors, and we may change the content, the packages or the prices at any time."),
+        p("Everything on this site, including descriptions of what an engagement includes, is published for information. It is an invitation to talk, not a binding offer. A contract exists only when we have both agreed a written proposal."),
+        p("We try hard to keep the site accurate and current. We do not promise that it is free of errors, and we may change the content or what we offer at any time."),
       ],
     },
     {
@@ -234,7 +237,6 @@ export const termsOfUse: LegalDoc = {
       blocks: [
         p("Nothing on this site is a guarantee of a commercial result. Figures describing our own track record are our records of work already delivered. They describe what has happened, not what will happen for you."),
         p("Examples of prospects, meetings, dashboards and interfaces shown on this site are illustrative and are labelled as such. They are not real contacts, real clients or real campaign data."),
-        p("Where we compare an engagement with hiring in-house or using another kind of agency, the figures we give for those alternatives are typical market ranges we have stated as ranges. They are not quotes and they are not claims about any particular competitor."),
       ],
     },
     {
@@ -275,19 +277,19 @@ export const refundPolicy: LegalDoc = {
       heading: "We replace rather than refund",
       blocks: [
         p("Fees are not refundable once work has been delivered. What we do instead is replace anything that does not meet the standard we agreed with you in writing before we started."),
-        p("A meeting that does not go ahead, or that turns out not to match the qualification criteria you set, is not counted and is not billed. We replace it. That is the remedy, and it is the same remedy on every package."),
+        p("A meeting that does not go ahead, or that turns out not to match the qualification criteria you set, is not counted and is not billed. We replace it. That is the remedy, and it is the same remedy on every plan."),
       ],
     },
     {
-      heading: "The Pilot",
+      heading: "The pay-per-meeting pilot",
       blocks: [
-        p("The Pilot is paid per booked meeting, so you are only invoiced for meetings that meet your criteria. The one-time onboarding fee covers the setup work at the start of the engagement and is not refundable once that work has begun."),
+        p("The pilot is paid per booked meeting, so you are only invoiced for meetings that meet your criteria. The one-time onboarding fee covers the setup work at the start of the engagement and is not refundable once that work has begun."),
       ],
     },
     {
-      heading: "Fixed packages",
+      heading: "Monthly plans",
       blocks: [
-        p("Core, Plus and Scale are monthly packages with a meeting commitment and one month's notice. Cancelling stops the engagement at the end of the notice period. Fees already invoiced for work delivered are not refunded."),
+        p("Monthly plans come with a meeting commitment and one month's notice. Cancelling stops the engagement at the end of the notice period. Fees already invoiced for work delivered are not refunded."),
         p("The exact commitment, the notice period and the guarantee terms are set out in your proposal, because they depend on the market, the ideal customer profile and the scope we agree with you."),
       ],
     },

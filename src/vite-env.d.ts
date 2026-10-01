@@ -1,12 +1,16 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  /** POST endpoint for lead submissions (the backend/ worker). Without it the form falls back to opening the visitor's email client. */
+  /** POST endpoint for the draft's contact and quote forms (a separate deployment of backend/). Without it the forms open the visitor's email client. */
   readonly VITE_CONTACT_ENDPOINT?: string;
-  /** Canonical booking link. Without it every "Book a call" goes to the lead form. */
+  readonly VITE_ASK_ENDPOINT?: string;
   readonly VITE_BOOKING_URL?: string;
-  /** Where analytics events are beaconed. Without it events only reach window.dataLayer. */
-  readonly VITE_ANALYTICS_ENDPOINT?: string;
-  /** Public base path; set to "/flowa-website/" by the GitHub Pages workflow. */
+  /** The "Client dashboard" link in the nav. Without it the link is not rendered. */
+  readonly VITE_CLIENT_DASHBOARD_URL?: string;
+  /** Canonical origin for this draft. */
+  readonly VITE_SITE_URL?: string;
+  /** "false" removes the noindex meta. Anything else keeps the draft unindexed. */
+  readonly VITE_DRAFT?: string;
+  /** Public base path; "/flowa-website-lab/" on the GitHub Pages preview. */
   readonly VITE_BASE?: string;
 }

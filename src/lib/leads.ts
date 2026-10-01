@@ -1,13 +1,14 @@
 import { SITE_CONFIG } from "@/config/site";
 import { getUtm, track } from "./analytics";
-import { sanitizeLead, validateLead, type LeadErrors, type LeadInput } from "./lead-schema";
-import { finalCta } from "@/content/site.en";
+import { sanitizeLead, validateLead, type Attribution, type LeadErrors, type LeadInput } from "./lead-schema";
 
 /**
- * Submits a lead. With VITE_CONTACT_ENDPOINT set, POSTs JSON and reports
- * the real outcome (timeout, network, server error, or success). Without
- * it, the honest fallback: open the visitor's email client with the
- * details filled in, and the UI says exactly that.
+ * Submits a contact or quote lead: POSTs JSON to the lead endpoint
+ * (VITE_CONTACT_ENDPOINT, or FormSubmit emailing ahmed@flowa.dk) and
+ * reports the real outcome (timeout, network, server error, or success).
+ * If no endpoint is configured at all,
+ * the honest fallback: open the visitor's email client with the details
+ * filled in, addressed to info@flowa.dk, and the UI says exactly that.
  */
 export type SubmitResult =
   | { status: "sent"; id?: string }
@@ -17,43 +18,49 @@ export type SubmitResult =
 
 const TIMEOUT_MS = 12000;
 
-export function buildLead(fields: Record<string, unknown>, service?: string): LeadInput {
+/** The page URL, the timestamp and the UTM parameters captured on landing. */
+export function attribution(): Attribution {
   const utm = getUtm();
-  return sanitizeLead({
-    ...fields,
-    sourcePage: typeof window === "undefined" ? "/" : window.location.pathname + window.location.search,
-    service,
-    utmSource: utm.utm_source,
-    utmMedium: utm.utm_medium,
-    utmCampaign: utm.utm_campaign,
-    utmTerm: utm.utm_term,
-    utmContent: utm.utm_content,
-  });
+  return {
+    page_url: typeof window === "undefined" ? "/" : window.location.href.slice(0, 400),
+    submitted_at: new Date().toISOString(),
+    ...utm,
+  };
+}
+
+export function buildLead(fields: Record<string, unknown>): LeadInput {
+  return sanitizeLead({ ...fields, ...attribution() });
 }
 
 export async function submitLead(lead: LeadInput): Promise<SubmitResult> {
   const errors = validateLead(lead);
   if (Object.keys(errors).length) return { status: "invalid", errors };
 
-  track("form_submit", { service: lead.service, page: lead.sourcePage });
+  track("form_submit", { kind: lead.kind });
 
-  if (!SITE_CONFIG.contactEndpoint) {
+  if (!SITE_CONFIG.leadEndpoint) {
     openMailto(lead);
     return { status: "mailto" };
   }
 
+  const isFormSubmit = SITE_CONFIG.leadEndpoint.includes("formsubmit.co");
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
   try {
-    const res = await fetch(SITE_CONFIG.contactEndpoint, {
+    const res = await fetch(SITE_CONFIG.leadEndpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify(lead),
+      body: JSON.stringify(isFormSubmit ? { ...lead, _subject: lead.kind === "quote" ? "New quote request from flowa.dk" : `New enquiry from ${lead.first_name} (flowa.dk)`, _template: "table" } : lead),
       signal: controller.signal,
     });
     if (res.ok) {
-      const data = (await res.json().catch(() => ({}))) as { id?: string };
-      track("form_success", { service: lead.service, page: lead.sourcePage });
+      const data = (await res.json().catch(() => ({}))) as { id?: string; success?: string | boolean };
+      // FormSubmit answers 200 with success "false" until the inbox has confirmed the form.
+      if (isFormSubmit && String(data.success) !== "true") {
+        track("form_error", { reason: "server", code: "formsubmit" });
+        return { status: "error", reason: "server", retryable: true };
+      }
+      track("form_success", { kind: lead.kind });
       return { status: "sent", id: data.id };
     }
     if (res.status === 429) {
@@ -76,20 +83,10 @@ export async function submitLead(lead: LeadInput): Promise<SubmitResult> {
 }
 
 function openMailto(lead: LeadInput): void {
-  const subject = `Book a call - ${lead.company}`;
-  const lines = [
-    `Name: ${lead.firstName} ${lead.lastName}`,
-    `Company: ${lead.company}`,
-    lead.jobTitle ? `Job title: ${lead.jobTitle}` : "",
-    `Email: ${lead.email}`,
-    lead.phone ? `Phone: ${lead.phone}` : "",
-    lead.companySize ? `Company size: ${lead.companySize}` : "",
-    lead.industry ? `Industry: ${lead.industry}` : "",
-    lead.website ? `Website: ${lead.website}` : "",
-    lead.preferredTiming ? `Preferred timing: ${lead.preferredTiming}` : "",
-    lead.service ? `Service: ${lead.service}` : "",
-    "",
-    lead.goal ? `What I'm looking to achieve:\n${lead.goal}` : "",
-  ].filter((l) => l !== "");
-  window.location.href = `mailto:${finalCta.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
+  const subject = lead.kind === "quote" ? "Quote request" : `Enquiry from ${lead.first_name}`;
+  const lines =
+    lead.kind === "quote"
+      ? [`Company type: ${lead.company_type}`, `Team size: ${lead.team_size}`, `Goals: ${lead.goals.join(", ")}`, `Email: ${lead.email}`]
+      : [`Name: ${lead.first_name}`, `Email: ${lead.email}`, "", lead.message];
+  window.location.href = `mailto:${SITE_CONFIG.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
 }

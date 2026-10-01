@@ -1,885 +1,376 @@
-@import "@fontsource-variable/inter";
+/* ------------------------------------------------------------------
+   Flowa — design system
+
+   Fonts are self-hosted through @fontsource rather than loaded from
+   Google Fonts, so the site still makes no third-party requests and the
+   cookie and privacy pages stay true. Same faces, same weights as the
+   brief: Poppins 300/400/500/600 and the Fraunces serif accent.
+   ------------------------------------------------------------------ */
+@import "@fontsource/poppins/300.css";
+@import "@fontsource/poppins/400.css";
+@import "@fontsource/poppins/500.css";
+@import "@fontsource/poppins/600.css";
+@import "@fontsource-variable/fraunces";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  /* ==================================================================
-     FLOWA design tokens — the single source of truth for the visual
-     language. Tailwind's theme (tailwind.config.ts) reads these, so a
-     class like `bg-accent/10` and a hand-written `var(--color-accent)`
-     are the same value. Few colours, many materials.
-     ================================================================== */
   :root {
-    /* the band's vertical padding (mirrors tailwind `py-band`), so a panel can bleed into it */
-    --band-pad: clamp(4rem, 8vw, 7rem);
-    /* --- colour (rgb triplets so Tailwind can apply opacity) --- */
-    --rgb-bg: 250 249 246;
-    --rgb-bg-secondary: 244 242 236;
-    --rgb-fg: 12 12 11;
-    --rgb-text-secondary: 74 71 68;
-    --rgb-muted: 107 103 95;
-    --rgb-border: 230 226 217;
-    --rgb-border-strong: 207 201 188;
-    --rgb-card: 255 255 255;
-    --rgb-accent: 238 158 71;
-    --rgb-accent-hover: 217 130 44;
-    --rgb-accent-strong: 201 116 30;
-    --rgb-accent-band: 168 94 20;
-    --rgb-ink: 18 17 16;
-    --rgb-error: 179 54 46;
-    --rgb-success: 17 102 73;
+    /* --- colour tokens: brief §2.2, used exactly --- */
+    --page-bg: #f6f6f3;
+    --surface: #ffffff;
+    --surface-soft: #f1f0ec;
+    --panel: #ffebd6;
+    --panel-strong: #ffd7ae;
+    --brand: #ee9e47;
+    --brand-strong: #e2802a;
+    --brand-deep: #a25d18;
+    --ink: #0c0c0b;
+    --ink-2: #1a1b1f;
+    --muted: #6b675f;
+    --line: rgba(12, 12, 11, 0.08);
 
-    --color-bg-primary: rgb(var(--rgb-bg));
-    --color-bg-secondary: rgb(var(--rgb-bg-secondary));
-    --color-bg-elevated: rgb(var(--rgb-card));
-    --color-bg-void: rgb(var(--rgb-ink));
-    --color-surface: rgb(var(--rgb-card));
-    --color-surface-elevated: rgb(var(--rgb-card));
-    --color-surface-glass: rgb(var(--rgb-card) / 0.78);
-    --color-text-primary: rgb(var(--rgb-fg));
-    --color-text-secondary: rgb(var(--rgb-text-secondary));
-    --color-text-muted: rgb(var(--rgb-muted));
-    --color-border-subtle: rgb(var(--rgb-fg) / 0.06);
-    --color-border-default: rgb(var(--rgb-border));
-    --color-border-strong: rgb(var(--rgb-border-strong));
-    --color-accent: rgb(var(--rgb-accent));
-    --color-accent-soft: rgb(var(--rgb-accent) / 0.12);
-    --color-accent-strong: rgb(var(--rgb-accent-strong));
-    --color-success: rgb(var(--rgb-success));
-    --color-warning: rgb(var(--rgb-accent-band));
-    --color-error: rgb(var(--rgb-error));
 
-    /* legacy names still read by a few components */
-    --flowa-text: #0c0c0b;
-    --flowa-orange-display: #c9741e; /* display-size orange text only: 3.3:1, which WCAG allows at >=24px or >=18.66px bold */
-    --flowa-orange-text: #a25d18;    /* orange for small text: 4.56:1 on the darkest background we use */
-    --flowa-band: #a85e14;           /* white text on an orange fill */
-    --flowa-ink: #121110;
+    /* --- shape and depth: brief §2.4 --- */
+    --r-frame: 20px;
+    --r-card: 16px;
+    --r-control: 8px;
+    --r-pill: 999px;
+    --shadow-float: 0 12px 40px rgba(12, 12, 11, 0.12);
 
-    /* --- status (qualification / meeting / opportunity UI) --- */
-    --status-neutral: rgb(var(--rgb-fg) / 0.2);
-    --status-active: rgb(var(--rgb-fg));
-    --status-progress: rgb(var(--rgb-accent-strong));
-    --status-success: rgb(var(--rgb-accent));
-    --status-warning: rgb(var(--rgb-accent-band));
-
-    /* --- surfaces & glass --- */
-    --glass-opacity-subtle: 0.6;
-    --glass-opacity-medium: 0.78;
-    --glass-opacity-strong: 0.94;
-    --glass-blur-subtle: 6px;
-    --glass-blur-medium: 12px;
-    --glass-blur-strong: 20px;
-    --glass-border-subtle: rgb(255 255 255 / 0.55);
-    --glass-border-visible: rgb(255 255 255 / 0.8);
-    --surface-subtle: rgb(var(--rgb-fg) / 0.03);
-    --surface-glass: rgb(var(--rgb-card) / var(--glass-opacity-medium));
-    --surface-glass-strong: rgb(var(--rgb-card) / var(--glass-opacity-strong));
-    --surface-elevated: rgb(var(--rgb-card));
-    --surface-highlight: rgb(var(--rgb-accent) / 0.06);
-
-    /* --- gradients: atmosphere, not decoration --- */
-    --gradient-atmosphere: radial-gradient(60% 55% at 78% 30%, rgb(var(--rgb-accent) / 0.1), rgb(var(--rgb-accent) / 0) 70%);
-    --gradient-surface: linear-gradient(180deg, rgb(var(--rgb-card)), rgb(var(--rgb-bg)));
-    --gradient-accent: linear-gradient(135deg, rgb(var(--rgb-accent)), rgb(var(--rgb-accent-strong)));
-    --gradient-highlight: linear-gradient(180deg, rgb(255 255 255 / 0.5), rgb(255 255 255 / 0));
-    --gradient-depth: radial-gradient(70% 60% at 20% 100%, rgb(var(--rgb-accent) / 0.08), rgb(var(--rgb-accent) / 0) 70%);
-
-    /* --- light --- */
-    --light-soft: 0 0 60px rgb(var(--rgb-accent) / 0.12);
-    --light-medium: 0 0 40px rgb(var(--rgb-accent) / 0.25);
-    --light-focus: 0 0 0 4px rgb(var(--rgb-accent) / 0.18), 0 0 18px rgb(var(--rgb-accent) / 0.6);
-    --light-accent: inset 0 1px 0 rgb(255 255 255 / 0.6);
-
-    /* --- shadow: large blur, low opacity --- */
-    --shadow-subtle: 0 1px 2px rgb(var(--rgb-fg) / 0.04), 0 10px 24px -14px rgb(var(--rgb-fg) / 0.25);
-    --shadow-medium: 0 1px 2px rgb(var(--rgb-fg) / 0.04), 0 24px 48px -20px rgb(var(--rgb-fg) / 0.16);
-    --shadow-deep: 0 2px 4px rgb(var(--rgb-fg) / 0.05), 0 40px 80px -30px rgb(var(--rgb-fg) / 0.28);
-    --shadow-glow: 0 0 0 1px rgb(var(--rgb-accent) / 0.35), 0 12px 40px -12px rgb(var(--rgb-accent) / 0.45);
-
-    /* --- depth (stacking) --- */
-    --depth-background: 0;
-    --depth-atmosphere: 1;
-    --depth-midground: 2;
-    --depth-surface: 3;
-    --depth-foreground: 4;
-    --depth-overlay: 50;
-
-    /* --- blur & opacity --- */
-    --blur-sm: 4px;
-    --blur-md: 12px;
-    --blur-lg: 24px;
-    --blur-xl: 40px;
-    --opacity-subtle: 0.06;
-    --opacity-muted: 0.4;
-    --opacity-medium: 0.6;
-    --opacity-visible: 0.88;
-    --opacity-solid: 1;
-
-    /* --- radius & border --- */
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 20px;
-    --radius-xl: 28px;
-    --radius-pill: 999px;
-    --border-subtle: 1px solid var(--color-border-subtle);
-    --border-default: 1px solid var(--color-border-default);
-    --border-strong: 1px solid var(--color-border-strong);
-    --border-highlight: 1px solid rgb(var(--rgb-accent) / 0.4);
-
-    /* --- focus --- */
-    --focus-ring: 2px solid var(--color-accent);
-    --focus-ring-offset: 2px;
-
-    /* --- motion: durations, curves, hierarchy --- */
-    --duration-instant: 80ms;
-    --duration-fast: 150ms;
-    --duration-normal: 240ms;
-    --duration-slow: 600ms;
-    --duration-slower: 800ms;
-    --dur-fast: var(--duration-fast);
-    --dur: var(--duration-normal);
-    --dur-slow: var(--duration-slow);
-    --dur-reveal: var(--duration-slower);
-    --dur-hero: 1000ms;
-    --ease-standard: cubic-bezier(0.2, 0, 0, 1);
-    --ease-smooth: cubic-bezier(0.45, 0, 0.55, 1);
-    --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
-    --ease-fluid: cubic-bezier(0.22, 1, 0.36, 1);
-    --ease-spring: cubic-bezier(0.34, 1.3, 0.64, 1);
-    --ease: var(--ease-emphasized);
-    --ease-soft: var(--ease-smooth);
-    /* hierarchy: primary (hero, transformations) · secondary (UI, sections) · micro (hover) · ambient (atmosphere) */
-    --motion-primary: var(--dur-hero) var(--ease-emphasized);
-    --motion-secondary: var(--duration-slower) var(--ease-emphasized);
-    --motion-micro: var(--duration-normal) var(--ease-emphasized);
-    --motion-ambient: 9s var(--ease-smooth);
-    --d1: 8px;
-    --d2: 16px;
-    --d3: 28px;
-    --stagger: 70ms;
-
-    /* --- interaction --- */
-    --interaction-hover: var(--surface-subtle);
-    --interaction-active: scale(0.98);
-    --interaction-focus: var(--focus-ring);
-    --interaction-disabled: var(--opacity-medium);
+    /* --- motion --- */
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --dur-fade: 300ms;
   }
-  @media (max-width: 767px) {
-    :root {
-      --d2: 12px;
-      --d3: 20px;
-      --dur-reveal: 640ms;
-      --dur-hero: 800ms;
-    }
-  }
+
   html {
+    -webkit-text-size-adjust: 100%;
     scroll-behavior: smooth;
-    scroll-padding-top: 88px;
+    /* the sticky announcement bar (56px) and nav (72px) */
+    scroll-padding-top: 140px;
   }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+
   body {
-    @apply bg-bg text-fg antialiased;
-    font-family: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
+    background: var(--page-bg);
+    color: var(--ink-2);
+    font-family: "Poppins", ui-sans-serif, system-ui, sans-serif;
+    font-feature-settings: "kern" 1, "liga" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
-  :focus-visible {
-    outline: var(--focus-ring);
-    outline-offset: var(--focus-ring-offset);
-    border-radius: 4px;
-  }
+
   ::selection {
-    background: theme("colors.accent.DEFAULT" / 25%);
+    background: var(--panel-strong);
+    color: var(--ink);
   }
-  h1,
-  h2,
-  h3 {
-    text-wrap: balance;
+
+  /* one visible focus ring for every interactive element: brief §8 */
+  :focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+    border-radius: var(--r-control);
   }
-  p {
-    text-wrap: pretty;
+
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+}
+
+@layer components {
+  /* Big rounded framed card: white fill, 1px near-black border. */
+  .framed {
+    background: var(--surface);
+    border: 1px solid var(--ink);
+    border-radius: var(--r-frame);
   }
-}
-
-/* ---------- Scroll reveal (IntersectionObserver sets data-inview) ---------- */
-.reveal {
-  opacity: 0;
-  transform: translateY(var(--d2));
-  transition:
-    opacity var(--dur-reveal) var(--ease),
-    transform var(--dur-reveal) var(--ease),
-    filter var(--dur-reveal) var(--ease);
-  transition-delay: var(--delay, 0ms);
-}
-.reveal-near {
-  transform: translateY(var(--d1));
-}
-.reveal-far {
-  transform: translateY(var(--d3));
-}
-/* Large surfaces arrive from slightly further back and settle into place. */
-.reveal-surface {
-  transform: translateY(var(--d3)) scale(0.97);
-  transform-origin: 50% 100%;
-}
-.reveal-blur {
-  filter: blur(6px);
-}
-.reveal[data-inview="true"] {
-  opacity: 1;
-  transform: none;
-  filter: blur(0);
-}
-
-/* Children of a .stagger arrive one after another once their reveal
-   ancestor (or the element itself) is in view. Depth: .far children come
-   from further away. */
-.stagger > * {
-  opacity: 0;
-  transform: translateY(var(--d2));
-  transition:
-    opacity var(--dur-reveal) var(--ease),
-    transform var(--dur-reveal) var(--ease);
-  transition-delay: calc(var(--delay, 0ms) + 100ms + var(--i, 0) * var(--stagger));
-}
-.stagger > .far {
-  transform: translateY(var(--d3));
-}
-.stagger > :nth-child(2) { --i: 1; }
-.stagger > :nth-child(3) { --i: 2; }
-.stagger > :nth-child(4) { --i: 3; }
-.stagger > :nth-child(5) { --i: 4; }
-.stagger > :nth-child(6) { --i: 5; }
-.stagger > :nth-child(7) { --i: 6; }
-.stagger > :nth-child(8) { --i: 7; }
-[data-inview="true"] .stagger > *,
-.stagger[data-inview="true"] > * {
-  opacity: 1;
-  transform: none;
-}
-
-/* A short rule that draws in beside an eyebrow. */
-.rule {
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform var(--dur-slow) var(--ease);
-  transition-delay: calc(var(--delay, 0ms) + 200ms);
-}
-[data-inview="true"] .rule {
-  transform: none;
-}
-
-/* Portraits settle from a slight zoom as their section arrives. */
-.img-settle img {
-  transform: scale(1.06);
-  transition: transform 1.4s var(--ease);
-}
-[data-inview="true"] .img-settle img {
-  transform: none;
-}
-
-/* ---------- Hero: the one load sequence ---------- */
-@keyframes line-up {
-  from { transform: translateY(110%); }
-  to { transform: none; }
-}
-@keyframes blur-in {
-  from { opacity: 0; filter: blur(8px); transform: translateY(var(--d1)); }
-  to { opacity: 1; filter: blur(0); transform: none; }
-}
-@keyframes rise {
-  from { opacity: 0; transform: translateY(var(--d2)); }
-  to { opacity: 1; transform: none; }
-}
-@keyframes surface-in {
-  from { opacity: 0; transform: translateY(var(--d3)) scale(0.97); }
-  to { opacity: 1; transform: none; }
-}
-.hero-mask {
-  display: block;
-  overflow: hidden;
-  padding-bottom: 0.12em;
-  margin-bottom: -0.12em;
-}
-.hero-line {
-  display: block;
-  animation: line-up var(--dur-hero) var(--ease) both;
-  animation-delay: var(--t, 0ms);
-}
-.hero-blur {
-  animation: blur-in var(--dur-hero) var(--ease) both;
-  animation-delay: var(--t, 0ms);
-}
-.hero-rise {
-  animation: rise var(--dur-reveal) var(--ease) both;
-  animation-delay: var(--t, 0ms);
-}
-.hero-surface {
-  animation: surface-in var(--dur-hero) var(--ease) both;
-  animation-delay: var(--t, 0ms);
-}
-
-/* ---------- Flow system (hero): path draws, a point of light travels it ---------- */
-.flow-path,
-.flow-path-halo {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  animation: flow-draw 1400ms var(--ease) both;
-  animation-delay: var(--t, 0ms);
-}
-.flow-path {
-  stroke: rgb(var(--rgb-fg) / 0.55);
-}
-/* a pale halo under the line so it reads over the glow */
-.flow-path-halo {
-  stroke: rgb(var(--rgb-bg) / 0.6);
-}
-@keyframes flow-draw {
-  to { stroke-dashoffset: 0; }
-}
-.flow-node {
-  left: var(--sx);
-  top: var(--sy);
-}
-@media (min-width: 640px) {
-  .flow-node {
-    left: var(--x);
-    top: var(--y);
+  /* Inner card: white, hairline border, 16px. */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-card);
   }
-}
-/* A node lights up as the point of light reaches it (same 9 s period). */
-@keyframes node-activate {
-  0%, 20%, 100% { background: var(--status-neutral); box-shadow: none; }
-  3%, 12% { background: var(--status-success); box-shadow: 0 0 0 3px rgb(var(--rgb-accent) / 0.25); }
-}
-.flow-node-core {
-  animation: node-activate var(--motion-ambient) infinite;
-  animation-delay: var(--at, 0ms);
-}
-@keyframes flow-end {
-  0%, 30%, 100% { box-shadow: var(--shadow-medium); }
-  4%, 16% { box-shadow: var(--shadow-medium), var(--shadow-glow); }
-}
-.flow-end {
-  animation: flow-end var(--motion-ambient) infinite;
-  animation-delay: 7800ms;
-}
-.flow-dot {
-  offset-rotate: 0deg;
-  animation: flow-travel 9s var(--ease-soft) 2400ms infinite;
-  opacity: 0;
-}
-@supports not (offset-path: path("M0 0")) {
-  .flow-dot { display: none; }
-}
-@keyframes flow-travel {
-  0% { offset-distance: 0%; opacity: 0; }
-  6% { opacity: 1; }
-  60% { offset-distance: 100%; opacity: 1; }
-  66% { offset-distance: 100%; opacity: 0; }
-  100% { offset-distance: 100%; opacity: 0; }
-}
-
-/* ---------- Depth: atmosphere behind the hero, depth inside the band ---------- */
-.atmosphere::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: var(--depth-atmosphere);
-  pointer-events: none;
-  background: var(--gradient-atmosphere);
-}
-.band-depth::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: var(--depth-atmosphere);
-  pointer-events: none;
-  background: var(--gradient-depth);
-}
-
-/* ---------- Ambient gradient (dark band) ---------- */
-.ambient-blob {
-  mix-blend-mode: screen;
-  will-change: transform, opacity;
-  animation-play-state: paused;
-}
-[data-active="true"] .ambient-blob {
-  animation-play-state: running;
-}
-
-/* ---------- The deal: promise crossed out, result rises ---------- */
-.transform-line {
-  position: relative;
-  display: inline;
-  background-image: linear-gradient(#fff, #fff); /* the rule stays full white while the words dim */
-  background-repeat: no-repeat;
-  background-size: 0% 2px;
-  background-position: 0 58%;
-  transition: background-size 900ms var(--ease) 500ms, color 900ms var(--ease) 500ms;
-}
-[data-inview="true"] .transform-line {
-  background-size: 100% 2px;
-  color: rgba(255, 255, 255, 0.55);
-}
-.transform-to {
-  opacity: 0;
-  transform: translateY(var(--d2));
-  transition: opacity 900ms var(--ease) 900ms, transform 900ms var(--ease) 900ms;
-}
-[data-inview="true"] .transform-to {
-  opacity: 1;
-  transform: none;
-}
-
-/* The one continuously living element: the logo's O drifts on a 40s
-   loop with tiny amplitude. Never faster, never larger. */
-@keyframes drift {
-  0% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
-  33% { transform: translate3d(-2%, 3%, 0) rotate(4deg) scale(1.03); }
-  66% { transform: translate3d(2%, -2%, 0) rotate(-3deg) scale(0.98); }
-  100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
-}
-.drift {
-  animation: drift 40s var(--ease-soft) infinite;
-  will-change: transform;
-}
-
-/* ---------- Logo form: the hero's living object ----------
-   The wordmark's O, filled in Flowa's orange, with a soft glow and an
-   outline echo. Contour morphing is written from JavaScript (LogoForm);
-   everything here runs on the compositor: the glow breathes (11 s), the
-   whole form drifts a couple of percent (29 s) and turns a few degrees
-   (23 s), on periods that never line up, so nothing reads as a loop. */
-@keyframes logo-form-breathe {
-  0%   { transform: scale(0.96); opacity: 0.8; }
-  50%  { transform: scale(1.04); opacity: 1; }
-  100% { transform: scale(0.96); opacity: 0.8; }
-}
-@keyframes logo-form-drift {
-  0%   { transform: translate(0, 0); }
-  33%  { transform: translate(-2%, 2.4%); }
-  66%  { transform: translate(1.8%, -1.6%); }
-  100% { transform: translate(0, 0); }
-}
-@keyframes logo-form-turn {
-  0%   { transform: rotate(-3deg); }
-  100% { transform: rotate(3deg); }
-}
-.logo-form {
-  position: absolute;
-  inset: 0;
-}
-.logo-form svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-}
-.logo-form-glow {
-  position: absolute;
-  inset: -20%;
-  border-radius: 50%;
-  background: radial-gradient(closest-side, rgb(var(--rgb-accent) / 0.36), rgb(var(--rgb-accent) / 0.14) 42%, rgb(var(--rgb-accent) / 0) 72%);
-  animation: logo-form-breathe 11s var(--ease-soft) infinite;
-  transition: filter 500ms var(--ease);
-  will-change: transform, opacity;
-}
-.logo-form-glow.is-lit {
-  filter: brightness(1.15) saturate(1.1);
-}
-.logo-form-drift {
-  animation: logo-form-drift 29s var(--ease-soft) infinite;
-  will-change: transform;
-}
-.logo-form-turn {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: logo-form-turn 23s ease-in-out infinite alternate;
-  will-change: transform;
-}
-.logo-form-body {
-  filter: drop-shadow(0 24px 40px rgb(var(--rgb-accent-band) / 0.18));
-}
-.logo-form-echo {
-  fill: none;
-  stroke: rgb(var(--rgb-accent) / 0.42);
-  stroke-width: 1.5;
-  vector-effect: non-scaling-stroke;
-}
-@media (max-width: 767px) {
-  .logo-form-body { filter: none; }
-}
-
-/* ---------- Scroll-linked movement (CSS scroll-driven, desktop only) ---------- */
-@supports (animation-timeline: view()) {
-  @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
-    @keyframes parallax {
-      from { transform: translateY(var(--p, 32px)); }
-      to { transform: translateY(calc(var(--p, 32px) * -1)); }
-    }
-    .parallax {
-      animation: parallax linear both;
-      animation-timeline: view();
-      animation-range: entry 0% exit 100%;
-    }
-    .parallax-slow { --p: 16px; }
-    .parallax-far { --p: 64px; }
+  /* Black label bar under the hero cards and the Frank cards. */
+  .label-bar {
+    background: var(--ink);
+    color: #fff;
+    border-radius: var(--r-control);
   }
-}
 
-/* ---------- Buttons: label slides, arrow leads ---------- */
-.btn-label {
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-  line-height: 1.25;
-}
-.btn-label > span {
-  display: block;
-  transition: transform var(--dur) var(--ease);
-}
-.btn-label > span + span {
-  position: absolute;
-  left: 0;
-  top: 100%;
-}
-.group:hover .btn-label > span,
-.group:focus-visible .btn-label > span {
-  transform: translateY(-100%);
-}
+  /* Faint grid, ~80px squares, thin white lines, a 4-point sparkle at every intersection. */
+  .sparkle-grid {
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath d='M40 36.5 Q40 40 43.5 40 Q40 40 40 43.5 Q40 40 36.5 40 Q40 40 40 36.5 Z' fill='%23ee9e47' fill-opacity='0.45'/%3E%3C/svg%3E"),
+      linear-gradient(to right, rgba(255, 255, 255, 0.9) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.9) 1px, transparent 1px);
+    background-size: 80px 80px, 80px 80px, 80px 80px;
+    background-position: 0 0, 40px 40px, 40px 40px;
+  }
 
-/* ---------- Marquee ---------- */
-@keyframes marquee-scroll {
-  from { transform: translate3d(0, 0, 0); }
-  to { transform: translate3d(-50%, 0, 0); }
-}
+  /* The Flowa "o" shapes: a slow float plus a few degrees of wobble, staggered per shape. */
+  .sphere-bob {
+    animation: sphere-bob var(--bob-dur, 7s) ease-in-out infinite;
+    animation-delay: var(--bob-delay, 0s);
+    will-change: transform;
+  }
+  @keyframes sphere-bob {
+    0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+    50% { transform: translateY(-10px) rotate(calc(var(--rot, 0deg) + 5deg)); }
+  }
+  /* Static (no float) shapes keep their tilt. */
+  .sphere-static { transform: rotate(var(--rot, 0deg)); }
 
-/* ---------- Comparison table: Flowa pills arrive row by row ---------- */
-.table-pill {
-  opacity: 0;
-  transform: translateY(6px);
-  transition:
-    opacity var(--dur) var(--ease),
-    transform var(--dur) var(--ease);
-  transition-delay: calc(300ms + var(--pill-delay, 0ms));
-}
-[data-inview="true"] .table-pill {
-  opacity: 1;
-  transform: translateY(0);
-}
+  /* The ink mock-up panel for the Meet Frank rows and the signal cards. */
+  .mock-dark {
+    background: var(--ink);
+    border-radius: var(--r-card);
+    color: #fff;
+  }
 
-/* ---------- Small state changes ---------- */
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-.fade-in {
-  animation: fade-in var(--dur) var(--ease) both;
-}
-@keyframes field-shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-2px); }
-  75% { transform: translateX(2px); }
-}
-.field-shake {
-  animation: field-shake 240ms ease-out;
+  /* Buttons: 8px radius; hover darkens a touch and lifts 1px. */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: var(--r-control);
+    font-weight: 500;
+    white-space: nowrap;
+    transition: transform 150ms ease-out, background-color 150ms ease-out, border-color 150ms ease-out, color 150ms ease-out;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+  .btn-primary { background: var(--ink); color: #fff; }
+  .btn-primary:hover { background: #000; }
+  .btn-outline { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+  .btn-outline:hover { background: rgba(12, 12, 11, 0.04); }
+  .btn-text { background: transparent; color: var(--ink); }
+  .btn-text:hover { background: rgba(12, 12, 11, 0.04); }
+  .btn:disabled, .btn[aria-disabled="true"] { opacity: 0.45; pointer-events: none; transform: none; }
+
+  /* Serif accent: only the tabbed-card feature titles and the Meet Frank rows. */
+  .serif {
+    font-family: "Fraunces Variable", "Fraunces", Georgia, serif;
+    font-weight: 500;
+    font-variation-settings: "opsz" 72, "SOFT" 40, "WONK" 0;
+  }
+
+  /* Progress line under the active tab: 5 s, matches the auto-advance. */
+  .tab-progress {
+    transform-origin: left center;
+    animation: tab-progress 5s linear forwards;
+  }
+  @keyframes tab-progress {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  /* Logo marquee: transform only. */
+  @keyframes marquee-scroll {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-50%, 0, 0); }
+  }
+
+  /* Scroll-in: cards fade up 16px, 300 ms, ease-out. A .stagger wrapper animates its children one by one. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity var(--dur-fade) ease-out, transform var(--dur-fade) ease-out;
+    transition-delay: var(--delay, 0ms);
+  }
+  .reveal[data-inview="true"] { opacity: 1; transform: none; }
+  .reveal.stagger { opacity: 1; transform: none; }
+  .reveal.stagger > * {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity var(--dur-fade) ease-out, transform var(--dur-fade) ease-out;
+    transition-delay: calc(var(--delay, 0ms) + var(--i, 0) * 60ms);
+  }
+  .reveal.stagger > :nth-child(2) { --i: 1; }
+  .reveal.stagger > :nth-child(3) { --i: 2; }
+  .reveal.stagger > :nth-child(4) { --i: 3; }
+  .reveal.stagger > :nth-child(5) { --i: 4; }
+  .reveal.stagger > :nth-child(6) { --i: 5; }
+  .reveal.stagger > :nth-child(7) { --i: 6; }
+  .reveal.stagger > :nth-child(n + 8) { --i: 7; }
+  .reveal.stagger[data-inview="true"] > * { opacity: 1; transform: none; }
+
+  .fade-in { animation: fade-in 300ms ease-out both; }
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  /* Chat widget and dropdown entrance. */
+  .rise-in { animation: rise-in 320ms var(--ease-out) both; }
+  @keyframes rise-in {
+    from { opacity: 0; transform: translateY(10px) scale(0.985); }
+    to { opacity: 1; transform: none; }
+  }
+
+  /* Hide scrollbars on horizontal swipe rows without disabling scrolling. */
+  .no-scrollbar { scrollbar-width: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+
+  /* Form controls: 8px radius, hairline border, ink focus ring from the base layer. */
+  .control {
+    width: 100%;
+    border-radius: var(--r-control);
+    border: 1px solid rgba(12, 12, 11, 0.2);
+    background: #fff;
+    color: var(--ink);
+    padding: 0 1rem;
+    transition: border-color 150ms ease-out;
+  }
+  .control::placeholder { color: var(--muted); }
+  .control:hover { border-color: rgba(12, 12, 11, 0.45); }
+  .control[aria-invalid="true"] { border-color: #b82a2a; }
+
+  /* Native checkbox, restyled to the system: square, 8px/3px radius, ink when checked. */
+  .checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    flex: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    border: 1.5px solid rgba(12, 12, 11, 0.45);
+    background: #fff;
+    display: inline-grid;
+    place-content: center;
+    cursor: pointer;
+    transition: background-color 120ms ease-out, border-color 120ms ease-out;
+  }
+  .checkbox::before {
+    content: "";
+    width: 11px;
+    height: 11px;
+    transform: scale(0);
+    transition: transform 120ms ease-out;
+    background: #fff;
+    clip-path: polygon(14% 44%, 0 62%, 40% 100%, 100% 20%, 86% 6%, 40% 70%);
+  }
+  .checkbox:checked { background: var(--ink); border-color: var(--ink); }
+  .checkbox:checked::before { transform: scale(1); }
+  .checkbox[aria-invalid="true"] { border-color: #b82a2a; }
 }
 
 /* Nothing may stay hidden where reveals cannot run. */
 @media print {
-  .reveal,
-  .stagger > *,
-  .table-pill,
-  .rule {
-    opacity: 1 !important;
-    transform: none !important;
-    filter: none !important;
-  }
+  .reveal, .reveal.stagger > * { opacity: 1 !important; transform: none !important; }
 }
 
-/* ---------- Reduced motion: everything settles instantly ---------- */
+/* Everything that moves stops moving. */
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-delay: 0ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    transition-delay: 0ms !important;
-  }
-  .drift,
-  .logo-form-glow,
-  .logo-form-drift,
-  .logo-form-turn,
-  .flow-dot,
-  .flow-node-core,
-  .flow-end,
-  .ambient-blob {
-    animation: none;
-  }
-  .flow-path {
-    stroke-dashoffset: 0;
-  }
-  .transform-line {
-    background-size: 100% 2px;
-    color: rgba(255, 255, 255, 0.55);
-  }
-  .transform-to {
-    opacity: 1;
-    transform: none;
-  }
-  .btn-label > span {
-    transform: none !important;
-  }
+  .sphere-bob, .tab-progress, .fade-in, .rise-in { animation: none !important; }
+  .reveal, .reveal.stagger > * { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .btn:hover { transform: none; }
+  * { scroll-behavior: auto !important; }
 }
 
-/* ---------- Services architecture: living systems ---------- */
-/* The engine strip: a light sweeps the line while the strip is on screen. */
-.engine-line {
-  background: linear-gradient(90deg, rgb(var(--rgb-border)) 0 100%);
-}
-.engine-line::after {
-  content: "";
-  position: absolute;
-  inset: -2px 0;
-  background: linear-gradient(90deg, rgb(var(--rgb-accent) / 0) 0%, rgb(var(--rgb-accent)) 50%, rgb(var(--rgb-accent) / 0) 100%);
-  background-size: 22% 100%;
-  background-repeat: no-repeat;
-  animation: engine-sweep 8.4s linear infinite;
-  animation-play-state: paused;
-}
-.engine-line-dark {
-  background: linear-gradient(90deg, rgb(255 255 255 / 0.2) 0 100%);
-}
-[data-active="true"] .engine-line::after {
-  animation-play-state: running;
-}
-@keyframes engine-sweep {
-  from { background-position: -22% 0; }
-  to { background-position: 122% 0; }
-}
-
-@media (min-width: 1024px) {
-  .process {
-    grid-template-columns: repeat(var(--n, 5), minmax(0, 1fr));
+/* ------------------------------------------------------------------
+   Design upgrade: motion and depth (frank-design-upgrade.md §3–§4).
+   All transform/opacity only; everything stops under reduced motion.
+   ------------------------------------------------------------------ */
+@layer components {
+  /* Hero cards lift in one by one on load (60 ms stagger via --i). */
+  .lift-in { animation: lift-in 700ms var(--ease-out) both; animation-delay: calc(200ms + var(--i, 0) * 60ms); }
+  @keyframes lift-in {
+    from { opacity: 0; transform: translateY(28px) scale(0.97); }
+    to { opacity: 1; transform: none; }
   }
-}
-/* The process line: fills as the section arrives, then keeps moving. */
-.process-fill,
-.process-fill-v {
-  transition: width 1200ms var(--ease-emphasized), height 1200ms var(--ease-emphasized);
-}
-.process-fill { width: 0; }
-.process-fill-v { height: 0; }
-.process[data-inview="true"] .process-fill { width: 100%; }
-.process[data-inview="true"] .process-fill-v { height: 100%; }
-.process-dash {
-  background-image: linear-gradient(90deg, rgb(var(--rgb-bg)) 0 50%, transparent 50% 100%);
-  background-size: 14px 1px;
-  opacity: 0;
-  animation: process-march 1.2s linear infinite;
-  animation-play-state: paused;
-}
-.process[data-inview="true"] .process-dash { opacity: 0.55; }
-.process[data-active="true"] .process-dash { animation-play-state: running; }
-@keyframes process-march {
-  from { background-position: 0 0; }
-  to { background-position: 14px 0; }
-}
-.process-dot {
-  left: 0;
-  opacity: 0;
-  animation: process-travel 6s var(--ease-smooth) infinite;
-  animation-play-state: paused;
-}
-.process[data-inview="true"] .process-dot { opacity: 1; }
-.process[data-active="true"] .process-dot { animation-play-state: running; }
-@keyframes process-travel {
-  0% { left: 0; opacity: 0; }
-  8% { opacity: 1; }
-  88% { left: calc(100% - 7px); opacity: 1; }
-  100% { left: calc(100% - 7px); opacity: 0; }
-}
-.process-node {
-  transition: background-color var(--dur-fast) ease-out, border-color var(--dur-fast) ease-out, color var(--dur-fast) ease-out;
-  transition-delay: calc(300ms + var(--i, 0) * 180ms);
-}
-.process[data-inview="true"] .process-node {
-  background-color: rgb(var(--rgb-accent));
-  border-color: rgb(var(--rgb-accent));
-  color: rgb(var(--rgb-fg));
-}
 
-/* ---------- Why Flowa: the engine spine ----------
-   Same language as the process line, turned vertical: the accent fills
-   downward as the list arrives, a dash marches along it, a point of
-   light travels it, each node lights in turn and the arc to each
-   interface card draws itself. All of it is driven by the two data
-   attributes on the list, so it costs no animation frames. */
-.why-engine-fill {
-  height: 0;
-  transition: height 1600ms var(--ease-emphasized);
-}
-.why-engine[data-inview="true"] .why-engine-fill { height: 100%; }
-.why-engine-dash {
-  background-image: linear-gradient(180deg, rgb(var(--rgb-bg)) 0 50%, transparent 50% 100%);
-  background-size: 1px 14px;
-  opacity: 0;
-  animation: why-engine-march 1.2s linear infinite;
-  animation-play-state: paused;
-}
-.why-engine[data-inview="true"] .why-engine-dash { opacity: 0.55; }
-.why-engine[data-active="true"] .why-engine-dash { animation-play-state: running; }
-@keyframes why-engine-march {
-  from { background-position: 0 0; }
-  to { background-position: 0 14px; }
-}
-.why-engine-dot {
-  top: 0;
-  opacity: 0;
-  animation: why-engine-travel 7s var(--ease-smooth) infinite;
-  animation-play-state: paused;
-}
-.why-engine[data-inview="true"] .why-engine-dot { opacity: 1; }
-.why-engine[data-active="true"] .why-engine-dot { animation-play-state: running; }
-@keyframes why-engine-travel {
-  0% { top: 0; opacity: 0; }
-  8% { opacity: 1; }
-  88% { top: calc(100% - 7px); opacity: 1; }
-  100% { top: calc(100% - 7px); opacity: 0; }
-}
-.why-engine-node {
-  transition: background-color var(--dur-fast) ease-out, border-color var(--dur-fast) ease-out, color var(--dur-fast) ease-out;
-  transition-delay: calc(200ms + var(--i, 0) * 160ms);
-}
-.why-engine[data-inview="true"] .why-engine-node {
-  background-color: rgb(var(--rgb-accent));
-  border-color: rgb(var(--rgb-accent));
-  color: rgb(var(--rgb-fg));
-}
-.why-engine-arc {
-  color: rgb(var(--rgb-accent) / 0.5);
-  stroke-dasharray: 3 4;
-  stroke-dashoffset: 60;
-  transition: stroke-dashoffset 900ms var(--ease-smooth);
-  transition-delay: calc(400ms + var(--i, 0) * 160ms);
-}
-.why-engine[data-inview="true"] .why-engine-arc { stroke-dashoffset: 0; }
+  /* Content swap: crossfade plus a 12px slide (tabs, cycling signals, accordion mock). */
+  .swap-in { animation: swap-in 450ms var(--ease-out) both; }
+  @keyframes swap-in {
+    from { opacity: 0; transform: translateX(12px); }
+    to { opacity: 1; transform: none; }
+  }
+  .swap-up { animation: swap-up 450ms var(--ease-out) both; }
+  @keyframes swap-up {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: none; }
+  }
+  /* Rows that slide in one by one inside a swapped mock (set --i inline). */
+  .row-in { animation: swap-in 420ms var(--ease-out) both; animation-delay: calc(120ms + var(--i, 0) * 90ms); }
 
-/* Pipeline hero: three points drifting between spine and object. */
-@keyframes particle-drift {
-  0% { transform: translate(0, 0); opacity: 0; }
-  15% { opacity: 1; }
-  85% { opacity: 1; }
-  100% { transform: translate(36px, -18px); opacity: 0; }
-}
-.particle {
-  animation: particle-drift 3.3s var(--ease-smooth) infinite;
-}
+  /* Typing indicator: three dots. */
+  .typing { display: inline-flex; gap: 4px; align-items: center; }
+  .typing > span { width: 6px; height: 6px; border-radius: 999px; background: currentColor; opacity: 0.35; animation: typing 1s ease-in-out infinite; }
+  .typing > span:nth-child(2) { animation-delay: 0.15s; }
+  .typing > span:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes typing {
+    0%, 100% { opacity: 0.3; transform: translateY(0); }
+    50% { opacity: 1; transform: translateY(-3px); }
+  }
 
-/* Dialer: audio bars while connected. */
-@keyframes wave {
-  0%, 100% { height: 20%; }
-  50% { height: 100%; }
-}
-.wave {
-  height: 20%;
-  animation: wave 900ms ease-in-out infinite;
-}
+  /* Button label slide: the label slides up and is replaced by itself; arrows nudge 3px. */
+  .btn-label { position: relative; display: inline-flex; overflow: hidden; height: 1.5em; line-height: 1.5em; }
+  .btn-label > span { display: block; transition: transform 320ms var(--ease-out); }
+  .btn-label > span + span { position: absolute; left: 0; top: 100%; }
+  .btn:hover .btn-label > span { transform: translateY(-100%); }
+  .btn .btn-arrow { transition: transform 200ms var(--ease-out); }
+  .btn:hover .btn-arrow { transform: translateX(3px); }
 
-/* Reply routing: each step of a route arrives after the previous. */
-@keyframes route-in {
-  from { opacity: 0; transform: translateX(-6px); }
-  to { opacity: 1; transform: none; }
-}
-.route-step {
-  animation: route-in var(--dur) var(--ease-emphasized) both;
-  animation-delay: calc(var(--i, 0) * 110ms);
-}
+  /* Trend line draws itself once in view (pathLength="1"). */
+  .draw-line { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.6s var(--ease-out); }
+  [data-inview="true"] .draw-line, .draw-line[data-inview="true"] { stroke-dashoffset: 0; }
+  .fill-area { opacity: 0; transition: opacity 900ms ease-out 900ms; }
+  [data-inview="true"] .fill-area { opacity: 0.14; }
 
-/* Operator scene: lines from the objects to the person, drawn on arrival. */
-.operator-line {
-  fill: none;
-  stroke: rgb(var(--rgb-fg) / 0.35);
-  stroke-width: 0.35;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  transition: stroke-dashoffset 1100ms var(--ease-emphasized);
-  transition-delay: calc(400ms + var(--t, 0ms));
-}
-[data-inview="true"] .operator-line {
-  stroke-dashoffset: 0;
-}
-.operator-line-dark {
-  stroke: rgb(255 255 255 / 0.35);
+  /* Calendar slots fill one by one once in view. */
+  .slot { opacity: 0; transform: scale(0.85); transition: opacity 360ms var(--ease-out), transform 360ms var(--ease-out); transition-delay: calc(200ms + var(--i, 0) * 180ms); }
+  [data-inview="true"] .slot { opacity: 1; transform: none; }
+
+  /* Glass card behind the front card in layered mock-ups. */
+  .glass { background: rgba(255, 255, 255, 0.7); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.6); }
+
+  /* Soft square "pixel" blocks around the /frank hero portrait. */
+  .pixel { position: absolute; border-radius: 6px; background: var(--panel); }
+  .pixel.grey { background: #e9e8e3; }
+
+  /* Live dot pulse. */
+  .live-dot { position: relative; }
+  .live-dot::after { content: ""; position: absolute; inset: -3px; border-radius: 999px; background: currentColor; opacity: 0.4; animation: live 1.8s ease-out infinite; }
+  @keyframes live {
+    from { transform: scale(0.6); opacity: 0.5; }
+    to { transform: scale(1.8); opacity: 0; }
+  }
+
+  /* Accordion body (the /frank "How Frank works" steps). */
+  .acc-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 400ms var(--ease-out); }
+  .acc-body[data-open="true"] { grid-template-rows: 1fr; }
+  .acc-body > div { overflow: hidden; }
+
+  /* The dark contact band: orange focus ring on the white form card. */
+  .contact-dark .control:focus-visible, .contact-dark .checkbox:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; border-color: var(--brand); }
+
+  /* Quiz tiles press in on click. */
+  .press:active { transform: scale(0.98); }
+
+  /* Step check in the pricing quiz. */
+  .check-pop { animation: check-pop 380ms var(--ease-out) both; }
+  @keyframes check-pop {
+    0% { transform: scale(0.4); opacity: 0; }
+    70% { transform: scale(1.15); opacity: 1; }
+    100% { transform: scale(1); }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .engine-line::after,
-  .process-dash,
-  .process-dot,
-  .why-engine-dash,
-  .why-engine-dot,
-  .particle,
-  .wave,
-  .route-step {
-    animation: none;
-  }
-  .process-dot { left: calc(100% - 7px); opacity: 1; }
-  .why-engine-dot { top: calc(100% - 7px); opacity: 1; }
-  .why-engine-arc { stroke-dashoffset: 0; }
-  .operator-line { stroke-dashoffset: 0; }
-  .route-step { opacity: 1; transform: none; }
+  .lift-in, .swap-in, .swap-up, .row-in, .typing > span, .live-dot::after, .check-pop { animation: none !important; }
+  .draw-line { stroke-dashoffset: 0 !important; transition: none !important; }
+  .fill-area { opacity: 0.14 !important; transition: none !important; }
+  .slot { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .btn-label > span { transition: none !important; }
+  .btn:hover .btn-label > span { transform: none !important; }
+  .acc-body { transition: none !important; }
 }
-
-/* ---------- Pricing: the panel, the lifted column and the O ---------- */
-.pricing-panel {
-  background-image: linear-gradient(180deg, rgb(255 255 255 / 0.85), rgb(var(--rgb-card) / 0.55)), var(--gradient-depth);
-}
-/* The recommended column: its own surface behind the grid, lifted a little above the rest. */
-.pricing-spot {
-  background: linear-gradient(180deg, rgb(var(--rgb-card)), rgb(var(--rgb-accent) / 0.07));
-  border: 1px solid rgb(var(--rgb-accent) / 0.45);
-  box-shadow: 0 1px 2px rgb(var(--rgb-fg) / 0.04), 0 30px 60px -28px rgb(var(--rgb-accent-band) / 0.5), inset 0 1px 0 rgb(255 255 255 / 0.8);
-}
-.pricing-spot::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto 0;
-  height: 3px;
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  background: var(--gradient-accent);
-}
-/* The O: a physical object resting on the grid's corner, tilted, with its own light and shadow. */
-.o-mark {
-  display: block;
-  transform: rotate(-8deg);
-  transition: transform var(--dur-slow) var(--ease-emphasized);
-}
-.o-mark img {
-  filter: drop-shadow(0 2px 2px rgb(var(--rgb-fg) / 0.08)) drop-shadow(0 18px 28px rgb(var(--rgb-accent-band) / 0.35));
-  transition: filter var(--dur-slow) var(--ease-emphasized), transform var(--dur-slow) var(--ease-emphasized);
-}
-.o-mark-glow {
-  position: absolute;
-  inset: 10% -10% -20% -10%;
-  border-radius: 999px;
-  background: radial-gradient(closest-side, rgb(var(--rgb-accent) / 0.45), rgb(var(--rgb-accent) / 0));
-  filter: blur(14px);
-  transition: opacity var(--dur-slow) var(--ease-emphasized);
-}
-.pricing-panel:hover .o-mark {
-  transform: rotate(-6deg) translate(-1px, -2px);
-}
-.pricing-panel:hover .o-mark img {
-  filter: drop-shadow(0 2px 2px rgb(var(--rgb-fg) / 0.08)) drop-shadow(0 24px 34px rgb(var(--rgb-accent-band) / 0.42));
-}
-@media (prefers-reduced-motion: reduce) {
-  .o-mark, .o-mark img, .o-mark-glow { transition: none; }
+@media print {
+  .slot { opacity: 1 !important; transform: none !important; }
+  .draw-line { stroke-dashoffset: 0 !important; }
 }

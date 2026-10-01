@@ -1,26 +1,27 @@
-// Fails the build if any user-facing string in the content modules still
-// contains a bracketed placeholder like "[Company name]", if an internal
-// pricing figure leaks into public content, if a statistic claims to be
-// a benchmark without naming its source, or if a case study would show
-// metrics without being verified. Missing content must be omitted from
-// the page, never shown as a note to the founders.
+// Fails the build if the content modules break one of the brief's rules:
+//  - a bracketed placeholder other than a [CONFIRM …] marker (brief §0:
+//    [CONFIRM] placeholders stay exactly as written; anything else is a
+//    mistake), and any placeholder at all once VITE_DRAFT=false;
+//  - a price, a price range or a "from £…" (brief §0.5, §6.3): the only
+//    pound figures allowed are the two verified track-record stats;
+//  - a package name (brief §5: Pilot / Core / Plus / Scale are removed);
+//  - an em dash in body copy (brief §1).
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { build } from "esbuild";
 import fs from "node:fs";
 
 const root = process.cwd();
+const DRAFT = process.env.VITE_DRAFT !== "false";
 const tmp = path.join(root, "node_modules", ".flowa-content-check.mjs");
 fs.writeFileSync(
   path.join(root, "node_modules", ".flowa-content-entry.ts"),
-  `export * as site from "@/content/site.en";
-export * as hub from "@/content/services-hub";
-export * as cases from "@/content/cases";
-export * as demo from "@/content/demo";
-export { services } from "@/content/services";
-export * as pricing from "@/content/pricing";
-export * as proof from "@/content/proof";
-export * as whyFlowa from "@/content/why-flowa";
+  `export * as chrome from "@/content/frank/chrome";
+export * as home from "@/content/frank/home";
+export * as pages from "@/content/frank/pages";
+export * as pricing from "@/content/frank/pricing";
+export * as form from "@/content/frank/form";
+export * as clients from "@/content/frank/clients";
 export * as legal from "@/content/legal";`,
 );
 await build({
@@ -37,74 +38,38 @@ const content = await import(pathToFileURL(tmp).href);
 fs.rmSync(tmp, { force: true });
 fs.rmSync(path.join(root, "node_modules", ".flowa-content-entry.ts"), { force: true });
 
-const PLACEHOLDER = /\[[^\]]+\]/;
+const PLACEHOLDER = /\[[^\]]+\]/g;
+const CONFIRM = /^\[CONFIRM\b[^\]]*\]$/;
+const PRICE = /£\s?\d|\bfrom £|\d\s?(?:GBP|DKK|EUR)\b|\bper month\b|\/month\b/i;
+const ALLOWED_STATS = ["£3.4M+", "£90K+"];
+const PACKAGE = /\b(Pilot|Core|Plus|Scale)\b/;
+const EM_DASH = /—/;
+
 const problems = [];
+const confirms = [];
 
-function walk(value, trail) {
+function walk(value, trail, { packages = true } = {}) {
   if (typeof value === "string") {
-    if (PLACEHOLDER.test(value)) problems.push(`${trail}: "${value.slice(0, 70)}"`);
-  } else if (Array.isArray(value)) {
-    value.forEach((v, i) => walk(v, `${trail}[${i}]`));
-  } else if (value && typeof value === "object") {
-    for (const [k, v] of Object.entries(value)) walk(v, trail ? `${trail}.${k}` : k);
-  }
+    for (const m of value.match(PLACEHOLDER) ?? []) {
+      if (CONFIRM.test(m)) confirms.push(`${trail}: ${m}`);
+      else problems.push(`${trail}: placeholder "${m}"`);
+    }
+    if (!ALLOWED_STATS.includes(value) && PRICE.test(value)) problems.push(`${trail}: contains a price: "${value.slice(0, 80)}"`);
+    if (packages && PACKAGE.test(value)) problems.push(`${trail}: contains a package name: "${value.slice(0, 80)}"`);
+    if (EM_DASH.test(value)) problems.push(`${trail}: em dash in copy: "${value.slice(0, 80)}"`);
+  } else if (Array.isArray(value)) value.forEach((v, i) => walk(v, `${trail}[${i}]`, { packages }));
+  else if (value && typeof value === "object") for (const [k, v] of Object.entries(value)) walk(v, trail ? `${trail}.${k}` : k, { packages });
 }
 
-for (const [name, value] of Object.entries(content.site)) walk(value, `site.${name}`);
-walk(content.pricing, "pricing");
-walk(content.proof, "proof");
-walk(content.hub, "servicesHub");
-walk(content.cases, "cases");
-walk(content.demo, "demo");
-walk(content.whyFlowa, "whyFlowa");
+for (const name of ["chrome", "home", "pages", "pricing", "form", "clients"]) walk(content[name], name);
 walk(content.legal, "legal");
-walk(content.services, "services");
 
-// Pricing: one public source of truth. Scale has no public price, and no internal
-// starting figure may appear anywhere in the content.
-const INTERNAL = /3[,.]?600/;
-function scan(value, trail) {
-  if (typeof value === "string") {
-    if (INTERNAL.test(value)) problems.push(`${trail}: contains an internal pricing figure`);
-  } else if (Array.isArray(value)) value.forEach((v, i) => scan(v, `${trail}[${i}]`));
-  else if (value && typeof value === "object") for (const [k, v] of Object.entries(value)) scan(v, `${trail}.${k}`);
-}
-scan(content.pricing, "pricing");
-scan(content.site, "site");
-scan(content.services, "services");
-const scale = content.pricing.packages.find((p) => p.id === "scale");
-if (scale && scale.monthly !== null) problems.push("pricing: Scale must not carry a public monthly price");
-for (const p of content.pricing.packages) {
-  if (typeof p.setup !== "number" || (p.monthly !== null && typeof p.monthly !== "number")) problems.push(`pricing: ${p.id} has a malformed price`);
-}
-// LinkedIn used to be refused here: it was a planned service, not a current one, so
-// it had no place in the package table. It is a live channel on every package now,
-// so the only rule left is that every feature states its availability on all four.
-for (const f of content.pricing.pricingFeatures) {
-  for (const id of ["pilot", "core", "plus", "scale"]) if (typeof f[id] !== "boolean") problems.push(`pricing feature ${f.id}: missing ${id}`);
-}
-
-// Statistics: a benchmark must name its source; a verified stat must have a value or be null (pending), never a placeholder word.
-for (const s of content.services) {
-  for (const stat of s.stats.items) {
-    if (stat.sourceType === "benchmark" && !stat.source) problems.push(`services/${s.slug} stat "${stat.label}": benchmark without a source`);
-    if (!["verified", "benchmark", "target", "process"].includes(stat.sourceType)) problems.push(`services/${s.slug} stat "${stat.label}": unknown sourceType`);
-    if (typeof stat.value === "string" && /x%|tbd|tbc|\?/i.test(stat.value)) problems.push(`services/${s.slug} stat "${stat.label}": value "${stat.value}" is a placeholder; use null until verified`);
-  }
-  if (s.system) {
-    for (const n of s.system.nodes) if (!["current", "supporting", "future"].includes(n.status)) problems.push(`services/${s.slug} node "${n.label}": unknown status`);
-  }
-}
-
-// Cases: metrics only with verified === true is enforced by the component; here we refuse a verified case with no client-approved content.
-for (const c of content.cases.caseStudies) {
-  if (c.verified && (!c.testimonial || !c.outcomes.length)) problems.push(`cases: "${c.client}" is marked verified but has no outcomes or testimonial`);
-}
+if (!DRAFT && confirms.length) for (const c of confirms) problems.push(`${c} must be resolved before launch (VITE_DRAFT=false)`);
 
 if (problems.length) {
-  console.error("\nContent check failed — placeholders must be omitted, not shipped:\n");
+  console.error("\nContent check failed:\n");
   for (const p of problems) console.error("  •", p);
   console.error("");
   process.exit(1);
 }
-console.log(`content ok: no placeholders across site, services (${content.services.length}), hub, cases, demo, pricing (${content.pricing.packages.length} packages)`);
+console.log(`content ok: no prices, no package names, no stray placeholders; ${confirms.length} [CONFIRM] item(s) left as written${DRAFT ? " (draft)" : ""}`);

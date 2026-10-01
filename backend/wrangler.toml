@@ -1,6 +1,7 @@
 # Cloudflare Worker for the Flowa lead endpoint.
 #   cd backend && npx wrangler kv namespace create LEADS   (paste the id below)
 #   npx wrangler secret put RESEND_API_KEY
+#   The "Ask a question" box uses Workers AI (the [ai] binding below), free.
 #   npx wrangler deploy
 name = "flowa-contact"
 main = "src/worker.ts"
@@ -10,9 +11,15 @@ compatibility_date = "2025-01-01"
 binding = "LEADS"
 id = "REPLACE_WITH_KV_NAMESPACE_ID"
 
+[ai]
+binding = "AI"
+
 [vars]
 ALLOWED_ORIGINS = "https://flowa.dk,https://www.flowa.dk,https://azam-stack.github.io"
 NOTIFY_TO = "info@flowa.dk"
 NOTIFY_FROM = "Flowa website <website@flowa.dk>"
 RATE_LIMIT = "5"
+ASK_WORKERS_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
+ASK_RATE_LIMIT = "8"
+ASK_DAILY_CAP = "120"
 # CRM_WEBHOOK_URL = "https://hooks.example.com/..."   (optional; token via `wrangler secret put CRM_WEBHOOK_TOKEN`)
