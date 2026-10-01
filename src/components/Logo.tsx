@@ -1,6 +1,10 @@
 import { asset } from "@/lib/asset";
 
-/** The real Flowa wordmark (public/flowa-logo.png), used as-is, not redrawn. */
+/**
+ * The Flowa wordmark on a transparent background: ink letters with the
+ * orange "o" (public/flowa-logo-dark.png, made from the original
+ * flowa-logo.png, which keeps the orange box for other uses).
+ */
 export function Logo({ className = "" }: { className?: string }) {
-  return <img src={asset("flowa-logo.png")} alt="Flowa" width={760} height={320} className={`h-8 w-auto sm:h-9 ${className}`} />;
+  return <img src={asset("flowa-logo-dark.png")} alt="Flowa" width={685} height={202} className={`h-7 w-auto sm:h-8 ${className}`} />;
 }
