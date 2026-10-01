@@ -20,22 +20,14 @@ export type MenuGroup = { key: string; label: string; items: MenuItem[] };
 export const nav = {
   groups: [
     {
-      key: "product",
-      label: "Product",
+      key: "how",
+      label: "How it works",
       items: [
         { title: "Frank – AI Outbound Agent", description: "Meet the agent that fills your calendar.", href: "/frank", icon: "frank" },
-        { title: "How Frank works", description: "Target, spot, reach, book.", href: "/how-it-works", icon: "steps" },
+        { title: "The process", description: "Target, spot, reach, book.", href: "/how-it-works", icon: "steps" },
         { title: "Signals Frank watches", description: "The buying signals behind every meeting.", href: "/signals", icon: "signals" },
         { title: "Channels: Email", description: "Verified data, deliverability, sequences.", href: "/channels/email", icon: "mail" },
         { title: "Channels: LinkedIn", description: "One-to-one notes, approved by a person.", href: "/channels/linkedin", icon: "linkedin" },
-      ],
-    },
-    {
-      key: "resources",
-      label: "Resources",
-      items: [
-        { title: "Cases", description: "Meetings Flowa has created, documented.", href: "/cases", icon: "cases" },
-        { title: "FAQ", description: "Straight answers to the usual questions.", href: "/faq", icon: "faq" },
       ],
     },
     {
@@ -43,10 +35,13 @@ export const nav = {
       label: "Company",
       items: [
         { title: "About us", description: "The people behind Flowa.", href: "/about", icon: "about" },
+        { title: "FAQ", description: "Straight answers to the usual questions.", href: "/faq", icon: "faq" },
         { title: "Contact", description: "Talk to Ahmed or Anton.", href: "/contact", icon: "contact" },
       ],
     },
   ] as MenuGroup[],
+  /** Direct links (no dropdown), shown after the first group and at the end. */
+  results: { label: "Results", href: "/cases" },
   pricing: { label: "Pricing", href: "/pricing" },
   /** Hidden until Flowa provides a URL: while `href` is null the link is not rendered at all. */
   clientDashboard: { label: "Client dashboard", href: null as string | null },

@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState, type ReactNode } from "react";
+import { useEffect, useId, useRef, useState, type ReactNode, Fragment } from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Logo } from "@/components/Logo";
@@ -133,6 +133,9 @@ function MobileSheet({ open, onClose, closeRef }: { open: boolean; onClose: () =
             </div>
           );
         })}
+        <SmartLink href={nav.results.href} onClick={onClose} className={`block border-b border-line py-4 text-[18px] font-medium text-ink ${pathname === nav.results.href ? "underline decoration-brand decoration-2 underline-offset-8" : ""}`}>
+          {nav.results.label}
+        </SmartLink>
         <SmartLink href={nav.pricing.href} onClick={onClose} className={`block border-b border-line py-4 text-[18px] font-medium text-ink ${pathname === nav.pricing.href ? "underline decoration-brand decoration-2 underline-offset-8" : ""}`}>
           {nav.pricing.label}
         </SmartLink>
@@ -195,8 +198,15 @@ export function Nav() {
             <Logo />
           </Link>
           <div className="hidden items-center gap-1 lg:flex">
-            {nav.groups.map((g) => (
-              <Dropdown key={g.key} group={g} open={openGroup === g.key} onOpen={() => setOpenGroup(g.key)} onClose={() => setOpenGroup((o) => (o === g.key ? null : o))} active={isActive(g)} />
+            {nav.groups.map((g, i) => (
+              <Fragment key={g.key}>
+                <Dropdown group={g} open={openGroup === g.key} onOpen={() => setOpenGroup(g.key)} onClose={() => setOpenGroup((o) => (o === g.key ? null : o))} active={isActive(g)} />
+                {i === 0 && (
+                  <SmartLink href={nav.results.href} className={`flex h-10 items-center rounded-control px-3 text-[15px] font-medium transition-colors hover:text-ink ${pathname === nav.results.href ? "text-ink underline decoration-brand decoration-2 underline-offset-[10px]" : "text-ink-2"}`}>
+                    {nav.results.label}
+                  </SmartLink>
+                )}
+              </Fragment>
             ))}
             <SmartLink href={nav.pricing.href} className={`flex h-10 items-center rounded-control px-3 text-[15px] font-medium transition-colors hover:text-ink ${pathname === nav.pricing.href ? "text-ink underline decoration-brand decoration-2 underline-offset-[10px]" : "text-ink-2"}`}>
               {nav.pricing.label}
