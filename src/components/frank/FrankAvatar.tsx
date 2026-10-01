@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import { asset } from "@/lib/asset";
 import { useReducedMotion } from "@/hooks/useInView";
 
@@ -8,8 +9,10 @@ import { useReducedMotion } from "@/hooks/useInView";
  * place that maps a pose to a file, so swapping art never touches callers.
  *
  * - `round`: the face crop (frank-face.webp), for chat, nav and avatars.
- * - `video`: plays the idle loop (public/video/frank-idle.*) with the
- *   portrait as poster; under reduced motion the still is shown instead.
+ * - `video`: shows the portrait still, and plays the idle loop
+ *   (public/video/frank-idle.*) only while the mouse is over Frank. The
+ *   video is not downloaded until the first hover. Touch devices and
+ *   reduced motion keep the still.
  */
 export type FrankPose = "portrait" | "wave" | "laptop" | "thumbs";
 
@@ -40,28 +43,42 @@ export function FrankAvatar({
   eager?: boolean;
 }) {
   const reduced = useReducedMotion();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(false);
   const alt = decorative ? "" : FRANK_ALT;
   const src = asset(round ? "images/frank/frank-face.webp" : FILE[pose]);
   const size = round ? 256 : 1024;
+  // The idle loop only plays while the pointer is over Frank (mouse, not touch).
+  const hoverable = video && !reduced;
+  const start = (e: React.PointerEvent) => {
+    if (!hoverable || e.pointerType === "touch") return;
+    const v = videoRef.current;
+    if (!v) return;
+    v.currentTime = 0;
+    void v.play().then(() => setPlaying(true)).catch(() => undefined);
+  };
+  const stop = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    setPlaying(false);
+    v.pause();
+  };
   return (
-    <div className={`${/\b(absolute|fixed)\b/.test(className) ? "" : "relative"} overflow-hidden bg-[#EFE9E8] ${round ? "rounded-full" : ""} ${className}`}>
-      {video && !reduced ? (
+    <div onPointerEnter={start} onPointerLeave={stop} className={`${/\b(absolute|fixed)\b/.test(className) ? "" : "relative"} overflow-hidden bg-[#EFE9E8] ${round ? "rounded-full" : ""} ${className}`}>
+      <img src={src} alt={alt} width={size} height={size} loading={eager ? "eager" : "lazy"} decoding="async" className="absolute inset-0 h-full w-full object-cover" />
+      {hoverable && (
         <video
-          className="absolute inset-0 h-full w-full object-cover"
-          autoPlay
+          ref={videoRef}
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${playing ? "opacity-100" : "opacity-0"}`}
           muted
           loop
           playsInline
-          preload="metadata"
-          poster={asset(FILE.portrait)}
-          aria-label={decorative ? undefined : FRANK_ALT}
-          aria-hidden={decorative || undefined}
+          preload="none"
+          aria-hidden="true"
         >
           <source src={asset("video/frank-idle.webm")} type="video/webm" />
           <source src={asset("video/frank-idle.mp4")} type="video/mp4" />
         </video>
-      ) : (
-        <img src={src} alt={alt} width={size} height={size} loading={eager ? "eager" : "lazy"} decoding="async" className="absolute inset-0 h-full w-full object-cover" />
       )}
     </div>
   );
