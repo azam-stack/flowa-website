@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useLocation } from "react-router-dom";
 import { SmartLink } from "@/components/SmartLink";
+import { SITE_CONFIG } from "@/config/site";
 import { chat } from "@/content/frank/chrome";
 import { useReducedMotion } from "@/hooks/useInView";
 import { track } from "@/lib/analytics";
@@ -40,7 +41,42 @@ export function ChatWidget() {
   const [mode, setMode] = useState<Mode>("avatar");
   const [typing, setTyping] = useState(true);
   const [draft, setDraft] = useState("");
-  const [asked, setAsked] = useState<string | null>(null);
+  type Msg = { from: "me" | "frank"; text: string; handoff?: boolean };
+  const [msgs, setMsgs] = useState<Msg[]>([]);
+  const [thinking, setThinking] = useState(false);
+  const listRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
+  }, [msgs, thinking]);
+
+  /** Answers from Flowa's approved facts via the same endpoint as the FAQ ask box. */
+  const ask = async (text: string) => {
+    const q = text.trim().slice(0, 300);
+    if (q.length < 1 || thinking) return;
+    setMsgs((m) => [...m, { from: "me", text: q }]);
+    if (/^(hi|hey|hello|hej|hejsa|hallo|yo|good (morning|afternoon|evening)|morning)[!. ]*$/i.test(q) || q.length < 3) {
+      setMsgs((m) => [...m, { from: "frank", text: chat.smallTalk }]);
+      return;
+    }
+    if (!SITE_CONFIG.askEndpoint) {
+      setMsgs((m) => [...m, { from: "frank", text: chat.error, handoff: true }]);
+      return;
+    }
+    setThinking(true);
+    track("ask_submit", { via: "chat" });
+    try {
+      const res = await fetch(SITE_CONFIG.askEndpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ question: q }) });
+      if (res.status === 429) setMsgs((m) => [...m, { from: "frank", text: chat.limited, handoff: true }]);
+      else {
+        const data = (await res.json()) as { ok?: boolean; answer?: string; handoff?: boolean };
+        setMsgs((m) => [...m, data.ok && data.answer ? { from: "frank", text: data.answer, handoff: data.handoff } : { from: "frank", text: chat.error, handoff: true }]);
+      }
+    } catch {
+      setMsgs((m) => [...m, { from: "frank", text: chat.error, handoff: true }]);
+    } finally {
+      setThinking(false);
+    }
+  };
   const { pathname } = useLocation();
   const reduced = useReducedMotion();
   const panelRef = useRef<HTMLDivElement>(null);
@@ -49,7 +85,7 @@ export function ChatWidget() {
   // A new page: back to the avatar; the teaser comes back after 8 s unless dismissed.
   useEffect(() => {
     setMode("avatar");
-    setAsked(null);
+    setMsgs([]);
     setDraft("");
     // Mobile: the avatar only, so nothing ever covers content.
     if (wasDismissed() || window.matchMedia("(max-width: 767px)").matches) return;
@@ -79,8 +115,8 @@ export function ChatWidget() {
 
   const open = (question?: string) => {
     track("chat_open", { via: question ? "message" : mode === "teaser" ? "teaser" : "avatar" });
-    if (question) setAsked(question);
     setMode("panel");
+    if (question) void ask(question);
   };
   const close = () => {
     track("chat_close");
@@ -90,8 +126,9 @@ export function ChatWidget() {
   };
   const send = (e: FormEvent) => {
     e.preventDefault();
-    if (draft.trim()) setAsked(draft.trim());
+    const q = draft;
     setDraft("");
+    void ask(q);
   };
 
   return (
@@ -132,27 +169,50 @@ export function ChatWidget() {
               <Close size={20} />
             </button>
           </div>
-          <div className="flex max-h-[50vh] flex-col gap-3 overflow-y-auto px-4 py-4">
+          <div ref={listRef} className="flex max-h-[50vh] flex-col gap-3 overflow-y-auto px-4 py-4" aria-live="polite">
             <p className="max-w-[88%] rounded-[16px] rounded-bl-[4px] bg-soft px-3.5 py-2.5 text-[14px] text-ink-2">{chat.greeting}</p>
-            {asked && <p className="ml-auto max-w-[85%] rounded-[16px] rounded-br-[4px] bg-ink px-3.5 py-2.5 text-[14px] text-white">{asked}</p>}
-            <p className="max-w-[88%] rounded-[16px] rounded-bl-[4px] bg-soft px-3.5 py-2.5 text-[14px] text-ink-2">{chat.quickRepliesHeading}</p>
-            <div className="flex flex-wrap gap-2 pl-1">
-              {chat.quickReplies.map((q) => (
-                <SmartLink key={q.href} href={q.href} onClick={() => track("chat_quick_reply", { label: q.label })} className="rounded-pill border border-ink px-3.5 py-2 text-[14px] font-medium text-ink transition-colors hover:bg-ink hover:text-white">
-                  {q.label}
-                </SmartLink>
-              ))}
-            </div>
+            {msgs.length === 0 && (
+              <div className="flex flex-wrap gap-2 pl-1">
+                {chat.quickReplies.map((q) => (
+                  <SmartLink key={q.href} href={q.href} onClick={() => track("chat_quick_reply", { label: q.label })} className="rounded-pill border border-ink px-3.5 py-2 text-[14px] font-medium text-ink transition-colors hover:bg-ink hover:text-white">
+                    {q.label}
+                  </SmartLink>
+                ))}
+              </div>
+            )}
+            {msgs.map((m, i) =>
+              m.from === "me" ? (
+                <p key={i} className="ml-auto max-w-[85%] rounded-[16px] rounded-br-[4px] bg-ink px-3.5 py-2.5 text-[14px] text-white">
+                  {m.text}
+                </p>
+              ) : (
+                <div key={i} className="swap-up max-w-[88%] rounded-[16px] rounded-bl-[4px] bg-soft px-3.5 py-2.5 text-[14px] leading-relaxed text-ink-2">
+                  {m.text}
+                  {m.handoff && (
+                    <SmartLink href={chat.bookMeetingHref} onClick={() => track("cta_click", { label: "chat_handoff_book" })} className="mt-2.5 block w-fit rounded-pill bg-ink px-3.5 py-1.5 text-[13px] font-medium text-white">
+                      {chat.bookMeeting}
+                    </SmartLink>
+                  )}
+                </div>
+              ),
+            )}
+            {thinking && (
+              <span className="typing w-fit rounded-[16px] rounded-bl-[4px] bg-soft px-4 py-3 text-ink" aria-label="Frank is typing">
+                <span />
+                <span />
+                <span />
+              </span>
+            )}
           </div>
           <form onSubmit={send} className="flex items-center gap-1.5 border-t border-line py-2 pl-4 pr-2">
             <label htmlFor="ask-frank" className="sr-only">
               {chat.placeholder}
             </label>
-            <input id="ask-frank" value={draft} onChange={(e) => setDraft(e.target.value)} placeholder={chat.placeholder} autoComplete="off" className="h-10 min-w-0 flex-1 bg-transparent text-[14px] text-ink outline-none placeholder:text-muted" />
+            <input id="ask-frank" maxLength={300} value={draft} onChange={(e) => setDraft(e.target.value)} placeholder={chat.placeholder} autoComplete="off" className="h-10 min-w-0 flex-1 bg-transparent text-[14px] text-ink outline-none placeholder:text-muted" />
             <SmartLink href={chat.bookMeetingHref} onClick={() => track("cta_click", { label: "chat_book_meeting" })} aria-label={chat.bookMeeting} className="grid h-10 w-10 flex-none place-items-center rounded-full border border-line text-ink transition-colors hover:bg-soft">
               <Calendar size={16} />
             </SmartLink>
-            <button type="submit" aria-label={chat.send} className="grid h-10 w-10 flex-none place-items-center rounded-full bg-ink text-white transition-colors hover:bg-black">
+            <button type="submit" disabled={thinking || !draft.trim()} aria-label={chat.send} className="grid h-10 w-10 flex-none place-items-center rounded-full bg-ink text-white transition-colors hover:bg-black disabled:opacity-40">
               <Send size={15} />
             </button>
           </form>

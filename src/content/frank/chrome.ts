@@ -52,7 +52,7 @@ export const nav = {
 } as const;
 
 export const chat = {
-  greeting: "Morning! I found 4 companies hiring SDRs this week. Want me to say hi?",
+  greeting: "Hi, I'm Frank, Flowa's AI agent. Ask me anything about how we book meetings.",
   meta: "Frank · now",
   placeholder: "Ask Frank anything",
   bookMeeting: "Book a call",
@@ -60,7 +60,10 @@ export const chat = {
   send: "Send",
   open: "Open chat with Frank",
   close: "Close chat",
-  quickRepliesHeading: "Here is what I can help with:",
+  quickRepliesHeading: "Or pick one:",
+  smallTalk: "Hi! What would you like to know about Flowa? For example how we find leads, who writes the messages, or how a qualified meeting is defined.",
+  error: "I couldn't answer just now. Email info@flowa.dk and Ahmed or Anton will reply within one working day.",
+  limited: "That's a lot of questions. Book a call and ask Ahmed and Anton directly.",
   quickReplies: [
     { label: "How does Frank work?", href: "/how-it-works" },
     { label: "What does it cost?", href: "/pricing" },
