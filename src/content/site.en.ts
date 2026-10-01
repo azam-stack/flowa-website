@@ -124,13 +124,14 @@ export const hero = {
  * Confirm the exact legal spelling/capitalisation of every name with the
  * founders — it must match how each company writes it themselves.
  */
-export type Client = { name: string; slug: string; url: string; scale?: number; format?: "svg" | "png" };
+/** Client logos are deliberately not links: no outbound clicks to client sites. */
+export type Client = { name: string; slug: string; scale?: number; format?: "svg" | "png" };
 export const clients: Client[] = [
-  { name: "Adversus", slug: "adversus", url: "https://adversus.io", format: "png", scale: 0.9 },
-  { name: "Generaxion", slug: "generaxion", url: "https://generaxion.com", format: "png", scale: 0.66 },
-  { name: "Lemon Marketing", slug: "lemon-marketing", url: "https://lemonmarketing.dk", format: "png", scale: 1.1 },
-  { name: "Datapeeps", slug: "datapeeps", url: "https://datapeeps.dk", format: "svg", scale: 1.2 },
-  { name: "Partner Team", slug: "partner-team", url: "https://partnerteam.dk", format: "png", scale: 1.25 },
+  { name: "Adversus", slug: "adversus", format: "png", scale: 0.9 },
+  { name: "Generaxion", slug: "generaxion", format: "png", scale: 0.66 },
+  { name: "Lemon Marketing", slug: "lemon-marketing", format: "png", scale: 1.1 },
+  { name: "Datapeeps", slug: "datapeeps", format: "svg", scale: 1.2 },
+  { name: "Partner Team", slug: "partner-team", format: "png", scale: 1.25 },
 ];
 
 export const clientLogos = {

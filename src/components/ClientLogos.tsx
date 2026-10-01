@@ -137,21 +137,15 @@ export function ClientLogos() {
 function LogoLink({ client, ariaHidden, onImgLoad }: { client: Client; ariaHidden?: boolean; onImgLoad?: () => void }) {
   const scale = client.scale ?? 1;
   return (
-    <a
-      href={client.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-hidden={ariaHidden || undefined}
-      tabIndex={ariaHidden ? -1 : undefined}
-      className="group shrink-0"
-    >
+    <span aria-hidden={ariaHidden || undefined} className="shrink-0">
       <img
         src={asset(`logos/${client.slug}.${client.format ?? "svg"}`)}
         alt={ariaHidden ? "" : client.name}
         onLoad={onImgLoad}
         style={{ transform: `scale(${scale})` }}
-        className="h-[22px] w-auto origin-center grayscale opacity-80 transition-all duration-200 group-hover:grayscale-0 group-hover:opacity-100 md:h-7"
+        draggable={false}
+        className="pointer-events-none h-[22px] w-auto origin-center select-none grayscale opacity-80 md:h-7"
       />
-    </a>
+    </span>
   );
 }
