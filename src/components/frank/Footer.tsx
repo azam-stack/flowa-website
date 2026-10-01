@@ -13,7 +13,10 @@ export function Footer() {
             <Link to="/" aria-label="Flowa home" className="inline-flex rounded-control">
               <Logo />
             </Link>
-            <p className="mt-5 max-w-xs text-[17px] font-medium leading-snug text-ink">{footer.tagline}</p>
+            <p className="mt-5 max-w-xs text-[19px] font-semibold leading-snug tracking-[-0.01em] text-ink">
+              {footer.tagline}
+              <span className="block text-brand-deep">{footer.taglineAccent}</span>
+            </p>
             <a href={`mailto:${footer.email}`} className="mt-3 inline-block text-[15px] text-brand-deep underline decoration-brand/50 underline-offset-4 hover:decoration-brand-deep">
               {footer.email}
             </a>

@@ -78,7 +78,9 @@ export const marquee = {
 } as const;
 
 export const footer = {
-  tagline: "Flowa finds the buyers. You close the deals.",
+  /** Flowa's motto, two-tone: the first line in ink, the second in orange. */
+  tagline: "Creating meetings.",
+  taglineAccent: "That create opportunities.",
   email: "info@flowa.dk",
   columns: [
     {
