@@ -8,7 +8,7 @@
  * certificate has reviewed them. They were written against a specific
  * technical audit of the site:
  *   - no cookies are set, by this site or by anyone else
- *   - no third-party scripts, fonts, pixels or tag managers load, except the Cal.com booking calendar on /demo
+ *   - no third-party scripts, fonts, embeds, pixels or tag managers load
  *   - the only browser storage is one strictly necessary sessionStorage
  *     key that stops a form being submitted twice
  *   - analytics events go to an in-memory array and are sent nowhere
@@ -93,7 +93,7 @@ export const privacyPolicy: LegalDoc = {
     {
       heading: "Visitors to this website",
       blocks: [
-        p("This website sets no cookies of its own. It loads no analytics, advertising pixels or tag managers. The one exception is the booking calendar on the Book a call page, which is provided by Cal.com and loads from their servers when you open that page."),
+        p("This website sets no cookies. It loads no third-party scripts, fonts, embeds, pixels or tag managers, so no other organisation receives anything about your visit through this site."),
         p("The site stores one item in your browser's session storage: a short key that prevents the same enquiry being submitted twice by accident. It is deleted when you close the tab, it is never sent anywhere, and it contains no information about you beyond a hash of what you just submitted."),
         p("The site is hosted on GitHub Pages. Like any web host, GitHub processes the requests your browser makes, including your IP address, in order to serve the page. We do not receive those logs and we do not analyse them."),
       ],
@@ -136,7 +136,7 @@ export const privacyPolicy: LegalDoc = {
         list([
           "GitHub, for hosting this website",
           "FormSubmit, which receives enquiries from the contact form and the quote form and emails them to us",
-          "Cal.com, which provides the booking calendar on our Book a call page and stores the details you enter when you book",
+          "Cal.com, if you book a call through our booking link",
           "Cloudflare Workers AI, which answers questions typed into the \"Ask a question\" box. Questions are not stored by us and should not contain personal data",
           "Cloudflare, for the service that receives enquiries from the contact form, where one is configured",
           "Resend, for sending us an internal notification when an enquiry arrives",
@@ -181,15 +181,15 @@ export const cookiePolicy: LegalDoc = {
   title: "Cookie policy",
   seo: {
     title: "Cookie policy | Flowa",
-    description: "Flowa's website sets no cookies of its own and loads no trackers. This page explains the browser storage the site uses and the Cal.com booking calendar on the Book a call page.",
+    description: "Flowa's website sets no cookies and loads no third-party scripts or trackers. This page explains the single item of strictly necessary browser storage the site does use.",
   },
   intro: "The short version: this website sets no cookies at all, and there is nothing here to consent to. The longer version explains what the site does store and why no consent banner is needed.",
   sections: [
     {
       heading: "We set no cookies",
       blocks: [
-        p("This website does not set a single cookie of its own. It loads no analytics vendor, no tag manager, no advertising pixel, no social media widget, no embedded video and no externally hosted font. Apart from the Cal.com booking calendar on the Book a call page, everything the page needs is served from this domain."),
-        p("That is a deliberate design choice. The only exception is the Cal.com booking calendar on the Book a call page: when you open that page, the calendar loads from Cal.com, which may use its own strictly necessary cookies to run the booking. Cal.com's own privacy policy applies to that part."),
+        p("This website does not set a single cookie, first-party or third-party. It loads no analytics vendor, no tag manager, no advertising pixel, no social media widget, no embedded video and no externally hosted font. Everything the page needs is served from this domain."),
+        p("That is a deliberate design choice, not an oversight. It also means no third party learns anything about your visit through this site."),
       ],
     },
     {

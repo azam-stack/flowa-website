@@ -165,6 +165,8 @@ export const contactPage = {
     calendarCta: "Pick a time in our calendar",
     points: ["20 minutes on Microsoft Teams", "Who you want to meet, and whether we can book them", "No slides, no hard sell"],
     formH2: "Rather write to us?",
+    openCalendar: "See available times",
+    opensNote: "Opens our calendar on Cal.com in a new tab.",
     calendarNote: "Pick a time that suits you. A 20-minute intro call on Microsoft Teams with Ahmed and Anton.",
     orForm: "Send us a message and Ahmed or Anton will reply within one working day.",
   },

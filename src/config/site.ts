@@ -25,8 +25,8 @@ export const SITE_CONFIG = {
   leadEndpoint: (env.VITE_CONTACT_ENDPOINT as string | undefined) || "https://formsubmit.co/ajax/ahmed@flowa.dk",
   /** The "Ask a question" box (backend/ worker /api/ask). Unset: the box is not shown. */
   askEndpoint: (env.VITE_ASK_ENDPOINT as string | undefined) || null,
-  /** Every "Book a call" button goes here: the /book-a-call page with the calendar inline. */
-  bookCallHref: "/book-a-call",
+  /** Every "Book a call" button opens the Cal.com calendar in a new tab (Anton added as a guest). */
+  bookCallHref: (env.VITE_BOOKING_URL as string | undefined) || "https://cal.com/flowa/intro?user=flowa&overlayCalendar=true&guests=anton@flowa.dk",
   /** The Cal.com calendar itself (embedded on /book-a-call; fallback link): the Cal.com intro call. `guests=` puts Anton on every booking. */
   bookingUrl: (env.VITE_BOOKING_URL as string | undefined) || "https://cal.com/flowa/intro?user=flowa&overlayCalendar=true&guests=anton@flowa.dk",
   clientDashboardUrl: (env.VITE_CLIENT_DASHBOARD_URL as string | undefined) || null,

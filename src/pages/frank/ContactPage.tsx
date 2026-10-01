@@ -1,7 +1,8 @@
 import { Container } from "@/components/Container";
-import { CalEmbed } from "@/components/frank/CalEmbed";
+import { SITE_CONFIG } from "@/config/site";
+import { track } from "@/lib/analytics";
 import { ContactBand } from "@/components/frank/ContactBand";
-import { Check } from "@/components/frank/Icons";
+import { Calendar, Check } from "@/components/frank/Icons";
 import { PageHero } from "@/components/frank/PageHero";
 import { Section } from "@/components/frank/SectionHeading";
 import { asset } from "@/lib/asset";
@@ -9,9 +10,8 @@ import { contactPage } from "@/content/frank/pages";
 import { breadcrumbJsonLd, useSeo } from "@/lib/seo";
 
 /**
- * /book-a-call: "Book a call" with the Cal.com calendar inline, so visitors see
- * the free times and book without leaving the site; the message form sits
- * underneath. /contact: the contact band as a full page.
+ * /book-a-call: a card that opens the Cal.com calendar in a new tab, with
+ * the message form underneath. /contact: the contact band as a full page.
  */
 export function ContactPage({ mode }: { mode: "demo" | "contact" }) {
   const t = contactPage[mode];
@@ -43,7 +43,14 @@ export function ContactPage({ mode }: { mode: "demo" | "contact" }) {
                 ))}
               </ul>
             </aside>
-            <CalEmbed />
+            <div className="flex flex-col items-start justify-center rounded-frame border border-ink bg-white p-8 shadow-float md:p-12">
+              <p className="text-h3 text-ink">{d.calendarCta}</p>
+              <p className="mt-2 max-w-lead text-body text-ink-2">{d.calendarNote}</p>
+              <a href={SITE_CONFIG.bookingUrl} target="_blank" rel="noopener noreferrer" onClick={() => track("cta_click", { label: "book_call_page" })} className="btn btn-primary mt-8 h-14 px-8 text-[17px]">
+                <Calendar size={18} /> {d.openCalendar}
+              </a>
+              <p className="mt-3 text-small text-muted">{d.opensNote}</p>
+            </div>
           </div>
         </Container>
       </Section>
