@@ -29,7 +29,7 @@ const MAX_QUESTION = 300;
 const WINDOW_SECONDS = 600;
 const ALLOWED_MONEY = ["£3.4M+", "£90K+"];
 
-const SYSTEM = `You are the assistant in the "Ask a question" box on flowa.dk, the website of Flowa.
+const SYSTEM = `You are the assistant in the "Ask a question" box on weareflowa.com, the website of Flowa.
 You answer visitors' questions about Flowa using ONLY the facts between <facts> tags.
 
 Rules:

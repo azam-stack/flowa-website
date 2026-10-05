@@ -1,5 +1,5 @@
-# Builds flowa.dk and publishes it to GitHub Pages on every push to main.
-# Settings → Pages → Source: "GitHub Actions", custom domain flowa.dk
+# Builds weareflowa.com and publishes it to GitHub Pages on every push to main.
+# Settings → Pages → Source: "GitHub Actions", custom domain weareflowa.com
 # (public/CNAME ships with the build).
 name: Deploy to GitHub Pages
 
@@ -31,7 +31,7 @@ jobs:
         env:
           # Served at the domain root, indexed, with a sitemap.
           VITE_BASE: /
-          VITE_SITE_URL: https://flowa.dk
+          VITE_SITE_URL: https://weareflowa.com
           VITE_DRAFT: "false"
           # Optional overrides (Settings → Variables). Unset = the defaults in src/config/site.ts.
           VITE_CONTACT_ENDPOINT: ${{ vars.VITE_CONTACT_ENDPOINT }}

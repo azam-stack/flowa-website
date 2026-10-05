@@ -15,7 +15,7 @@ id = "REPLACE_WITH_KV_NAMESPACE_ID"
 binding = "AI"
 
 [vars]
-ALLOWED_ORIGINS = "https://flowa.dk,https://www.flowa.dk,https://azam-stack.github.io"
+ALLOWED_ORIGINS = "https://weareflowa.com,https://www.weareflowa.com,https://flowa.dk,https://www.flowa.dk,https://azam-stack.github.io"
 NOTIFY_TO = "info@flowa.dk"
 NOTIFY_FROM = "Flowa website <website@flowa.dk>"
 RATE_LIMIT = "5"

@@ -10,7 +10,7 @@
  *   Defaults to the Cal.com intro call, with Anton added as a guest.
  * - VITE_CLIENT_DASHBOARD_URL: the "Client dashboard" nav link. Unset:
  *   the link is not rendered at all.
- * - VITE_SITE_URL: the canonical origin. Defaults to https://flowa.dk.
+ * - VITE_SITE_URL: the canonical origin. Defaults to https://weareflowa.com.
  * - VITE_DRAFT: "false" removes the noindex meta. Default: draft on.
  */
 const env = import.meta.env;
@@ -18,7 +18,7 @@ const env = import.meta.env;
 export const SITE_CONFIG = {
   name: "Flowa",
   company: "Flowa",
-  siteUrl: ((env.VITE_SITE_URL as string | undefined) || "https://flowa.dk").replace(/\/$/, ""),
+  siteUrl: ((env.VITE_SITE_URL as string | undefined) || "https://weareflowa.com").replace(/\/$/, ""),
   locale: "en_GB",
   lang: "en-GB",
   draft: (env.VITE_DRAFT as string | undefined) !== "false",

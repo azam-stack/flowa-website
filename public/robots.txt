@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://flowa.dk/sitemap.xml
+Sitemap: https://weareflowa.com/sitemap.xml

@@ -50,7 +50,7 @@ export async function submitLead(lead: LeadInput): Promise<SubmitResult> {
     const res = await fetch(SITE_CONFIG.leadEndpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify(isFormSubmit ? { ...lead, _subject: lead.kind === "quote" ? "New quote request from flowa.dk" : `New enquiry from ${lead.first_name} (flowa.dk)`, _template: "table" } : lead),
+      body: JSON.stringify(isFormSubmit ? { ...lead, _subject: lead.kind === "quote" ? "New quote request from weareflowa.com" : `New enquiry from ${lead.first_name} (weareflowa.com)`, _template: "table" } : lead),
       signal: controller.signal,
     });
     if (res.ok) {

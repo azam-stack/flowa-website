@@ -29,7 +29,7 @@ QUALIFIED MEETINGS AND PAYMENT
 - What counts as a qualified meeting is agreed in writing with the client before work starts: role or decision-making authority, genuine interest and a match with the ideal customer profile.
 - The client pays for meetings that are held with someone who meets the agreed criteria. Activity is never billed.
 - If someone doesn't turn up to a meeting, the client tells Flowa within 24 hours and Flowa rebooks the meeting.
-- Flowa does not publish prices. Price depends on market and volume. Visitors get a quote by answering three questions on the pricing page (flowa.dk/pricing), and Flowa replies within one working day.
+- Flowa does not publish prices. Price depends on market and volume. Visitors get a quote by answering three questions on the pricing page (weareflowa.com/pricing), and Flowa replies within one working day.
 
 HOW AN ENGAGEMENT RUNS
 - Week 1: kick-off call with Ahmed and Anton; agree the ideal customer, the roles worth meeting and the written definition of a qualified meeting.
@@ -41,7 +41,7 @@ DATA, PRIVACY AND COMPLIANCE
 - Every list, contact and campaign asset built for a client belongs to the client. Flowa never sells data.
 - Outreach is built around UK GDPR and PECR: business contacts only, in their professional role, with a clear way to opt out.
 - Opt-outs are permanent across every campaign.
-- The privacy policy is at flowa.dk/privacy.
+- The privacy policy is at weareflowa.com/privacy.
 
 SALES TEAMS AND CRM
 - Flowa does not replace a sales team. Flowa fills the calendar; the client's team runs the conversation and the close.
