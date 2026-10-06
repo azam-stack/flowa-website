@@ -2,9 +2,9 @@
 //  - a bracketed placeholder other than a [CONFIRM …] marker (brief §0:
 //    [CONFIRM] placeholders stay exactly as written; anything else is a
 //    mistake), and any placeholder at all once VITE_DRAFT=false;
-//  - a price, a price range or a "from £…" (brief §0.5, §6.3): the only
-//    pound figures allowed are the two verified track-record stats;
-//  - a package name (brief §5: Pilot / Core / Plus / Scale are removed);
+//  - a pound figure other than the published prices (£400, £1,200) and
+//    the two verified track-record stats (the onboarding fee amount is
+//    never published; Ahmed and Anton tell clients themselves);
 //  - an em dash in body copy (brief §1).
 import path from "node:path";
 import { pathToFileURL } from "node:url";
@@ -40,25 +40,23 @@ fs.rmSync(path.join(root, "node_modules", ".flowa-content-entry.ts"), { force: t
 
 const PLACEHOLDER = /\[[^\]]+\]/g;
 const CONFIRM = /^\[CONFIRM\b[^\]]*\]$/;
-const PRICE = /£\s?\d|\bfrom £|\d\s?(?:GBP|DKK|EUR)\b|\bper month\b|\/month\b/i;
-const ALLOWED_STATS = ["£3.4M+", "£90K+"];
-const PACKAGE = /\b(Pilot|Core|Plus|Scale)\b/;
+const MONEY = /£\s?[\d.,]+\s?[KMkm]?\+?|\d\s?(?:GBP|DKK|EUR)\b/g;
+const ALLOWED_MONEY = ["£3.4M+", "£90K+", "£400", "£1,200"];
 const EM_DASH = /—/;
 
 const problems = [];
 const confirms = [];
 
-function walk(value, trail, { packages = true } = {}) {
+function walk(value, trail) {
   if (typeof value === "string") {
     for (const m of value.match(PLACEHOLDER) ?? []) {
       if (CONFIRM.test(m)) confirms.push(`${trail}: ${m}`);
       else problems.push(`${trail}: placeholder "${m}"`);
     }
-    if (!ALLOWED_STATS.includes(value) && PRICE.test(value)) problems.push(`${trail}: contains a price: "${value.slice(0, 80)}"`);
-    if (packages && PACKAGE.test(value)) problems.push(`${trail}: contains a package name: "${value.slice(0, 80)}"`);
+    for (const m of value.match(MONEY) ?? []) if (!ALLOWED_MONEY.includes(m.replace(/\s/g, "").replace(/[.,]+$/, ""))) problems.push(`${trail}: unpublished price "${m}": "${value.slice(0, 80)}"`);
     if (EM_DASH.test(value)) problems.push(`${trail}: em dash in copy: "${value.slice(0, 80)}"`);
-  } else if (Array.isArray(value)) value.forEach((v, i) => walk(v, `${trail}[${i}]`, { packages }));
-  else if (value && typeof value === "object") for (const [k, v] of Object.entries(value)) walk(v, trail ? `${trail}.${k}` : k, { packages });
+  } else if (Array.isArray(value)) value.forEach((v, i) => walk(v, `${trail}[${i}]`));
+  else if (value && typeof value === "object") for (const [k, v] of Object.entries(value)) walk(v, trail ? `${trail}.${k}` : k);
 }
 
 for (const name of ["chrome", "home", "pages", "pricing", "form", "clients"]) walk(content[name], name);
@@ -72,4 +70,4 @@ if (problems.length) {
   console.error("");
   process.exit(1);
 }
-console.log(`content ok: no prices, no package names, no stray placeholders; ${confirms.length} [CONFIRM] item(s) left as written${DRAFT ? " (draft)" : ""}`);
+console.log(`content ok: only published prices, no stray placeholders; ${confirms.length} [CONFIRM] item(s) left as written${DRAFT ? " (draft)" : ""}`);

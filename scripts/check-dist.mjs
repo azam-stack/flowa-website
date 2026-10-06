@@ -1,9 +1,9 @@
 // After the prerender: the acceptance checks that can only be made on the
 // built output (brief §9). Fails if any HTML or JS in dist/ contains a
-// price, a "from £…", a package name or "On request"; if any HTML page
-// lacks the noindex meta while the site is a draft; or if a sitemap was
-// written. The two verified stats (£3.4M+, £90K+) are the only pound
-// figures allowed.
+// pound figure other than the published prices (£400, £1,200) and the
+// two verified stats (£3.4M+, £90K+); if
+// any HTML page lacks the noindex meta while the site is a draft; or if
+// a sitemap was written.
 import fs from "node:fs";
 import path from "node:path";
 
@@ -18,16 +18,13 @@ const files = [];
   }
 })(dist);
 
-const PRICE = /£\s?(?!3\.4M\+|90K\+)\d|\bfrom £|\bOn request\b/;
-const PACKAGE = /\b(Pilot|Core|Plus|Scale)\b/;
+const PRICE = /£\s?(?!3\.4M\+|90K\+|400\b|1,200\b)\d/;
 const problems = [];
 for (const f of files) {
   const text = fs.readFileSync(f, "utf8");
   const rel = path.relative(dist, f);
   const price = text.match(PRICE);
   if (price) problems.push(`${rel}: price-like text "${text.slice(Math.max(0, price.index - 30), price.index + 30).replace(/\s+/g, " ")}"`);
-  const pkg = text.match(PACKAGE);
-  if (pkg) problems.push(`${rel}: package name "${text.slice(Math.max(0, pkg.index - 30), pkg.index + 30).replace(/\s+/g, " ")}"`);
   if (DRAFT && rel.endsWith(".html") && !/<meta name="robots" content="noindex, nofollow" \/>/.test(text)) problems.push(`${rel}: missing the noindex meta`);
 }
 if (DRAFT && fs.existsSync(path.join(dist, "sitemap.xml"))) problems.push("dist/sitemap.xml exists in draft mode");
@@ -42,4 +39,4 @@ if (problems.length) {
   console.error("");
   process.exit(1);
 }
-console.log(`dist ok: ${files.length} files scanned, no prices or package names, ${DRAFT ? "noindex on every page, no sitemap" : "indexable, sitemap present"}`);
+console.log(`dist ok: ${files.length} files scanned, only published prices, ${DRAFT ? "noindex on every page, no sitemap" : "indexable, sitemap present"}`);

@@ -29,7 +29,7 @@ QUALIFIED MEETINGS AND PAYMENT
 - What counts as a qualified meeting is agreed in writing with the client before work starts: role or decision-making authority, genuine interest and a match with the ideal customer profile.
 - The client pays for meetings that are held with someone who meets the agreed criteria. Activity is never billed.
 - If someone doesn't turn up to a meeting, the client tells Flowa within 24 hours and Flowa rebooks the meeting.
-- Flowa does not publish prices. Price depends on market and volume. Visitors get a quote by answering three questions on the pricing page (weareflowa.com/pricing), and Flowa replies within one working day.
+- Published starting prices: the Pilot is from £400 per booked meeting with no monthly commitment; monthly plans start from £1,200 a month and include a meeting guarantee; Scale is on request. Prices exclude VAT. The exact quote depends on market and volume: visitors answer three questions on the pricing page (weareflowa.com/pricing) and Flowa replies within one working day.
 
 HOW AN ENGAGEMENT RUNS
 - Week 1: kick-off call with Ahmed and Anton; agree the ideal customer, the roles worth meeting and the written definition of a qualified meeting.

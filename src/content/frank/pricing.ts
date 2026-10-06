@@ -1,16 +1,15 @@
 /**
- * The pricing page: a quote quiz, no prices. Brief §6.
+ * The pricing page: the quote quiz, then three published starting
+ * points (Pilot per meeting, monthly plans from, Scale on request).
  *
- * Nothing in this file, and nothing rendered from it, may contain a
- * price, a price range, a "from" amount or a package name. The build
- * greps the output for all of them. The only numbers allowed are the
- * proof badge ("2,000+ meetings booked", a verified Flowa record) and
- * the team-size bands in the quiz.
+ * The only prices allowed anywhere on the site are £400 and £1,200
+ * (see PUBLISHED_PRICES in scripts/check-content.mjs). The onboarding
+ * fee is never published; Ahmed and Anton tell clients themselves.
  */
 import { SITE_CONFIG } from "@/config/site";
 
 export const pricing = {
-  seo: { title: "Pricing | Flowa", description: "A quote built around your market. Answer three quick questions and we will send your quote within one working day." },
+  seo: { title: "Pricing | Flowa", description: "Pilot from £400 per booked meeting, monthly plans from £1,200 a month. Answer three quick questions and get your exact quote within one working day." },
 
   left: {
     h1Light: "A quote built ",
@@ -70,6 +69,46 @@ export const pricing = {
     sending: "Sending…",
   },
 
+  plans: {
+    h2Light: "Where most clients ",
+    h2Bold: "start",
+    sub: "Your exact quote depends on your market and the volume you want. These are the starting points.",
+    items: [
+      {
+        name: "Pilot",
+        price: "£400",
+        unit: "per booked meeting",
+        body: "Try Flowa on your own market. You only pay for meetings that are held with the right person.",
+        points: ["No monthly commitment", "LinkedIn and email outreach", "Every message approved by Ahmed or Anton"],
+        cta: "Get my quote",
+        href: "#quote",
+        featured: false,
+      },
+      {
+        name: "Monthly",
+        price: "from £1,200",
+        unit: "per month",
+        body: "A steady flow of qualified meetings, with a fixed monthly fee and a meeting guarantee.",
+        points: ["Meeting guarantee", "No-show recovery", "Live dashboard and CRM sync"],
+        cta: "Get my quote",
+        href: "#quote",
+        featured: true,
+        badge: "Most chosen",
+      },
+      {
+        name: "Scale",
+        price: "On request",
+        unit: "",
+        body: "Several markets or ideal customers at once, with weekly strategy sessions and reserved target segments.",
+        points: ["Multiple markets and ICPs", "Weekly strategy session", "Competitor exclusivity"],
+        cta: "Book a call",
+        href: SITE_CONFIG.bookCallHref,
+        featured: false,
+      },
+    ],
+    footnote: "Prices exclude VAT. Guarantee terms are set out in your proposal.",
+  },
+
   includes: {
     h2: "Every engagement includes",
     items: [
@@ -89,8 +128,8 @@ export const pricing = {
   faq: {
     h2: "Pricing questions",
     items: [
-      { q: "How is pricing set?", a: "By your market, your ideal customer and the meeting volume you want. Answer three questions above and we'll send a quote within one working day." },
-      { q: "Can we start small?", a: "Yes. You can start with a pay-per-meeting pilot on your own market before committing to a monthly plan." },
+      { q: "How is pricing set?", a: "The Pilot starts at £400 per booked meeting and monthly plans start at £1,200 a month. Your exact quote depends on your market, your ideal customer and the meeting volume you want. Answer three questions above and we'll send it within one working day." },
+      { q: "Can we start small?", a: "Yes. Start with the Pilot on your own market and pay per booked meeting before committing to a monthly plan." },
       { q: "Is there a meeting guarantee?", a: "Monthly plans include a meeting guarantee. The exact terms depend on your ideal customer, market and scope, and are set out in your proposal." },
       { q: "Can we change plans later?", a: "Yes. Changes are agreed in writing and take effect from the next period." },
       { q: "Who owns the data?", a: "You do, on every plan." },

@@ -268,7 +268,7 @@ export const home = {
       { q: "Who is behind Flowa?", a: "Flowa's co-founders, Ahmed Zamzam and Anton Busk. They set up your campaign, agree your qualification criteria with you and check the outreach." },
       { q: "Where does Frank find leads?", a: "Public buying signals: LinkedIn posts and comments, job ads, leadership changes and company news. Then verified contact data. No bought lists blasted at scale." },
       { q: "What counts as a qualified meeting?", a: "We agree it with you before we start: role or decision-making authority, genuine interest and a match with your ideal customer profile. It's written down, so there's no ambiguity later." },
-      { q: "What does it cost?", a: "It depends on your market and volume. Answer three quick questions on our pricing page and we'll send you a quote within one working day.", link: { label: "Go to pricing", href: "/pricing" } },
+      { q: "What does it cost?", a: "The Pilot starts at £400 per booked meeting and monthly plans start at £1,200 a month. Your exact quote depends on your market and volume, and we send it within one working day.", link: { label: "Go to pricing", href: "/pricing" } },
       { q: "Who owns the data?", a: "You do. Every list, contact and campaign asset built for you stays yours." },
       { q: "Does Flowa work with our CRM?", a: "Booked meetings and replies can be shared with the CRM you already use. We set it up with you during onboarding." },
       { q: "How quickly can we start?", a: "After a first call we agree strategy and your ideal customer profile. Onboarding usually starts shortly after." },
