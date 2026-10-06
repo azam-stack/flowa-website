@@ -14,7 +14,7 @@ export const pricing = {
   left: {
     h1Light: "A quote built ",
     h1Bold: "around your market",
-    sub: "One agent. A quote sized to your market. No hidden fees.",
+    sub: "A quote sized to your market, with every cost agreed in writing before we start.",
     bullets: ["Pay for meetings, not activity", "Every message checked by a person", "Your data stays yours"],
     badge: "2,000+ meetings booked",
   },
@@ -129,7 +129,7 @@ export const pricing = {
     h2: "Every engagement includes",
     items: [
       "Ideal customer workshop and buyer profile",
-      "Email outreach",
+      "Email and LinkedIn outreach",
       "Research and verification",
       "Domain setup and deliverability",
       "Copywriting and continuous testing",

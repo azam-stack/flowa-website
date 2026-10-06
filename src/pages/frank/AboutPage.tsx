@@ -18,7 +18,40 @@ export function AboutPage() {
   return (
     <>
       <PageHero light={t.h1Light} bold={t.h1Bold} sub={t.sub} />
-      <Section>
+      <Section id="story">
+        <Container>
+          <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
+            <Reveal>
+              <p className="text-eyebrow text-brand-deep">{t.story.eyebrow}</p>
+              <h2 className="mt-3 text-h2 text-ink">
+                {t.story.h2Light}
+                <span className="font-semibold">{t.story.h2Bold}</span>
+              </h2>
+              <div className="mt-6 flex max-w-[620px] flex-col gap-4">
+                {t.story.paragraphs.map((para) => (
+                  <p key={para.slice(0, 24)} className="text-body text-ink-2 md:text-[18px] md:leading-relaxed">
+                    {para}
+                  </p>
+                ))}
+              </div>
+            </Reveal>
+            <Reveal stagger as="ol" className="relative flex flex-col gap-4 self-center">
+              <span className="absolute bottom-6 left-[19px] top-6 w-px bg-ink/15" aria-hidden="true" />
+              {t.story.timeline.map((s, i) => (
+                <li key={s.title} className="relative flex gap-4">
+                  <span className={`relative z-[1] grid h-10 w-10 flex-none place-items-center rounded-full border border-ink text-[13px] font-semibold ${i === t.story.timeline.length - 1 ? "bg-ink text-white" : "bg-white text-ink"}`}>{i + 1}</span>
+                  <div className={`flex-1 rounded-card border p-5 ${i === t.story.timeline.length - 1 ? "border-ink bg-white shadow-lift" : "border-line bg-white"}`}>
+                    <p className="text-[12px] font-semibold uppercase tracking-[0.08em] text-brand-deep">{s.label}</p>
+                    <h3 className="mt-1 text-[18px] font-semibold text-ink">{s.title}</h3>
+                    <p className="mt-1 text-[15px] text-ink-2">{s.body}</p>
+                  </div>
+                </li>
+              ))}
+            </Reveal>
+          </div>
+        </Container>
+      </Section>
+      <Section tone="white">
         <Container>
           <Reveal stagger as="ul" className="grid gap-6 md:grid-cols-2">
             {t.people.map((p) => {

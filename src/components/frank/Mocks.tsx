@@ -269,7 +269,49 @@ export function SignalsMock({ className = "" }: { className?: string }) {
 }
 
 /** Mock-ups for the four How Frank works steps. */
-export function StepMock({ kind, className = "" }: { kind: "target" | "reach" | "qualify" | "book"; className?: string }) {
+export function StepMock({ kind, className = "" }: { kind: "target" | "reach" | "qualify" | "approve" | "send" | "book"; className?: string }) {
+  if (kind === "approve")
+    return (
+      <DarkMock className={className}>
+        <MockCard>
+          <p className="text-[12px] text-muted">To: Oliver Hart · Brightline Software</p>
+          <p className="mt-1.5 text-[13px] leading-snug text-ink-2">Hi Oliver, saw you're hiring two SDRs. While they ramp, we can keep your calendar full. Worth 20 minutes?</p>
+        </MockCard>
+        <GlassCard className="flex items-center gap-3">
+          <span className="relative h-9 w-9 flex-none">
+            <img src={asset("images/team/ahmed.webp")} alt="" width={36} height={36} loading="lazy" className="h-full w-full rounded-full object-cover" />
+            <span className="absolute -bottom-0.5 -right-0.5 grid h-4 w-4 place-items-center rounded-full bg-brand text-ink ring-2 ring-white">
+              <Check size={9} />
+            </span>
+          </span>
+          <div className="min-w-0">
+            <p className="text-[12px] font-semibold">Approved by Ahmed</p>
+            <p className="text-[12px] text-ink-2">Nothing sends without this step</p>
+          </div>
+        </GlassCard>
+      </DarkMock>
+    );
+  if (kind === "send")
+    return (
+      <DarkMock className={className}>
+        <Reveal stagger className="flex flex-col gap-2">
+          {[
+            ["email", "Email · Oliver Hart", "Sent inside the send window"],
+            ["linkedin", "LinkedIn · Priya Nair", "Connection note, one to one"],
+            ["email", "Email · Tom Whitfield", "Follow-up stops if he replies"],
+          ].map(([k, t, s2], i) => (
+            <div key={i} className="flex items-center gap-3 rounded-card bg-white p-3 text-ink shadow-lift">
+              <Avatar name={t.split(" · ")[1]} size={36} />
+              <div className="min-w-0">
+                <p className="truncate text-[12px] font-semibold">{t}</p>
+                <p className="truncate text-[12px] text-muted">{s2}</p>
+              </div>
+              <ChannelBadge kind={k as "linkedin" | "email"} size={24} className="ml-auto" />
+            </div>
+          ))}
+        </Reveal>
+      </DarkMock>
+    );
   if (kind === "target")
     return (
       <DarkMock className={className}>

@@ -15,6 +15,7 @@ import { SectionHeading, Section } from "@/components/frank/SectionHeading";
 import { SparkleGrid } from "@/components/frank/SparkleGrid";
 import { Sphere } from "@/components/frank/Sphere";
 import { VideoModal } from "@/components/frank/VideoModal";
+import { UseCases } from "@/components/frank/UseCases";
 import { home } from "@/content/frank/home";
 import { frankPage as t, howItWorks } from "@/content/frank/pages";
 import { track } from "@/lib/analytics";
@@ -182,6 +183,8 @@ export function FrankPage() {
           <HowAccordion />
         </Container>
       </Section>
+
+      <UseCases />
 
       <Section tone="white" id="stats">
         <Container>

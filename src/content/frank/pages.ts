@@ -24,22 +24,24 @@ export const frankPage = {
     chip: "Hot",
   },
   stripEyebrow: "How Frank works",
-  stripH2: "Four steps, every week",
+  stripH2: "Six steps, from signal to meeting",
   statsEyebrow: "Measured in meetings",
   statsH2: "Our own numbers, not promises",
   faqH2: "Questions about Frank",
 } as const;
 
 export const howItWorks = {
-  seo: { title: "How it works | Flowa", description: "Target, spot, reach, book. The four steps we run every week to turn buying signals into qualified meetings." },
+  seo: { title: "How it works | Flowa", description: "Find, qualify, draft, approve, send, book. The six steps that turn a public buying signal into a qualified meeting, with a person approving every message." },
   h1Light: "How ",
   h1Bold: "Flowa works",
-  sub: "Four steps, from your ideal customer to a meeting in your calendar.",
+  sub: "Six steps, from a public buying signal to a meeting in your calendar. Frank does the legwork. A person approves every message.",
   steps: [
-    { n: "01", title: "Target", headline: "Agree who is worth meeting", body: "We agree your ideal customer, the roles worth talking to and what counts as a qualified meeting.", mock: "target" as const },
-    { n: "02", title: "Spot", headline: "Find a real reason to talk", body: "Frank scans daily for buying signals that match that profile and checks every lead against it.", mock: "qualify" as const },
-    { n: "03", title: "Reach", headline: "Frank drafts. A person approves.", body: "Frank drafts a personal first message. We approve it and send it on LinkedIn or email.", mock: "reach" as const },
-    { n: "04", title: "Book", headline: "Meetings land in your calendar", body: "Replies are qualified and meetings go straight into your calendar, with the context you need before you join.", mock: "book" as const },
+    { n: "01", title: "Find", headline: "Read your market every day", body: "Frank scans LinkedIn, job ads and company news for companies that match the ideal customer we agreed with you.", mock: "target" as const },
+    { n: "02", title: "Qualify", headline: "Only leads with a real reason", body: "Every lead needs the right role, size and market, and a dated signal we can point to. The rest are dropped.", mock: "qualify" as const },
+    { n: "03", title: "Draft", headline: "Written for one person", body: "Frank drafts a short first message that opens with what actually happened at their company.", mock: "reach" as const },
+    { n: "04", title: "Approve", headline: "A person says yes first", body: "Ahmed or Anton reads every message and edits it if needed. Nothing goes out without their approval.", mock: "approve" as const },
+    { n: "05", title: "Send", headline: "At a human pace", body: "Sent on email or LinkedIn inside safe daily limits. A reply stops the sequence straight away.", mock: "send" as const },
+    { n: "06", title: "Book", headline: "Meetings land in your calendar", body: "Anton qualifies the reply against the criteria we agreed and books the meeting, with a short brief before you join.", mock: "book" as const },
   ],
 } as const;
 
@@ -57,9 +59,9 @@ export const signals = {
     ],
   },
   engine: {
-    eyebrow: "Inside Frank",
-    h2: "Six steps, run every day",
-    sub: "Every capability, in the order Frank runs it.",
+    eyebrow: "Inside Find and Qualify",
+    h2: "What Frank checks before a lead reaches us",
+    sub: "The work behind the first two steps, in the order Frank runs it every day.",
     steps: [
       { n: "01", title: "Read the market", body: "Every day Frank reads job posts, leadership changes, UK expansion moves and public posts from decision-makers across the market you sell into.", chip: "Job post · 2 x SDR" },
       { n: "02", title: "Understand the signal", body: "He reads context rather than keywords, so he can tell a real buying signal from noise, and an agency from a brand with the word marketing in its name.", chip: "Buying signal" },
@@ -143,10 +145,25 @@ export const casesPage = {
 } as const;
 
 export const aboutPage = {
-  seo: { title: "About us | Flowa", description: "The people behind Flowa: Ahmed Zamzam and Anton Busk, Flowa's co-founders, who set up and oversee every campaign." },
+  seo: { title: "About us | Flowa", description: "Ahmed Zamzam and Anton Busk met as meeting bookers in a call centre, started Flowa and built Frank to find the right companies at the right moment." },
   h1Light: "The people ",
   h1Bold: "behind Flowa",
-  sub: "Flowa builds and runs Frank, our AI outbound agent. Two co-founders set up and oversee every client's campaign.",
+  sub: "Two former meeting bookers who built the tool they wished they'd had. Ahmed and Anton set up and run every client's campaign themselves.",
+  story: {
+    eyebrow: "Our story",
+    h2Light: "We started out ",
+    h2Bold: "booking the meetings ourselves",
+    paragraphs: [
+      "Ahmed and Anton met as meeting bookers in a call centre. It didn't take long to see that the meeting is where a company's growth really starts, and how much of a booker's day is lost on calling the wrong people at the wrong time.",
+      "So we started Flowa, first as a call centre of our own. The more meetings we booked, the clearer it became that the hard part isn't the call. It's knowing who to reach, and when.",
+      "That's why we built Frank. Not to replace a meeting booker or a sales team, but to make them far more effective. No guesswork, no scattergun lists: the right companies, at the right moment. A person still approves every message and runs every conversation.",
+    ],
+    timeline: [
+      { label: "Where it began", title: "Meeting bookers in a call centre", body: "Ahmed and Anton learn first-hand what one good meeting is worth." },
+      { label: "Flowa", title: "Our own call centre", body: "Booking meetings for B2B companies, and learning that timing beats volume." },
+      { label: "Today", title: "Frank, our AI outbound agent", body: "Finds the right companies at the right moment, so every message has a reason." },
+    ],
+  },
   people: [
     { name: "Ahmed Zamzam", slug: "ahmed", role: "Co-founder", owns: ["Market research and targeting", "Outreach copy", "Reporting"] },
     { name: "Anton Busk", slug: "anton", role: "Co-founder", owns: ["Campaign strategy", "LinkedIn and conversations", "Booking and follow-up"] },

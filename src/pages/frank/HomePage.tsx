@@ -13,7 +13,6 @@ import { TeamBand } from "@/components/frank/TeamBand";
 import { TabbedFeature } from "@/components/frank/TabbedFeature";
 import { Testimonials } from "@/components/frank/Testimonials";
 import { ComplianceSection, EngagementTimeline, PromiseBand } from "@/components/frank/TrustSections";
-import { UseCases } from "@/components/frank/UseCases";
 import { WhoFrankHelps } from "@/components/frank/WhoFrankHelps";
 import { home } from "@/content/frank/home";
 import { faqJsonLd, useSeo } from "@/lib/seo";
@@ -34,7 +33,6 @@ export function HomePage() {
       <StatsStrip className="mt-10 md:mt-14" />
       <LiveCampaign />
       <TabbedFeature />
-      <UseCases />
       <MeetFrank />
       <TeamBand />
       <EngagementTimeline />

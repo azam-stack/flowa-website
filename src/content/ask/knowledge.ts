@@ -11,6 +11,7 @@ ABOUT FLOWA
 - Flowa books qualified B2B sales meetings for other companies, mainly with UK decision-makers.
 - Flowa is run by its two co-founders, Ahmed Zamzam and Anton Busk. They set up every campaign, approve every message and keep the conversations going. There are no account managers or hand-offs.
 - Flowa takes on a limited number of clients at a time.
+- Origin: Ahmed and Anton met as meeting bookers in a call centre. They started Flowa as a call centre, then built Frank to find the right companies at the right moment, to help meeting bookers and sales teams rather than replace them.
 
 FRANK
 - Frank is Flowa's AI outbound agent. He finds companies showing a real reason to buy, researches the decision-maker and drafts the first message.
