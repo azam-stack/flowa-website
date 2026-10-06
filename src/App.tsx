@@ -26,12 +26,12 @@ export default function App() {
   return (
     <BrowserRouter basename={basename}>
       <ScrollManager />
-      <div className="flex min-h-screen flex-col overflow-x-hidden bg-page text-ink-2">
+      <div className="flex min-h-screen flex-col overflow-x-clip bg-page text-ink-2">
         <a href="#main" className="sr-only z-[90] rounded-control bg-ink px-4 py-2 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
           {nav.skipToContent}
         </a>
+        <AnnouncementBar />
         <header className="sticky top-0 z-50">
-          <AnnouncementBar />
           <Nav />
         </header>
         <main id="main" tabIndex={-1} className="flex-1 outline-none">

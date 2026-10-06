@@ -191,7 +191,7 @@ export function Nav() {
   );
 
   return (
-    <nav aria-label="Main" className="border-b border-ink bg-page">
+    <nav aria-label="Main" className="border-b border-ink bg-page/95 backdrop-blur-md supports-[backdrop-filter]:bg-page/85">
       <div className="mx-auto flex h-[72px] w-full max-w-container items-center justify-between gap-6 px-4 md:px-10 xl:px-gutter">
         <div className="flex items-center gap-8">
           <Link to="/" aria-label="Flowa home" className="flex items-center rounded-control">
