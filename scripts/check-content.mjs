@@ -41,7 +41,7 @@ fs.rmSync(path.join(root, "node_modules", ".flowa-content-entry.ts"), { force: t
 const PLACEHOLDER = /\[[^\]]+\]/g;
 const CONFIRM = /^\[CONFIRM\b[^\]]*\]$/;
 const MONEY = /£\s?[\d.,]+\s?[KMkm]?\+?|\d\s?(?:GBP|DKK|EUR)\b/g;
-const ALLOWED_MONEY = ["£3.4M+", "£90K+", "£400", "£1,200"];
+const ALLOWED_MONEY = ["£3.4M+", "£90K+", "£400", "£1,200", "£50K+"];
 const EM_DASH = /—/;
 
 const problems = [];

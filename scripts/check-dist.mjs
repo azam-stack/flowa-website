@@ -18,7 +18,7 @@ const files = [];
   }
 })(dist);
 
-const PRICE = /£\s?(?!3\.4M\+|90K\+|400\b|1,200\b)\d/;
+const PRICE = /£\s?(?!3\.4M\+|90K\+|400\b|1,200\b|50K\+)\d/;
 const problems = [];
 for (const f of files) {
   const text = fs.readFileSync(f, "utf8");

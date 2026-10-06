@@ -109,6 +109,22 @@ export const pricing = {
     footnote: "Prices exclude VAT. Guarantee terms are set out in your proposal.",
   },
 
+  /** Flowa next to the two alternatives a buyer weighs. Typical UK figures, no competitor named. */
+  compare: {
+    h2Light: "What the same meetings ",
+    h2Bold: "cost elsewhere",
+    sub: "Most teams weigh us against hiring a rep or buying software and running it themselves.",
+    columns: ["Hire an SDR", "Outbound software", "Flowa"],
+    rows: [
+      { label: "What it costs", cells: ["£50K+ a year in salary, NI and tools", "A monthly licence, usage and your team's time", "Pilot from £400 per booked meeting"] },
+      { label: "First meetings", cells: ["After hiring and a three-month ramp", "After you build the lists, copy and domains", "First messages go out in week 2"] },
+      { label: "Who writes the messages", cells: ["A junior rep", "Software, on autopilot", "Frank drafts, Ahmed or Anton approves"] },
+      { label: "Who runs it day to day", cells: ["Your sales manager", "You", "Ahmed and Anton"] },
+      { label: "If the meetings don't come", cells: ["You still pay the salary", "You still pay the licence", "On the Pilot, you only pay for meetings held"] },
+    ],
+    footnote: "SDR figure: typical UK cost of one rep including salary, commission, employer's National Insurance and sales tools.",
+  },
+
   includes: {
     h2: "Every engagement includes",
     items: [

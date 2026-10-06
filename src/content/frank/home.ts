@@ -38,6 +38,34 @@ export const home = {
     },
   },
 
+  /** "Watch a campaign run": the product demo under the stats. Fictional lead, illustrative. */
+  demo: {
+    eyebrow: "See it work",
+    h2Light: "Watch a campaign ",
+    h2Bold: "run",
+    sub: "From a public signal to a meeting in your calendar. Frank does the legwork. A person signs off before anything is sent.",
+    windowTitle: "Campaign · UK SaaS sales leaders",
+    illustrative: "Illustrative example",
+    pause: "Pause",
+    play: "Play",
+    steps: [
+      { key: "find", name: "Find", when: "Every day", line: "Frank scans LinkedIn, job ads and company news for your ideal customer." },
+      { key: "qualify", name: "Qualify", when: "Every lead", line: "Each lead needs the right role, size and market, and a dated signal." },
+      { key: "draft", name: "Draft", when: "Same day", line: "A short one-to-one message that opens with what they actually said." },
+      { key: "approve", name: "Approve", when: "Before anything sends", line: "Ahmed or Anton reads every message. Nothing goes out without a yes." },
+      { key: "send", name: "Send", when: "Human pace", line: "Sent from your domain or LinkedIn, inside safe daily limits." },
+      { key: "book", name: "Book", when: "On reply", line: "Anton picks up the reply and books the meeting into your calendar." },
+    ],
+    feed: {
+      find: { title: "Scanned LinkedIn, job ads and company news", chips: ["214 companies match your ICP", "41 with a signal this week"] },
+      qualify: { name: "Oliver Hart", role: "Head of Sales · Brightline Software", signal: "Posted: hiring 2 SDRs · 4h ago", checks: ["Decision-maker", "120 people", "UK"] },
+      draft: { subject: "Your two SDR hires", body: "Hi Oliver, saw you're hiring two SDRs. While they ramp, we can keep your calendar full with teams that have a real reason to talk. Worth 20 minutes?", by: "Drafted by Frank" },
+      approve: { who: "Ahmed", text: "Ahmed approved the message", time: "09:42", note: "Nothing sends without this step" },
+      send: { text: "Sent from your domain", meta: "Inside the send window · paced like a person" },
+      book: { reply: "Good timing. Thursday works?", text: "Anton booked Thu 14:30", meta: "Brief sent · added to your CRM" },
+    },
+  },
+
   /** 4.3 */
   tabbed: {
     eyebrow: "Why Flowa",
@@ -213,9 +241,11 @@ export const home = {
   /** Compliance and brand safety (UK). */
   compliance: {
     eyebrow: "Safe for your brand",
-    h2: "Outreach your legal team can sign off",
-    sub: "Built around UK GDPR and PECR, with a person checking every message that carries your name.",
+    h2: "The rules Frank can't break",
+    sub: "Built around UK GDPR and PECR. They hold on every campaign, for every client, whatever the volume.",
     items: [
+      { title: "A person approves every message", body: "Frank drafts. Nothing goes out until Ahmed or Anton has read it and said yes." },
+      { title: "No signal, no message", body: "Every lead needs a dated, public reason to reach out that we can point to. Otherwise we don't write." },
       { title: "Business contacts only", body: "We contact people in their professional role, about something relevant to their job, with a clear way to say no." },
       { title: "Opt-outs are permanent", body: "Anyone who asks not to hear from us is suppressed across every campaign, for good." },
       { title: "No bought lists", body: "Every lead comes from a public buying signal and verified contact data. Nothing is blasted at scale." },
