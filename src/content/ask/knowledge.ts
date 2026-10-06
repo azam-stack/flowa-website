@@ -53,6 +53,7 @@ TRACK RECORD (Flowa's own records)
 - Published cases: for DataPeeps (which sells data and leads to companies such as insurers), Flowa booked a first meeting with one of Denmark's largest insurance companies. For Generaxion, a meeting Flowa booked led to an annual sale of £90K+.
 
 GETTING STARTED AND CONTACT
+- Free market snapshot: visitors tell Flowa who they sell to and, within one working day, get 10 companies in their market showing a buying signal now, with who decides and draft first messages (weareflowa.com/market-snapshot). Flowa makes five a week.
 - Book a 20-minute intro call with Ahmed and Anton: https://cal.com/flowa/intro
 - Or email info@flowa.dk. Ahmed or Anton reply within one working day.
 `.trim();

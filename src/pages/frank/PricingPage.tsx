@@ -3,6 +3,7 @@ import { FaqList } from "@/components/frank/FaqList";
 import { Btn } from "@/components/frank/Btn";
 import { Check, Sparkle } from "@/components/frank/Icons";
 import { Marquee } from "@/components/frank/Marquee";
+import { MeetingValue } from "@/components/frank/MeetingValue";
 import { PricingCard } from "@/components/frank/PricingQuiz";
 import { SectionHeading, Section } from "@/components/frank/SectionHeading";
 import { FinalCta } from "@/components/frank/StatementBand";
@@ -122,6 +123,7 @@ export function PricingPage() {
         </Container>
       </section>
       <Plans />
+      <MeetingValue />
       <Compare />
       <Marquee className="mt-2 md:mt-4" />
       <Section tone="white">

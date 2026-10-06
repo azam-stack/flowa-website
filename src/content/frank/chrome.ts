@@ -24,7 +24,7 @@ export const nav = {
       label: "How it works",
       items: [
         { title: "Frank – AI Outbound Agent", description: "Meet the agent that fills your calendar.", href: "/frank", icon: "frank" },
-        { title: "The process", description: "Target, spot, reach, book.", href: "/how-it-works", icon: "steps" },
+        { title: "The process", description: "Six steps, from signal to meeting.", href: "/how-it-works", icon: "steps" },
         { title: "Signals Frank watches", description: "The buying signals behind every meeting.", href: "/signals", icon: "signals" },
         { title: "Channels: Email", description: "Verified data, deliverability, sequences.", href: "/channels/email", icon: "mail" },
         { title: "Channels: LinkedIn", description: "One-to-one notes, approved by a person.", href: "/channels/linkedin", icon: "linkedin" },
@@ -67,6 +67,7 @@ export const chat = {
   quickReplies: [
     { label: "How does Frank work?", href: "/how-it-works" },
     { label: "What does it cost?", href: "/pricing" },
+    { label: "Free market snapshot", href: "/market-snapshot" },
     { label: "Book a call", href: SITE_CONFIG.bookCallHref },
   ],
 } as const;
@@ -90,6 +91,7 @@ export const footer = {
         { label: "Email", href: "/channels/email" },
         { label: "LinkedIn", href: "/channels/linkedin" },
         { label: "Pricing", href: "/pricing" },
+        { label: "Free market snapshot", href: "/market-snapshot" },
       ],
     },
     {

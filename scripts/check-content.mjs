@@ -22,6 +22,7 @@ export * as pages from "@/content/frank/pages";
 export * as pricing from "@/content/frank/pricing";
 export * as form from "@/content/frank/form";
 export * as clients from "@/content/frank/clients";
+export * as snapshot from "@/content/frank/snapshot";
 export * as legal from "@/content/legal";`,
 );
 await build({
@@ -59,7 +60,7 @@ function walk(value, trail) {
   else if (value && typeof value === "object") for (const [k, v] of Object.entries(value)) walk(v, trail ? `${trail}.${k}` : k);
 }
 
-for (const name of ["chrome", "home", "pages", "pricing", "form", "clients"]) walk(content[name], name);
+for (const name of ["chrome", "home", "pages", "pricing", "form", "clients", "snapshot"]) walk(content[name], name);
 walk(content.legal, "legal");
 
 if (!DRAFT && confirms.length) for (const c of confirms) problems.push(`${c} must be resolved before launch (VITE_DRAFT=false)`);

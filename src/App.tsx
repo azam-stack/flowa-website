@@ -16,6 +16,7 @@ import { HomePage } from "@/pages/frank/HomePage";
 import { HowItWorksPage } from "@/pages/frank/HowItWorksPage";
 import { NotFoundPage } from "@/pages/frank/NotFoundPage";
 import { PricingPage } from "@/pages/frank/PricingPage";
+import { SnapshotPage } from "@/pages/frank/SnapshotPage";
 import { SignalsPage } from "@/pages/frank/SignalsPage";
 import { LegalPage } from "@/pages/LegalPage";
 import { redirects } from "../scripts/routes";
@@ -47,6 +48,7 @@ export default function App() {
             <Route path="/book-a-call" element={<ContactPage mode="demo" />} />
             <Route path="/contact" element={<ContactPage mode="contact" />} />
             <Route path="/faq" element={<FaqPage />} />
+            <Route path="/market-snapshot" element={<SnapshotPage />} />
             {/* Privacy, cookies, terms and refunds all render from one template, wording unchanged. */}
             {legalDocs.map((doc) => (
               <Route key={doc.slug} path={`/${doc.slug}`} element={<LegalPage doc={doc} />} />

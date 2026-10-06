@@ -1,6 +1,7 @@
 import { useRef, useState, type FormEvent } from "react";
 import { SmartLink } from "@/components/SmartLink";
 import { shortForm as t } from "@/content/frank/form";
+import { snapshot } from "@/content/frank/snapshot";
 import { track } from "@/lib/analytics";
 import { leadDedupeKey, type LeadErrors } from "@/lib/lead-schema";
 import { buildLead, submitLead, type SubmitResult } from "@/lib/leads";
@@ -39,7 +40,10 @@ const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
  * Without a draft endpoint it opens the visitor's email client and says
  * so; it never pretends something was sent.
  */
-export function ShortForm({ idPrefix = "contact" }: { idPrefix?: string }) {
+export function ShortForm({ idPrefix = "contact", variant = "contact" }: { idPrefix?: string; variant?: "contact" | "snapshot" }) {
+  const isSnapshot = variant === "snapshot";
+  const sf = snapshot.form;
+  const [sell, setSell] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<LeadErrors>({});
   const [failure, setFailure] = useState<Extract<SubmitResult, { status: "error" }> | null>(null);
@@ -62,7 +66,7 @@ export function ShortForm({ idPrefix = "contact" }: { idPrefix?: string }) {
     if (!fields.first_name.trim()) e.first_name = "required";
     if (!fields.email.trim()) e.email = "required";
     else if (!EMAIL.test(fields.email.trim())) e.email = "email";
-    if (!fields.message.trim()) e.message = "required";
+    if (!fields.message.trim() || (isSnapshot && !sell.trim())) e.message = "required";
     if (!fields.consent) e.consent = "required";
     return e;
   };
@@ -83,7 +87,8 @@ export function ShortForm({ idPrefix = "contact" }: { idPrefix?: string }) {
       (form.querySelector("[aria-invalid='true']") as HTMLElement | null)?.focus();
       return;
     }
-    const lead = buildLead({ kind: "contact", ...fields, consent: true });
+    const message = isSnapshot ? `Market snapshot request\nWe sell: ${sell.trim()}\nWe want to meet: ${fields.message.trim()}` : fields.message;
+    const lead = buildLead({ kind: "contact", ...fields, message, consent: true });
     let sentKeys: string[] = [];
     try {
       sentKeys = JSON.parse(sessionStorage.getItem(DEDUPE_STORAGE) || "[]") as string[];
@@ -123,7 +128,7 @@ export function ShortForm({ idPrefix = "contact" }: { idPrefix?: string }) {
     return (
       <div className="fade-in flex flex-col items-center gap-5 text-center" role="status" aria-live="polite">
         <FrankAvatar pose="thumbs" className="h-36 w-36 rounded-card" />
-        <p className="text-[20px] font-medium leading-snug text-ink">{status === "sent" ? t.successTitle : t.mailtoTitle}</p>
+        <p className="text-[20px] font-medium leading-snug text-ink">{status === "sent" ? (isSnapshot ? sf.successTitle : t.successTitle) : t.mailtoTitle}</p>
         {status === "mailto" && (
           <p className="text-body text-ink-2">
             {t.mailtoBody}{" "}
@@ -171,11 +176,23 @@ export function ShortForm({ idPrefix = "contact" }: { idPrefix?: string }) {
           )}
         </div>
       </div>
+      {isSnapshot && (
+        <div>
+          <label htmlFor={id("sell")} className="mb-1.5 block text-[14px] font-medium text-ink">
+            {sf.sell} <span aria-hidden="true">*</span>
+          </label>
+          <input id={id("sell")} name="sell" required value={sell} onChange={(e) => { setSell(e.target.value); if (errors.message) setErrors((er) => ({ ...er, message: undefined })); }} placeholder={sf.sellPlaceholder} aria-invalid={errors.message && !sell.trim() ? true : undefined} className="control h-12" />
+        </div>
+      )}
       <div>
         <label htmlFor={id("message")} className="mb-1.5 block text-[14px] font-medium text-ink">
-          {t.message} <span aria-hidden="true">*</span>
+          {isSnapshot ? sf.meet : t.message} <span aria-hidden="true">*</span>
         </label>
-        <textarea id={id("message")} name="message" rows={4} required value={fields.message} onChange={(e) => set("message", e.target.value)} placeholder={t.messagePlaceholder} aria-invalid={errors.message ? true : undefined} aria-describedby={describe("message")} className="control resize-none py-3" />
+        {isSnapshot ? (
+          <input id={id("message")} name="message" required value={fields.message} onChange={(e) => set("message", e.target.value)} placeholder={sf.meetPlaceholder} aria-invalid={errors.message ? true : undefined} aria-describedby={describe("message")} className="control h-12" />
+        ) : (
+          <textarea id={id("message")} name="message" rows={4} required value={fields.message} onChange={(e) => set("message", e.target.value)} placeholder={t.messagePlaceholder} aria-invalid={errors.message ? true : undefined} aria-describedby={describe("message")} className="control resize-none py-3" />
+        )}
         {errors.message && (
           <p id={id("message-error")} className="mt-1.5 text-[13px] font-medium text-error">
             {msg(errors.message)}
@@ -215,7 +232,7 @@ export function ShortForm({ idPrefix = "contact" }: { idPrefix?: string }) {
       )}
       <div className="flex flex-wrap items-center gap-3">
         <Btn type="submit" size="lg" disabled={status === "sending"}>
-          {status === "sending" ? t.sending : status === "error" && failure?.retryable ? t.retry : t.submit}
+          {status === "sending" ? t.sending : status === "error" && failure?.retryable ? t.retry : isSnapshot ? sf.submit : t.submit}
         </Btn>
       </div>
     </form>

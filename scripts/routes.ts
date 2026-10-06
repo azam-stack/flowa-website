@@ -6,6 +6,7 @@
  */
 import { home } from "@/content/frank/home";
 import { pricing } from "@/content/frank/pricing";
+import { snapshot } from "@/content/frank/snapshot";
 import { aboutPage, casesPage, channelEmail, channelLinkedIn, contactPage, faqPage, frankPage, howItWorks, signals } from "@/content/frank/pages";
 import { legalDocs } from "@/content/legal";
 import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
@@ -26,6 +27,7 @@ export const routes: RouteMeta[] = [
   { path: "/pricing", title: pricing.seo.title, description: pricing.seo.description, jsonLd: [faqJsonLd(pricing.faq.items), crumb("Pricing", "/pricing")] },
   { path: "/book-a-call", title: contactPage.demo.seo.title, description: contactPage.demo.seo.description, jsonLd: [crumb("Book a call", "/book-a-call")] },
   { path: "/contact", title: contactPage.contact.seo.title, description: contactPage.contact.seo.description, jsonLd: [crumb("Contact", "/contact")] },
+  { path: snapshot.path, title: snapshot.seo.title, description: snapshot.seo.description, jsonLd: [crumb("Market snapshot", snapshot.path)] },
   { path: "/faq", title: faqPage.seo.title, description: faqPage.seo.description, jsonLd: [faqJsonLd([...home.faq.items, ...pricing.faq.items]), crumb("FAQ", "/faq")] },
   ...legalDocs.map((d) => ({ path: `/${d.slug}`, title: d.seo.title, description: d.seo.description, jsonLd: [crumb(d.title, `/${d.slug}`)] })),
 ];
