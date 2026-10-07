@@ -170,6 +170,12 @@
   }
 
   /* Logo marquee: transform only. */
+  .story-flow { animation: story-flow var(--dur, 36s) linear infinite; }
+  .story-flow-reverse { animation: story-flow var(--dur, 36s) linear infinite reverse; }
+  @keyframes story-flow {
+    from { transform: translateY(0); }
+    to { transform: translateY(-50%); }
+  }
   @keyframes marquee-scroll {
     from { transform: translate3d(0, 0, 0); }
     to { transform: translate3d(-50%, 0, 0); }
