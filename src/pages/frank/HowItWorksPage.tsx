@@ -1,7 +1,6 @@
 import { Container } from "@/components/Container";
 import { ContactBand } from "@/components/frank/ContactBand";
 import { HowSteps } from "@/components/frank/HowStrip";
-import { LiveCampaign } from "@/components/frank/LiveCampaign";
 import { PageHero } from "@/components/frank/PageHero";
 import { Section } from "@/components/frank/SectionHeading";
 import { howItWorks as t } from "@/content/frank/pages";
@@ -18,7 +17,6 @@ export function HowItWorksPage() {
           <HowSteps />
         </Container>
       </Section>
-      <LiveCampaign />
       <ContactBand idPrefix="how" />
     </>
   );
