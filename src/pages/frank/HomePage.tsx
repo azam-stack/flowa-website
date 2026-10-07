@@ -5,6 +5,7 @@ import { FaqList } from "@/components/frank/FaqList";
 import { SmartLink } from "@/components/SmartLink";
 import { Hero } from "@/components/frank/Hero";
 import { LiveCampaign } from "@/components/frank/LiveCampaign";
+import { MarketSkyline } from "@/components/frank/MarketSkyline";
 import { SnapshotBand } from "@/pages/frank/SnapshotPage";
 import { Marquee } from "@/components/frank/Marquee";
 import { MeetFrank } from "@/components/frank/MeetFrank";
@@ -32,6 +33,7 @@ export function HomePage() {
       <Hero />
       <Marquee className="mt-6 md:mt-10" />
       <StatsStrip className="mt-10 md:mt-14" />
+      <MarketSkyline />
       <LiveCampaign />
       <SnapshotBand />
       <TabbedFeature />

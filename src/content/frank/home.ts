@@ -38,6 +38,45 @@ export const home = {
     },
   },
 
+  /** "Your market, from flat to booked": the skyline funnel above the demo. Illustrative market, fictional companies. */
+  skyline: {
+    eyebrow: "Your market, through Frank's eyes",
+    h2Light: "Most of your market is quiet. ",
+    h2Bold: "Frank finds who stands out.",
+    sub: "Every square is a company that fits your market. Most have no reason to talk this week. Frank finds the few that do, and those are the ones we reach.",
+    stages: [
+      { key: "market", count: 240, label: "companies in your market", line: "Every company that fits, on one map." },
+      { key: "signal", count: 18, label: "show a buying signal this week", line: "Hiring, new leaders, expansion, posts about the problem." },
+      { key: "fit", count: 7, label: "match your ideal customer", line: "Right role, size and market, with a dated signal." },
+      { key: "booked", count: 3, label: "meetings booked", line: "Approved by Ahmed or Anton, booked by Anton." },
+    ],
+    scanning: "Frank is reading the market…",
+    replay: "Play again",
+    hoverHint: "Hover a tower to see why it stands out.",
+    note: "Illustrative market. Companies are fictional.",
+    /** Tooltips for the raised towers, in order of how far they rise. */
+    companies: [
+      { name: "Brightline Software", signal: "Hiring 2 SDRs" },
+      { name: "Northgate IT Services", signal: "New Head of Sales" },
+      { name: "Kestrel Creative", signal: "Founder post: pipeline is thin" },
+      { name: "Halden Analytics", signal: "Opening a London office" },
+      { name: "Marlow Cloud", signal: "Series A announced" },
+      { name: "Fenwick Health Tech", signal: "Hiring a Head of Growth" },
+      { name: "Oakridge Payroll", signal: "New CRO in post" },
+      { name: "Thistle Data", signal: "Expanding into the UK" },
+      { name: "Pembrook Studio", signal: "Asked for agency recommendations" },
+      { name: "Ashby Logistics Software", signal: "Hiring 3 account executives" },
+      { name: "Lumen Field Services", signal: "New sales director" },
+      { name: "Corvid Security", signal: "Partnership announced" },
+      { name: "Wrenfield Consulting", signal: "Posted about outbound" },
+      { name: "Saltmarsh Media", signal: "Rebrand and new website" },
+      { name: "Greyfriars Legal Tech", signal: "Hiring SDRs" },
+      { name: "Hollis Energy Systems", signal: "New UK entity registered" },
+      { name: "Quayside Recruitment", signal: "Head of Sales left, role open" },
+      { name: "Bramble HR", signal: "Commented on a pipeline post" },
+    ],
+  },
+
   /** "Watch a campaign run": the product demo under the stats. Fictional lead, illustrative. */
   demo: {
     eyebrow: "See it work",
