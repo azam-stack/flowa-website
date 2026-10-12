@@ -7,11 +7,11 @@ import { Hero } from "@/components/frank/Hero";
 import { LiveCampaign } from "@/components/frank/LiveCampaign";
 import { SnapshotBand } from "@/pages/frank/SnapshotPage";
 import { Marquee } from "@/components/frank/Marquee";
-import { MeetFrank } from "@/components/frank/MeetFrank";
 import { ClientResults, StatsStrip } from "@/components/frank/Proof";
 import { SectionHeading, Section } from "@/components/frank/SectionHeading";
 import { TeamBand } from "@/components/frank/TeamBand";
-import { TabbedFeature } from "@/components/frank/TabbedFeature";
+import { SdrMath } from "@/components/frank/SdrMath";
+import { UseCases } from "@/components/frank/UseCases";
 import { Testimonials } from "@/components/frank/Testimonials";
 import { ComplianceSection, EngagementTimeline, PromiseBand } from "@/components/frank/TrustSections";
 import { WhoFrankHelps } from "@/components/frank/WhoFrankHelps";
@@ -19,11 +19,11 @@ import { home } from "@/content/frank/home";
 import { faqJsonLd, useSeo } from "@/lib/seo";
 
 /**
- * The homepage, in the order a buyer's questions come up: who are you and
- * does it work (hero, logos, numbers), how (signals, use cases, Frank, the
- * people), what working together looks like and what it costs me if it
- * doesn't work (engagement, promise), proof (results), is it safe
- * (compliance), then contact and FAQ.
+ * The homepage, in the order a buyer decides: what is the deal (hero), show
+ * me it working (campaign), what is my alternative (SDR math), what am I
+ * paying for (promise), does it work (numbers, results), what do you run
+ * (use cases), who are you (team, engagement), is it for me, is it safe,
+ * contact, FAQ, and the free market snapshot as the last word.
  */
 export function HomePage() {
   useSeo({ title: home.seo.title, description: home.seo.description, path: "/", jsonLd: [faqJsonLd(home.faq.items)] });
@@ -31,16 +31,15 @@ export function HomePage() {
     <>
       <Hero />
       <Marquee className="mt-6 md:mt-10" />
-      <StatsStrip className="mt-10 md:mt-14" />
       <LiveCampaign />
-      <SnapshotBand />
-      <TabbedFeature />
-      <MeetFrank />
+      <SdrMath />
+      <PromiseBand />
+      <StatsStrip className="mt-14 md:mt-20" />
+      <ClientResults />
+      <UseCases />
       <TeamBand />
       <EngagementTimeline />
-      <PromiseBand />
       <WhoFrankHelps />
-      <ClientResults />
       <ComplianceSection />
       <ContactBand />
       {/* Hidden until approved client quotes exist */}
@@ -59,6 +58,9 @@ export function HomePage() {
           </div>
         </Container>
       </Section>
+      <div className="pb-16 md:pb-24">
+        <SnapshotBand />
+      </div>
     </>
   );
 }

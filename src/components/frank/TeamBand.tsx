@@ -4,13 +4,12 @@ import { Reveal } from "@/components/Reveal";
 import { home } from "@/content/frank/home";
 import { asset } from "@/lib/asset";
 import { Btn } from "./Btn";
-import { FrankAvatar } from "./FrankAvatar";
 import { Check } from "./Icons";
 import { Section } from "./SectionHeading";
 import { Sphere } from "./Sphere";
 
 /**
- * The people band: Frank does the digging, Ahmed and Anton do the talking.
+ * The people band: the two founders who run every campaign. The research agent is a sentence, not a card.
  * Makes the human side of the service visible next to the agent: the
  * founders approve every message and run every conversation.
  */
@@ -32,15 +31,7 @@ export function TeamBand() {
                 </Btn>
               </div>
             </Reveal>
-            <Reveal stagger className="grid grid-cols-3 gap-3 md:gap-4">
-              <figure className="flex min-w-0 flex-col gap-2 rounded-card border border-ink bg-surface p-2">
-                <FrankAvatar decorative className="aspect-[4/5] w-full rounded-[10px]" />
-                <figcaption className="px-1 pb-1">
-                  <p className="text-[15px] font-semibold text-ink">Frank</p>
-                  <p className="text-[11px] font-medium uppercase tracking-wide text-brand-deep">AI agent</p>
-                  <p className="mt-1 text-[12px] leading-snug text-muted">{t.frankDoes}</p>
-                </figcaption>
-              </figure>
+            <Reveal stagger className="grid grid-cols-2 gap-3 md:gap-4">
               {t.people.map((p, i) => (
                 <figure key={p.key} className="flex min-w-0 flex-col gap-2 rounded-card border border-ink bg-surface p-2" style={{ "--i": i + 1 } as CSSProperties}>
                   <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[10px] bg-panel">
@@ -49,7 +40,7 @@ export function TeamBand() {
                       <span className="grid h-3.5 w-3.5 place-items-center rounded-full bg-brand">
                         <Check size={8} />
                       </span>
-                      Human
+                      Co-founder
                     </span>
                   </div>
                   <figcaption className="px-1 pb-1">

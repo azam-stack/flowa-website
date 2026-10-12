@@ -6,27 +6,35 @@
  */
 export const home = {
   seo: {
-    title: "Flowa | AI-powered outbound that books B2B meetings",
-    description: "Flowa books qualified B2B meetings. Our AI agent Frank finds companies with a real reason to buy and drafts the first message; Ahmed and Anton approve every word and book the meeting.",
+    title: "Flowa | B2B meetings in the UK, paid per meeting that happens",
+    description: "Flowa books qualified B2B meetings with UK buyers who have a reason to talk now. No SDR salary, no retainer on the pilot: you pay when the meeting takes place.",
   },
 
-  /** 4.1 */
+  /** 4.1 — problem first. The buyer's alternative is an SDR hire; we are the lower-risk way to the same calendar. */
   hero: {
-    h1Light: "Outbound that books ",
-    h1Bold: "B2B meetings",
-    sub: "Our AI agent Frank finds buyers with a real reason to talk. Ahmed and Anton approve every message and book the meeting.",
-    demo: "Book a call",
+    h1Light: "Stop hiring SDRs. ",
+    h1Bold: "Pay for meetings that happen.",
+    sub: "We find UK buyers with a reason to talk this week, write to them one at a time, and book the meeting into your calendar. You are billed when it takes place, not for activity.",
+    demo: "Get five free leads from your market",
+    demoHref: "/market-snapshot",
+    secondary: "See a campaign run",
+    secondaryHref: "#see-it-work",
     video: "See Frank in action",
     /** The demo video in the modal: one warm SaaS lead, from signal to booked meeting. */
     videoSrc: "video/frank-in-action.mp4",
     videoPoster: "video/poster.jpg",
     videoNote: "Example is illustrative. People and companies are fictional.",
     videoClose: "Close video",
+    /** The proof line under the buttons. Flowa's own records. */
+    proof: [
+      { value: "2,000+", label: "meetings booked" },
+      { value: "70%", label: "show up" },
+      { value: "£400", label: "per held meeting on the pilot" },
+    ],
     cards: {
       left: {
         label: "Spots buying signals",
         mini: { tag: "New signal", body: "Hiring 2 SDRs", time: "4h ago" },
-        /** The left card cycles through these every 4 s. */
         cycle: [
           { tag: "New signal", body: "Hiring 2 SDRs", meta: "Brightline Software", time: "4h ago", person: "Oliver Hart" },
           { tag: "LinkedIn post", body: "“Pipeline is thin this quarter”", meta: "Kestrel Creative", time: "1h ago", person: "Tom Whitfield" },
@@ -40,21 +48,21 @@ export const home = {
 
   /** "Watch a campaign run": the product demo under the stats. Fictional lead, illustrative. */
   demo: {
-    eyebrow: "See it work",
-    h2Light: "Watch a campaign ",
-    h2Bold: "run",
-    sub: "From a public signal to a meeting in your calendar. Frank does the legwork. A person signs off before anything is sent.",
+    eyebrow: "How it works",
+    h2Light: "One campaign, ",
+    h2Bold: "start to finish",
+    sub: "From a public buying signal to a meeting in your calendar. This is the whole method, with nothing hidden: research, one message, a human yes, a booked slot.",
     windowTitle: "Campaign · UK SaaS sales leaders",
     illustrative: "Illustrative example",
     pause: "Pause",
     play: "Play",
     steps: [
-      { key: "find", name: "Find", when: "Every day", line: "Frank scans LinkedIn, job ads and company news for your ideal customer." },
+      { key: "find", name: "Find", when: "Every morning", line: "We read LinkedIn, job ads, funding news and trade-show lists for companies that match your ideal customer and have a reason to talk now." },
       { key: "qualify", name: "Qualify", when: "Every lead", line: "Each lead needs the right role, size and market, and a dated signal." },
-      { key: "draft", name: "Draft", when: "Same day", line: "A short one-to-one message that opens with what they actually said." },
+      { key: "draft", name: "Draft", when: "Same day", line: "One short message to one person, opening with the thing they actually said. No sequence, no template." },
       { key: "approve", name: "Approve", when: "Before anything sends", line: "Ahmed or Anton reads every message. Nothing goes out without a yes." },
       { key: "send", name: "Send", when: "Human pace", line: "Sent from your domain or LinkedIn, inside safe daily limits." },
-      { key: "book", name: "Book", when: "On reply", line: "Anton picks up the reply and books the meeting into your calendar." },
+      { key: "book", name: "Book", when: "On reply", line: "Anton answers within the hour, qualifies against your criteria and books the meeting with a brief attached." },
     ],
     feed: {
       find: { title: "Scanned LinkedIn, job ads and company news", chips: ["214 companies match your ICP", "41 with a signal this week"] },
@@ -64,6 +72,17 @@ export const home = {
       send: { text: "Sent from your domain", meta: "Inside the send window · paced like a person" },
       book: { reply: "Good timing. Thursday works?", text: "Anton booked Thu 14:30", meta: "Brief sent · added to your CRM" },
     },
+  },
+
+  /** The buyer's real alternative, side by side. Figures are UK averages Flowa quotes in sales calls; keep them defensible. */
+  math: {
+    eyebrow: "The alternative",
+    h2Light: "An SDR costs you ",
+    h2Bold: "£35K before the first meeting.",
+    sub: "Most teams we talk to are deciding between hiring an SDR and working with us. Here is the honest comparison.",
+    left: { title: "Hiring an SDR", rows: ["£30–40K salary, plus tools and data", "3–4 months to ramp before meetings arrive", "Average tenure around 16 months, then you recruit again", "You pay for activity: dials, emails, time", "Quality depends on one person's week"] },
+    right: { title: "Working with Flowa", rows: ["No salary. The pilot has no retainer", "First meetings in week two", "The same two founders run your campaign from day one", "You pay per meeting that takes place", "Every message read by a person before it sends"] },
+    foot: "One invoice instead of a hire. If the meetings stop, so does the invoice.",
   },
 
   /** 4.3 */
@@ -98,14 +117,14 @@ export const home = {
 
   /** 4.5 */
   useCases: {
-    eyebrow: "Use cases",
-    h2: "One team, your whole outbound",
-    sub: "Frank does the research and the drafts. Ahmed and Anton approve every message and keep the conversations going.",
+    eyebrow: "What we run for you",
+    h2: "Six ways we fill a calendar",
+    sub: "Pick the ones that fit. Every one ends the same way: a qualified meeting, booked by a person, with a brief attached.",
     items: [
-      { key: "signal", title: "Signal-based outbound", body: "Reach companies at the moment they show a need, not months after a list was exported.", who: ["frank"], whoLabel: "Frank spots it" },
-      { key: "email", title: "Cold email, done carefully", body: "Short sequences on verified data. Frank drafts, Ahmed approves, and deliverability is handled for you.", who: ["frank", "ahmed"], whoLabel: "Frank drafts · Ahmed approves" },
-      { key: "linkedin", title: "LinkedIn outreach", body: "Notes and messages drafted one to one by Frank. Anton approves each one and keeps the conversation going.", who: ["frank", "anton"], whoLabel: "Frank drafts · Anton replies" },
-      { key: "accounts", title: "Named target accounts", body: "Give us the companies you want. Frank finds the right people, and we open the door.", who: ["frank", "ahmed", "anton"], whoLabel: "Frank finds · we reach out" },
+      { key: "signal", title: "Signal-based outbound", body: "A funding round, a new sales director, a hiring post, a trade-show list. We write the week it happens, not months after a list was exported.", who: ["frank"], whoLabel: "Found by our research agent" },
+      { key: "email", title: "Cold email, done carefully", body: "One message to one person on verified data, sent from your domain at a human pace. Deliverability and suppression handled for you.", who: ["frank", "ahmed"], whoLabel: "Drafted, then approved by Ahmed" },
+      { key: "linkedin", title: "LinkedIn outreach", body: "Connection notes and messages written one to one. Anton approves each and keeps the conversation going until there is a slot in the calendar.", who: ["frank", "anton"], whoLabel: "Anton runs the conversation" },
+      { key: "accounts", title: "Named target accounts", body: "Give us the twenty companies you want. We find the right person at each, the reason to write now, and open the door.", who: ["frank", "ahmed", "anton"], whoLabel: "We map the account" },
       { key: "noshow", title: "No-show recovery", body: "Missed meetings are followed up and rebooked by us, and a no-show is never counted as delivered.", who: ["anton"], whoLabel: "Anton follows up" },
       { key: "crm", title: "CRM and live dashboard", body: "Every reply and booked meeting syncs to your CRM. Watch it happen on your live dashboard.", who: ["ahmed", "anton"], whoLabel: "You see everything" },
     ],
@@ -113,14 +132,14 @@ export const home = {
 
   /** People band: Frank does the digging, Ahmed and Anton do the talking. */
   team: {
-    eyebrow: "The people behind Flowa",
-    h2: "Frank does the digging. Ahmed and Anton do the talking.",
-    sub: "Every message is read and approved by one of Flowa's co-founders before it goes out, and they keep every conversation going until there is a meeting.",
+    eyebrow: "Who you work with",
+    h2: "Two founders, not a platform.",
+    sub: "Ahmed and Anton came up through cold calling agencies in Denmark and moved the business to the UK market. They set your criteria with you, read every message before it sends, and run every conversation to a booked meeting. Our research agent, Frank, does the reading so they can do the talking.",
     people: [
       { key: "ahmed", name: "Ahmed Zamzam", role: "Co-founder", does: "Approves every message and owns your targeting" },
       { key: "anton", name: "Anton Busk", role: "Co-founder", does: "Runs the conversations and books the meetings" },
     ],
-    frankDoes: "Finds the signals, researches the buyer and drafts the first line",
+    frankDoes: "Reads your market every morning and drafts the first line",
     cta: "Meet the team",
     ctaHref: "/about",
   },
@@ -241,10 +260,10 @@ export const home = {
   /** Compliance and brand safety (UK). */
   compliance: {
     eyebrow: "Safe for your brand",
-    h2: "The rules Frank can't break",
+    h2: "The rules we don't break",
     sub: "Built around UK GDPR and PECR. They hold on every campaign, for every client, whatever the volume.",
     items: [
-      { title: "A person approves every message", body: "Frank drafts. Nothing goes out until Ahmed or Anton has read it and said yes." },
+      { title: "A person approves every message", body: "Nothing goes out until Ahmed or Anton has read it and said yes." },
       { title: "No signal, no message", body: "Every lead needs a dated, public reason to reach out that we can point to. Otherwise we don't write." },
       { title: "Business contacts only", body: "We contact people in their professional role, about something relevant to their job, with a clear way to say no." },
       { title: "Opt-outs are permanent", body: "Anyone who asks not to hear from us is suppressed across every campaign, for good." },
@@ -264,8 +283,8 @@ export const home = {
 
   /** 4.10 */
   contact: {
-    h2: "Let Flowa prospect. You take the meetings.",
-    sub: "See how Flowa can build your pipeline, qualify replies and book the meetings your team wants.",
+    h2: "Tell us who you want to meet.",
+    sub: "A 20-minute call with Ahmed or Anton: your market, what a qualified meeting looks like for you, and whether we are the right fit. No deck.",
     points: ["A reply from Ahmed or Anton within one working day", "Every message checked by a person", "Your data stays yours"],
   },
 
@@ -289,16 +308,18 @@ export const home = {
   faq: {
     h2: "Questions, answered",
     /** The five shown on the homepage; /faq shows them all. */
-    homeQuestions: ["What is Frank?", "Is it all automated?", "What counts as a qualified meeting?", "What does it cost?", "Who owns the data?"],
+    homeQuestions: ["Do I need my own list of leads?", "What counts as a qualified meeting?", "What happens if nobody shows up?", "Is it all automated?", "What does it cost?"],
     allLink: { label: "See all questions", href: "/faq" },
     items: [
-      { q: "What is Frank?", a: "Frank is Flowa's AI outbound agent. He finds companies with a real reason to buy and drafts the first message. Ahmed or Anton approves every message, and we follow up until there's a meeting in your calendar." },
+      { q: "Do I need my own list of leads?", a: "No. We build the list from public buying signals in your market every week, checked against the criteria we agree with you. If you already have target accounts, give us the names and we find the right people." },
+      { q: "What happens if nobody shows up?", a: "A no-show is not a meeting, so it is not billed. Tell us within 24 hours and we rebook it, so the lead stays warm. Across our engagements about seven in ten booked meetings take place." },
+      { q: "What is Frank?", a: "Our research agent. It reads LinkedIn, job ads, funding news and trade-show lists every morning and drafts a first line. Everything else, the approval, the conversation and the booking, is done by Ahmed and Anton." },
       { q: "Is it all automated?", a: "The research and the drafts are. The sending isn't. A person reads and approves every message, because one bad message costs more than ten good ones earn." },
       { q: "Does Flowa replace my sales team?", a: "No. We fill the calendar. Your team does what it's best at: the conversation and the close." },
       { q: "Who is behind Flowa?", a: "Flowa's co-founders, Ahmed Zamzam and Anton Busk. They set up your campaign, agree your qualification criteria with you and check the outreach." },
       { q: "Where does Frank find leads?", a: "Public buying signals: LinkedIn posts and comments, job ads, leadership changes and company news. Then verified contact data. No bought lists blasted at scale." },
       { q: "What counts as a qualified meeting?", a: "We agree it with you before we start: role or decision-making authority, genuine interest and a match with your ideal customer profile. It's written down, so there's no ambiguity later." },
-      { q: "What does it cost?", a: "The Pilot starts at £400 per booked meeting and monthly plans start at £1,200 a month. Your exact quote depends on your market and volume, and we send it within one working day.", link: { label: "Go to pricing", href: "/pricing" } },
+      { q: "What does it cost?", a: "The pilot is £400 per meeting that takes place, with no retainer, so your risk is one meeting. Monthly plans start at £1,200 a month with a meeting commitment. Your exact quote depends on your market and volume, and we send it within one working day.", link: { label: "Go to pricing", href: "/pricing" } },
       { q: "Who owns the data?", a: "You do. Every list, contact and campaign asset built for you stays yours." },
       { q: "Does Flowa work with our CRM?", a: "Booked meetings and replies can be shared with the CRM you already use. We set it up with you during onboarding." },
       { q: "How quickly can we start?", a: "After a first call we agree strategy and your ideal customer profile. Onboarding usually starts shortly after." },

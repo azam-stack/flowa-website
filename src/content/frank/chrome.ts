@@ -8,9 +8,9 @@
 import { SITE_CONFIG } from "@/config/site";
 
 export const announcement = {
-  lead: "Meet Frank,",
-  rest: " our new AI outbound agent",
-  href: "/frank",
+  lead: "Free market snapshot:",
+  rest: " the first five leads from your market are on us",
+  href: "/market-snapshot",
   ariaLabel: "Meet Frank, our new AI outbound agent",
 } as const;
 
