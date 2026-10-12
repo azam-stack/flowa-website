@@ -61,6 +61,8 @@ function BusinessDetails() {
     ...(e.cvr ? [{ label: "CVR", value: e.cvr }] : []),
     ...(e.address ? [{ label: "Registered address", value: e.address }] : []),
     { label: "Email", value: e.email },
+    ...(e.icoRegistration ? [{ label: "ICO registration", value: e.icoRegistration }] : []),
+    ...(e.ukRepresentative ? [{ label: "UK representative", value: [e.ukRepresentative.name, ...e.ukRepresentative.address, e.ukRepresentative.email] }] : []),
   ];
   return (
     <div className="framed mt-12 p-6 md:mt-16 md:p-8">

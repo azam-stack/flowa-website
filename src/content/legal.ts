@@ -48,6 +48,16 @@ export const legalEntity = {
   authority: { name: "Datatilsynet", url: "https://www.datatilsynet.dk" },
   /** The UK authority, relevant because Flowa targets buyers in the UK. */
   ukAuthority: { name: "the Information Commissioner's Office", url: "https://ico.org.uk" },
+  /**
+   * UK GDPR Article 27 representative. Flowa offers services to people
+   * in the UK without being established there, so it must appoint one.
+   * Fill in once the appointment is signed; the row and the sentence in
+   * the privacy policy render only when this is non-null. Keep the
+   * ICO registration reference next to it once the data protection
+   * fee is paid.
+   */
+  ukRepresentative: null as { name: string; address: string[]; email: string } | null,
+  icoRegistration: null as string | null,
 } as const;
 
 export type LegalBlock =
@@ -68,7 +78,7 @@ export type LegalDoc = {
 };
 
 /** Last substantive review of these documents. Update when the text changes. */
-export const legalUpdated = "1 October 2026";
+export const legalUpdated = "12 October 2026";
 
 const p = (text: string): LegalBlock => ({ kind: "p", text });
 const list = (items: string[]): LegalBlock => ({ kind: "list", items });
@@ -111,6 +121,7 @@ export const privacyPolicy: LegalDoc = {
       blocks: [
         p("This is the part of our work that involves the most personal data, so it gets the most detail. Where we are asked, we identify people at companies that fit a client's stated criteria and contact them about that client's offer. Our lawful basis is Article 6(1)(f) of the GDPR, our legitimate interest and our client's legitimate interest in business-to-business commercial communication, balanced against your interests. You can object at any time and we will stop."),
         p("We do this only in a business context, to people in a professional role, about something relevant to that role. We do not process special category data and we do not target private individuals."),
+        p("We also respect the marketing rules of the country you are in. In the United Kingdom we send unsolicited email only to corporate subscribers, that is limited companies, LLPs and similar bodies, and not to sole traders or partnerships, who are treated as individuals under PECR. We do not send unsolicited marketing email to businesses in Denmark, where the Marketing Practices Act requires prior consent. Every message we send says who we are and who we are writing for, and tells you how to stop."),
         p("Because we do not collect this data from you directly, Article 14 of the GDPR requires us to tell you where it came from. The categories of source are:"),
         list([
           "Public professional profiles and posts, including what someone has published about their own role or company",
@@ -135,15 +146,14 @@ export const privacyPolicy: LegalDoc = {
         p("We keep the list of suppliers short and we do not sell data to anyone. The processors we use are:"),
         list([
           "GitHub, for hosting this website",
-          "FormSubmit, which receives enquiries from the contact form and the quote form and emails them to us",
           "Cal.com, if you book a call through our booking link",
           "Cloudflare Workers AI, which answers questions typed into the \"Ask a question\" box. Questions are not stored by us and should not contain personal data",
-          "Cloudflare, for the service that receives enquiries from the contact form, where one is configured",
+          "Cloudflare, for the service that receives enquiries from the contact form and the quote form, and stores them",
           "Resend, for sending us an internal notification when an enquiry arrives",
           "Microsoft, for our own email",
           "Where a client asks for it, that client's own CRM, so the records we produce for them land in their system",
         ]),
-        p("Some of these suppliers process data outside the European Economic Area, principally in the United States. Where that happens the transfer relies on the European Commission's adequacy decision for the EU-US Data Privacy Framework or on standard contractual clauses."),
+        p("We have a data processing agreement, or the supplier's standard data processing terms, in place with each of them. Some of these suppliers process data outside the European Economic Area, principally in the United States. Where that happens the transfer relies on the European Commission's adequacy decision for the EU-US Data Privacy Framework or on standard contractual clauses."),
       ],
     },
     {
@@ -156,6 +166,16 @@ export const privacyPolicy: LegalDoc = {
           "Suppression records: kept indefinitely, because deleting them would mean contacting you again",
           "Client and accounting records: five years from the end of the financial year, as the Danish Bookkeeping Act requires",
         ]),
+      ],
+    },
+    {
+      heading: "If you are in the United Kingdom",
+      blocks: [
+        p("Flowa is established in Denmark and offers its services to businesses in the United Kingdom, so the UK GDPR applies to what we do with your data alongside the EU GDPR. Everything in this policy applies equally under both, and the rights below are the same."),
+        ...(legalEntity.ukRepresentative
+          ? [p("Our UK representative under Article 27 of the UK GDPR, who you can contact about anything in this policy as an alternative to writing to us directly, is listed in the business details at the bottom of this page.")]
+          : [p("We are appointing a representative in the United Kingdom under Article 27 of the UK GDPR. Until that appointment is published here, please write to info@flowa.dk, and we will handle any request about your data exactly as the law requires.")]),
+        ...(legalEntity.icoRegistration ? [p("Flowa is registered with the Information Commissioner's Office; the registration reference is in the business details below.")] : []),
       ],
     },
     {

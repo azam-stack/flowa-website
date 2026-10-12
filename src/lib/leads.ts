@@ -4,7 +4,7 @@ import { sanitizeLead, validateLead, type Attribution, type LeadErrors, type Lea
 
 /**
  * Submits a contact or quote lead: POSTs JSON to the lead endpoint
- * (VITE_CONTACT_ENDPOINT, or FormSubmit emailing ahmed@flowa.dk) and
+ * (VITE_CONTACT_ENDPOINT, the Cloudflare Worker in backend/) and
  * reports the real outcome (timeout, network, server error, or success).
  * If no endpoint is configured at all,
  * the honest fallback: open the visitor's email client with the details
@@ -43,23 +43,17 @@ export async function submitLead(lead: LeadInput): Promise<SubmitResult> {
     return { status: "mailto" };
   }
 
-  const isFormSubmit = SITE_CONFIG.leadEndpoint.includes("formsubmit.co");
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
   try {
     const res = await fetch(SITE_CONFIG.leadEndpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify(isFormSubmit ? { ...lead, _subject: lead.kind === "quote" ? "New quote request from weareflowa.com" : lead.message.startsWith("Market snapshot request") ? `Market snapshot request from ${lead.first_name} (weareflowa.com)` : `New enquiry from ${lead.first_name} (weareflowa.com)`, _template: "table" } : lead),
+      body: JSON.stringify(lead),
       signal: controller.signal,
     });
     if (res.ok) {
       const data = (await res.json().catch(() => ({}))) as { id?: string; success?: string | boolean };
-      // FormSubmit answers 200 with success "false" until the inbox has confirmed the form.
-      if (isFormSubmit && String(data.success) !== "true") {
-        track("form_error", { reason: "server", code: "formsubmit" });
-        return { status: "error", reason: "server", retryable: true };
-      }
       track("form_success", { kind: lead.kind });
       return { status: "sent", id: data.id };
     }

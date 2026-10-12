@@ -4,8 +4,10 @@
  * place, and nowhere else.
  *
  * - VITE_CONTACT_ENDPOINT: the POST endpoint for contact and quote
- *   submissions (the backend/ Cloudflare Worker, once deployed). Unset:
- *   submissions go to FormSubmit, which emails them to ahmed@flowa.dk.
+ *   submissions (the backend/ Cloudflare Worker). Unset: the forms open
+ *   the visitor's email client instead. FormSubmit is no longer used:
+ *   it has no data processing agreement, so it cannot be a GDPR
+ *   Article 28 processor for enquiries.
  * - VITE_BOOKING_URL: the calendar every "Book a call" button opens.
  *   Defaults to the Cal.com intro call, with Anton added as a guest.
  * - VITE_CLIENT_DASHBOARD_URL: the "Client dashboard" nav link. Unset:
@@ -22,7 +24,7 @@ export const SITE_CONFIG = {
   locale: "en_GB",
   lang: "en-GB",
   draft: (env.VITE_DRAFT as string | undefined) !== "false",
-  leadEndpoint: (env.VITE_CONTACT_ENDPOINT as string | undefined) || "https://formsubmit.co/ajax/ahmed@flowa.dk",
+  leadEndpoint: (env.VITE_CONTACT_ENDPOINT as string | undefined) || null,
   /** The "Ask a question" box (backend/ worker /api/ask). Unset: the box is not shown. */
   askEndpoint: (env.VITE_ASK_ENDPOINT as string | undefined) || null,
   /** Every "Book a call" button opens the Cal.com calendar in a new tab (Anton added as a guest). */
