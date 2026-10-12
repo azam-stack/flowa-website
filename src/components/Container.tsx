@@ -1,8 +1,9 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
-export function Container({ children, className = "", style }: { children: ReactNode; className?: string; style?: React.CSSProperties }) {
+/** Container max-width 1400px, side padding 88px desktop / 16px mobile (brief §2.4). */
+export function Container({ children, className = "", style, id }: { children: ReactNode; className?: string; style?: CSSProperties; id?: string }) {
   return (
-    <div className={`mx-auto w-full max-w-content px-6 md:px-10 ${className}`} style={style}>
+    <div id={id} className={`mx-auto w-full max-w-container px-4 md:px-10 xl:px-gutter ${className}`} style={style}>
       {children}
     </div>
   );

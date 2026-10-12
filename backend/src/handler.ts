@@ -11,18 +11,18 @@ import { rateLimited, isDuplicate } from "./rate-limit";
  *
  * 1. CORS: only the configured origins.
  * 2. Rate limit per IP.
- * 3. Parse and sanitise the payload (shared schema with the form).
+ * 3. Parse and sanitise the payload (shared schema with the forms: "contact" or "quote").
  * 4. Validate; 400 with field errors if invalid.
  * 5. Honeypot: silently accept.
  * 6. Duplicate within 10 minutes: 200 with `duplicate: true`, not stored twice.
- * 7. Add id, timestamp; source page, service and UTM come from the client and were sanitised.
+ * 7. Add id, timestamp; page URL and UTM come from the client and were sanitised.
  * 8. Store (KV) and forward to every configured CRM provider.
  * 9. Notify by email (failure logged, not surfaced to the visitor).
  * 10. 200 { ok: true, id }.
  */
 const WINDOW_SECONDS = 600;
 
-function corsHeaders(origin: string | null, env: Env): Record<string, string> {
+export function corsHeaders(origin: string | null, env: Env): Record<string, string> {
   const allowed = (env.ALLOWED_ORIGINS || "")
     .split(",")
     .map((s) => s.trim())
@@ -37,7 +37,7 @@ function corsHeaders(origin: string | null, env: Env): Record<string, string> {
   };
 }
 
-function json(body: unknown, status: number, headers: Record<string, string>): Response {
+export function json(body: unknown, status: number, headers: Record<string, string>): Response {
   return new Response(JSON.stringify(body), { status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store", ...headers } });
 }
 

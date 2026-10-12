@@ -9,27 +9,26 @@ import type { Env } from "./env";
  */
 export async function notifyByEmail(env: Env, lead: Lead): Promise<boolean> {
   if (!env.RESEND_API_KEY || !env.NOTIFY_TO || !env.NOTIFY_FROM) return false;
-  const rows: [string, string | undefined][] = [
-    ["Name", `${lead.firstName} ${lead.lastName}`],
-    ["Company", lead.company],
-    ["Email", lead.email],
-    ["Phone", lead.phone],
-    ["Job title", lead.jobTitle],
-    ["Company size", lead.companySize],
-    ["Industry", lead.industry],
-    ["Website", lead.website],
-    ["Preferred timing", lead.preferredTiming],
-    ["Service", lead.service],
-    ["Source page", lead.sourcePage],
-    ["UTM", [lead.utmSource, lead.utmMedium, lead.utmCampaign, lead.utmTerm, lead.utmContent].filter(Boolean).join(" / ") || undefined],
-    ["Submitted", lead.createdAt],
-    ["Lead id", lead.id],
-  ];
+  const utm = [lead.utm_source, lead.utm_medium, lead.utm_campaign, lead.utm_term, lead.utm_content].filter(Boolean).join(" / ") || undefined;
+  const rows: [string, string | undefined][] =
+    lead.kind === "quote"
+      ? [
+          ["Company type", lead.company_type],
+          ["Team size", lead.team_size],
+          ["Goals", lead.goals.join(", ")],
+          ["Email", lead.email],
+        ]
+      : [
+          ["Name", lead.first_name],
+          ["Email", lead.email],
+        ];
+  rows.push(["Page", lead.page_url], ["UTM", utm], ["Submitted", lead.submitted_at], ["Lead id", lead.id]);
   const text = rows
     .filter(([, v]) => v)
     .map(([k, v]) => `${k}: ${v}`)
-    .concat(lead.goal ? ["", "What they want to achieve:", lead.goal] : [])
+    .concat(lead.kind === "contact" ? ["", "What they would like to discuss:", lead.message] : [])
     .join("\n");
+  const subject = lead.kind === "quote" ? `Quote request: ${lead.email} (${lead.company_type}, ${lead.team_size})` : `Enquiry: ${lead.first_name} <${lead.email}>`;
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, "Content-Type": "application/json" },
@@ -37,7 +36,7 @@ export async function notifyByEmail(env: Env, lead: Lead): Promise<boolean> {
       from: env.NOTIFY_FROM,
       to: env.NOTIFY_TO.split(",").map((s) => s.trim()),
       reply_to: lead.email,
-      subject: `New lead: ${lead.company} (${lead.firstName} ${lead.lastName})${lead.service ? ` · ${lead.service}` : ""}`,
+      subject,
       text,
     }),
   });

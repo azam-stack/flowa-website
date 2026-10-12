@@ -12,6 +12,6 @@ export class KvStoreProvider implements CRMProvider {
   constructor(private readonly kv: KVNamespace) {}
 
   async createLead(lead: Lead): Promise<void> {
-    await this.kv.put(`lead:${lead.createdAt}:${lead.id}`, JSON.stringify(lead), { metadata: { email: lead.email, company: lead.company } });
+    await this.kv.put(`lead:${lead.createdAt}:${lead.id}`, JSON.stringify(lead), { metadata: { email: lead.email, kind: lead.kind } });
   }
 }

@@ -2,25 +2,31 @@ import { SITE_CONFIG } from "@/config/site";
 
 /**
  * Event tracking with no vendor in the frontend. Every event goes to
- * `window.dataLayer` (so a tag manager can pick it up) and, when
- * VITE_ANALYTICS_ENDPOINT is set, is beaconed there as JSON. Personal
- * data from the lead form is never sent: form events carry the service
- * and the page, not the fields.
+ * `window.dataLayer` only: the draft is never connected to the production
+ * analytics property (brief §0). Personal data from the forms is never
+ * tracked: form events carry the page, not the fields.
  */
 export type AnalyticsEvent =
   | "page_view"
-  | "service_view"
   | "cta_click"
-  | "book_call_click"
+  | "announcement_click"
+  | "nav_click"
+  | "video_open"
   | "form_start"
   | "form_submit"
   | "form_success"
   | "form_error"
-  | "service_card_click"
-  | "case_study_open"
   | "faq_open"
-  | "video_play"
-  | "scroll_depth";
+  | "chat_open"
+  | "chat_close"
+  | "chat_quick_reply"
+  | "quiz_step_1"
+  | "quiz_step_2"
+  | "quiz_step_3"
+  | "quiz_step_4"
+  | "quiz_submit"
+  | "scroll_depth"
+  | "ask_submit";
 
 export type EventProps = Record<string, string | number | boolean | undefined>;
 
@@ -33,27 +39,30 @@ declare global {
 const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"] as const;
 export type Utm = Partial<Record<(typeof UTM_KEYS)[number], string>>;
 
-const UTM_STORAGE = "flowa:utm";
+/**
+ * UTM parameters from the landing URL, held in memory for as long as the
+ * page is open so a form submitted after some browsing still carries
+ * them. Deliberately not written to sessionStorage: storing marketing
+ * attribution on a visitor's device would need consent under ePrivacy
+ * and PECR, and the site has no consent banner because it needs none.
+ */
+let utmMemo: Utm | null = null;
 
-/** UTM parameters from the landing URL, remembered for the session so a later form submit still carries them. */
 export function getUtm(): Utm {
   if (typeof window === "undefined") return {};
+  if (utmMemo) return utmMemo;
+  const fresh: Utm = {};
   try {
     const params = new URLSearchParams(window.location.search);
-    const fresh: Utm = {};
     for (const k of UTM_KEYS) {
       const v = params.get(k);
       if (v) fresh[k] = v.slice(0, 200);
     }
-    if (Object.keys(fresh).length) {
-      sessionStorage.setItem(UTM_STORAGE, JSON.stringify(fresh));
-      return fresh;
-    }
-    const stored = sessionStorage.getItem(UTM_STORAGE);
-    return stored ? (JSON.parse(stored) as Utm) : {};
   } catch {
-    return {};
+    /* a malformed query string must never break the page */
   }
+  utmMemo = fresh;
+  return fresh;
 }
 
 export function track(event: AnalyticsEvent, props: EventProps = {}): void {

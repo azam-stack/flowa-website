@@ -4,22 +4,22 @@ import { track, watchScrollDepth } from "./analytics";
 
 /**
  * Per-route document head. The production build also writes these tags
- * into each route's static HTML (scripts/prerender-routes.mjs) so crawlers
- * and link previews see them without JavaScript; this hook keeps the
- * live document in step during client-side navigation.
+ * into each route's static HTML (scripts/prerender-routes.mjs) so link
+ * previews see them without JavaScript; this hook keeps the live
+ * document in step during client-side navigation.
+ *
+ * While the site is a draft every page carries
+ * `<meta name="robots" content="noindex, nofollow">` (brief §0).
  */
 export type PageSeo = {
   title: string;
   description: string;
-  /** Path, e.g. "/services/cold-email". Canonical is siteUrl + path. */
+  /** Path, e.g. "/channels/email". Canonical is siteUrl + path. */
   path: string;
   ogTitle?: string;
   ogDescription?: string;
-  ogType?: "website" | "article";
   /** JSON-LD blocks for this page, in addition to the site-wide Organization/WebSite blocks. */
   jsonLd?: object[];
-  /** Analytics: which service this page is about. */
-  service?: string;
 };
 
 function setMeta(attr: "name" | "property", key: string, content: string) {
@@ -50,8 +50,9 @@ export function applySeo(seo: PageSeo): void {
   const url = canonicalUrl(seo.path);
   document.title = seo.title;
   setMeta("name", "description", seo.description);
+  if (SITE_CONFIG.draft) setMeta("name", "robots", "noindex, nofollow");
   setLink("canonical", url);
-  setMeta("property", "og:type", seo.ogType ?? "website");
+  setMeta("property", "og:type", "website");
   setMeta("property", "og:site_name", SITE_CONFIG.name);
   setMeta("property", "og:url", url);
   setMeta("property", "og:title", seo.ogTitle ?? seo.title);
@@ -76,8 +77,7 @@ export function applySeo(seo: PageSeo): void {
 export function useSeo(seo: PageSeo): void {
   useEffect(() => {
     applySeo(seo);
-    track("page_view", { title: seo.title, service: seo.service });
-    if (seo.service) track("service_view", { service: seo.service });
+    track("page_view", { title: seo.title });
     return watchScrollDepth(seo.path);
     // The page's identity is its path; the rest is derived from it.
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -90,18 +90,6 @@ export function faqJsonLd(items: readonly { q: string; a: string }[]): object {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: items.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
-  };
-}
-
-export function serviceJsonLd(input: { name: string; description: string; path: string }): object {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    name: input.name,
-    serviceType: input.name,
-    description: input.description,
-    url: canonicalUrl(input.path),
-    provider: { "@type": "Organization", name: SITE_CONFIG.name, url: `${SITE_CONFIG.siteUrl}/` },
   };
 }
 
