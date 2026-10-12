@@ -42,7 +42,8 @@ fs.rmSync(path.join(root, "node_modules", ".flowa-content-entry.ts"), { force: t
 const PLACEHOLDER = /\[[^\]]+\]/g;
 const CONFIRM = /^\[CONFIRM\b[^\]]*\]$/;
 const MONEY = /£\s?[\d.,]+\s?[KMkm]?\+?|\d\s?(?:GBP|DKK|EUR)\b/g;
-const ALLOWED_MONEY = ["£3.4M+", "£90K+", "£400", "£1,200", "£50K+"];
+// £35K and £30 (as in "£30–40K salary") are the SDR-hire market figures in the homepage comparison, not Flowa prices.
+const ALLOWED_MONEY = ["£3.4M+", "£90K+", "£400", "£1,200", "£50K+", "£35K", "£30"];
 const EM_DASH = /—/;
 
 const problems = [];

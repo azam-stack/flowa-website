@@ -18,7 +18,8 @@ const files = [];
   }
 })(dist);
 
-const PRICE = /£\s?(?!3\.4M\+|90K\+|400\b|1,200\b|50K\+)\d/;
+// £35K and £30–40K are the SDR-hire market figures in the homepage comparison, not Flowa prices.
+const PRICE = /£\s?(?!3\.4M\+|90K\+|400\b|1,200\b|50K\+|35K\b|30–40K\b)\d/;
 const problems = [];
 for (const f of files) {
   const text = fs.readFileSync(f, "utf8");
