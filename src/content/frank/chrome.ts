@@ -8,10 +8,10 @@
 import { SITE_CONFIG } from "@/config/site";
 
 export const announcement = {
-  lead: "Free market snapshot:",
-  rest: " the first five leads from your market are on us",
-  href: "/market-snapshot",
-  ariaLabel: "Meet Frank, our new AI outbound agent",
+  lead: "Pay per meeting that happens.",
+  rest: " No SDR salary, no retainer on the pilot",
+  href: SITE_CONFIG.bookCallHref,
+  ariaLabel: "Book a call with Flowa",
 } as const;
 
 export type MenuItem = { title: string; description: string; href: string; icon: "frank" | "steps" | "signals" | "mail" | "linkedin" | "cases" | "faq" | "about" | "contact" };

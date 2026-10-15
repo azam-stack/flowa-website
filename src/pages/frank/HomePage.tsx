@@ -4,7 +4,7 @@ import { AskBox } from "@/components/frank/AskBox";
 import { FaqList } from "@/components/frank/FaqList";
 import { SmartLink } from "@/components/SmartLink";
 import { Hero } from "@/components/frank/Hero";
-import { LiveCampaign } from "@/components/frank/LiveCampaign";
+import { ChannelLoop } from "@/components/frank/ChannelLoop";
 import { SnapshotBand } from "@/pages/frank/SnapshotPage";
 import { Marquee } from "@/components/frank/Marquee";
 import { ClientResults, StatsStrip } from "@/components/frank/Proof";
@@ -31,7 +31,7 @@ export function HomePage() {
     <>
       <Hero />
       <Marquee className="mt-6 md:mt-10" />
-      <LiveCampaign />
+      <ChannelLoop />
       <SdrMath />
       <PromiseBand />
       <StatsStrip className="mt-14 md:mt-20" />
