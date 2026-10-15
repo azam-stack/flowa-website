@@ -35,7 +35,7 @@ export function Hero() {
             </h1>
             <p className="mx-auto mt-6 max-w-[680px] text-sub text-ink-2">{h.sub}</p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-              <Btn href={h.demoHref} size="lg" trackLabel="hero_snapshot">
+              <Btn href={h.demoHref} size="lg" trackLabel="hero_book_call">
                 {h.demo}
               </Btn>
               <SmartLink href={h.secondaryHref} className="btn btn-text h-14 px-4 text-[17px]" onClick={() => track("cta_click", { label: "hero_see_campaign" })}>

@@ -4,6 +4,8 @@
  * fictional companies only. Copy v2: Frank finds, researches and drafts;
  * a person at Flowa approves every message; Frank follows up and books.
  */
+import { SITE_CONFIG } from "@/config/site";
+
 export const home = {
   seo: {
     title: "Flowa | B2B meetings in the UK, paid per meeting that happens",
@@ -15,8 +17,8 @@ export const home = {
     h1Light: "Stop hiring SDRs. ",
     h1Bold: "Pay for meetings that happen.",
     sub: "We find UK buyers with a reason to talk this week, write to them one at a time, and book the meeting into your calendar. You are billed when it takes place, not for activity.",
-    demo: "Get five free leads from your market",
-    demoHref: "/market-snapshot",
+    demo: "Book a 20-minute call",
+    demoHref: SITE_CONFIG.bookCallHref,
     secondary: "See a campaign run",
     secondaryHref: "#see-it-work",
     video: "See Frank in action",
@@ -46,16 +48,25 @@ export const home = {
     },
   },
 
-  /** "Watch a campaign run": the product demo under the stats. Fictional lead, illustrative. */
+  /** "One campaign, start to finish": headline, the channel card and the step strip. */
   demo: {
     eyebrow: "How it works",
     h2Light: "One campaign, ",
     h2Bold: "start to finish",
-    sub: "From a public buying signal to a meeting in your calendar. This is the whole method, with nothing hidden: research, one message, a human yes, a booked slot.",
-    windowTitle: "Campaign · UK SaaS sales leaders",
-    illustrative: "Illustrative example",
-    pause: "Pause",
-    play: "Play",
+    sub: "From a public buying signal to a meeting in your calendar. We reach each buyer on the channel they actually answer, one message at a time, and a person at Flowa reads every one before it sends.",
+    /** The channel card to the right of the headline: three channels, one team. */
+    card: {
+      label: "Three channels, two founders",
+      status: "Live",
+      channels: [
+        { key: "email", name: "Email" },
+        { key: "linkedin", name: "LinkedIn" },
+        { key: "phone", name: "Phone" },
+      ],
+      centre: "Flowa",
+      foot: "Every message read by a person before it sends.",
+      out: "Meeting in your calendar",
+    },
     steps: [
       { key: "find", name: "Find", when: "Every morning", line: "We read LinkedIn, job ads, funding news and trade-show lists for companies that match your ideal customer and have a reason to talk now." },
       { key: "qualify", name: "Qualify", when: "Every lead", line: "Each lead needs the right role, size and market, and a dated signal." },
@@ -64,14 +75,6 @@ export const home = {
       { key: "send", name: "Send", when: "Human pace", line: "Sent from your domain or LinkedIn, inside safe daily limits." },
       { key: "book", name: "Book", when: "On reply", line: "Anton answers within the hour, qualifies against your criteria and books the meeting with a brief attached." },
     ],
-    feed: {
-      find: { title: "Scanned LinkedIn, job ads and company news", chips: ["214 companies match your ICP", "41 with a signal this week"] },
-      qualify: { name: "Oliver Hart", role: "Head of Sales · Brightline Software", signal: "Posted: hiring 2 SDRs · 4h ago", checks: ["Decision-maker", "120 people", "UK"] },
-      draft: { subject: "Your two SDR hires", body: "Hi Oliver, saw you're hiring two SDRs. While they ramp, we can keep your calendar full with teams that have a real reason to talk. Worth 20 minutes?", by: "Drafted by Frank" },
-      approve: { who: "Ahmed", text: "Ahmed approved the message", time: "09:42", note: "Nothing sends without this step" },
-      send: { text: "Sent from your domain", meta: "Inside the send window · paced like a person" },
-      book: { reply: "Good timing. Thursday works?", text: "Anton booked Thu 14:30", meta: "Brief sent · added to your CRM" },
-    },
   },
 
   /** The buyer's real alternative, side by side. Figures are UK averages Flowa quotes in sales calls; keep them defensible. */
