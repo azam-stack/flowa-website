@@ -84,7 +84,7 @@ export function SignalMoment() {
                         </span>
                         <span className="mt-0.5 block text-[14px] leading-snug text-ink-2">{s.signal}</span>
                       </span>
-                      <Stamp show={on} delayMs={STAMP_MS} label={s.stamp} />
+                      <Stamp show={on} delayMs={STAMP_MS} label={s.stamp} booked={"booked" in s && Boolean(s.booked)} />
                     </li>
                   );
                 })}
@@ -93,9 +93,6 @@ export function SignalMoment() {
               <p className="border-t border-line px-6 py-4 text-center text-[11.5px] font-medium uppercase tracking-[0.14em] text-muted">{m.card.foot}</p>
             </div>
 
-            <p className="mt-6 text-[17px] leading-snug text-ink">
-              <span className="font-semibold">{m.closing.split(". ")[0]}.</span> {m.closing.split(". ").slice(1).join(". ")}
-            </p>
           </Reveal>
 
           <Reveal className="lg:col-start-1">
@@ -103,8 +100,7 @@ export function SignalMoment() {
               {m.groups.map((g) => (
                 <li key={g.name}>
                   <p className="text-[12px] font-semibold uppercase tracking-[0.14em] text-brand-deep">{g.name}</p>
-                  <p className="mt-1.5 text-[15px] leading-snug text-ink">{g.line}</p>
-                  <ul className="mt-3 flex flex-wrap gap-1.5">
+                  <ul className="mt-2.5 flex flex-wrap gap-1.5">
                     {g.tags.map((t) => (
                       <li key={t} className="rounded-pill border border-line bg-soft px-2.5 py-1 text-[12.5px] font-medium text-ink-2">
                         {t}
@@ -121,10 +117,10 @@ export function SignalMoment() {
   );
 }
 
-function Stamp({ show, delayMs, label }: { show: boolean; delayMs: number; label: string }) {
+function Stamp({ show, delayMs, label, booked }: { show: boolean; delayMs: number; label: string; booked?: boolean }) {
   return (
-    <span className={`signal-stamp hidden flex-none items-center gap-1.5 rounded-pill px-2.5 py-1 text-[12px] font-semibold sm:inline-flex ${show ? "is-on" : ""}`} style={{ transitionDelay: show ? `${delayMs}ms` : "0ms" }}>
-      <Check size={10} /> {label}
+    <span className={`signal-stamp hidden flex-none items-center gap-1.5 rounded-pill px-2.5 py-1 text-[12px] font-semibold sm:inline-flex ${booked ? "is-booked" : ""} ${show ? "is-on" : ""}`} style={{ transitionDelay: show ? `${delayMs}ms` : "0ms" }}>
+      {booked ? <Calendar size={11} /> : <Check size={10} />} {label}
     </span>
   );
 }
