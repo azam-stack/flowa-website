@@ -41,7 +41,7 @@ export const nav = {
     },
   ] as MenuGroup[],
   /** Direct links (no dropdown), shown after the first group and at the end. */
-  results: { label: "Results", href: "/cases" },
+  results: { label: "Results", href: "/#results" },
   pricing: { label: "Pricing", href: "/pricing" },
   /** Hidden until Flowa provides a URL: while `href` is null the link is not rendered at all. */
   clientDashboard: { label: "Client dashboard", href: null as string | null },
@@ -72,10 +72,6 @@ export const chat = {
   ],
 } as const;
 
-export const marquee = {
-  heading: "Join the companies Flowa has booked meetings for",
-} as const;
-
 export const footer = {
   /** Flowa's motto, two-tone: the first line in ink, the second in orange. */
   tagline: "Creating meetings.",
@@ -98,7 +94,6 @@ export const footer = {
       heading: "Company",
       links: [
         { label: "About", href: "/about" },
-        { label: "Cases", href: "/cases" },
         { label: "Contact", href: "/contact" },
       ],
     },

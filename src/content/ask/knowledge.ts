@@ -30,7 +30,7 @@ QUALIFIED MEETINGS AND PAYMENT
 - What counts as a qualified meeting is agreed in writing with the client before work starts: role or decision-making authority, genuine interest and a match with the ideal customer profile.
 - The client pays for meetings that are held with someone who meets the agreed criteria. Activity is never billed.
 - If someone doesn't turn up to a meeting, the client tells Flowa within 24 hours and Flowa rebooks the meeting.
-- Published starting prices: the Pilot is from £400 per booked meeting with no monthly commitment; monthly plans start from £1,200 a month and include a meeting guarantee; Scale is on request. Prices exclude VAT. The exact quote depends on market and volume: visitors answer three questions on the pricing page (weareflowa.com/pricing) and Flowa replies within one working day.
+- Published starting prices: the Pilot is from £400 per booked meeting with no monthly commitment plus a one-off £500 setup fee; monthly plans start from £1,200 a month and include a meeting guarantee; Scale is on request. Prices exclude VAT. The exact quote depends on market and volume: visitors answer three questions on the pricing page (weareflowa.com/pricing) and Flowa replies within one working day.
 
 HOW AN ENGAGEMENT RUNS
 - Week 1: kick-off call with Ahmed and Anton; agree the ideal customer, the roles worth meeting and the written definition of a qualified meeting.
@@ -50,7 +50,6 @@ SALES TEAMS AND CRM
 
 TRACK RECORD (Flowa's own records)
 - 6+ years of B2B outbound, 2,000+ meetings booked, £3.4M+ revenue generated for clients, and a record £90K+ annual sale from one meeting.
-- Published cases: for DataPeeps (which sells data and leads to companies such as insurers), Flowa booked a first meeting with one of Denmark's largest insurance companies. For Generaxion, a meeting Flowa booked led to an annual sale of £90K+.
 
 GETTING STARTED AND CONTACT
 - Free market snapshot: visitors tell Flowa who they sell to and, within one working day, get 10 companies in their market showing a buying signal now, with who decides and draft first messages (weareflowa.com/market-snapshot). Flowa makes five a week.

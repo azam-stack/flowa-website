@@ -114,36 +114,6 @@ export const channelLinkedIn = {
   ],
 } as const;
 
-export const casesPage = {
-  seo: { title: "Cases | Flowa", description: "Meetings Flowa has created for its clients: a first meeting with one of Denmark's largest insurers for DataPeeps, and an annual sale worth over 90,000 pounds for Generaxion." },
-  h1Light: "Meetings Flowa has created. ",
-  h1Bold: "Documented, not dramatised.",
-  sub: "Real meetings for real clients. Each case is published with the client's approval.",
-  /** Results only as the clients reported them. The insurer is deliberately not named. */
-  cases: [
-    {
-      slug: "datapeeps",
-      client: "DataPeeps",
-      sells: "Sells data and leads to companies such as insurers",
-      work: "We mapped the decision-makers at the insurers that fit DataPeeps' profile and opened the conversation with a message written for one person.",
-      resultBig: "Top-tier insurer",
-      resultLabel: "First meeting booked with one of Denmark's largest insurance companies",
-    },
-    {
-      slug: "generaxion",
-      client: "Generaxion",
-      sells: "",
-      work: "We booked qualified first meetings against the criteria agreed with Generaxion before we started.",
-      resultBig: "£90K+",
-      resultLabel: "Annual sale generated from a single meeting we booked",
-    },
-  ],
-  caseLabels: { work: "What we did", result: "Result" },
-  approvalNote: "Results as reported by the clients. Published with their permission.",
-  contactH2: "Want to be the next case?",
-  contactSub: "Tell us who you sell to. Ahmed or Anton will reply within one working day.",
-} as const;
-
 export const aboutPage = {
   seo: { title: "About us | Flowa", description: "Ahmed Zamzam and Anton Busk met as meeting bookers in a call centre, started Flowa and built Frank to find the right companies at the right moment." },
   h1Light: "The people ",

@@ -3,8 +3,8 @@
  * points (Pilot per meeting, monthly plans from, Scale on request).
  *
  * The only prices allowed anywhere on the site are £400 and £1,200
- * (see PUBLISHED_PRICES in scripts/check-content.mjs). The onboarding
- * fee is never published; Ahmed and Anton tell clients themselves.
+ * (see ALLOWED_MONEY in scripts/check-content.mjs). The Pilot's £500 setup
+ * fee is shown as small print on the Pilot card only.
  */
 import { SITE_CONFIG } from "@/config/site";
 
@@ -80,6 +80,8 @@ export const pricing = {
         unit: "per booked meeting",
         body: "Try Flowa on your own market. You only pay for meetings that are held with the right person.",
         points: ["No monthly commitment", "LinkedIn and email outreach", "Every message approved by Ahmed or Anton"],
+        /** Small print under the button. The setup fee covers domain, deliverability and the first list. */
+        note: "Plus a one-off £500 setup fee.",
         cta: "Get my quote",
         href: "#quote",
         featured: false,

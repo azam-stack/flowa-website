@@ -296,14 +296,6 @@ export const home = {
     link: { label: "Read our privacy policy", href: "/privacy" },
   },
 
-  /** Homepage results: published client cases. */
-  results: {
-    eyebrow: "Client results",
-    h2: "What one meeting can be worth",
-    sub: "Two results our clients have let us share.",
-    cta: "See all cases",
-  },
-
   /** 4.10 */
   contact: {
     h2: "Tell us who you want to meet.",

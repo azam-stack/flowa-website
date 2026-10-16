@@ -7,8 +7,7 @@ import { Hero } from "@/components/frank/Hero";
 import { ChannelLoop } from "@/components/frank/ChannelLoop";
 import { SignalMoment } from "@/components/frank/SignalMoment";
 import { SnapshotBand } from "@/pages/frank/SnapshotPage";
-import { Marquee } from "@/components/frank/Marquee";
-import { ClientResults, StatsStrip } from "@/components/frank/Proof";
+import { StatsStrip } from "@/components/frank/Proof";
 import { SectionHeading, Section } from "@/components/frank/SectionHeading";
 import { TeamBand } from "@/components/frank/TeamBand";
 import { SdrMath } from "@/components/frank/SdrMath";
@@ -31,13 +30,11 @@ export function HomePage() {
   return (
     <>
       <Hero />
-      <Marquee className="mt-6 md:mt-10" />
       <ChannelLoop />
       <SignalMoment />
       <SdrMath />
       <PromiseBand />
-      <StatsStrip className="mt-14 md:mt-20" />
-      <ClientResults />
+      <StatsStrip className="mt-2 md:mt-4" />
       <UseCases />
       <TeamBand />
       <EngagementTimeline />

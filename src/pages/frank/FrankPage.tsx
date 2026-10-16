@@ -9,7 +9,6 @@ import { CountUp } from "@/components/frank/CountUp";
 import { FaqList } from "@/components/frank/FaqList";
 import { FrankAvatar } from "@/components/frank/FrankAvatar";
 import { Play, PlusIcon } from "@/components/frank/Icons";
-import { Marquee } from "@/components/frank/Marquee";
 import { Avatar, ChannelBadge, StepMock } from "@/components/frank/Mocks";
 import { SectionHeading, Section } from "@/components/frank/SectionHeading";
 import { SparkleGrid } from "@/components/frank/SparkleGrid";
@@ -174,8 +173,6 @@ export function FrankPage() {
         </Container>
         <VideoModal open={video} onClose={() => setVideo(false)} />
       </section>
-
-      <Marquee className="mt-16 md:mt-20" />
 
       <Section id="how-frank-works">
         <Container>

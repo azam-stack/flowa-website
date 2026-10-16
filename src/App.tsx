@@ -7,7 +7,6 @@ import { ScrollManager } from "@/components/ScrollManager";
 import { nav } from "@/content/frank/chrome";
 import { legalDocs } from "@/content/legal";
 import { AboutPage } from "@/pages/frank/AboutPage";
-import { CasesPage } from "@/pages/frank/CasesPage";
 import { ChannelPage } from "@/pages/frank/ChannelPage";
 import { ContactPage } from "@/pages/frank/ContactPage";
 import { FaqPage } from "@/pages/frank/FaqPage";
@@ -42,7 +41,6 @@ export default function App() {
             <Route path="/signals" element={<SignalsPage />} />
             <Route path="/channels/email" element={<ChannelPage channel="email" />} />
             <Route path="/channels/linkedin" element={<ChannelPage channel="linkedin" />} />
-            <Route path="/cases" element={<CasesPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/pricing" element={<PricingPage />} />
             <Route path="/book-a-call" element={<ContactPage mode="demo" />} />
