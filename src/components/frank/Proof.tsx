@@ -2,9 +2,7 @@ import { Container } from "@/components/Container";
 import { Reveal } from "@/components/Reveal";
 import { home } from "@/content/frank/home";
 import { asset } from "@/lib/asset";
-import { casesPage } from "@/content/frank/pages";
 import { Btn } from "./Btn";
-import { CaseCard } from "./CaseCard";
 import { CountUp } from "./CountUp";
 import { SectionHeading } from "./SectionHeading";
 import { Section } from "./SectionHeading";
@@ -78,7 +76,7 @@ export function Proof({ withHeading = true, withStats = true }: { withHeading?: 
 export function StatsStrip({ className = "" }: { className?: string }) {
   const p = home.proof;
   return (
-    <section className={className} aria-label={p.stripTitle}>
+    <section id="results" className={className} aria-label={p.stripTitle}>
       <Container>
         <Reveal className="grid gap-6 border-y border-ink py-8 md:grid-cols-[minmax(0,0.8fr)_minmax(0,3fr)] md:items-center md:gap-10 md:py-10">
           <div>
@@ -99,40 +97,5 @@ export function StatsStrip({ className = "" }: { className?: string }) {
         </Reveal>
       </Container>
     </section>
-  );
-}
-
-/**
- * Homepage results: the two published client cases next to the founder
- * quote, with a link to /cases.
- */
-export function ClientResults() {
-  const p = home.proof;
-  const r = home.results;
-  return (
-    <Section id="results">
-      <Container>
-        <SectionHeading eyebrow={r.eyebrow} title={r.h2} sub={r.sub} />
-        <Reveal stagger className="mt-12 grid gap-6 md:mt-16 lg:grid-cols-3">
-          {casesPage.cases.map((c) => (
-            <CaseCard key={c.slug} c={c} compact />
-          ))}
-          <figure className="relative flex flex-col justify-between rounded-frame bg-ink p-6 text-white shadow-lift md:p-8">
-            <blockquote className="text-[20px] font-light leading-snug md:text-[22px]">“{p.quote}”</blockquote>
-            <figcaption className="mt-6 flex items-center gap-3 text-[14px] text-white/80">
-              <img src={asset("images/team/ahmed.webp")} alt="" width={40} height={40} loading="lazy" className="h-10 w-10 rounded-full object-cover object-top" />
-              <span>
-                <span className="font-semibold text-white">{p.quoteName}</span>, {p.quoteRole}
-              </span>
-            </figcaption>
-          </figure>
-        </Reveal>
-        <div className="mt-8 flex justify-center">
-          <Btn href="/cases" variant="outline" trackLabel="results_all_cases">
-            {r.cta}
-          </Btn>
-        </div>
-      </Container>
-    </Section>
   );
 }

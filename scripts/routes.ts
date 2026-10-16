@@ -7,7 +7,7 @@
 import { home } from "@/content/frank/home";
 import { pricing } from "@/content/frank/pricing";
 import { snapshot } from "@/content/frank/snapshot";
-import { aboutPage, casesPage, channelEmail, channelLinkedIn, contactPage, faqPage, frankPage, howItWorks, signals } from "@/content/frank/pages";
+import { aboutPage, channelEmail, channelLinkedIn, contactPage, faqPage, frankPage, howItWorks, signals } from "@/content/frank/pages";
 import { legalDocs } from "@/content/legal";
 import { faqJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
@@ -22,7 +22,6 @@ export const routes: RouteMeta[] = [
   { path: "/signals", title: signals.seo.title, description: signals.seo.description, jsonLd: [crumb("Signals", "/signals")] },
   { path: "/channels/email", title: channelEmail.seo.title, description: channelEmail.seo.description, jsonLd: [crumb("Email", "/channels/email")] },
   { path: "/channels/linkedin", title: channelLinkedIn.seo.title, description: channelLinkedIn.seo.description, jsonLd: [crumb("LinkedIn", "/channels/linkedin")] },
-  { path: "/cases", title: casesPage.seo.title, description: casesPage.seo.description, jsonLd: [crumb("Cases", "/cases")] },
   { path: "/about", title: aboutPage.seo.title, description: aboutPage.seo.description, jsonLd: [crumb("About", "/about")] },
   { path: "/pricing", title: pricing.seo.title, description: pricing.seo.description, jsonLd: [faqJsonLd(pricing.faq.items), crumb("Pricing", "/pricing")] },
   { path: "/book-a-call", title: contactPage.demo.seo.title, description: contactPage.demo.seo.description, jsonLd: [crumb("Book a call", "/book-a-call")] },
@@ -42,6 +41,7 @@ export type RouteRedirect = { from: string; to: string };
 
 export const redirects: RouteRedirect[] = [
   { from: "/demo", to: "/book-a-call" },
+  { from: "/cases", to: "/" },
   { from: "/why-flowa", to: "/signals" },
   { from: "/services/cold-email", to: "/channels/email" },
   { from: "/services/linkedin-outreach", to: "/channels/linkedin" },

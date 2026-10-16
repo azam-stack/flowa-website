@@ -2,7 +2,6 @@ import { Container } from "@/components/Container";
 import { FaqList } from "@/components/frank/FaqList";
 import { Btn } from "@/components/frank/Btn";
 import { Check, Sparkle } from "@/components/frank/Icons";
-import { Marquee } from "@/components/frank/Marquee";
 import { MeetingValue } from "@/components/frank/MeetingValue";
 import { PricingCard } from "@/components/frank/PricingQuiz";
 import { SectionHeading, Section } from "@/components/frank/SectionHeading";
@@ -46,6 +45,7 @@ function Plans() {
               <Btn href={plan.href} variant={plan.featured ? "primary" : "outline"} className="mt-8 w-full justify-center" trackLabel={`pricing_plan_${plan.name.toLowerCase()}`}>
                 {plan.cta}
               </Btn>
+              {"note" in plan && plan.note && <p className="mt-3 text-center text-[12.5px] text-muted">{plan.note}</p>}
             </li>
           ))}
         </Reveal>
@@ -125,7 +125,6 @@ export function PricingPage() {
       <Plans />
       <MeetingValue />
       <Compare />
-      <Marquee className="mt-2 md:mt-4" />
       <Section tone="white">
         <Container>
           <SectionHeading title={t.includes.h2} />

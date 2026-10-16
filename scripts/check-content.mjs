@@ -21,7 +21,6 @@ export * as home from "@/content/frank/home";
 export * as pages from "@/content/frank/pages";
 export * as pricing from "@/content/frank/pricing";
 export * as form from "@/content/frank/form";
-export * as clients from "@/content/frank/clients";
 export * as snapshot from "@/content/frank/snapshot";
 export * as legal from "@/content/legal";`,
 );
@@ -43,7 +42,7 @@ const PLACEHOLDER = /\[[^\]]+\]/g;
 const CONFIRM = /^\[CONFIRM\b[^\]]*\]$/;
 const MONEY = /£\s?[\d.,]+\s?[KMkm]?\+?|\d\s?(?:GBP|DKK|EUR)\b/g;
 // £35K and £30 (as in "£30–40K salary") are the SDR-hire market figures in the homepage comparison, not Flowa prices.
-const ALLOWED_MONEY = ["£3.4M+", "£90K+", "£400", "£1,200", "£50K+", "£35K", "£30"];
+const ALLOWED_MONEY = ["£3.4M+", "£90K+", "£400", "£1,200", "£50K+", "£35K", "£30", "£500"];
 const EM_DASH = /—/;
 
 const problems = [];
@@ -61,7 +60,7 @@ function walk(value, trail) {
   else if (value && typeof value === "object") for (const [k, v] of Object.entries(value)) walk(v, trail ? `${trail}.${k}` : k);
 }
 
-for (const name of ["chrome", "home", "pages", "pricing", "form", "clients", "snapshot"]) walk(content[name], name);
+for (const name of ["chrome", "home", "pages", "pricing", "form", "snapshot"]) walk(content[name], name);
 walk(content.legal, "legal");
 
 if (!DRAFT && confirms.length) for (const c of confirms) problems.push(`${c} must be resolved before launch (VITE_DRAFT=false)`);
