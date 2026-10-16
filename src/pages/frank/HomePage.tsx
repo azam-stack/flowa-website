@@ -5,6 +5,7 @@ import { FaqList } from "@/components/frank/FaqList";
 import { SmartLink } from "@/components/SmartLink";
 import { Hero } from "@/components/frank/Hero";
 import { ChannelLoop } from "@/components/frank/ChannelLoop";
+import { SignalMoment } from "@/components/frank/SignalMoment";
 import { SnapshotBand } from "@/pages/frank/SnapshotPage";
 import { Marquee } from "@/components/frank/Marquee";
 import { ClientResults, StatsStrip } from "@/components/frank/Proof";
@@ -32,6 +33,7 @@ export function HomePage() {
       <Hero />
       <Marquee className="mt-6 md:mt-10" />
       <ChannelLoop />
+      <SignalMoment />
       <SdrMath />
       <PromiseBand />
       <StatsStrip className="mt-14 md:mt-20" />

@@ -77,6 +77,26 @@ export const home = {
     ],
   },
 
+  /** "We catch the moment": timing, not lists. Signals are fictional companies, illustrative. */
+  moment: {
+    eyebrow: "Why it works",
+    h2Light: "We don't call lists. ",
+    h2Bold: "We catch the moment.",
+    sub: "Every morning we read funding news, Companies House, job boards and trade-show lists for one thing: a reason your buyer would take a meeting this week.",
+    card: { label: "Signals · this week", status: "Watching", foot: "Decision maker reached the same week, with a reason that is about them." },
+    signals: [
+      { key: "hire", company: "Brightline Software", signal: "Hiring their first SDR", source: "Job ad", when: "2h ago", stamp: "Meeting Thu 14:30", booked: true },
+      { key: "leader", company: "Northgate IT Services", signal: "New Sales Director appointed", source: "LinkedIn", when: "Today", stamp: "Contacted Wed" },
+      { key: "funding", company: "Kestrel Creative", signal: "Raised a Series A to grow the UK team", source: "Funding news", when: "Yesterday", stamp: "Contacted Thu" },
+      { key: "show", company: "Harbour Logistics", signal: "Exhibiting at a logistics show in March", source: "Exhibitor list", when: "This week", stamp: "Contacted Thu" },
+    ],
+    groups: [
+      { name: "Growing", tags: ["Hiring", "Funding", "New office", "Acquisition"] },
+      { name: "Changing", tags: ["New leader", "Contract renewal", "New regulation"] },
+      { name: "Visible", tags: ["Trade show", "Award shortlist", "Launch", "Growth list"] },
+    ],
+  },
+
   /** The buyer's real alternative, side by side. Figures are UK averages Flowa quotes in sales calls; keep them defensible. */
   math: {
     eyebrow: "The alternative",

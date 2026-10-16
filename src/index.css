@@ -394,6 +394,13 @@
     .loop-out span:last-child { font-size: 13px; }
   }
 
+  /* "We catch the moment": signal rows land one by one, the stamp a beat later. */
+  .signal-row { opacity: 0; transform: translateY(10px) scale(0.985); transition: opacity 450ms var(--ease-out), transform 450ms var(--ease-out); }
+  .signal-row.is-on { opacity: 1; transform: none; }
+  .signal-stamp { background: rgba(43,182,115,0.12); color: #1B7F4E; opacity: 0; transform: scale(0.85); transition: opacity 320ms var(--ease-out), transform 320ms var(--ease-out); }
+  .signal-stamp.is-on { opacity: 1; transform: none; }
+  .signal-stamp.is-booked { background: #2BB673; color: #fff; }
+
   /* Accordion body (the /frank "How Frank works" steps). */
   .acc-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 400ms var(--ease-out); }
   .acc-body[data-open="true"] { grid-template-rows: 1fr; }
@@ -418,6 +425,7 @@
   .lift-in, .swap-in, .swap-up, .row-in, .typing > span, .live-dot::after, .check-pop { animation: none !important; }
   .loop-pulse, .loop-ping, .loop-out-ping, .loop-ring { animation: none !important; }
   .loop-pulse { stroke-dasharray: none !important; opacity: 0.6; }
+  .signal-row, .signal-stamp { opacity: 1 !important; transform: none !important; transition: none !important; }
   .draw-line { stroke-dashoffset: 0 !important; transition: none !important; }
   .fill-area { opacity: 0.14 !important; transition: none !important; }
   .slot { opacity: 1 !important; transform: none !important; transition: none !important; }
