@@ -1,13 +1,10 @@
-import { useState } from "react";
 import { Container } from "@/components/Container";
 import { SmartLink } from "@/components/SmartLink";
 import { home } from "@/content/frank/home";
 import { track } from "@/lib/analytics";
 import { Btn } from "./Btn";
-import { Play } from "./Icons";
 import { SparkleGrid } from "./SparkleGrid";
 import { SphereGroup, heroClusterLeft, heroClusterRight } from "./Sphere";
-import { VideoModal } from "./VideoModal";
 
 /**
  * Homepage hero: the buyer's problem first. One headline that names the
@@ -17,7 +14,6 @@ import { VideoModal } from "./VideoModal";
  * demo directly below, not by a character.
  */
 export function Hero() {
-  const [video, setVideo] = useState(false);
   const h = home.hero;
   return (
     <section className="pt-5 md:pt-8" aria-label="Introduction">
@@ -49,26 +45,10 @@ export function Hero() {
                   <span className="text-[14px] text-ink-2">{p.label}</span>
                 </li>
               ))}
-              <li>
-                <button
-                  type="button"
-                  onClick={() => {
-                    track("video_open");
-                    setVideo(true);
-                  }}
-                  className="flex items-center gap-2 text-[14px] font-medium text-ink underline-offset-4 hover:underline"
-                >
-                  <span className="grid h-7 w-7 place-items-center rounded-full border border-ink bg-white">
-                    <Play size={11} />
-                  </span>
-                  {h.video}
-                </button>
-              </li>
             </ul>
           </div>
         </div>
       </Container>
-      <VideoModal open={video} onClose={() => setVideo(false)} />
     </section>
   );
 }

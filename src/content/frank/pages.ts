@@ -9,10 +9,9 @@ import { home } from "./home";
 
 export const frankPage = {
   seo: { title: "Frank, our AI outbound agent | Flowa", description: "Meet Frank. He finds companies with a reason to buy now, drafts the first message for a person to approve, then follows up and books the meeting." },
-  h1Light: "Meet ",
-  h1Bold: "Frank.",
-  sub: "Flowa's AI outbound agent. He reads your market every day, drafts the first message for a real reason, and books the meeting once a person has approved it.",
-  video: "See Frank in action",
+  h1Light: "Frank. ",
+  h1Bold: "The system behind every meeting.",
+  sub: "Frank reads your market every morning, drafts the first message for a real reason, and hands it to a person before anything sends. Here is the whole loop, as it runs.",
   hotLeads: {
     title: "Hot leads today",
     rows: [
@@ -36,13 +35,29 @@ export const howItWorks = {
   h1Bold: "Flowa works",
   sub: "Six steps, from a public buying signal to a meeting in your calendar. Frank does the legwork. A person approves every message.",
   steps: [
-    { n: "01", title: "Find", headline: "Read your market every day", body: "Frank scans LinkedIn, job ads and company news for companies that match the ideal customer we agreed with you.", mock: "target" as const },
-    { n: "02", title: "Qualify", headline: "Only leads with a real reason", body: "Every lead needs the right role, size and market, and a dated signal we can point to. The rest are dropped.", mock: "qualify" as const },
-    { n: "03", title: "Draft", headline: "Written for one person", body: "Frank drafts a short first message that opens with what actually happened at their company.", mock: "reach" as const },
-    { n: "04", title: "Approve", headline: "A person says yes first", body: "Ahmed or Anton reads every message and edits it if needed. Nothing goes out without their approval.", mock: "approve" as const },
-    { n: "05", title: "Send", headline: "At a human pace", body: "Sent on email or LinkedIn inside safe daily limits. A reply stops the sequence straight away.", mock: "send" as const },
-    { n: "06", title: "Book", headline: "Meetings land in your calendar", body: "Anton qualifies the reply against the criteria we agreed and books the meeting, with a short brief before you join.", mock: "book" as const },
+    { n: "01", title: "Find", when: "Every morning", headline: "Read your market every day", body: "Frank scans LinkedIn, job ads and company news for companies that match the ideal customer we agreed with you.", mock: "target" as const },
+    { n: "02", title: "Qualify", when: "Every lead", headline: "Only leads with a real reason", body: "Every lead needs the right role, size and market, and a dated signal we can point to. The rest are dropped.", mock: "qualify" as const },
+    { n: "03", title: "Draft", when: "Same day", headline: "Written for one person", body: "Frank drafts a short first message that opens with what actually happened at their company.", mock: "reach" as const },
+    { n: "04", title: "Approve", when: "Before anything sends", headline: "A person says yes first", body: "Ahmed or Anton reads every message and edits it if needed. Nothing goes out without their approval.", mock: "approve" as const },
+    { n: "05", title: "Send", when: "Human pace", headline: "At a human pace", body: "Sent on email or LinkedIn inside safe daily limits. A reply stops the sequence straight away.", mock: "send" as const },
+    { n: "06", title: "Book", when: "On reply", headline: "Meetings land in your calendar", body: "Anton qualifies the reply against the criteria we agreed and books the meeting, with a short brief before you join.", mock: "book" as const },
   ],
+  /** The product window beside the steps. One small scene per step; fictional lead, illustrative. */
+  motion: {
+    eyebrow: "How Frank works",
+    h2Light: "Six steps, ",
+    h2Bold: "from signal to meeting",
+    sub: "Frank does the legwork. A person approves every message. This is the whole loop, as it runs.",
+    windowTitle: "Frank",
+    status: ["Reading the market", "Checking the lead", "Drafting", "Waiting for a person", "Sending", "Booked"],
+    find: { placeholder: "Who do you sell to?", query: "UK SaaS · 50–200 people · hiring sales", results: ["214 companies match", "41 with a signal this week"], sources: ["LinkedIn", "Job ads", "Companies House", "Funding news"] },
+    qualify: { name: "Oliver Hart", role: "Head of Sales · Brightline Software", signal: "Hiring 2 SDRs · posted 4h ago", checks: ["Decision-maker", "120 people", "UK"] },
+    draft: { to: "Oliver Hart", subject: "Your two SDR hires", body: "Hi Oliver, saw you're hiring two SDRs. While they ramp, we can keep your calendar full with teams that have a real reason to talk. Worth 20 minutes?" },
+    approve: { waiting: "Waiting for approval", who: "Ahmed", button: "Approve", done: "Approved by Ahmed · 09:42", note: "Nothing sends without this step" },
+    send: { line: "Sent from your domain", meta: "1 of 1 today · paced like a person", channel: "Email" },
+    book: { reply: "Good timing. Thursday works?", slot: "Thu 14:30", meta: "Booked by Anton · brief attached · added to your CRM" },
+    illustrative: "Illustrative example. People and companies are fictional.",
+  },
 } as const;
 
 export const signals = {
