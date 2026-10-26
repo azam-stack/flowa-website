@@ -4,7 +4,7 @@ import { AskBox } from "@/components/frank/AskBox";
 import { FaqList } from "@/components/frank/FaqList";
 import { SmartLink } from "@/components/SmartLink";
 import { Hero } from "@/components/frank/Hero";
-import { ChannelLoop } from "@/components/frank/ChannelLoop";
+import { TheMeeting } from "@/components/frank/TheMeeting";
 import { SignalMoment } from "@/components/frank/SignalMoment";
 import { SnapshotBand } from "@/pages/frank/SnapshotPage";
 import { StatsStrip } from "@/components/frank/Proof";
@@ -19,9 +19,9 @@ import { home } from "@/content/frank/home";
 import { faqJsonLd, useSeo } from "@/lib/seo";
 
 /**
- * The homepage, in the order a buyer decides: what is the deal (hero), show
- * me it working (campaign), what is my alternative (SDR math), what am I
- * paying for (promise), does it work (numbers, results), what do you run
+ * The homepage, in the order a buyer decides: what is the deal (hero), what
+ * do I get (the meeting), what is my alternative (SDR math), why are the
+ * meetings good (the moment), what am I paying for (promise), does it work (numbers, results), what do you run
  * (use cases), who are you (team, engagement), is it for me, is it safe,
  * contact, FAQ, and the free market snapshot as the last word.
  */
@@ -30,9 +30,9 @@ export function HomePage() {
   return (
     <>
       <Hero />
-      <ChannelLoop />
-      <SignalMoment />
+      <TheMeeting />
       <SdrMath />
+      <SignalMoment />
       <PromiseBand />
       <StatsStrip className="mt-2 md:mt-4" />
       <UseCases />

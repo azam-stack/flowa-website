@@ -401,6 +401,11 @@
   .signal-stamp.is-on { opacity: 1; transform: none; }
   .signal-stamp.is-booked { background: #2BB673; color: #fff; }
 
+  /* "What you get": the calendar invite and its Held stamp. */
+  .meeting-card { overflow: hidden; border-radius: 20px; border: 1px solid var(--ink); background: #fff; box-shadow: 0 24px 60px rgba(12,12,11,0.14); }
+  .meeting-held { display: inline-flex; align-items: center; gap: 6px; flex: none; border-radius: 999px; background: #2BB673; color: #fff; padding: 6px 12px; font-size: 12.5px; font-weight: 600; opacity: 0; transform: scale(0.7); transition: opacity 360ms var(--ease-out) 900ms, transform 360ms var(--ease-out) 900ms; }
+  .meeting-card.is-held .meeting-held { opacity: 1; transform: none; }
+
   /* "How Frank works": the dark product window and its scenes. */
   .fm-window { position: relative; overflow: hidden; border-radius: 20px; background: #0C0C0B; color: #fff; box-shadow: 0 24px 60px rgba(12,12,11,0.28); }
   .fm-window::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 50% at 20% 0%, rgba(238,158,71,0.22), transparent 70%), radial-gradient(50% 40% at 100% 100%, rgba(240,138,108,0.14), transparent 70%); pointer-events: none; }
@@ -454,6 +459,7 @@
   .signal-row, .signal-stamp { opacity: 1 !important; transform: none !important; transition: none !important; }
   .fm-scene, .fm-row, .fm-fade, .fm-caret, .fm-progress::after, .fm-send > span, .fm-approve { animation: none !important; }
   .fm-body { grid-template-rows: 1fr !important; }
+  .meeting-held { opacity: 1 !important; transform: none !important; transition: none !important; }
   .draw-line { stroke-dashoffset: 0 !important; transition: none !important; }
   .fill-area { opacity: 0.14 !important; transition: none !important; }
   .slot { opacity: 1 !important; transform: none !important; transition: none !important; }

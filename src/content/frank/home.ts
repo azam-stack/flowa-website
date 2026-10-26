@@ -19,8 +19,8 @@ export const home = {
     sub: "We find UK buyers with a reason to talk this week, write to them one at a time, and book the meeting into your calendar. You are billed when it takes place, not for activity.",
     demo: "Book a 20-minute call",
     demoHref: SITE_CONFIG.bookCallHref,
-    secondary: "See a campaign run",
-    secondaryHref: "#see-it-work",
+    secondary: "See how Frank works",
+    secondaryHref: "/how-it-works",
     video: "See Frank in action",
     /** The demo video in the modal: one warm SaaS lead, from signal to booked meeting. */
     videoSrc: "video/frank-in-action.mp4",
@@ -45,6 +45,33 @@ export const home = {
       },
       centre: { label: "Frank | AI Outbound Agent" },
       right: { label: "Books qualified meetings", mini: { tag: "Booked", body: "Priya Nair", time: "Tue 10:00" } },
+    },
+  },
+
+  /** "The meeting": what the buyer actually gets. The invite as it lands in their calendar, and the four checks it passed first. Fictional lead. */
+  meeting: {
+    eyebrow: "What you get",
+    h2Light: "A meeting that happens. ",
+    h2Bold: "With the right person, for a reason.",
+    sub: "Not a lead, not a reply. A confirmed slot in your calendar with someone who has the authority, fits your ideal customer and has a reason to talk this month, briefed before you join.",
+    checksTitle: "Before you are invoiced, every meeting has passed four checks",
+    checks: [
+      { title: "Right person", body: "Decision-maker or budget holder. We agree the roles with you in writing." },
+      { title: "Right company", body: "Size, market and sector match the ideal customer we set together." },
+      { title: "Right reason", body: "A dated signal we can point to: a hire, a funding round, a new director." },
+      { title: "It took place", body: "No-shows are not billed. We rebook them instead." },
+    ],
+    invite: {
+      kicker: "Thu 14:30 – 15:00",
+      title: "Intro call · Brightline Software",
+      who: { name: "Oliver Hart", role: "Head of Sales", company: "Brightline Software · 120 people · UK" },
+      whyLabel: "Why now",
+      why: "Hiring two SDRs, posted Tuesday. Wants pipeline while they ramp.",
+      briefLabel: "Brief",
+      brief: "Open with the SDR hires. He has used an agency before and left over quality; lead with the approval step.",
+      bookedBy: "Booked by Anton · added to your CRM",
+      held: "Held",
+      proof: "70% of booked meetings take place. If one doesn't, you don't pay for it.",
     },
   },
 
