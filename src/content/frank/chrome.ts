@@ -7,42 +7,16 @@
  */
 import { SITE_CONFIG } from "@/config/site";
 
-export const announcement = {
-  lead: "Pay per meeting that happens.",
-  rest: " No SDR salary, no retainer on the pilot",
-  href: SITE_CONFIG.bookCallHref,
-  ariaLabel: "Book a call with Flowa",
-} as const;
-
-export type MenuItem = { title: string; description: string; href: string; icon: "frank" | "steps" | "signals" | "mail" | "linkedin" | "cases" | "faq" | "about" | "contact" };
-export type MenuGroup = { key: string; label: string; items: MenuItem[] };
+export type NavLink = { label: string; href: string };
 
 export const nav = {
-  groups: [
-    {
-      key: "how",
-      label: "How it works",
-      items: [
-        { title: "Frank – AI Outbound Agent", description: "Meet the agent that fills your calendar.", href: "/frank", icon: "frank" },
-        { title: "The process", description: "Six steps, from signal to meeting.", href: "/how-it-works", icon: "steps" },
-        { title: "Signals Frank watches", description: "The buying signals behind every meeting.", href: "/signals", icon: "signals" },
-        { title: "Channels: Email", description: "Verified data, deliverability, sequences.", href: "/channels/email", icon: "mail" },
-        { title: "Channels: LinkedIn", description: "One-to-one notes, approved by a person.", href: "/channels/linkedin", icon: "linkedin" },
-      ],
-    },
-    {
-      key: "company",
-      label: "Company",
-      items: [
-        { title: "About us", description: "The people behind Flowa.", href: "/about", icon: "about" },
-        { title: "FAQ", description: "Straight answers to the usual questions.", href: "/faq", icon: "faq" },
-        { title: "Contact", description: "Talk to Ahmed or Anton.", href: "/contact", icon: "contact" },
-      ],
-    },
-  ] as MenuGroup[],
-  /** Direct links (no dropdown), shown after the first group and at the end. */
-  results: { label: "Results", href: "/#results" },
-  pricing: { label: "Pricing", href: "/pricing" },
+  /** Four flat links, no dropdowns. Everything else lives in the footer. */
+  links: [
+    { label: "How it works", href: "/how-it-works" },
+    { label: "Frank", href: "/frank" },
+    { label: "Pricing", href: "/pricing" },
+    { label: "About", href: "/about" },
+  ] as NavLink[],
   /** Hidden until Flowa provides a URL: while `href` is null the link is not rendered at all. */
   clientDashboard: { label: "Client dashboard", href: null as string | null },
   demo: { label: "Book a call", href: SITE_CONFIG.bookCallHref },

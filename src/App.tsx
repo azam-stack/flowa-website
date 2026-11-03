@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { AnnouncementBar } from "@/components/frank/AnnouncementBar";
 import { ChatWidget } from "@/components/frank/ChatWidget";
 import { Footer } from "@/components/frank/Footer";
 import { Nav } from "@/components/frank/Nav";
@@ -29,7 +28,6 @@ export default function App() {
         <a href="#main" className="sr-only z-[90] rounded-control bg-ink px-4 py-2 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
           {nav.skipToContent}
         </a>
-        <AnnouncementBar />
         <header className="sticky top-0 z-50">
           <Nav />
         </header>

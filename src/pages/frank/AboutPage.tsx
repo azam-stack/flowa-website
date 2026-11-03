@@ -1,5 +1,6 @@
 import { Container } from "@/components/Container";
 import { ContactBand } from "@/components/frank/ContactBand";
+import { WhoFrankHelps } from "@/components/frank/WhoFrankHelps";
 import { Check } from "@/components/frank/Icons";
 import { PageHero } from "@/components/frank/PageHero";
 import { Section } from "@/components/frank/SectionHeading";
@@ -96,6 +97,7 @@ export function AboutPage() {
           </Reveal>
         </Container>
       </Section>
+      <WhoFrankHelps />
       <ContactBand idPrefix="about" />
     </>
   );

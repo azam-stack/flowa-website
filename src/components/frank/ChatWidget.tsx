@@ -87,13 +87,7 @@ export function ChatWidget() {
     setMode("avatar");
     setMsgs([]);
     setDraft("");
-    // Mobile: the avatar only, so nothing ever covers content.
-    if (wasDismissed() || window.matchMedia("(max-width: 767px)").matches) return;
-    const t = window.setTimeout(() => {
-      setTyping(!reduced);
-      setMode((m) => (m === "avatar" ? "teaser" : m));
-    }, TEASER_DELAY_MS);
-    return () => window.clearTimeout(t);
+    // The widget never opens itself: the avatar waits until someone clicks it.
   }, [pathname, reduced]);
 
   useEffect(() => {

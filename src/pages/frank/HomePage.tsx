@@ -1,29 +1,24 @@
 import { Container } from "@/components/Container";
 import { ContactBand } from "@/components/frank/ContactBand";
-import { AskBox } from "@/components/frank/AskBox";
 import { FaqList } from "@/components/frank/FaqList";
 import { SmartLink } from "@/components/SmartLink";
 import { Hero } from "@/components/frank/Hero";
 import { TheMeeting } from "@/components/frank/TheMeeting";
 import { SignalMoment } from "@/components/frank/SignalMoment";
-import { SnapshotBand } from "@/pages/frank/SnapshotPage";
 import { StatsStrip } from "@/components/frank/Proof";
 import { SectionHeading, Section } from "@/components/frank/SectionHeading";
 import { TeamBand } from "@/components/frank/TeamBand";
 import { SdrMath } from "@/components/frank/SdrMath";
-import { UseCases } from "@/components/frank/UseCases";
 import { Testimonials } from "@/components/frank/Testimonials";
-import { ComplianceSection, EngagementTimeline, PromiseBand } from "@/components/frank/TrustSections";
-import { WhoFrankHelps } from "@/components/frank/WhoFrankHelps";
 import { home } from "@/content/frank/home";
 import { faqJsonLd, useSeo } from "@/lib/seo";
 
 /**
- * The homepage, in the order a buyer decides: what is the deal (hero), what
- * do I get (the meeting), what is my alternative (SDR math), why are the
- * meetings good (the moment), what am I paying for (promise), does it work (numbers, results), what do you run
- * (use cases), who are you (team, engagement), is it for me, is it safe,
- * contact, FAQ, and the free market snapshot as the last word.
+ * The homepage: eight sections, one idea each. What is the deal (hero),
+ * what do I get (the meeting), what is my alternative (SDR math), why are
+ * the meetings good (the moment), the numbers, who are you (team), the
+ * five questions buyers ask, and one way to get in touch. Use cases,
+ * the engagement plan, fit and compliance live on their own pages.
  */
 export function HomePage() {
   useSeo({ title: home.seo.title, description: home.seo.description, path: "/", jsonLd: [faqJsonLd(home.faq.items)] });
@@ -33,14 +28,8 @@ export function HomePage() {
       <TheMeeting />
       <SdrMath />
       <SignalMoment />
-      <PromiseBand />
       <StatsStrip className="mt-2 md:mt-4" />
-      <UseCases />
       <TeamBand />
-      <EngagementTimeline />
-      <WhoFrankHelps />
-      <ComplianceSection />
-      <ContactBand />
       {/* Hidden until approved client quotes exist */}
       <Testimonials />
       <Section id="faq">
@@ -53,13 +42,10 @@ export function HomePage() {
                 {home.faq.allLink.label}
               </SmartLink>
             </div>
-            <AskBox className="mt-10" />
           </div>
         </Container>
       </Section>
-      <div className="pb-16 md:pb-24">
-        <SnapshotBand />
-      </div>
+      <ContactBand />
     </>
   );
 }
