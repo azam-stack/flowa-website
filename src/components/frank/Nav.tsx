@@ -77,20 +77,33 @@ export function Nav() {
     setSheet(false);
   }, [pathname]);
 
+  // On the homepage the nav floats transparent over the orange hero until you scroll.
+  const [over, setOver] = useState(false);
+  useEffect(() => {
+    const update = () => setOver(window.scrollY < 24 && document.documentElement.dataset.orangeTop === "1");
+    update();
+    const t = window.setTimeout(update, 0);
+    window.addEventListener("scroll", update, { passive: true });
+    return () => {
+      window.clearTimeout(t);
+      window.removeEventListener("scroll", update);
+    };
+  }, [pathname]);
+
   const closeSheet = () => {
     setSheet(false);
     burgerRef.current?.focus();
   };
 
   return (
-    <nav aria-label="Main" className="border-b border-line bg-page/80 backdrop-blur-xl">
+    <nav aria-label="Main" className={`transition-colors duration-300 ${over ? "border-b border-transparent bg-transparent" : "border-b border-line bg-page/80 backdrop-blur-xl"}`}>
       <div className="mx-auto grid h-[72px] w-full max-w-container grid-cols-[1fr_auto_1fr] items-center px-4 md:px-10 xl:px-gutter">
         <Link to="/" aria-label="Flowa home" className="flex items-center justify-self-start rounded-control">
           <Logo />
         </Link>
         <div className="hidden items-center gap-2 lg:flex">
           {nav.links.map((l) => (
-            <SmartLink key={l.href} href={l.href} onClick={() => track("nav_click", { label: l.label })} className={`flex h-10 items-center rounded-pill px-4 text-[14.5px] font-medium transition-colors hover:text-ink ${active(pathname, l.href) ? "bg-white/[0.06] text-ink" : "text-ink-2/80"}`}>
+            <SmartLink key={l.href} href={l.href} onClick={() => track("nav_click", { label: l.label })} className={`flex h-10 items-center rounded-pill px-4 text-[14.5px] font-medium transition-colors ${over ? "text-white/90 hover:text-white" : active(pathname, l.href) ? "bg-white/[0.06] text-ink" : "text-ink-2/80 hover:text-ink"}`}>
               {l.label}
             </SmartLink>
           ))}
@@ -101,7 +114,7 @@ export function Nav() {
               {nav.clientDashboard.label}
             </a>
           )}
-          <Btn href={nav.demo.href} size="sm" className="hidden lg:inline-flex" trackLabel="nav_book_demo">
+          <Btn href={nav.demo.href} size="sm" className={`hidden lg:inline-flex ${over ? "!bg-[#0a0a0a] !shadow-none" : ""}`} trackLabel="nav_book_demo">
             {nav.demo.label}
           </Btn>
           <button ref={burgerRef} type="button" onClick={() => setSheet(true)} aria-label={nav.menuOpen} aria-expanded={sheet} className="grid h-11 w-11 place-items-center rounded-control lg:hidden">

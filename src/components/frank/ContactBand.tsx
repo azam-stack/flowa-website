@@ -4,7 +4,6 @@ import { Reveal } from "@/components/Reveal";
 import { home } from "@/content/frank/home";
 import { FrankAvatar, type FrankPose } from "./FrankAvatar";
 import { Calendar, Check } from "./Icons";
-import { KineticField } from "./KineticField";
 import { SITE_CONFIG } from "@/config/site";
 import { track } from "@/lib/analytics";
 import { ShortForm } from "./ShortForm";
@@ -18,7 +17,6 @@ import { ShortForm } from "./ShortForm";
 export function ContactBand({ h2 = home.contact.h2, sub = home.contact.sub, pose, idPrefix = "contact", id = "contact", as: Heading = "h2", calendar }: { h2?: string; sub?: string; pose?: FrankPose; idPrefix?: string; id?: string; as?: "h1" | "h2"; calendar?: { cta: string; note: string; orForm: string } }) {
   return (
     <section id={id} className="contact-dark relative overflow-hidden bg-brand py-section-m text-white lg:py-section" aria-label={h2}>
-      <KineticField className="opacity-90 mix-blend-soft-light" strands={200} pinch={0.5} color="255, 255, 255" intensity={3} glow={false} />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-brand/0 via-brand/0 to-[#c84200]/60" aria-hidden="true" />
             <Container className="relative">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
