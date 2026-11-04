@@ -124,7 +124,7 @@ export function KineticField({ className = "", strands = 140, pinch = 0.55, colo
           const upper = s.y < 0.5;
           const pts = upper ? contour.upper : contour.lower;
           const sc = s.scale * (1 + Math.sin(t * s.speed * 0.6 + s.phase) * 0.012);
-          const yIn = cy + (s.y - 0.5) * h * 1.6;
+          const yIn = cy + (s.y - 0.5) * h * 1.9;
           // the window a strand covers drifts along the outline, so the whole ring looks like it is turning
           const slide = ((t * s.speed * 0.05 + s.phase / (Math.PI * 2)) % 0.18 + 0.18) % 0.18;
           const i0 = Math.floor(Math.min(0.3, s.join + slide) * (pts.length - 1));
@@ -139,10 +139,11 @@ export function KineticField({ className = "", strands = 140, pinch = 0.55, colo
             const q = contour.at(pts[i], sc);
             ctx.lineTo(q[0], q[1]);
           }
-          const yOut = cy + (s.y - 0.5) * h * 1.6;
+          const yOut = cy + (s.y - 0.5) * h * 1.9;
           ctx.bezierCurveTo(last[0] + (w - last[0]) * 0.25, last[1] + wave(0.65) * 0.3, last[0] + (w - last[0]) * 0.55, yOut + wave(0.8), w, yOut + wave(1));
           const nearOne = 1 - Math.min(1, Math.abs(s.scale - 1) / 0.35);
-          const a = Math.min(1, s.alpha * intensity * (0.5 + nearOne * 0.7));
+          // strands away from the outline fade hard: the ring is the subject, the rest is air
+          const a = Math.min(1, s.alpha * intensity * (0.18 + nearOne * nearOne * 1.1));
           ctx.strokeStyle = `rgba(${color}, ${a})`;
           ctx.lineWidth = s.width * (0.7 + nearOne * 0.5);
           ctx.stroke();
