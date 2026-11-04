@@ -75,17 +75,26 @@ export const home = {
     },
   },
 
-  /** "The method, in three beats": the dot field reshapes from market → the one → the meeting. */
+  /** "From signal to meeting": the whole chain in one picture, left to right. */
   method: {
     eyebrow: "How we do it",
-    h2Light: "We read the market. ",
-    h2Bold: "We find the one. We book the meeting.",
-    sub: "Three steps, no list. Every morning the market is read for a reason to talk; one person is chosen because of it; a meeting lands in your calendar, with a brief.",
-    beats: [
-      { key: "market", label: "Read the market", title: "Every morning, every signal", body: "Funding, hires, new directors, trade shows. Hundreds of companies read; a handful light up with a reason this week.", stat: "214 read · 41 with a signal" },
-      { key: "one", label: "Find the one", title: "One person, one reason", body: "Not a list. The decision-maker at the company that has a reason to talk now, written to by name, approved by a person before it sends.", stat: "Head of Sales · hiring two SDRs" },
-      { key: "meeting", label: "Book the meeting", title: "In your calendar, held", body: "Anton qualifies the reply against the criteria we agreed, books the slot and attaches a brief. You pay when it takes place.", stat: "Thu 14:30 · Held" },
+    h2Light: "From a signal in the market ",
+    h2Bold: "to a meeting in your calendar.",
+    sub: "Every step is visible, and a person at Flowa is in the loop before anything sends. You see the result as a confirmed slot, with a brief.",
+    stations: [
+      { key: "market", label: "01 · Read", title: "The market, every morning", body: "Funding, hires, new directors, trade shows. Hundreds of companies read; a few light up with a reason this week.", stat: "214 read · 41 with a signal" },
+      { key: "one", label: "02 · Find", title: "The one with a reason", body: "The decision-maker at the company that has a reason to talk now. Checked against your criteria, approved by a person.", stat: "Oliver Hart · Head of Sales" },
+      { key: "reach", label: "03 · Reach", title: "On the channel they answer", body: "Phone, email or LinkedIn, one person at a time, at a human pace. A reply stops the sequence straight away.", stat: "Replied on LinkedIn · 2 days" },
+      { key: "meeting", label: "04 · Book", title: "Meeting in your calendar", body: "Anton qualifies the reply, books the slot and attaches a brief. You pay when it takes place.", stat: "Thu 14:30 · Held" },
     ],
+    one: { name: "Oliver Hart", role: "Head of Sales · Brightline Software", signal: "Hiring 2 SDRs · 4h ago" },
+    channels: [
+      { key: "phone", name: "Phone" },
+      { key: "email", name: "Email" },
+      { key: "linkedin", name: "LinkedIn" },
+    ],
+    reply: "Good timing. Thursday works?",
+    meeting: { slot: "Thu 14:30", title: "Intro call · Brightline", held: "Held" },
   },
 
   /** "One campaign, start to finish": headline, the channel card and the step strip. */
