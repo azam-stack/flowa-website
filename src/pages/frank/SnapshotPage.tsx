@@ -28,7 +28,7 @@ export function SnapshotPage() {
                 <ol className="mt-8 flex flex-col gap-4">
                   {t.steps.map((s, i) => (
                     <li key={s.title} className="flex items-start gap-4">
-                      <span className="grid h-9 w-9 flex-none place-items-center rounded-full border border-white/15 bg-surface text-[14px] font-semibold text-ink">{i + 1}</span>
+                      <span className="grid h-9 w-9 flex-none place-items-center rounded-full border border-line bg-surface text-[14px] font-semibold text-ink">{i + 1}</span>
                       <span>
                         <span className="block text-[17px] font-semibold text-ink">{s.title}</span>
                         <span className="block text-[15px] text-ink-2">{s.body}</span>
@@ -38,7 +38,7 @@ export function SnapshotPage() {
                 </ol>
                 <p className="mt-8 text-[14px] text-muted">{t.limit}</p>
               </div>
-              <div id="snapshot-form" className="rounded-frame border border-white/15 bg-surface p-6 shadow-lift md:p-8">
+              <div id="snapshot-form" className="rounded-frame border border-line bg-surface p-6 shadow-lift md:p-8">
                 <h2 className="mb-5 text-[22px] font-semibold text-ink">{t.form.h2}</h2>
                 <ShortForm idPrefix="snapshot" variant="snapshot" />
               </div>
@@ -51,7 +51,7 @@ export function SnapshotPage() {
         <Container>
           <SectionHeading title={<>{t.example.h2Light}<span className="dim">{t.example.h2Bold}</span></>} sub={t.example.sub} />
           <Reveal className="mx-auto mt-10 max-w-5xl md:mt-14">
-            <div className="hidden overflow-hidden rounded-frame border border-white/15 bg-surface md:block">
+            <div className="hidden overflow-hidden rounded-frame border border-line bg-surface md:block">
               <table className="w-full table-fixed border-collapse text-left">
                 <thead>
                   <tr className="bg-soft">

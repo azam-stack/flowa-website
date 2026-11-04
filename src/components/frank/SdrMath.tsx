@@ -29,7 +29,7 @@ export function SdrMath() {
             <ul className="mt-6 divide-y divide-white/25">
               {m.left.rows.map((r) => (
                 <li key={r} className="flex gap-3 py-3 text-[16px] leading-snug text-ink-2">
-                  <span aria-hidden="true" className="mt-[9px] h-[6px] w-[6px] flex-none rounded-full bg-white/30" />
+                  <span aria-hidden="true" className="mt-[9px] h-[6px] w-[6px] flex-none rounded-full bg-ink/30" />
                   {r}
                 </li>
               ))}

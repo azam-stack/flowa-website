@@ -75,6 +75,19 @@ export const home = {
     },
   },
 
+  /** "The method, in three beats": the dot field reshapes from market → the one → the meeting. */
+  method: {
+    eyebrow: "How we do it",
+    h2Light: "We read the market. ",
+    h2Bold: "We find the one. We book the meeting.",
+    sub: "Three steps, no list. Every morning the market is read for a reason to talk; one person is chosen because of it; a meeting lands in your calendar, with a brief.",
+    beats: [
+      { key: "market", label: "Read the market", title: "Every morning, every signal", body: "Funding, hires, new directors, trade shows. Hundreds of companies read; a handful light up with a reason this week.", stat: "214 read · 41 with a signal" },
+      { key: "one", label: "Find the one", title: "One person, one reason", body: "Not a list. The decision-maker at the company that has a reason to talk now, written to by name, approved by a person before it sends.", stat: "Head of Sales · hiring two SDRs" },
+      { key: "meeting", label: "Book the meeting", title: "In your calendar, held", body: "Anton qualifies the reply against the criteria we agreed, books the slot and attaches a brief. You pay when it takes place.", stat: "Thu 14:30 · Held" },
+    ],
+  },
+
   /** "One campaign, start to finish": headline, the channel card and the step strip. */
   demo: {
     eyebrow: "How it works",

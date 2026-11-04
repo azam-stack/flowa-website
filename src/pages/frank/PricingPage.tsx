@@ -63,7 +63,7 @@ function Compare() {
       <Container>
         <SectionHeading title={<>{c.h2Light}<span className="dim">{c.h2Bold}</span></>} sub={c.sub} />
         <Reveal className="mx-auto mt-10 max-w-5xl md:mt-14">
-          <div className="hidden overflow-hidden rounded-frame border border-white/15 md:block">
+          <div className="hidden overflow-hidden rounded-frame border border-line md:block">
             <table className="w-full table-fixed border-collapse text-left">
               <thead>
                 <tr>
@@ -92,7 +92,7 @@ function Compare() {
           </div>
           <div className="flex flex-col gap-4 md:hidden">
             {c.columns.map((col, i) => (
-              <div key={col} className={`rounded-frame border p-5 ${i === 2 ? "border-2 border-white/15 bg-surface shadow-lift" : "border-line bg-surface"}`}>
+              <div key={col} className={`rounded-frame border p-5 ${i === 2 ? "border-2 border-line bg-surface shadow-lift" : "border-line bg-surface"}`}>
                 <h3 className="text-[17px] font-semibold text-ink">{col}</h3>
                 <dl className="mt-3 flex flex-col gap-3">
                   {c.rows.map((r) => (

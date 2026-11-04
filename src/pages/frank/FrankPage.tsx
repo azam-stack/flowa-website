@@ -52,9 +52,9 @@ export function FrankPage() {
       <Section tone="white" id="stats">
         <Container>
           <SectionHeading eyebrow={t.statsEyebrow} title={t.statsH2} align="left" />
-          <Reveal className="mt-10 grid border-t border-white/15 sm:grid-cols-2 md:mt-14">
+          <Reveal className="mt-10 grid border-t border-line sm:grid-cols-2 md:mt-14">
             {p.stats.map((s, i) => (
-              <div key={s.label} className={`border-b border-white/15 py-8 md:py-10 ${i % 2 === 0 ? "sm:border-r sm:pr-10" : "sm:pl-10"}`}>
+              <div key={s.label} className={`border-b border-line py-8 md:py-10 ${i % 2 === 0 ? "sm:border-r sm:pr-10" : "sm:pl-10"}`}>
                 <CountUp value={s.value} className="text-[clamp(3rem,2rem+3vw,5rem)] font-light leading-none tracking-[-0.03em] text-ink" />
                 <p className="mt-3 text-body text-ink-2">{s.label}</p>
               </div>

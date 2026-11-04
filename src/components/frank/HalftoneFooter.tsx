@@ -8,7 +8,7 @@ export function HalftoneFooter({ wordmark = "flowa", dotGap = 6, radius = 90, cr
   const rootRef = useRef<HTMLElement>(null);
   const paint = (m: CanvasRenderingContext2D, w: number, h: number) => paintWordmark(m, w, h, wordmark, crop, 0.96);
   return (
-    <footer ref={rootRef} className="relative isolate h-[620px] overflow-hidden border-t border-line bg-page text-ink md:h-[760px]">
+    <footer ref={rootRef} className="relative isolate h-[620px] overflow-hidden bg-[#140804] text-[#fcffff] md:h-[760px]">
       <HalftoneField paint={paint} ink={[252, 255, 255]} warm={[238, 80, 1]} dotGap={dotGap} radius={radius} grain={grain} listenOn={rootRef} />
       <span className="sr-only">{wordmark}</span>
       <div className="relative z-[1] mx-auto grid w-full max-w-container gap-8 px-4 pt-12 md:grid-cols-[1.3fr_repeat(4,minmax(0,1fr))] md:px-10 md:pt-14 xl:px-gutter">
@@ -16,20 +16,20 @@ export function HalftoneFooter({ wordmark = "flowa", dotGap = 6, radius = 90, cr
           <Link to="/" aria-label="Flowa home" className="inline-flex rounded-control">
             <Logo />
           </Link>
-          <p className="mt-5 max-w-xs text-[15px] leading-snug text-ink-2">
+          <p className="mt-5 max-w-xs text-[15px] leading-snug text-white/75">
             {footer.tagline} <span className="text-brand-deep">{footer.taglineAccent}</span>
           </p>
-          <a href={`mailto:${footer.email}`} className="mono-label mt-4 inline-block text-ink-2 hover:text-ink">
+          <a href={`mailto:${footer.email}`} className="mono-label mt-4 inline-block text-white/60 hover:text-white">
             {footer.email}
           </a>
         </div>
         {footer.columns.map((col) => (
           <nav key={col.heading} aria-label={col.heading}>
-            <h2 className="mono-label">{col.heading}</h2>
+            <h2 className="mono-label text-white/50">{col.heading}</h2>
             <ul className="mt-4 flex flex-col gap-2">
               {col.links.map((l) => (
                 <li key={l.href}>
-                  <SmartLink href={l.href} className="text-[14px] text-ink-2/80 transition-colors hover:text-ink">
+                  <SmartLink href={l.href} className="text-[14px] text-white/75 transition-colors hover:text-white">
                     {l.label}
                   </SmartLink>
                 </li>
@@ -38,9 +38,9 @@ export function HalftoneFooter({ wordmark = "flowa", dotGap = 6, radius = 90, cr
           </nav>
         ))}
       </div>
-      <div className="relative z-[1] mx-auto mt-8 flex w-full max-w-container items-center justify-between gap-4 border-t border-line px-4 pt-4 md:px-10 xl:px-gutter">
-        <p className="mono-label">{footer.bottom}</p>
-        <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="mono-label text-ink-2 hover:text-ink">
+      <div className="relative z-[1] mx-auto mt-8 flex w-full max-w-container items-center justify-between gap-4 border-t border-white/15 px-4 pt-4 md:px-10 xl:px-gutter">
+        <p className="mono-label text-white/50">{footer.bottom}</p>
+        <button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="mono-label text-white/60 hover:text-white">
           Back to top ↑
         </button>
       </div>

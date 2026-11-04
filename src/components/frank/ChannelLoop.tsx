@@ -37,30 +37,29 @@ export function ChannelLoop() {
   const drop = `M ${hub.x} ${hub.y + 46} L ${out.x} ${out.y - 24}`;
 
   return (
-    <Section id="see-it-work">
+    <Section id="see-it-work" tone="white">
       <Container>
         <div ref={ref} className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-16">
           <Reveal>
-            <p className="mono-label text-brand-deep">{d.eyebrow}</p>
-            <h2 className="mt-3 text-statement text-ink">
+            <h2 className="text-[clamp(2.75rem,1.5rem+4.6vw,5.5rem)] font-semibold leading-[0.98] tracking-[-0.04em] text-ink">
               {d.h2Light}
               <br className="hidden md:block" />
               <span className="dim">{d.h2Bold}</span>
             </h2>
-            <p className="mt-6 max-w-lead text-sub text-ink-2">{d.sub}</p>
           </Reveal>
 
           <Reveal>
+            <p className="mb-8 max-w-[560px] text-[18px] leading-relaxed text-ink-2 md:text-[20px]">{d.sub}</p>
             <div className={`loop-card ${active ? "is-live" : ""}`} data-active={active}>
               <div className="flex items-center justify-between gap-4 px-6 pt-5 text-[11.5px] font-medium uppercase tracking-[0.14em] text-muted">
                 <span>{c.label}</span>
-                <span className="flex items-center gap-2 text-lime">
+                <span className="flex items-center gap-2 text-[#5a7a00]">
                   <span className="live-dot h-1.5 w-1.5 rounded-full bg-lime text-lime" />
                   {c.status}
                 </span>
               </div>
 
-              <div className="px-5 pb-5 pt-6 md:px-8">
+              <div className="px-6 pb-8 pt-10 md:px-12">
                 <div className="loop-stage" style={{ aspectRatio: `${W} / ${H}` }}>
                   {/* Wires (the stage's coordinate system) */}
                   <svg className="loop-wires" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" aria-hidden="true">
@@ -94,7 +93,7 @@ export function ChannelLoop() {
                   <div className="loop-at loop-hub" style={at(hub.x, hub.y)}>
                     <span className="loop-ring" aria-hidden="true" />
                     <span className="loop-core">
-                      <SmileyBall size={26} className="[&_path]:fill-brand" />
+                      <SmileyBall size={34} className="[&_path]:fill-brand" />
                     </span>
                     <span className="loop-hub-label">{c.centre}</span>
                   </div>
@@ -113,14 +112,6 @@ export function ChannelLoop() {
               <p className="border-t border-line px-6 py-4 text-center text-[11.5px] font-medium uppercase tracking-[0.14em] text-muted">{c.foot}</p>
             </div>
 
-            <ol className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-2 text-[12px] font-medium uppercase tracking-[0.1em] text-muted" aria-label="The steps">
-              {d.steps.map((s, i) => (
-                <li key={s.key} className="flex items-center gap-2">
-                  <span className="rounded-pill border border-line bg-white/[0.04] px-3 py-1 text-ink">{s.name}</span>
-                  {i < d.steps.length - 1 && <span aria-hidden="true">→</span>}
-                </li>
-              ))}
-            </ol>
           </Reveal>
         </div>
       </Container>

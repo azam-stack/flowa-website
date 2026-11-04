@@ -24,7 +24,7 @@ const TONES: Record<Tint, { hi: string; base: string; low: string }> = {
   6: { hi: "#FFFFFF", base: "#F7F5F1", low: "#D9D3C9" },
 };
 
-export function FlowaO({ tint = 1, mark = false, outline = false, stroke = "#0C0C0B", className = "" }: { tint?: Tint; mark?: boolean; outline?: boolean; stroke?: string; className?: string }) {
+export function FlowaO({ tint = 1, mark = false, outline = false, stroke = "#1B0C06", className = "" }: { tint?: Tint; mark?: boolean; outline?: boolean; stroke?: string; className?: string }) {
   const id = useId().replace(/:/g, "");
   const t = TONES[tint];
   if (outline) {
@@ -54,7 +54,7 @@ export function FlowaO({ tint = 1, mark = false, outline = false, stroke = "#0C0
           <feGaussianBlur stdDeviation="14" />
         </filter>
       </defs>
-      <path d={FLOWA_O} transform="translate(10 26)" fill="#0C0C0B" opacity="0.12" filter={`url(#${id}-soft)`} />
+      <path d={FLOWA_O} transform="translate(10 26)" fill="#1B0C06" opacity="0.12" filter={`url(#${id}-soft)`} />
       <path d={FLOWA_O} fill={`url(#${id}-g)`} />
       <path d={FLOWA_O} fill="#000" filter={`url(#${id}-grain)`} />
     </svg>

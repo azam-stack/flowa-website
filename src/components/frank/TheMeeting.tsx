@@ -81,7 +81,7 @@ export function TheMeeting() {
                   <p className="mt-1 text-[15px] leading-snug text-ink">{inv.why}</p>
                 </div>
 
-                <div className="rounded-[14px] bg-white/[0.05] px-4 py-3">
+                <div className="rounded-[14px] bg-soft px-4 py-3">
                   <p className="text-[11.5px] font-semibold uppercase tracking-[0.12em] text-muted">{inv.briefLabel}</p>
                   <p className="mt-1 text-[14.5px] leading-snug text-ink-2">{inv.brief}</p>
                 </div>

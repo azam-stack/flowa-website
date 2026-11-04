@@ -23,7 +23,7 @@ export function MeetingValue() {
     <Section id="meeting-value">
       <Container>
         <SectionHeading title={<>{t.h2Light}<span className="dim">{t.h2Bold}</span></>} sub={t.sub} />
-        <Reveal className="mx-auto mt-10 grid max-w-4xl overflow-hidden rounded-frame border border-white/15 bg-surface md:mt-14 md:grid-cols-2">
+        <Reveal className="mx-auto mt-10 grid max-w-4xl overflow-hidden rounded-frame border border-line bg-surface md:mt-14 md:grid-cols-2">
           <div className="flex flex-col gap-6 p-6 md:p-8">
             <div>
               <label htmlFor={`${uid}-deal`} className="mb-2 block text-[15px] font-medium text-ink">
@@ -48,7 +48,7 @@ export function MeetingValue() {
                 {t.rateLabel}
               </label>
               <div className="flex items-center gap-4">
-                <input id={`${uid}-rate`} type="range" min={1} max={5} step={1} value={rate} onChange={(e) => setRate(Number(e.target.value))} className="w-full accent-[#0C0C0B]" />
+                <input id={`${uid}-rate`} type="range" min={1} max={5} step={1} value={rate} onChange={(e) => setRate(Number(e.target.value))} className="w-full accent-[#1B0C06]" />
                 <span className="w-14 flex-none text-right text-[17px] font-semibold text-ink">{rate} / 10</span>
               </div>
             </div>
@@ -62,7 +62,7 @@ export function MeetingValue() {
                 <span className="font-semibold text-brand">{multiple >= 1 ? `${multiple.toFixed(multiple >= 10 ? 0 : 1)}×` : `${Math.round(multiple * 100)}%`}</span> {t.vsPilot}
               </p>
             </div>
-            <div className="border-t border-white/15 pt-5">
+            <div className="border-t border-line pt-5">
               <p className="text-[15px] text-white/70">{t.payback}</p>
               <p className="mt-1 text-[24px] font-semibold">
                 {payback} {t.paybackUnit}

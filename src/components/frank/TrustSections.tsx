@@ -25,7 +25,7 @@ export function EngagementTimeline() {
           <Reveal stagger as="ol" className="relative grid gap-8 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
             {e.steps.map((s, i) => (
               <li key={s.title} className="relative min-w-0">
-                <span className={`relative z-[1] grid h-11 w-11 place-items-center rounded-full border border-white/15 text-[14px] font-semibold ${i === e.steps.length - 1 ? "bg-brand text-white" : "bg-surface text-ink"}`}>
+                <span className={`relative z-[1] grid h-11 w-11 place-items-center rounded-full border border-line text-[14px] font-semibold ${i === e.steps.length - 1 ? "bg-brand text-white" : "bg-surface text-ink"}`}>
                   {i === e.steps.length - 1 ? <Calendar size={18} /> : `0${i + 1}`}
                 </span>
                 <p className="mt-5 text-[13px] font-semibold uppercase tracking-wide text-brand-deep">{s.when}</p>
@@ -70,7 +70,7 @@ export function PromiseBand() {
         </Reveal>
         <Reveal stagger as="ul" className="mt-12 grid gap-5 md:mt-14 md:grid-cols-3">
           {p.points.map((pt, i) => (
-            <li key={pt.title} className="rounded-frame border border-white/15 bg-white/[0.06] p-6 backdrop-blur-md md:p-7" style={{ "--i": i } as CSSProperties}>
+            <li key={pt.title} className="rounded-frame border border-line bg-soft p-6 backdrop-blur-md md:p-7" style={{ "--i": i } as CSSProperties}>
               <span className="grid h-9 w-9 place-items-center rounded-full bg-brand text-white">
                 <Check size={16} />
               </span>
@@ -102,7 +102,7 @@ export function ComplianceSection() {
               {c.link.label}
             </SmartLink>
           </Reveal>
-          <Reveal stagger as="ul" className="grid gap-px overflow-hidden rounded-frame border border-white/15 bg-ink sm:grid-cols-2">
+          <Reveal stagger as="ul" className="grid gap-px overflow-hidden rounded-frame border border-line bg-ink sm:grid-cols-2">
             {c.items.map((it) => (
               <li key={it.title} className="bg-surface p-6 md:p-7">
                 <span className="grid h-7 w-7 place-items-center rounded-full bg-brand text-white">

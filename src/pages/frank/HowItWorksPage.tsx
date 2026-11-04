@@ -1,4 +1,5 @@
 import { ChannelLoop } from "@/components/frank/ChannelLoop";
+import { TheMeeting } from "@/components/frank/TheMeeting";
 import { ContactBand } from "@/components/frank/ContactBand";
 import { ComplianceSection } from "@/components/frank/TrustSections";
 import { FrankMotion } from "@/components/frank/FrankMotion";
@@ -14,6 +15,7 @@ export function HowItWorksPage() {
       <PageHero light={t.h1Light} bold={t.h1Bold} sub={t.sub} />
       <FrankMotion id="steps" />
       <ChannelLoop />
+      <TheMeeting />
       <ComplianceSection />
       <ContactBand idPrefix="how" />
     </>
