@@ -20,12 +20,12 @@ function MainCard({ tab }: { tab: string }) {
       <MockCard className="overflow-hidden p-0 md:p-0">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line px-5 py-4">
           <p className="min-w-0 text-[17px] text-ink">
-            <strong className="font-semibold">{m.countBold}</strong>
+            <strong className="dim font-normal">{m.countBold}</strong>
             {m.countRest}
           </p>
           <span className="flex items-center gap-2 text-[13px] text-muted">
             <span className="relative inline-block h-5 w-9 rounded-pill bg-ink">
-              <span className="absolute right-0.5 top-0.5 h-4 w-4 rounded-full bg-white" />
+              <span className="absolute right-0.5 top-0.5 h-4 w-4 rounded-full bg-surface" />
             </span>
             {m.toggle}
           </span>
@@ -56,12 +56,12 @@ function MainCard({ tab }: { tab: string }) {
             <p className="text-[15px] font-semibold text-ink">Oliver Hart</p>
             <p className="truncate text-[12px] text-muted">Head of Sales · Brightline Software · 120 people</p>
           </div>
-          <span className="ml-auto flex-none rounded-pill bg-ink px-2.5 py-1 text-[11px] font-medium text-white">Passed</span>
+          <span className="ml-auto flex-none rounded-pill bg-ink px-2.5 py-1 text-[11px] font-medium text-page">Passed</span>
         </div>
         <ul className="mt-4 flex flex-col gap-2">
           {["Real decision-maker, not just the poster", "Right industry and size", "Right market: UK", "Dated signal: two SDR roles, 2 days ago"].map((t, i) => (
             <li key={t} className="row-in flex items-center gap-2.5 rounded-[10px] bg-soft px-3 py-2.5 text-[13px] text-ink-2" style={{ "--i": i } as CSSProperties}>
-              <span className="grid h-5 w-5 flex-none place-items-center rounded-full bg-brand text-ink">
+              <span className="grid h-5 w-5 flex-none place-items-center rounded-full bg-brand text-white">
                 <Check size={12} />
               </span>
               {t}
@@ -200,7 +200,7 @@ export function TabbedFeature() {
           </div>
 
           {/* desktop: four columns */}
-          <div role="tablist" aria-label={t.h2} className="hidden border-t border-ink md:grid md:grid-cols-4 md:divide-x md:divide-ink">
+          <div role="tablist" aria-label={t.h2} className="hidden border-t border-white/15 md:grid md:grid-cols-4 md:divide-x md:divide-ink">
             {t.tabs.map((tb, i) => {
               const isActive = i === active;
               return (
@@ -228,10 +228,10 @@ export function TabbedFeature() {
           </div>
 
           {/* mobile: pills + the active description */}
-          <div className="border-t border-ink md:hidden">
+          <div className="border-t border-white/15 md:hidden">
             <div role="tablist" aria-label={t.h2} className="no-scrollbar flex gap-2 overflow-x-auto px-4 pt-4">
               {t.tabs.map((tb, i) => (
-                <button key={tb.key} role="tab" aria-selected={i === active} onClick={() => select(i)} className={`flex-none rounded-pill border px-4 py-2 text-[14px] font-medium transition-colors ${i === active ? "border-ink bg-ink text-white" : "border-line bg-white text-ink-2"}`}>
+                <button key={tb.key} role="tab" aria-selected={i === active} onClick={() => select(i)} className={`flex-none rounded-pill border px-4 py-2 text-[14px] font-medium transition-colors ${i === active ? "border-white/15 bg-ink text-page" : "border-line bg-surface text-ink-2"}`}>
                   {tb.title}
                 </button>
               ))}

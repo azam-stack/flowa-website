@@ -16,7 +16,7 @@ export function FaqList({ items, defaultOpen = null, className = "" }: { items: 
         const b = `${base}-b-${i}`;
         const p = `${base}-p-${i}`;
         return (
-          <div key={item.q} className="rounded-card border border-line bg-white">
+          <div key={item.q} className="panel-soft">
             <h3 className="m-0">
               <button
                 id={b}
@@ -30,7 +30,7 @@ export function FaqList({ items, defaultOpen = null, className = "" }: { items: 
                 className="flex w-full items-center justify-between gap-4 rounded-card px-5 py-4 text-left md:px-6 md:py-5"
               >
                 <span className="text-[16px] font-medium text-ink md:text-[17px]">{item.q}</span>
-                <span className={`grid h-8 w-8 flex-none place-items-center rounded-full border border-ink text-ink transition-transform duration-200 ease-out motion-reduce:transition-none ${isOpen ? "rotate-45" : ""}`} aria-hidden="true">
+                <span className={`grid h-8 w-8 flex-none place-items-center rounded-full border border-white/15 text-ink transition-transform duration-200 ease-out motion-reduce:transition-none ${isOpen ? "rotate-45" : ""}`} aria-hidden="true">
                   <PlusIcon size={16} />
                 </span>
               </button>

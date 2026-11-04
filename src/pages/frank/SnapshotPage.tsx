@@ -4,7 +4,6 @@ import { Btn } from "@/components/frank/Btn";
 import { Check } from "@/components/frank/Icons";
 import { SectionHeading, Section } from "@/components/frank/SectionHeading";
 import { ShortForm } from "@/components/frank/ShortForm";
-import { SparkleGrid } from "@/components/frank/SparkleGrid";
 import { snapshot as t } from "@/content/frank/snapshot";
 import { breadcrumbJsonLd, useSeo } from "@/lib/seo";
 
@@ -19,18 +18,17 @@ export function SnapshotPage() {
       <section className="pt-5 md:pt-8">
         <Container>
           <div className="framed relative overflow-hidden" style={{ background: "linear-gradient(180deg, #ffffff 0%, var(--page-bg) 100%)" }}>
-            <SparkleGrid fade />
             <div className="relative z-[1] grid gap-10 px-6 py-12 md:px-12 md:py-16 lg:grid-cols-[1.1fr_1fr] lg:items-start lg:gap-14 lg:px-16 lg:py-20">
               <div>
                 <h1 className="text-h1 text-ink">
                   {t.h1Light}
-                  <span className="font-semibold">{t.h1Bold}</span>
+                  <span className="dim">{t.h1Bold}</span>
                 </h1>
                 <p className="mt-5 max-w-[560px] text-sub text-ink-2">{t.sub}</p>
                 <ol className="mt-8 flex flex-col gap-4">
                   {t.steps.map((s, i) => (
                     <li key={s.title} className="flex items-start gap-4">
-                      <span className="grid h-9 w-9 flex-none place-items-center rounded-full border border-ink bg-white text-[14px] font-semibold text-ink">{i + 1}</span>
+                      <span className="grid h-9 w-9 flex-none place-items-center rounded-full border border-white/15 bg-surface text-[14px] font-semibold text-ink">{i + 1}</span>
                       <span>
                         <span className="block text-[17px] font-semibold text-ink">{s.title}</span>
                         <span className="block text-[15px] text-ink-2">{s.body}</span>
@@ -40,7 +38,7 @@ export function SnapshotPage() {
                 </ol>
                 <p className="mt-8 text-[14px] text-muted">{t.limit}</p>
               </div>
-              <div id="snapshot-form" className="rounded-frame border border-ink bg-white p-6 shadow-lift md:p-8">
+              <div id="snapshot-form" className="rounded-frame border border-white/15 bg-surface p-6 shadow-lift md:p-8">
                 <h2 className="mb-5 text-[22px] font-semibold text-ink">{t.form.h2}</h2>
                 <ShortForm idPrefix="snapshot" variant="snapshot" />
               </div>
@@ -51,9 +49,9 @@ export function SnapshotPage() {
 
       <Section>
         <Container>
-          <SectionHeading title={<>{t.example.h2Light}<span className="font-semibold">{t.example.h2Bold}</span></>} sub={t.example.sub} />
+          <SectionHeading title={<>{t.example.h2Light}<span className="dim">{t.example.h2Bold}</span></>} sub={t.example.sub} />
           <Reveal className="mx-auto mt-10 max-w-5xl md:mt-14">
-            <div className="hidden overflow-hidden rounded-frame border border-ink bg-white md:block">
+            <div className="hidden overflow-hidden rounded-frame border border-white/15 bg-surface md:block">
               <table className="w-full table-fixed border-collapse text-left">
                 <thead>
                   <tr className="bg-soft">
@@ -79,7 +77,7 @@ export function SnapshotPage() {
             </div>
             <ul className="flex flex-col gap-3 md:hidden">
               {t.example.rows.map((r) => (
-                <li key={r[0]} className="rounded-frame border border-line bg-white p-5">
+                <li key={r[0]} className="rounded-frame border border-line bg-surface p-5">
                   <p className="text-[16px] font-semibold text-ink">{r[0]}</p>
                   <p className="mt-2">
                     <span className="rounded-pill bg-brand/20 px-2.5 py-1 text-[13px] font-medium text-ink">{r[1]}</span>

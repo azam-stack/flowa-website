@@ -128,7 +128,7 @@ export function ChatWidget() {
   return (
     <div className="fixed bottom-4 right-4 z-40 flex flex-col items-end gap-3 md:bottom-6 md:right-6">
       {mode === "teaser" && (
-        <div className="rise-in relative w-[min(300px,calc(100vw-2rem))] rounded-[18px] rounded-br-[6px] border border-line bg-white p-4 pr-10 text-left shadow-lift">
+        <div className="rise-in relative w-[min(300px,calc(100vw-2rem))] rounded-[18px] rounded-br-[6px] border border-line bg-surface p-4 pr-10 text-left shadow-lift">
           <button type="button" onClick={close} aria-label={chat.close} className="absolute right-2 top-2 grid h-8 w-8 place-items-center rounded-full text-muted hover:bg-soft hover:text-ink">
             <Close size={15} />
           </button>
@@ -150,13 +150,13 @@ export function ChatWidget() {
       )}
 
       {mode === "panel" && (
-        <div ref={panelRef} role="dialog" aria-label="Chat with Frank" className="rise-in w-[min(380px,calc(100vw-2rem))] overflow-hidden rounded-[20px] border border-line bg-white shadow-lift">
+        <div ref={panelRef} role="dialog" aria-label="Chat with Frank" className="rise-in w-[min(380px,calc(100vw-2rem))] overflow-hidden rounded-[20px] border border-line bg-surface shadow-lift">
           <div className="flex items-center gap-3 border-b border-line px-4 py-3">
             <FrankAvatar round decorative className="h-11 w-11 flex-none" />
             <div className="min-w-0">
               <p className="text-[15px] font-semibold text-ink">Frank</p>
               <p className="flex items-center gap-1.5 text-[12px] text-muted">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#2BB673]" /> AI outbound agent · online
+                <span className="h-1.5 w-1.5 rounded-full bg-lime" /> AI outbound agent · online
               </p>
             </div>
             <button type="button" onClick={close} aria-label={chat.close} className="ml-auto grid h-10 w-10 place-items-center rounded-full text-ink hover:bg-soft">
@@ -168,7 +168,7 @@ export function ChatWidget() {
             {msgs.length === 0 && (
               <div className="flex flex-wrap gap-2 pl-1">
                 {chat.quickReplies.map((q) => (
-                  <SmartLink key={q.href} href={q.href} onClick={() => track("chat_quick_reply", { label: q.label })} className="rounded-pill border border-ink px-3.5 py-2 text-[14px] font-medium text-ink transition-colors hover:bg-ink hover:text-white">
+                  <SmartLink key={q.href} href={q.href} onClick={() => track("chat_quick_reply", { label: q.label })} className="rounded-pill border border-white/15 px-3.5 py-2 text-[14px] font-medium text-ink transition-colors hover:bg-ink hover:text-page">
                     {q.label}
                   </SmartLink>
                 ))}
@@ -176,14 +176,14 @@ export function ChatWidget() {
             )}
             {msgs.map((m, i) =>
               m.from === "me" ? (
-                <p key={i} className="ml-auto max-w-[85%] rounded-[16px] rounded-br-[4px] bg-ink px-3.5 py-2.5 text-[14px] text-white">
+                <p key={i} className="ml-auto max-w-[85%] rounded-[16px] rounded-br-[4px] bg-ink px-3.5 py-2.5 text-[14px] text-page">
                   {m.text}
                 </p>
               ) : (
                 <div key={i} className="swap-up max-w-[88%] rounded-[16px] rounded-bl-[4px] bg-soft px-3.5 py-2.5 text-[14px] leading-relaxed text-ink-2">
                   {m.text}
                   {m.handoff && (
-                    <SmartLink href={chat.bookMeetingHref} onClick={() => track("cta_click", { label: "chat_handoff_book" })} className="mt-2.5 block w-fit rounded-pill bg-ink px-3.5 py-1.5 text-[13px] font-medium text-white">
+                    <SmartLink href={chat.bookMeetingHref} onClick={() => track("cta_click", { label: "chat_handoff_book" })} className="mt-2.5 block w-fit rounded-pill bg-ink px-3.5 py-1.5 text-[13px] font-medium text-page">
                       {chat.bookMeeting}
                     </SmartLink>
                   )}
@@ -206,7 +206,7 @@ export function ChatWidget() {
             <SmartLink href={chat.bookMeetingHref} onClick={() => track("cta_click", { label: "chat_book_meeting" })} aria-label={chat.bookMeeting} className="grid h-10 w-10 flex-none place-items-center rounded-full border border-line text-ink transition-colors hover:bg-soft">
               <Calendar size={16} />
             </SmartLink>
-            <button type="submit" disabled={thinking || !draft.trim()} aria-label={chat.send} className="grid h-10 w-10 flex-none place-items-center rounded-full bg-ink text-white transition-colors hover:bg-black disabled:opacity-40">
+            <button type="submit" disabled={thinking || !draft.trim()} aria-label={chat.send} className="grid h-10 w-10 flex-none place-items-center rounded-full bg-ink text-page transition-colors hover:bg-black disabled:opacity-40">
               <Send size={15} />
             </button>
           </form>
@@ -219,10 +219,10 @@ export function ChatWidget() {
         onClick={() => (mode === "panel" ? close() : open())}
         aria-label={mode === "panel" ? chat.close : chat.open}
         aria-expanded={mode === "panel"}
-        className="relative grid h-16 w-16 place-items-center rounded-full border border-ink bg-white shadow-lift transition-transform duration-200 hover:-translate-y-0.5"
+        className="relative grid h-16 w-16 place-items-center rounded-full border border-white/15 bg-surface shadow-lift transition-transform duration-200 hover:-translate-y-0.5"
       >
         <FrankAvatar round decorative className="h-[56px] w-[56px]" />
-        <span className="absolute bottom-0.5 right-0.5 h-3.5 w-3.5 rounded-full bg-[#2BB673] ring-2 ring-white" />
+        <span className="absolute bottom-0.5 right-0.5 h-3.5 w-3.5 rounded-full bg-lime ring-2 ring-white" />
       </button>
     </div>
   );

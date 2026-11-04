@@ -47,10 +47,10 @@ export function FrankMotion({ id = "how-frank-works" }: { id?: string }) {
     <Section id={id}>
       <Container>
         <Reveal className="max-w-3xl">
-          <p className="text-eyebrow text-brand-deep">{m.eyebrow}</p>
+          <p className="mono-label text-brand-deep">{m.eyebrow}</p>
           <h2 className="mt-3 text-h2 text-ink">
             {m.h2Light}
-            <span className="font-semibold">{m.h2Bold}</span>
+            <span className="dim">{m.h2Bold}</span>
           </h2>
           <p className="mt-4 max-w-lead text-sub text-ink-2">{m.sub}</p>
         </Reveal>
@@ -88,7 +88,7 @@ export function FrankMotion({ id = "how-frank-works" }: { id?: string }) {
                   {m.windowTitle}
                 </span>
                 <span className="flex items-center gap-2 rounded-pill bg-white/[0.07] px-3 py-1 text-[12px] text-white/80">
-                  <span className={`h-1.5 w-1.5 rounded-full ${shown === last ? "bg-[#2BB673]" : "bg-brand"} ${playing ? "live-dot" : ""}`} />
+                  <span className={`h-1.5 w-1.5 rounded-full ${shown === last ? "bg-lime" : "bg-brand"} ${playing ? "live-dot" : ""}`} />
                   <span key={shown} className="fm-fade">
                     {m.status[shown]}
                   </span>
@@ -163,7 +163,7 @@ function Scene({ step, playing }: { step: string; playing: boolean }) {
           <ul className="mt-4 flex flex-col gap-2">
             {m.qualify.checks.map((c, i) => (
               <Row key={c} i={i + 3} className="flex items-center gap-2.5 text-[14px] text-white/90">
-                <span className="grid h-5 w-5 place-items-center rounded-full bg-[#2BB673] text-white">
+                <span className="grid h-5 w-5 place-items-center rounded-full bg-lime text-white">
                   <Check size={11} />
                 </span>
                 {c}
@@ -195,7 +195,7 @@ function Scene({ step, playing }: { step: string; playing: boolean }) {
             </span>
           </Row>
           <Row i={5} className="mt-3 flex items-center gap-2 text-[13px] text-white/80">
-            <span className="grid h-5 w-5 place-items-center rounded-full bg-[#2BB673] text-white">
+            <span className="grid h-5 w-5 place-items-center rounded-full bg-lime text-white">
               <Check size={11} />
             </span>
             Sent · Tue 09:48
@@ -210,7 +210,7 @@ function Scene({ step, playing }: { step: string; playing: boolean }) {
             <p className="rounded-[14px] rounded-bl-[4px] bg-white/10 px-3.5 py-2 text-[14px] text-white">{m.book.reply}</p>
           </Row>
           <Row i={3} className="fm-card flex items-center gap-4">
-            <span className="grid h-12 w-12 place-items-center rounded-[12px] bg-[#2BB673] text-white">
+            <span className="grid h-12 w-12 place-items-center rounded-[12px] bg-lime text-white">
               <Calendar size={20} />
             </span>
             <div className="min-w-0">

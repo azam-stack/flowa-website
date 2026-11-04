@@ -38,7 +38,7 @@ function MobileSheet({ open, onClose, closeRef }: { open: boolean; onClose: () =
   if (!open) return null;
   return (
     <div role="dialog" aria-modal="true" aria-label="Menu" className="fixed inset-0 z-[70] flex flex-col bg-page lg:hidden">
-      <div className="flex h-[72px] flex-none items-center justify-between border-b border-ink px-4">
+      <div className="flex h-[72px] flex-none items-center justify-between border-b border-line px-4">
         <Link to="/" onClick={onClose} aria-label="Flowa home">
           <Logo />
         </Link>
@@ -58,7 +58,7 @@ function MobileSheet({ open, onClose, closeRef }: { open: boolean; onClose: () =
           </a>
         )}
       </nav>
-      <div className="flex-none border-t border-ink bg-page p-4">
+      <div className="flex-none border-t border-line bg-page p-4">
         <Btn href={nav.demo.href} size="lg" className="w-full" trackLabel="nav_book_demo" onClick={onClose}>
           {nav.demo.label}
         </Btn>
@@ -83,27 +83,25 @@ export function Nav() {
   };
 
   return (
-    <nav aria-label="Main" className="border-b border-ink bg-page/95 backdrop-blur-md supports-[backdrop-filter]:bg-page/85">
-      <div className="mx-auto flex h-[72px] w-full max-w-container items-center justify-between gap-6 px-4 md:px-10 xl:px-gutter">
-        <div className="flex items-center gap-8">
-          <Link to="/" aria-label="Flowa home" className="flex items-center rounded-control">
-            <Logo />
-          </Link>
-          <div className="hidden items-center gap-1 lg:flex">
-            {nav.links.map((l) => (
-              <SmartLink key={l.href} href={l.href} onClick={() => track("nav_click", { label: l.label })} className={`flex h-10 items-center rounded-control px-3 text-[15px] font-medium transition-colors hover:text-ink ${active(pathname, l.href) ? "text-ink underline decoration-brand decoration-2 underline-offset-[10px]" : "text-ink-2"}`}>
-                {l.label}
-              </SmartLink>
-            ))}
-          </div>
+    <nav aria-label="Main" className="border-b border-line bg-page/80 backdrop-blur-xl">
+      <div className="mx-auto grid h-[72px] w-full max-w-container grid-cols-[1fr_auto_1fr] items-center px-4 md:px-10 xl:px-gutter">
+        <Link to="/" aria-label="Flowa home" className="flex items-center justify-self-start rounded-control">
+          <Logo />
+        </Link>
+        <div className="hidden items-center gap-2 lg:flex">
+          {nav.links.map((l) => (
+            <SmartLink key={l.href} href={l.href} onClick={() => track("nav_click", { label: l.label })} className={`flex h-10 items-center rounded-pill px-4 text-[14.5px] font-medium transition-colors hover:text-ink ${active(pathname, l.href) ? "bg-white/[0.06] text-ink" : "text-ink-2/80"}`}>
+              {l.label}
+            </SmartLink>
+          ))}
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-self-end gap-2">
           {SITE_CONFIG.clientDashboardUrl && (
-            <a href={SITE_CONFIG.clientDashboardUrl} target="_blank" rel="noopener noreferrer" className="hidden h-10 items-center rounded-control px-3 text-[15px] font-medium text-ink-2 hover:text-ink lg:flex">
+            <a href={SITE_CONFIG.clientDashboardUrl} target="_blank" rel="noopener noreferrer" className="hidden h-10 items-center rounded-control px-3 text-[14.5px] font-medium text-ink-2 hover:text-ink lg:flex">
               {nav.clientDashboard.label}
             </a>
           )}
-          <Btn href={nav.demo.href} size="sm" className="hidden lg:inline-flex" trackLabel="nav_book_demo">
+          <Btn href={nav.demo.href} size="sm" variant="outline" className="hidden lg:inline-flex" trackLabel="nav_book_demo">
             {nav.demo.label}
           </Btn>
           <button ref={burgerRef} type="button" onClick={() => setSheet(true)} aria-label={nav.menuOpen} aria-expanded={sheet} className="grid h-11 w-11 place-items-center rounded-control lg:hidden">

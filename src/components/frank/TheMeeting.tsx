@@ -23,10 +23,10 @@ export function TheMeeting() {
       <Container>
         <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
           <Reveal>
-            <p className="text-eyebrow text-brand-deep">{m.eyebrow}</p>
+            <p className="mono-label text-brand-deep">{m.eyebrow}</p>
             <h2 className="mt-3 text-h2 text-ink">
               {m.h2Light}
-              <span className="font-semibold">{m.h2Bold}</span>
+              <span className="dim">{m.h2Bold}</span>
             </h2>
             <p className="mt-4 max-w-lead text-sub text-ink-2">{m.sub}</p>
 
@@ -34,7 +34,7 @@ export function TheMeeting() {
             <ol className="mt-4 grid gap-x-8 gap-y-5 sm:grid-cols-2">
               {m.checks.map((c, i) => (
                 <li key={c.title} className="flex gap-3">
-                  <span className="mt-0.5 grid h-6 w-6 flex-none place-items-center rounded-full bg-ink text-white">
+                  <span className="mt-0.5 grid h-6 w-6 flex-none place-items-center rounded-full bg-brand text-white">
                     <Check size={12} />
                   </span>
                   <span>
@@ -52,7 +52,7 @@ export function TheMeeting() {
             <div ref={ref} className={`meeting-card ${inView ? "is-held" : ""}`}>
               <div className="flex items-start justify-between gap-4 border-b border-line px-6 py-5">
                 <div className="flex items-center gap-3">
-                  <span className="grid h-11 w-11 flex-none place-items-center rounded-[12px] bg-ink text-white">
+                  <span className="grid h-11 w-11 flex-none place-items-center rounded-[12px] bg-brand text-white">
                     <Calendar size={18} />
                   </span>
                   <div>
@@ -76,12 +76,12 @@ export function TheMeeting() {
                   </div>
                 </div>
 
-                <div className="rounded-[14px] bg-brand/15 px-4 py-3">
+                <div className="rounded-[14px] bg-brand/15 px-4 py-3 ring-1 ring-brand/30">
                   <p className="text-[11.5px] font-semibold uppercase tracking-[0.12em] text-brand-deep">{inv.whyLabel}</p>
                   <p className="mt-1 text-[15px] leading-snug text-ink">{inv.why}</p>
                 </div>
 
-                <div className="rounded-[14px] bg-soft px-4 py-3">
+                <div className="rounded-[14px] bg-white/[0.05] px-4 py-3">
                   <p className="text-[11.5px] font-semibold uppercase tracking-[0.12em] text-muted">{inv.briefLabel}</p>
                   <p className="mt-1 text-[14.5px] leading-snug text-ink-2">{inv.brief}</p>
                 </div>

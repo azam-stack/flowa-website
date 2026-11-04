@@ -35,7 +35,7 @@ export function ContactPage({ mode }: { mode: "demo" | "contact" }) {
               <ul className="mt-5 flex flex-col gap-3">
                 {d.points.map((pt) => (
                   <li key={pt} className="flex items-start gap-3 text-body text-ink-2">
-                    <span className="mt-0.5 grid h-6 w-6 flex-none place-items-center rounded-full bg-brand text-ink">
+                    <span className="mt-0.5 grid h-6 w-6 flex-none place-items-center rounded-full bg-brand text-white">
                       <Check size={13} />
                     </span>
                     {pt}
@@ -43,7 +43,7 @@ export function ContactPage({ mode }: { mode: "demo" | "contact" }) {
                 ))}
               </ul>
             </aside>
-            <div className="flex flex-col items-start justify-center rounded-frame border border-ink bg-white p-8 shadow-float md:p-12">
+            <div className="flex flex-col items-start justify-center rounded-frame border border-white/15 bg-surface p-8 shadow-float md:p-12">
               <p className="text-h3 text-ink">{d.calendarCta}</p>
               <p className="mt-2 max-w-lead text-body text-ink-2">{d.calendarNote}</p>
               <a href={SITE_CONFIG.bookingUrl} target="_blank" rel="noopener noreferrer" onClick={() => track("cta_click", { label: "book_call_page" })} className="btn btn-primary mt-8 h-14 px-8 text-[17px]">

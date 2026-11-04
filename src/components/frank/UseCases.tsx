@@ -16,7 +16,7 @@ type Who = "frank" | "ahmed" | "anton";
 /** Who does the work on this card: overlapping faces (Frank and/or the founders) with a short label. */
 export function TeamStack({ who, label, className = "" }: { who: readonly string[]; label: string; className?: string }) {
   return (
-    <div className={`flex items-center gap-2 rounded-pill bg-white py-1 pl-1 pr-3 shadow-float ${className}`}>
+    <div className={`flex items-center gap-2 rounded-pill bg-surface py-1 pl-1 pr-3 shadow-float ${className}`}>
       <span className="flex -space-x-2">
         {(who as Who[]).map((w) =>
           w === "frank" ? (
@@ -34,7 +34,7 @@ export function TeamStack({ who, label, className = "" }: { who: readonly string
 /** The illustration panel on each use-case card: a mini UI collage plus who does the work. */
 function Art({ k, who, label }: { k: Key; who: readonly string[]; label: string }) {
   const frank = <TeamStack who={who} label={label} className="absolute bottom-3 left-3" />;
-  const mini = "rounded-[12px] bg-white p-3 shadow-float text-ink";
+  const mini = "rounded-[12px] bg-surface p-3 shadow-float text-ink";
   if (k === "signal")
     return (
       <>
@@ -106,7 +106,7 @@ function Art({ k, who, label }: { k: Key; who: readonly string[]; label: string 
             <div key={n as string} className="flex items-center justify-between py-1 text-[12px]">
               <span className="text-ink-2">{n as string}</span>
               {done ? (
-                <span className="grid h-5 w-5 place-items-center rounded-full bg-brand text-ink">
+                <span className="grid h-5 w-5 place-items-center rounded-full bg-brand text-white">
                   <Check size={11} />
                 </span>
               ) : (

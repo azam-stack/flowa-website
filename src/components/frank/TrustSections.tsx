@@ -8,7 +8,6 @@ import { Btn } from "./Btn";
 import { Calendar, Check, Shield } from "./Icons";
 import { SITE_CONFIG } from "@/config/site";
 import { SectionHeading, Section } from "./SectionHeading";
-import { Sphere } from "./Sphere";
 
 /**
  * How an engagement runs: four steps on a line, each with when it
@@ -26,7 +25,7 @@ export function EngagementTimeline() {
           <Reveal stagger as="ol" className="relative grid gap-8 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
             {e.steps.map((s, i) => (
               <li key={s.title} className="relative min-w-0">
-                <span className={`relative z-[1] grid h-11 w-11 place-items-center rounded-full border border-ink text-[14px] font-semibold ${i === e.steps.length - 1 ? "bg-brand text-ink" : "bg-surface text-ink"}`}>
+                <span className={`relative z-[1] grid h-11 w-11 place-items-center rounded-full border border-white/15 text-[14px] font-semibold ${i === e.steps.length - 1 ? "bg-brand text-white" : "bg-surface text-ink"}`}>
                   {i === e.steps.length - 1 ? <Calendar size={18} /> : `0${i + 1}`}
                 </span>
                 <p className="mt-5 text-[13px] font-semibold uppercase tracking-wide text-brand-deep">{s.when}</p>
@@ -58,22 +57,21 @@ export function EngagementTimeline() {
 export function PromiseBand() {
   const p = home.promise;
   return (
-    <section id="promise" className="relative overflow-hidden bg-ink py-section-m text-white lg:py-section" aria-label={p.eyebrow}>
-      <img src={asset("images/backgrounds/silk-dark.webp")} alt="" aria-hidden="true" loading="lazy" className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-70" />
-      <Sphere size={160} tint={1} className="absolute -left-12 bottom-8 hidden opacity-90 lg:block" rotate={18} duration={9} />
+    <section id="promise" className="relative overflow-hidden bg-ink py-section-m text-page lg:py-section" aria-label={p.eyebrow}>
+      <img src={asset("images/backgrounds/silk-dark.webp")} alt="" aria-hidden="true" loading="lazy" className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-40" />
       <Container className="relative">
         <Reveal className="max-w-3xl">
           <p className="text-eyebrow text-brand">{p.eyebrow}</p>
           <h2 className="mt-3 text-[clamp(2.25rem,1.5rem+2.4vw,3.75rem)] font-light leading-[1.05] tracking-[-0.03em]">
             {p.h2Light}
-            <span className="font-semibold">{p.h2Bold}</span>
+            <span className="dim">{p.h2Bold}</span>
           </h2>
           <p className="mt-4 max-w-lead text-sub text-white/75">{p.sub}</p>
         </Reveal>
         <Reveal stagger as="ul" className="mt-12 grid gap-5 md:mt-14 md:grid-cols-3">
           {p.points.map((pt, i) => (
             <li key={pt.title} className="rounded-frame border border-white/15 bg-white/[0.06] p-6 backdrop-blur-md md:p-7" style={{ "--i": i } as CSSProperties}>
-              <span className="grid h-9 w-9 place-items-center rounded-full bg-brand text-ink">
+              <span className="grid h-9 w-9 place-items-center rounded-full bg-brand text-white">
                 <Check size={16} />
               </span>
               <h3 className="mt-5 text-[20px] font-semibold">{pt.title}</h3>
@@ -94,7 +92,7 @@ export function ComplianceSection() {
       <Container>
         <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
           <Reveal>
-            <span className="grid h-12 w-12 place-items-center rounded-full bg-ink text-white">
+            <span className="grid h-12 w-12 place-items-center rounded-full bg-ink text-page">
               <Shield size={22} />
             </span>
             <p className="mt-6 text-eyebrow text-brand-deep">{c.eyebrow}</p>
@@ -104,10 +102,10 @@ export function ComplianceSection() {
               {c.link.label}
             </SmartLink>
           </Reveal>
-          <Reveal stagger as="ul" className="grid gap-px overflow-hidden rounded-frame border border-ink bg-ink sm:grid-cols-2">
+          <Reveal stagger as="ul" className="grid gap-px overflow-hidden rounded-frame border border-white/15 bg-ink sm:grid-cols-2">
             {c.items.map((it) => (
               <li key={it.title} className="bg-surface p-6 md:p-7">
-                <span className="grid h-7 w-7 place-items-center rounded-full bg-brand text-ink">
+                <span className="grid h-7 w-7 place-items-center rounded-full bg-brand text-white">
                   <Check size={13} />
                 </span>
                 <h3 className="mt-4 text-[18px] font-semibold text-ink">{it.title}</h3>

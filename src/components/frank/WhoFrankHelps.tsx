@@ -23,7 +23,7 @@ export function WhoFrankHelps() {
             <ul className="mt-6 flex flex-col gap-4">
               {w.fit.map((f) => (
                 <li key={f} className="flex items-start gap-3 text-body text-ink-2">
-                  <span className="mt-0.5 grid h-6 w-6 flex-none place-items-center rounded-full bg-brand text-ink">
+                  <span className="mt-0.5 grid h-6 w-6 flex-none place-items-center rounded-full bg-brand text-white">
                     <Check size={13} />
                   </span>
                   {f}
@@ -31,7 +31,7 @@ export function WhoFrankHelps() {
               ))}
             </ul>
           </div>
-          <div className="rounded-frame bg-ink p-6 text-white md:p-9">
+          <div className="rounded-frame bg-ink p-6 text-page md:p-9">
             <h3 className="text-h3">{w.notFitTitle}</h3>
             <ul className="mt-6 flex flex-col gap-4">
               {w.notFit.map((f) => (

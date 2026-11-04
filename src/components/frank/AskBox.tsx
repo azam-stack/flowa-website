@@ -48,7 +48,7 @@ export function AskBox({ className = "" }: { className?: string }) {
   };
 
   return (
-    <div className={`rounded-frame border border-ink bg-surface p-5 shadow-float md:p-7 ${className}`}>
+    <div className={`rounded-frame border border-white/15 bg-surface p-5 shadow-float md:p-7 ${className}`}>
       <div className="flex items-center gap-3">
         <FrankAvatar round decorative className="h-10 w-10 flex-none" />
         <div>
@@ -59,7 +59,7 @@ export function AskBox({ className = "" }: { className?: string }) {
 
       {asked && (
         <div className="mt-5 flex flex-col gap-3" aria-live="polite">
-          <p className="ml-auto max-w-[85%] rounded-[16px] rounded-br-[4px] bg-ink px-4 py-2.5 text-[14px] text-white">{asked}</p>
+          <p className="ml-auto max-w-[85%] rounded-[16px] rounded-br-[4px] bg-ink px-4 py-2.5 text-[14px] text-page">{asked}</p>
           {state === "loading" && (
             <span className="typing w-fit rounded-[16px] rounded-bl-[4px] bg-soft px-4 py-3 text-ink" aria-label="Answering">
               <span />
@@ -71,7 +71,7 @@ export function AskBox({ className = "" }: { className?: string }) {
             <div className="swap-up max-w-[90%] rounded-[16px] rounded-bl-[4px] bg-soft px-4 py-3 text-[14px] leading-relaxed text-ink-2">
               {answer}
               {handoff && (
-                <SmartLink href={SITE_CONFIG.bookCallHref} className="mt-3 block w-fit rounded-pill bg-ink px-4 py-2 text-[13px] font-medium text-white">
+                <SmartLink href={SITE_CONFIG.bookCallHref} className="mt-3 block w-fit rounded-pill bg-ink px-4 py-2 text-[13px] font-medium text-page">
                   Book a call
                 </SmartLink>
               )}
@@ -85,19 +85,19 @@ export function AskBox({ className = "" }: { className?: string }) {
       {!asked && (
         <div className="mt-5 flex flex-wrap gap-2">
           {SUGGESTIONS.map((s) => (
-            <button key={s} type="button" onClick={() => void ask(s)} className="rounded-pill border border-line bg-white px-3.5 py-2 text-[13px] text-ink-2 transition-colors hover:border-ink">
+            <button key={s} type="button" onClick={() => void ask(s)} className="rounded-pill border border-line bg-surface px-3.5 py-2 text-[13px] text-ink-2 transition-colors hover:border-white/15">
               {s}
             </button>
           ))}
         </div>
       )}
 
-      <form onSubmit={submit} className="mt-4 flex items-center gap-2 rounded-pill border border-ink/20 bg-white py-1.5 pl-4 pr-1.5 focus-within:border-ink">
+      <form onSubmit={submit} className="mt-4 flex items-center gap-2 rounded-pill border border-white/20 bg-surface py-1.5 pl-4 pr-1.5 focus-within:border-white/15">
         <label htmlFor="ask-q" className="sr-only">
           Your question
         </label>
         <input id="ask-q" value={q} maxLength={MAX} onChange={(e) => setQ(e.target.value)} placeholder="Type your question" autoComplete="off" className="h-10 min-w-0 flex-1 bg-transparent text-[15px] text-ink outline-none placeholder:text-muted" />
-        <button type="submit" disabled={state === "loading" || q.trim().length < 3} aria-label="Ask" className="grid h-10 w-10 flex-none place-items-center rounded-full bg-ink text-white transition-opacity disabled:opacity-40">
+        <button type="submit" disabled={state === "loading" || q.trim().length < 3} aria-label="Ask" className="grid h-10 w-10 flex-none place-items-center rounded-full bg-ink text-page transition-opacity disabled:opacity-40">
           <Send size={15} />
         </button>
       </form>

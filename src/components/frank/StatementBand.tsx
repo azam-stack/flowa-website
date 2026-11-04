@@ -28,7 +28,7 @@ export function StatementBand({ headline, cta, ctaHref = SITE_CONFIG.bookCallHre
             </Btn>
           </Reveal>
         </div>
-        <Reveal delay={80} className="relative mt-10 min-h-[340px] overflow-hidden rounded-frame border border-ink bg-page md:mt-14 md:min-h-[420px]">
+        <Reveal delay={80} className="relative mt-10 min-h-[340px] overflow-hidden rounded-frame border border-white/15 bg-page md:mt-14 md:min-h-[420px]">
           <SparkleGrid />
           <div className="absolute left-5 top-1/2 w-[72%] max-w-[300px] -translate-y-1/2 md:left-14 md:max-w-[440px]">{illustration}</div>
           <div className="absolute inset-y-0 right-0 w-[48%]">

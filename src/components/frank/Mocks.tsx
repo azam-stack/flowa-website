@@ -38,7 +38,7 @@ export function DarkMock({ title, count, children, className = "" }: { title?: s
 
 /** The front white UI card: lifted with the deep shadow. */
 export function MockCard({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return <div className={`min-w-0 rounded-card bg-white p-4 text-ink shadow-lift md:p-5 ${className}`}>{children}</div>;
+  return <div className={`min-w-0 rounded-card bg-surface p-4 text-ink shadow-lift md:p-5 ${className}`}>{children}</div>;
 }
 
 /** A glassy card that sits behind the front card. */
@@ -62,7 +62,7 @@ export function Avatar({ name, size = 40, status, className = "" }: { name: stri
       )}
       <span className="pointer-events-none absolute inset-0 rounded-full ring-2 ring-white" />
       {status && (
-        <span className={`absolute -bottom-0.5 -right-0.5 grid h-4 w-4 place-items-center rounded-full ring-2 ring-white ${status === "ok" ? "bg-brand text-ink" : "bg-[#2BB673]"}`}>
+        <span className={`absolute -bottom-0.5 -right-0.5 grid h-4 w-4 place-items-center rounded-full ring-2 ring-white ${status === "ok" ? "bg-brand text-white" : "bg-lime"}`}>
           {status === "ok" && <Check size={9} />}
         </span>
       )}
@@ -73,7 +73,7 @@ export function Avatar({ name, size = 40, status, className = "" }: { name: stri
 /** Round black channel badges, the way product UIs show where a message goes. Only Flowa's real channels. */
 export function ChannelBadge({ kind, size = 28, className = "" }: { kind: "linkedin" | "email" | "calendar"; size?: number; className?: string }) {
   return (
-    <span className={`inline-grid flex-none place-items-center rounded-full bg-ink text-white ${className}`} style={{ width: size, height: size }}>
+    <span className={`inline-grid flex-none place-items-center rounded-full bg-ink text-page ${className}`} style={{ width: size, height: size }}>
       {kind === "linkedin" ? (
         <span className="font-semibold leading-none" style={{ fontSize: size * 0.42 }}>
           in
@@ -105,7 +105,7 @@ export function ScanMock({ className = "" }: { className?: string }) {
               <p className="truncate text-[15px] font-semibold">Oliver Hart</p>
               <p className="truncate text-[12px] text-muted">Head of Sales · Brightline Software · 120 people</p>
             </div>
-            <span className="ml-auto flex-none rounded-pill bg-ink px-2.5 py-1 text-[11px] font-medium text-white">ICP 92</span>
+            <span className="ml-auto flex-none rounded-pill bg-ink px-2.5 py-1 text-[11px] font-medium text-page">ICP 92</span>
           </div>
           <div className="mt-3 flex flex-wrap gap-2">
             <Chip>Why now: hiring two SDRs</Chip>
@@ -180,7 +180,7 @@ export function DraftMock({ className = "" }: { className?: string }) {
           <p className="text-[13px] font-medium text-white">Checked and approved by Ahmed</p>
           <p className="text-[11px] text-white/60">Sent at a human pace · LinkedIn</p>
         </div>
-        <span className={`ml-auto grid h-7 w-7 flex-none place-items-center rounded-full bg-brand text-ink ${done ? "check-pop" : "opacity-0"}`}>
+        <span className={`ml-auto grid h-7 w-7 flex-none place-items-center rounded-full bg-brand text-white ${done ? "check-pop" : "opacity-0"}`}>
           <Check size={14} />
         </span>
       </div>
@@ -211,7 +211,7 @@ export function CalendarMock({ className = "" }: { className?: string }) {
               {blocks[d].map((b) => (
                 <span
                   key={b.label + b.top}
-                  className={`slot absolute left-1 right-1 rounded-[6px] px-1.5 py-1 text-[10px] font-medium leading-none ${b.tone === "brand" ? "bg-brand text-ink" : "border border-line bg-white text-ink-2"}`}
+                  className={`slot absolute left-1 right-1 rounded-[6px] px-1.5 py-1 text-[10px] font-medium leading-none ${b.tone === "brand" ? "bg-brand text-white" : "border border-line bg-surface text-ink-2"}`}
                   style={{ top: 18 + b.top, "--i": b.i } as React.CSSProperties}
                 >
                   {b.label}
@@ -280,7 +280,7 @@ export function StepMock({ kind, className = "" }: { kind: "target" | "reach" | 
         <GlassCard className="flex items-center gap-3">
           <span className="relative h-9 w-9 flex-none">
             <img src={asset("images/team/ahmed.webp")} alt="" width={36} height={36} loading="lazy" className="h-full w-full rounded-full object-cover" />
-            <span className="absolute -bottom-0.5 -right-0.5 grid h-4 w-4 place-items-center rounded-full bg-brand text-ink ring-2 ring-white">
+            <span className="absolute -bottom-0.5 -right-0.5 grid h-4 w-4 place-items-center rounded-full bg-brand text-white ring-2 ring-white">
               <Check size={9} />
             </span>
           </span>
@@ -300,7 +300,7 @@ export function StepMock({ kind, className = "" }: { kind: "target" | "reach" | 
             ["linkedin", "LinkedIn · Priya Nair", "Connection note, one to one"],
             ["email", "Email · Tom Whitfield", "Follow-up stops if he replies"],
           ].map(([k, t, s2], i) => (
-            <div key={i} className="flex items-center gap-3 rounded-card bg-white p-3 text-ink shadow-lift">
+            <div key={i} className="flex items-center gap-3 rounded-card bg-surface p-3 text-ink shadow-lift">
               <Avatar name={t.split(" · ")[1]} size={36} />
               <div className="min-w-0">
                 <p className="truncate text-[12px] font-semibold">{t}</p>
@@ -340,7 +340,7 @@ export function StepMock({ kind, className = "" }: { kind: "target" | "reach" | 
             ["email", "Email · Oliver Hart", "Opens with the new office · approved"],
             ["linkedin", "LinkedIn · Priya Nair", "Short follow-up, three days later"],
           ].map(([k, t, s], i) => (
-            <div key={i} className="flex items-center gap-3 rounded-card bg-white p-3 text-ink shadow-lift">
+            <div key={i} className="flex items-center gap-3 rounded-card bg-surface p-3 text-ink shadow-lift">
               <Avatar name={t.split(" · ")[1]} size={36} />
               <div className="min-w-0">
                 <p className="truncate text-[12px] font-semibold">{t}</p>
@@ -366,7 +366,7 @@ export function StepMock({ kind, className = "" }: { kind: "target" | "reach" | 
           <Reveal stagger className="mt-3 flex flex-col gap-1.5">
             {["Decision-maker", "Right industry and size", "Right market", "Dated signal we can point to"].map((c) => (
               <span key={c} className="flex items-center gap-2 text-[12px] text-ink-2">
-                <span className="grid h-5 w-5 flex-none place-items-center rounded-full bg-brand text-ink">
+                <span className="grid h-5 w-5 flex-none place-items-center rounded-full bg-brand text-white">
                   <Check size={11} />
                 </span>
                 {c}
@@ -409,7 +409,7 @@ export function SignalExampleCard({ n, signal, meaning, signalLabel, meaningLabe
         <span className="text-[13px] text-white/50">{n}</span>
       </div>
       <p className="text-[18px] font-medium leading-snug text-white md:text-[20px]">{signal}</p>
-      <div className="rounded-card bg-white p-4 text-ink">
+      <div className="rounded-card bg-surface p-4 text-ink">
         <p className="text-[12px] font-semibold text-muted">{meaningLabel}</p>
         <p className="mt-1 text-[15px] leading-relaxed">{meaning}</p>
       </div>
@@ -430,7 +430,7 @@ export function HeroSignalMini() {
   }, [reduced, active, items.length]);
   const s = items[i];
   return (
-    <div ref={ref} className="w-full rounded-card bg-white p-3.5 text-left shadow-lift" aria-hidden="true">
+    <div ref={ref} className="w-full rounded-card bg-surface p-3.5 text-left shadow-lift" aria-hidden="true">
       <div key={i} className="swap-up">
         <div className="flex items-center justify-between gap-2">
           <Chip className="text-[12px]">{s.tag}</Chip>
@@ -450,7 +450,7 @@ export function HeroSignalMini() {
 
 export function HeroMeetingMini({ tag, body, time }: { tag: string; body: string; time: string }) {
   return (
-    <div className="w-full rounded-card bg-white p-3.5 text-left shadow-lift" aria-hidden="true">
+    <div className="w-full rounded-card bg-surface p-3.5 text-left shadow-lift" aria-hidden="true">
       <div className="flex items-center justify-between gap-2">
         <Chip className="text-[12px]">{tag}</Chip>
         <span className="whitespace-nowrap text-[11px] text-muted">{time}</span>

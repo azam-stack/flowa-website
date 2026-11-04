@@ -44,22 +44,22 @@ export function SignalMoment() {
       <Container>
         <div ref={ref} className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-16">
           <Reveal>
-            <p className="text-eyebrow text-brand-deep">{m.eyebrow}</p>
-            <h2 className="mt-3 text-statement font-semibold text-ink">
+            <p className="mono-label text-brand-deep">{m.eyebrow}</p>
+            <h2 className="mt-3 text-statement text-ink">
               {m.h2Light}
               <br className="hidden md:block" />
-              <span className="text-muted">{m.h2Bold}</span>
+              <span className="dim">{m.h2Bold}</span>
             </h2>
             <p className="mt-6 max-w-lead text-sub text-ink-2">{m.sub}</p>
 
           </Reveal>
 
           <Reveal className="lg:row-span-2">
-            <div className="overflow-hidden rounded-frame border border-line bg-soft shadow-float">
+            <div className="panel overflow-hidden">
               <div className="flex items-center justify-between gap-4 px-6 pt-5 text-[11.5px] font-medium uppercase tracking-[0.14em] text-muted">
                 <span>{m.card.label}</span>
-                <span className="flex items-center gap-2 text-[#1B7F4E]">
-                  <span className="live-dot h-1.5 w-1.5 rounded-full bg-[#2BB673] text-[#2BB673]" />
+                <span className="flex items-center gap-2 text-lime">
+                  <span className="live-dot h-1.5 w-1.5 rounded-full bg-lime text-lime" />
                   {m.card.status}
                 </span>
               </div>
@@ -70,9 +70,9 @@ export function SignalMoment() {
                   return (
                     <li
                       key={s.key}
-                      className={`signal-row flex items-center gap-3 rounded-[14px] border border-line bg-white p-3 md:p-3.5 ${on ? "is-on" : ""}`}
+                      className={`signal-row flex items-center gap-3 rounded-[14px] border border-line bg-surface p-3 md:p-3.5 ${on ? "is-on" : ""}`}
                     >
-                      <span className="grid h-10 w-10 flex-none place-items-center rounded-full bg-ink text-white">
+                      <span className="grid h-10 w-10 flex-none place-items-center rounded-full bg-brand text-white">
                         <SignalIcon kind={s.key} />
                       </span>
                       <span className="min-w-0 flex-1">
@@ -102,7 +102,7 @@ export function SignalMoment() {
                   <p className="text-[12px] font-semibold uppercase tracking-[0.14em] text-brand-deep">{g.name}</p>
                   <ul className="mt-2.5 flex flex-wrap gap-1.5">
                     {g.tags.map((t) => (
-                      <li key={t} className="rounded-pill border border-line bg-soft px-2.5 py-1 text-[12.5px] font-medium text-ink-2">
+                      <li key={t} className="rounded-pill border border-line bg-white/[0.04] px-2.5 py-1 text-[12.5px] font-medium text-ink-2">
                         {t}
                       </li>
                     ))}

@@ -22,10 +22,10 @@ export function Testimonials() {
         <div className="flex items-center justify-between gap-6">
           <h2 className="text-h2 text-ink">{t.title}</h2>
           <div className="flex gap-2">
-            <button type="button" onClick={() => go(-1)} aria-label={t.prev} className="grid h-12 w-12 place-items-center rounded-full bg-ink text-white hover:bg-black">
+            <button type="button" onClick={() => go(-1)} aria-label={t.prev} className="grid h-12 w-12 place-items-center rounded-full bg-ink text-page hover:bg-black">
               <ArrowLeft size={20} />
             </button>
-            <button type="button" onClick={() => go(1)} aria-label={t.next} className="grid h-12 w-12 place-items-center rounded-full bg-ink text-white hover:bg-black">
+            <button type="button" onClick={() => go(1)} aria-label={t.next} className="grid h-12 w-12 place-items-center rounded-full bg-ink text-page hover:bg-black">
               <ArrowRight size={20} />
             </button>
           </div>
@@ -33,7 +33,7 @@ export function Testimonials() {
         <div className="mt-10 overflow-hidden">
           <ul className="flex gap-6 transition-transform duration-500 ease-out motion-reduce:transition-none" style={{ transform: `translateX(calc(-${index} * (100% + 1.5rem) / 3))` }}>
             {t.items.map((q) => (
-              <li key={q.name + q.company} className="w-full flex-none rounded-card border border-ink bg-white p-7 md:w-[calc((100%-3rem)/3)]">
+              <li key={q.name + q.company} className="w-full flex-none rounded-card border border-white/15 bg-surface p-7 md:w-[calc((100%-3rem)/3)]">
                 <blockquote className="text-[17px] leading-relaxed text-ink">“{q.quote}”</blockquote>
                 <p className="mt-5 text-[14px] text-ink-2">
                   <span className="font-semibold text-ink">{q.name}</span>, {q.role}, {q.company}

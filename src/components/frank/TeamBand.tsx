@@ -6,7 +6,6 @@ import { asset } from "@/lib/asset";
 import { Btn } from "./Btn";
 import { Check } from "./Icons";
 import { Section } from "./SectionHeading";
-import { Sphere } from "./Sphere";
 
 /**
  * The people band: the two founders who run every campaign. The research agent is a sentence, not a card.
@@ -18,8 +17,7 @@ export function TeamBand() {
   return (
     <Section id="team">
       <Container>
-        <div className="framed relative overflow-hidden px-6 py-10 shadow-float md:px-12 md:py-14 lg:px-16">
-          <Sphere size={150} tint={1} mark className="absolute -bottom-12 -right-10 hidden opacity-90 lg:block" rotate={-16} duration={9} />
+        <div className="panel relative overflow-hidden px-6 py-10 md:px-12 md:py-14 lg:px-16">
           <div className="relative grid items-center gap-10 lg:grid-cols-[1fr_1.15fr] lg:gap-14">
             <Reveal>
               <p className="text-eyebrow text-brand-deep">{t.eyebrow}</p>
@@ -33,10 +31,10 @@ export function TeamBand() {
             </Reveal>
             <Reveal stagger className="grid grid-cols-2 gap-3 md:gap-4">
               {t.people.map((p, i) => (
-                <figure key={p.key} className="flex min-w-0 flex-col gap-2 rounded-card border border-ink bg-surface p-2" style={{ "--i": i + 1 } as CSSProperties}>
+                <figure key={p.key} className="flex min-w-0 flex-col gap-2 rounded-card border border-line bg-soft p-2" style={{ "--i": i + 1 } as CSSProperties}>
                   <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[10px] bg-panel">
                     <img src={asset(`images/team/${p.key}.webp`)} alt={`${p.name}, ${p.role} of Flowa`} width={480} height={600} loading="lazy" className="h-full w-full object-cover" />
-                    <span className="absolute bottom-2 left-2 flex items-center gap-1 rounded-pill bg-white px-2 py-0.5 text-[11px] font-medium text-ink shadow-float">
+                    <span className="absolute bottom-2 left-2 flex items-center gap-1 rounded-pill bg-surface px-2 py-0.5 text-[11px] font-medium text-ink shadow-float">
                       <span className="grid h-3.5 w-3.5 place-items-center rounded-full bg-brand">
                         <Check size={8} />
                       </span>

@@ -21,7 +21,7 @@ function Panel({ tint, children, className = "" }: { tint: Tint; children: React
   );
 }
 
-const card = "rounded-card bg-white p-3.5 text-ink shadow-lift";
+const card = "rounded-card bg-surface p-3.5 text-ink shadow-lift";
 
 export function FoundersVignette() {
   const pts = "M6 50 L40 44 L74 46 L108 32 L142 26 L176 14";
@@ -82,7 +82,7 @@ export function TrustVignette() {
   return (
     <div className="relative h-36 w-44" aria-hidden="true">
       <FlowaO tint={1} mark className="absolute inset-0 h-full w-full -rotate-6" />
-      <span className="absolute -bottom-1 right-2 grid h-12 w-12 place-items-center rounded-full bg-ink text-white shadow-lift">
+      <span className="absolute -bottom-1 right-2 grid h-12 w-12 place-items-center rounded-full bg-ink text-page shadow-lift">
         <Shield size={22} />
       </span>
     </div>
@@ -99,7 +99,7 @@ export function CalendarsVignette() {
   return (
     <Reveal stagger className="flex w-full flex-col gap-3" threshold={0.3}>
       {rows.map(([n, t], i) => (
-        <div key={n} className={`flex items-center gap-3 rounded-[16px] bg-white p-3 shadow-lift ${i === 1 ? "ml-6 md:ml-10" : ""}`} aria-hidden="true">
+        <div key={n} className={`flex items-center gap-3 rounded-[16px] bg-surface p-3 shadow-lift ${i === 1 ? "ml-6 md:ml-10" : ""}`} aria-hidden="true">
           <Avatar name={n} size={40} status="ok" />
           <div className="min-w-0">
             <p className="truncate text-[14px] font-semibold text-ink">{n}</p>

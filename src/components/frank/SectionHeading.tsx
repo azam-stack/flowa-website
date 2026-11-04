@@ -9,7 +9,7 @@ export function SectionHeading({ eyebrow, title, sub, align = "center", classNam
   const centred = align === "center";
   return (
     <Reveal stagger className={`relative ${centred ? "mx-auto text-center" : ""} max-w-3xl ${className}`}>
-      {eyebrow && <p className="text-eyebrow text-brand-deep">{eyebrow}</p>}
+      {eyebrow && <p className="mono-label text-brand-deep">{eyebrow}</p>}
       <h2 className={`text-h2 text-ink ${eyebrow ? "mt-3" : ""}`}>{title}</h2>
       {sub && <p className={`mt-4 text-sub text-ink-2 ${centred ? "mx-auto" : ""} max-w-lead`}>{sub}</p>}
       {children}

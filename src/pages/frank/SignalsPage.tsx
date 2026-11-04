@@ -4,7 +4,6 @@ import { ContactBand } from "@/components/frank/ContactBand";
 import { SignalExampleCard } from "@/components/frank/Mocks";
 import { PageHero } from "@/components/frank/PageHero";
 import { SectionHeading, Section } from "@/components/frank/SectionHeading";
-import { Sphere } from "@/components/frank/Sphere";
 import { Reveal } from "@/components/Reveal";
 import { signals as t } from "@/content/frank/pages";
 import { breadcrumbJsonLd, useSeo } from "@/lib/seo";
@@ -19,7 +18,6 @@ export function SignalsPage() {
       <Section>
         <Container>
           <Reveal className="framed relative grid gap-8 overflow-hidden px-6 py-10 md:grid-cols-[1fr_1.4fr] md:px-12 md:py-14">
-            <Sphere size={60} tint={5} className="absolute -right-4 -top-4 hidden md:block" />
             <h2 className="text-h2 text-ink">{t.problem.h2}</h2>
             <ul className="flex flex-col gap-4">
               {t.problem.lines.map((l, i) => (

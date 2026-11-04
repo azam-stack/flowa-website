@@ -22,8 +22,8 @@ export function MeetingValue() {
   return (
     <Section id="meeting-value">
       <Container>
-        <SectionHeading title={<>{t.h2Light}<span className="font-semibold">{t.h2Bold}</span></>} sub={t.sub} />
-        <Reveal className="mx-auto mt-10 grid max-w-4xl overflow-hidden rounded-frame border border-ink bg-white md:mt-14 md:grid-cols-2">
+        <SectionHeading title={<>{t.h2Light}<span className="dim">{t.h2Bold}</span></>} sub={t.sub} />
+        <Reveal className="mx-auto mt-10 grid max-w-4xl overflow-hidden rounded-frame border border-white/15 bg-surface md:mt-14 md:grid-cols-2">
           <div className="flex flex-col gap-6 p-6 md:p-8">
             <div>
               <label htmlFor={`${uid}-deal`} className="mb-2 block text-[15px] font-medium text-ink">
@@ -54,7 +54,7 @@ export function MeetingValue() {
             </div>
             <p className="text-small text-muted">{t.note}</p>
           </div>
-          <div className="flex flex-col justify-center gap-5 bg-ink p-6 text-white md:p-8" aria-live="polite">
+          <div className="flex flex-col justify-center gap-5 bg-brand p-6 text-white md:p-8" aria-live="polite">
             <div>
               <p className="text-[15px] text-white/70">{t.resultLabel}</p>
               <p className="mt-1 text-[clamp(2.5rem,2rem+2vw,3.5rem)] font-light leading-none tracking-[-0.03em]">{gbp(value)}</p>

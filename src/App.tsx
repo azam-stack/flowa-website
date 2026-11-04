@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ChatWidget } from "@/components/frank/ChatWidget";
-import { Footer } from "@/components/frank/Footer";
+import { HalftoneFooter } from "@/components/frank/HalftoneFooter";
 import { Nav } from "@/components/frank/Nav";
 import { ScrollManager } from "@/components/ScrollManager";
 import { nav } from "@/content/frank/chrome";
@@ -24,8 +24,8 @@ export default function App() {
   return (
     <BrowserRouter basename={basename}>
       <ScrollManager />
-      <div className="flex min-h-screen flex-col overflow-x-clip bg-page text-ink-2">
-        <a href="#main" className="sr-only z-[90] rounded-control bg-ink px-4 py-2 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
+      <div className="site-frame flex min-h-screen flex-col overflow-x-clip bg-page text-ink-2">
+        <a href="#main" className="sr-only z-[90] rounded-control bg-ink px-4 py-2 text-page focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
           {nav.skipToContent}
         </a>
         <header className="sticky top-0 z-50">
@@ -56,7 +56,7 @@ export default function App() {
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
-        <Footer />
+        <HalftoneFooter />
         <ChatWidget />
       </div>
     </BrowserRouter>

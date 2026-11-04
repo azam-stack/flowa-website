@@ -25,11 +25,16 @@ export function HomePage() {
   return (
     <>
       <Hero />
+      <div className="hatch" />
       <TheMeeting />
+      <div className="hatch" />
       <SdrMath />
+      <div className="hatch" />
       <SignalMoment />
+      <div className="hatch" />
       <StatsStrip className="mt-2 md:mt-4" />
       <TeamBand />
+      <div className="hatch" />
       {/* Hidden until approved client quotes exist */}
       <Testimonials />
       <Section id="faq">
@@ -45,6 +50,7 @@ export function HomePage() {
           </div>
         </Container>
       </Section>
+      <div className="hatch" />
       <ContactBand />
     </>
   );

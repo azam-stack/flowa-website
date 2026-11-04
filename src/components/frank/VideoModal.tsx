@@ -30,8 +30,8 @@ export function VideoModal({ open, onClose }: { open: boolean; onClose: () => vo
     <div className="fixed inset-0 z-[80] grid place-items-center p-4" role="dialog" aria-modal="true" aria-label={home.hero.video}>
       <button type="button" aria-label={home.hero.videoClose} onClick={onClose} className="absolute inset-0 cursor-default bg-ink/75 backdrop-blur-sm" tabIndex={-1} />
       <div className="rise-in relative w-full max-w-5xl">
-        <div className="overflow-hidden rounded-frame border border-ink bg-ink shadow-lift">
-          <button ref={closeRef} type="button" onClick={onClose} aria-label={home.hero.videoClose} className="absolute right-3 top-3 z-10 grid h-10 w-10 place-items-center rounded-full bg-white text-ink shadow-float">
+        <div className="overflow-hidden rounded-frame border border-white/15 bg-ink shadow-lift">
+          <button ref={closeRef} type="button" onClick={onClose} aria-label={home.hero.videoClose} className="absolute right-3 top-3 z-10 grid h-10 w-10 place-items-center rounded-full bg-surface text-ink shadow-float">
             <Close size={20} />
           </button>
           <video className="block aspect-video w-full bg-ink" poster={asset(home.hero.videoPoster)} autoPlay muted controls playsInline preload="metadata">

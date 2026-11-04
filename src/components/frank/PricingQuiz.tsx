@@ -8,7 +8,6 @@ import { buildLead, submitLead } from "@/lib/leads";
 import { Btn } from "./Btn";
 import { FrankAvatar } from "./FrankAvatar";
 import { Check, Sparkle } from "./Icons";
-import { Sphere } from "./Sphere";
 
 type Step = 1 | 2 | 3 | 4;
 type Status = "idle" | "sending" | "sent" | "mailto" | "error";
@@ -35,7 +34,7 @@ function StepIndicator({ step }: { step: Step }) {
             {i > 0 && <span className="text-muted" aria-hidden="true">›</span>}
             <span className={`flex items-center gap-1.5 ${current ? "font-semibold text-ink" : done ? "text-ink" : "text-muted"}`}>
               {done && (
-                <span className="check-pop grid h-4 w-4 place-items-center rounded-full bg-ink text-white">
+                <span className="check-pop grid h-4 w-4 place-items-center rounded-full bg-ink text-page">
                   <Check size={10} />
                 </span>
               )}
@@ -58,7 +57,7 @@ function Tiles({ name, options, value, onPick }: { name: string; options: readon
       {options.map((o) => {
         const selected = value === o;
         return (
-          <button key={o} type="button" role="radio" aria-checked={selected} onClick={() => onPick(o)} className={`press min-h-[56px] rounded-control border border-ink px-3 py-3 text-center text-[15px] font-medium leading-snug transition-[background-color,transform,box-shadow] duration-150 md:min-h-[100px] ${selected ? "bg-panel text-ink shadow-[inset_0_0_0_1px_#0C0C0B]" : "bg-white text-ink hover:-translate-y-0.5 hover:bg-soft"}`}>
+          <button key={o} type="button" role="radio" aria-checked={selected} onClick={() => onPick(o)} className={`press min-h-[56px] rounded-control border border-white/15 px-3 py-3 text-center text-[15px] font-medium leading-snug transition-[background-color,transform,box-shadow] duration-150 md:min-h-[100px] ${selected ? "bg-panel text-ink shadow-[inset_0_0_0_1px_#0C0C0B]" : "bg-surface text-ink hover:-translate-y-0.5 hover:bg-soft"}`}>
             {o}
           </button>
         );
@@ -208,7 +207,7 @@ export function PricingQuiz() {
             {GOALS.map((g) => {
               const checked = goals.includes(g);
               return (
-                <label key={g} className={`flex min-h-[52px] cursor-pointer items-center gap-3 rounded-control border px-4 py-3 text-[15px] font-medium transition-colors ${checked ? "border-ink bg-panel text-ink" : "border-ink bg-white text-ink hover:bg-soft"}`}>
+                <label key={g} className={`flex min-h-[52px] cursor-pointer items-center gap-3 rounded-control border px-4 py-3 text-[15px] font-medium transition-colors ${checked ? "border-white/15 bg-panel text-ink" : "border-white/15 bg-surface text-ink hover:bg-soft"}`}>
                   <input type="checkbox" className="checkbox" checked={checked} onChange={() => toggleGoal(g)} />
                   {g}
                 </label>
@@ -296,10 +295,9 @@ export function PricingCard() {
   return (
     <div id="quote" className="framed grid overflow-hidden lg:grid-cols-2">
       <div className="relative overflow-hidden px-6 py-10 md:px-12 md:py-14">
-        <Sphere size={220} tint={1} outline className="pointer-events-none absolute -bottom-20 -left-16 opacity-[0.07]" bob={false} rotate={-18} />
         <h1 className="text-h1 text-ink">
           {t.left.h1Light}
-          <span className="font-semibold">{t.left.h1Bold}</span>
+          <span className="dim">{t.left.h1Bold}</span>
         </h1>
         <p className="mt-5 text-sub text-ink-2">{t.left.sub}</p>
         <ul className="mt-8 flex flex-col gap-3">
@@ -312,16 +310,13 @@ export function PricingCard() {
         </ul>
         <div className="relative mt-12 flex items-center gap-4 lg:mt-24">
           <div className="flex -space-x-2" aria-hidden="true">
-            <Sphere size={34} tint={4} mark bob={false} rotate={-10} />
-            <Sphere size={34} tint={2} bob={false} rotate={14} />
-            <Sphere size={34} tint={1} mark bob={false} rotate={-4} />
           </div>
           <p className="text-[17px] font-semibold text-ink">{t.left.badge}</p>
         </div>
       </div>
-      <div className="bg-soft px-5 py-8 md:px-10 md:py-12 lg:border-l lg:border-ink">
+      <div className="bg-soft px-5 py-8 md:px-10 md:py-12 lg:border-l lg:border-white/15">
         <p className="text-[15px] font-medium text-ink">{t.right.heading}</p>
-        <div className="mt-4 rounded-card bg-white p-5 shadow-lift md:p-7">
+        <div className="mt-4 rounded-card bg-surface p-5 shadow-lift md:p-7">
           <PricingQuiz />
         </div>
       </div>

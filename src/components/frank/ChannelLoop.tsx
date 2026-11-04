@@ -41,11 +41,11 @@ export function ChannelLoop() {
       <Container>
         <div ref={ref} className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-16">
           <Reveal>
-            <p className="text-eyebrow text-brand-deep">{d.eyebrow}</p>
-            <h2 className="mt-3 text-statement font-semibold text-ink">
+            <p className="mono-label text-brand-deep">{d.eyebrow}</p>
+            <h2 className="mt-3 text-statement text-ink">
               {d.h2Light}
               <br className="hidden md:block" />
-              <span className="text-muted">{d.h2Bold}</span>
+              <span className="dim">{d.h2Bold}</span>
             </h2>
             <p className="mt-6 max-w-lead text-sub text-ink-2">{d.sub}</p>
           </Reveal>
@@ -54,8 +54,8 @@ export function ChannelLoop() {
             <div className={`loop-card ${active ? "is-live" : ""}`} data-active={active}>
               <div className="flex items-center justify-between gap-4 px-6 pt-5 text-[11.5px] font-medium uppercase tracking-[0.14em] text-muted">
                 <span>{c.label}</span>
-                <span className="flex items-center gap-2 text-[#1B7F4E]">
-                  <span className="live-dot h-1.5 w-1.5 rounded-full bg-[#2BB673] text-[#2BB673]" />
+                <span className="flex items-center gap-2 text-lime">
+                  <span className="live-dot h-1.5 w-1.5 rounded-full bg-lime text-lime" />
                   {c.status}
                 </span>
               </div>
@@ -102,7 +102,7 @@ export function ChannelLoop() {
                   {/* Output */}
                   <div className="loop-at loop-out" style={at(out.x, out.y)}>
                     <span className="loop-out-ping" aria-hidden="true" />
-                    <span className="grid h-9 w-9 flex-none place-items-center rounded-full bg-[#2BB673] text-white">
+                    <span className="grid h-9 w-9 flex-none place-items-center rounded-full bg-lime text-white">
                       <Calendar size={16} />
                     </span>
                     <span className="whitespace-nowrap text-[15px] font-semibold text-ink">{c.out}</span>
@@ -116,7 +116,7 @@ export function ChannelLoop() {
             <ol className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-2 text-[12px] font-medium uppercase tracking-[0.1em] text-muted" aria-label="The steps">
               {d.steps.map((s, i) => (
                 <li key={s.key} className="flex items-center gap-2">
-                  <span className="rounded-pill border border-line bg-white px-3 py-1 text-ink">{s.name}</span>
+                  <span className="rounded-pill border border-line bg-white/[0.04] px-3 py-1 text-ink">{s.name}</span>
                   {i < d.steps.length - 1 && <span aria-hidden="true">→</span>}
                 </li>
               ))}

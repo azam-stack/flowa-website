@@ -4,7 +4,6 @@ import { WhoFrankHelps } from "@/components/frank/WhoFrankHelps";
 import { Check } from "@/components/frank/Icons";
 import { PageHero } from "@/components/frank/PageHero";
 import { Section } from "@/components/frank/SectionHeading";
-import { Sphere } from "@/components/frank/Sphere";
 import { Reveal } from "@/components/Reveal";
 import { aboutPage as t } from "@/content/frank/pages";
 import { asset } from "@/lib/asset";
@@ -26,7 +25,7 @@ export function AboutPage() {
               <p className="text-eyebrow text-brand-deep">{t.story.eyebrow}</p>
               <h2 className="mt-3 text-h2 text-ink">
                 {t.story.h2Light}
-                <span className="font-semibold">{t.story.h2Bold}</span>
+                <span className="dim">{t.story.h2Bold}</span>
               </h2>
               <div className="mt-6 flex max-w-[620px] flex-col gap-4">
                 {t.story.paragraphs.map((para) => (
@@ -40,8 +39,8 @@ export function AboutPage() {
               <span className="absolute bottom-6 left-[19px] top-6 w-px bg-ink/15" aria-hidden="true" />
               {t.story.timeline.map((s, i) => (
                 <li key={s.title} className="relative flex gap-4">
-                  <span className={`relative z-[1] grid h-10 w-10 flex-none place-items-center rounded-full border border-ink text-[13px] font-semibold ${i === t.story.timeline.length - 1 ? "bg-ink text-white" : "bg-white text-ink"}`}>{i + 1}</span>
-                  <div className={`flex-1 rounded-card border p-5 ${i === t.story.timeline.length - 1 ? "border-ink bg-white shadow-lift" : "border-line bg-white"}`}>
+                  <span className={`relative z-[1] grid h-10 w-10 flex-none place-items-center rounded-full border border-white/15 text-[13px] font-semibold ${i === t.story.timeline.length - 1 ? "bg-ink text-page" : "bg-surface text-ink"}`}>{i + 1}</span>
+                  <div className={`flex-1 rounded-card border p-5 ${i === t.story.timeline.length - 1 ? "border-white/15 bg-surface shadow-lift" : "border-line bg-surface"}`}>
                     <p className="text-[12px] font-semibold uppercase tracking-[0.08em] text-brand-deep">{s.label}</p>
                     <h3 className="mt-1 text-[18px] font-semibold text-ink">{s.title}</h3>
                     <p className="mt-1 text-[15px] text-ink-2">{s.body}</p>
@@ -72,7 +71,7 @@ export function AboutPage() {
                     <ul className="mt-4 flex flex-col gap-2">
                       {p.owns.map((o) => (
                         <li key={o} className="flex items-center gap-2.5 text-body text-ink-2">
-                          <span className="grid h-5 w-5 flex-none place-items-center rounded-full bg-brand text-ink">
+                          <span className="grid h-5 w-5 flex-none place-items-center rounded-full bg-brand text-white">
                             <Check size={12} />
                           </span>
                           {o}
@@ -86,7 +85,6 @@ export function AboutPage() {
           </Reveal>
 
           <Reveal delay={80} className="relative mt-12 md:mt-16">
-            <Sphere size={72} tint={1} mark className="absolute -right-3 -top-8 hidden md:block" rotate={14} />
             <figure className="framed px-7 py-10 md:px-12 md:py-14">
               <blockquote className="max-w-3xl text-[24px] font-light leading-snug text-ink md:text-[30px]">“{t.quote}”</blockquote>
               <figcaption className="mt-6 text-[15px] text-ink-2">
