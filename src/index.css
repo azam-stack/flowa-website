@@ -470,6 +470,85 @@
   .mj-held { opacity: 0; transform: scale(0.8); transition: opacity 360ms var(--ease-out) 900ms, transform 360ms var(--ease-out) 900ms; }
   .mj-held.is-on { opacity: 1; transform: none; }
 
+  /* "From signal to meeting": the scene. A fixed 1120×560 stage scaled to fit; elements move with real transforms per step. */
+  .ms-frame { position: relative; width: 100%; max-width: 1120px; margin-inline: auto; overflow: hidden; border-radius: 24px; border: 1px solid var(--line); background: linear-gradient(180deg, #faf9f6 0%, #f3f1ec 100%); box-shadow: 0 1px 0 rgba(14,11,9,0.03), 0 30px 80px rgba(14,11,9,0.08); }
+  .ms { position: absolute; left: 0; top: 0; transform-origin: top left; --e: cubic-bezier(0.22, 1, 0.36, 1); }
+  .ms-glow { position: absolute; right: -120px; bottom: -160px; width: 520px; height: 520px; border-radius: 999px; background: radial-gradient(circle, rgba(232,81,26,0.22) 0%, rgba(232,81,26,0) 65%); pointer-events: none; }
+  .ms-card { position: absolute; display: flex; flex-direction: column; border-radius: 18px; background: #fff; border: 1px solid var(--line); box-shadow: 0 1px 0 rgba(14,11,9,0.03), 0 24px 50px rgba(14,11,9,0.12); padding: 16px 18px; transition: transform 900ms var(--e), opacity 500ms var(--e), box-shadow 500ms var(--e); will-change: transform; }
+
+  /* 0 · market: 11×9 dots at the left */
+  .ms-market { position: absolute; left: 60px; top: 130px; width: 300px; display: grid; grid-template-columns: repeat(11, 1fr); gap: 10px; transition: opacity 600ms var(--e), transform 900ms var(--e); }
+  .ms-dot { display: block; aspect-ratio: 1; border-radius: 999px; background: rgba(14,11,9,0.22); transform: scale(0.75); transition: background 500ms, transform 500ms; }
+  .ms-dot.is-hot { background: var(--brand); transform: scale(1.1); }
+  .ms.is-live[data-step="0"] .ms-dot.is-hot { animation: mj-hot 2.4s ease-in-out infinite; animation-delay: calc(var(--i) * 23ms); }
+  .ms[data-step="1"] .ms-market, .ms[data-step="2"] .ms-market, .ms[data-step="3"] .ms-market { opacity: 0.35; transform: scale(0.94); }
+  .ms-cap { position: absolute; transition: opacity 400ms; }
+  .ms-cap-market { left: 60px; top: 400px; }
+  .ms:not([data-step="0"]) .ms-cap-market { opacity: 0; }
+
+  /* 1 · the one: rises out of the field and settles centre-left */
+  .ms-person { left: 400px; top: 180px; width: 290px; transform: translate(-200px, 60px) scale(0.5); opacity: 0; }
+  .ms[data-step="1"] .ms-person, .ms[data-step="2"] .ms-person, .ms[data-step="3"] .ms-person { transform: none; opacity: 1; }
+  .ms[data-step="2"] .ms-person, .ms[data-step="3"] .ms-person { transform: scale(0.96); box-shadow: 0 12px 30px rgba(14,11,9,0.08); }
+  .ms-approved { opacity: 0; transition: opacity 400ms var(--e) 1200ms; }
+  .ms[data-step="1"] .ms-approved, .ms[data-step="2"] .ms-approved, .ms[data-step="3"] .ms-approved { opacity: 1; }
+
+  /* 2 · the message: travels from the person card to the channels */
+  .ms-msg { left: 430px; top: 220px; width: 270px; transform: scale(0.5); opacity: 0; transition-duration: 1100ms; border-radius: 16px 16px 4px 16px; }
+  .ms[data-step="2"] .ms-msg { transform: translate(340px, -150px); opacity: 1; }
+  .ms[data-step="3"] .ms-msg { transform: translate(340px, -150px) scale(0.96); opacity: 0.45; }
+
+  /* 2 · the channels: three pills, LinkedIn is the one that answers */
+  .ms-channels { position: absolute; left: 770px; top: 170px; width: 230px; display: flex; flex-direction: column; gap: 10px; opacity: 0.45; transform: translateX(30px); transition: opacity 600ms var(--e), transform 900ms var(--e); }
+  .ms[data-step="2"] .ms-channels, .ms[data-step="3"] .ms-channels { opacity: 1; transform: none; }
+  .ms-ch { position: relative; display: flex; align-items: center; gap: 10px; border-radius: 14px; background: #fff; border: 1px solid var(--line); padding: 9px 12px; box-shadow: 0 8px 20px rgba(14,11,9,0.06); transition: box-shadow 400ms, border-color 400ms, transform 600ms var(--e); }
+  .ms-sent { opacity: 0; transition: opacity 300ms; }
+  .ms[data-step="2"] .ms-ch-phone { transition-delay: 900ms; }
+  .ms[data-step="2"] .ms-ch-email { transition-delay: 1300ms; }
+  .ms[data-step="2"] .ms-ch-linkedin { transition-delay: 1700ms; }
+  .ms[data-step="2"] .ms-ch .ms-sent, .ms[data-step="3"] .ms-ch .ms-sent { opacity: 1; }
+  .ms[data-step="2"] .ms-ch-phone .ms-sent { transition-delay: 1000ms; }
+  .ms[data-step="2"] .ms-ch-email .ms-sent { transition-delay: 1400ms; }
+  .ms[data-step="2"] .ms-ch-linkedin .ms-sent { transition-delay: 1800ms; }
+  .ms[data-step="2"] .ms-ch-linkedin, .ms[data-step="3"] .ms-ch-linkedin { border-color: var(--brand); box-shadow: 0 0 0 3px rgba(232,81,26,0.18), 0 12px 28px rgba(232,81,26,0.18); transform: translateX(-8px); }
+
+  /* 2→3 · the reply: slides back from LinkedIn toward the person */
+  .ms-reply { position: absolute; left: 560px; top: 335px; display: flex; align-items: flex-end; gap: 8px; opacity: 0; transform: translate(60px, -20px) scale(0.7); transition: transform 900ms var(--e), opacity 400ms var(--e); }
+  .ms[data-step="2"] .ms-reply { opacity: 1; transform: none; transition-delay: 2100ms; }
+  .ms[data-step="3"] .ms-reply { opacity: 1; transform: translate(-40px, -30px) scale(0.9); }
+
+  /* 3 · the meeting: drops in at the right and turns Held */
+  .ms-meeting { left: 720px; top: 390px; width: 330px; transform: translateY(-80px) scale(0.9); opacity: 0; }
+  .ms[data-step="3"] .ms-meeting { transform: none; opacity: 1; }
+  .ms-held { opacity: 0; transform: scale(0.7); transition: opacity 360ms var(--e), transform 360ms var(--e); }
+  .ms[data-step="3"] .ms-held { opacity: 1; transform: none; transition-delay: 1100ms; }
+
+  /* the rail */
+  .ms-rail { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .ms-rail-base { fill: none; stroke: rgba(14,11,9,0.12); stroke-width: 1.5; stroke-dasharray: 0.012 0.012; }
+  .ms-rail-pulse { fill: none; stroke: var(--brand); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 0.06 2; stroke-dashoffset: 0.06; }
+  .ms.is-live .ms-rail-pulse { animation: ms-pulse 3s linear infinite; }
+  @keyframes ms-pulse { 0% { stroke-dashoffset: 0.06; } 70%, 100% { stroke-dashoffset: -1; } }
+
+  /* scrubber */
+  .ms-progress { animation: ms-progress var(--d, 3s) linear both; }
+  @keyframes ms-progress { from { width: 0; } to { width: 100%; } }
+
+  /* mobile stage: 520×740, stacked */
+  .ms.is-m .ms-glow { right: -200px; bottom: -220px; }
+  .ms.is-m .ms-rail { display: none; }
+  .ms.is-m .ms-market { left: 30px; top: 40px; width: 220px; gap: 7px; }
+  .ms.is-m .ms-cap-market { left: 30px; top: 230px; }
+  .ms.is-m .ms-person { left: 270px; top: 50px; width: 220px; transform: translate(-160px, 40px) scale(0.5); }
+  .ms.is-m[data-step="1"] .ms-person, .ms.is-m[data-step="2"] .ms-person, .ms.is-m[data-step="3"] .ms-person { transform: none; }
+  .ms.is-m .ms-msg { left: 280px; top: 110px; width: 210px; }
+  .ms.is-m[data-step="2"] .ms-msg, .ms.is-m[data-step="3"] .ms-msg { transform: translate(0, 210px); }
+  .ms.is-m .ms-channels { left: 30px; top: 320px; width: 230px; transform: translateY(30px); }
+  .ms.is-m[data-step="2"] .ms-channels, .ms.is-m[data-step="3"] .ms-channels { transform: none; }
+  .ms.is-m .ms-reply { left: 270px; top: 460px; }
+  .ms.is-m[data-step="3"] .ms-reply { transform: translate(0, -20px) scale(0.9); }
+  .ms.is-m .ms-meeting { left: 30px; top: 560px; width: 460px; }
+
   /* Accordion body (the /frank "How Frank works" steps). */
   .acc-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 400ms var(--ease-out); }
   .acc-body[data-open="true"] { grid-template-rows: 1fr; }
@@ -522,7 +601,8 @@
   .fm-scene, .fm-row, .fm-fade, .fm-caret, .fm-progress::after, .fm-send > span, .fm-approve { animation: none !important; }
   .fm-body { grid-template-rows: 1fr !important; }
   .meeting-held { opacity: 1 !important; transform: none !important; transition: none !important; }
-  .mj-rail-pulse, .mj-dot, .mj-ch, .mj-sent { animation: none !important; }
+  .mj-rail-pulse, .mj-dot, .mj-ch, .mj-sent, .ms-rail-pulse, .ms-dot, .ms-progress { animation: none !important; }
+  .ms-card, .ms-channels, .ms-reply, .ms-held, .ms-approved, .ms-market, .ms-sent, .ms-ch { transition: none !important; }
   .mj-station, .mj-ch, .mj-reply, .mj-held, .mj-ch .mj-sent { opacity: 1 !important; transform: none !important; transition: none !important; }
   .draw-line { stroke-dashoffset: 0 !important; transition: none !important; }
   .fill-area { opacity: 0.14 !important; transition: none !important; }
