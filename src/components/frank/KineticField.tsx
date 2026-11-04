@@ -7,7 +7,10 @@ import { useInView, useReducedMotion } from "@/hooks/useInView";
  * something moving fast. Drawn additively on a 2D canvas so overlaps glow.
  * Drifts slowly while on screen; a single still frame under reduced motion.
  */
-export function KineticField({ className = "", strands = 140, pinch = 0.55, color = "238, 80, 1", intensity = 1, glow = true }: { className?: string; strands?: number; pinch?: number; /** "r, g, b" */ color?: string; intensity?: number; glow?: boolean }) {
+/** The Flowa "o": the logo loop, in a 0..360 box. Strands are pressed into this silhouette as they cross the centre. */
+const LOGO_PATH = "M40 36 C58 12 84 2 132 26 C176 49 212 68 236 65 C256 62 274 61 304 63 C336 66 348 96 348 134 C344 200 298 298 240 292 C206 287 170 302 128 313 C92 322 64 320 50 304 C36 288 44 256 48 232 C52 210 52 196 48 186 C30 128 14 92 22 66 C25 54 31 46 40 36 Z";
+
+export function KineticField({ className = "", strands = 140, pinch = 0.55, color = "238, 80, 1", intensity = 1, glow = true, shape = "horizon", shapeSize = 0.62 }: { className?: string; strands?: number; pinch?: number; /** "r, g, b" */ color?: string; intensity?: number; glow?: boolean; /** "horizon": strands pinch to a line. "logo": strands are pressed into the Flowa "o" at the centre. */ shape?: "horizon" | "logo"; /** Logo height as a fraction of the field height. */ shapeSize?: number }) {
   const ref = useRef<HTMLCanvasElement>(null);
   const { ref: wrap, active } = useInView<HTMLDivElement>({ threshold: 0.05 });
   const reduced = useReducedMotion();
@@ -22,6 +25,10 @@ export function KineticField({ className = "", strands = 140, pinch = 0.55, colo
     let h = 0;
     let dpr = 1;
     let raf = 0;
+    // Per-column [top, bottom] of the logo silhouette, or null where there is none.
+    let band: Array<[number, number] | null> = [];
+    let bandL = 0;
+    let bandR = 0;
     const seeds = Array.from({ length: strands }, (_, i) => ({
       y: (i + 0.5) / strands, // base vertical position 0..1
       amp: 0.02 + Math.random() * 0.08,
@@ -39,6 +46,53 @@ export function KineticField({ className = "", strands = 140, pinch = 0.55, colo
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.round(w * dpr);
       canvas.height = Math.round(h * dpr);
+      band = [];
+      if (shape === "logo") {
+        const size = h * shapeSize;
+        const scale = size / 360;
+        const ox = w / 2 - (180 * scale);
+        const oy = h / 2 - (170 * scale);
+        const off = document.createElement("canvas");
+        off.width = w;
+        off.height = h;
+        const o = off.getContext("2d", { willReadFrequently: true });
+        if (o) {
+          o.setTransform(scale, 0, 0, scale, ox, oy);
+          o.fillStyle = "#000";
+          o.fill(new Path2D(LOGO_PATH));
+          const img = o.getImageData(0, 0, w, h).data;
+          for (let x = 0; x < w; x++) {
+            let top = -1;
+            let bottom = -1;
+            for (let y = 0; y < h; y++) {
+              if (img[(y * w + x) * 4 + 3] > 40) {
+                if (top < 0) top = y;
+                bottom = y;
+              }
+            }
+            band[x] = top >= 0 ? [top, bottom] : null;
+          }
+          bandL = band.findIndex((b) => b);
+          bandR = band.length - 1 - [...band].reverse().findIndex((b) => b);
+          // Soften the silhouette's edges along x so strands bend instead of kinking.
+          const R = 14;
+          const smooth: typeof band = band.map((_, x) => {
+            let t = 0;
+            let bo = 0;
+            let n = 0;
+            for (let k = -R; k <= R; k++) {
+              const b = band[x + k];
+              if (b) {
+                t += b[0];
+                bo += b[1];
+                n++;
+              }
+            }
+            return n > 0 && band[x] ? [t / n, bo / n] : null;
+          });
+          band = smooth;
+        }
+      }
     };
 
     const draw = (t: number) => {
@@ -57,7 +111,20 @@ export function KineticField({ className = "", strands = 140, pinch = 0.55, colo
           const bell = Math.exp(-Math.pow((u - 0.5) / 0.22, 2));
           const spread = 1 - pinch * bell;
           const wave = Math.sin(u * Math.PI * 2 * s.freq + s.phase + t * s.speed) * s.amp;
-          const y = cy + ((s.y - 0.5) * spread + wave * spread) * h;
+          let y = cy + ((s.y - 0.5) * spread + wave * spread) * h;
+          if (shape === "logo") {
+            const b = band[Math.min(w - 1, Math.max(0, Math.round(x)))];
+            if (b) {
+              // inside the logo's columns: the strand's slot inside the silhouette. The weight stays ~1 across the
+              // body of the shape and eases to 0 at its left and right tips, so there are no walls at the edges.
+              const ty = b[0] + s.y * (b[1] - b[0]) + wave * (b[1] - b[0]) * 0.3;
+              const cxl = (bandL + bandR) / 2;
+              const half = Math.max(1, (bandR - bandL) / 2);
+              const d = Math.min(1, Math.abs(x - cxl) / half);
+              const k = 1 - d * d * d * d;
+              y = y + (ty - y) * k;
+            }
+          }
           if (k === 0) ctx.moveTo(x, y);
           else ctx.lineTo(x, y);
         }
@@ -102,7 +169,7 @@ export function KineticField({ className = "", strands = 140, pinch = 0.55, colo
       cancelAnimationFrame(raf);
       ro.disconnect();
     };
-  }, [active, reduced, strands, pinch, color, intensity, glow, wrap]);
+  }, [active, reduced, strands, pinch, color, intensity, glow, shape, shapeSize, wrap]);
 
   return (
     <div ref={wrap} className={`pointer-events-none absolute inset-0 ${className}`} aria-hidden="true">
