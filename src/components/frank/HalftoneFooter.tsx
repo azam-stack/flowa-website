@@ -3,20 +3,10 @@ import { Link } from "react-router-dom";
 import { Logo } from "@/components/Logo";
 import { SmartLink } from "@/components/SmartLink";
 import { footer } from "@/content/frank/chrome";
-import { HalftoneField } from "./HalftoneField";
+import { HalftoneField, paintWordmark } from "./HalftoneField";
 export function HalftoneFooter({ wordmark = "flowa", dotGap = 6, radius = 90, crop = 0.3, grain = 0.5 }: { wordmark?: string; dotGap?: number; radius?: number; crop?: number; grain?: number }) {
   const rootRef = useRef<HTMLElement>(null);
-  const paint = (m: CanvasRenderingContext2D, w: number, h: number) => {
-    const family = '"Inter Tight Variable", "Inter Tight", "Inter", "Helvetica Neue", Arial, sans-serif';
-    m.font = `800 100px ${family}`;
-    const measured = m.measureText(wordmark).width;
-    const fit = measured > 0 ? ((w * 0.96) / measured) * 100 : 0;
-    m.font = `800 ${fit}px ${family}`;
-    const box = m.measureText(wordmark);
-    const cap = box.actualBoundingBoxAscent || fit * 0.72;
-    m.textBaseline = "alphabetic";
-    m.fillText(wordmark, (w - box.width) / 2, h + cap * Math.max(0, Math.min(0.6, crop)));
-  };
+  const paint = (m: CanvasRenderingContext2D, w: number, h: number) => paintWordmark(m, w, h, wordmark, crop, 0.96);
   return (
     <footer ref={rootRef} className="relative isolate h-[620px] overflow-hidden border-t border-line bg-page text-ink md:h-[760px]">
       <HalftoneField paint={paint} ink={[252, 255, 255]} warm={[238, 80, 1]} dotGap={dotGap} radius={radius} grain={grain} listenOn={rootRef} />

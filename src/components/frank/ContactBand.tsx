@@ -16,9 +16,8 @@ import { ShortForm } from "./ShortForm";
  */
 export function ContactBand({ h2 = home.contact.h2, sub = home.contact.sub, pose, idPrefix = "contact", id = "contact", as: Heading = "h2", calendar }: { h2?: string; sub?: string; pose?: FrankPose; idPrefix?: string; id?: string; as?: "h1" | "h2"; calendar?: { cta: string; note: string; orForm: string } }) {
   return (
-    <section id={id} className="contact-dark relative overflow-hidden bg-brand py-section-m text-white lg:py-section" aria-label={h2}>
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-brand/0 via-brand/0 to-[#c84200]/60" aria-hidden="true" />
-            <Container className="relative">
+    <section id={id} className="contact-dark wall overflow-hidden py-section-m text-white lg:py-section" aria-label={h2}>
+                  <Container className="relative">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <Reveal>
             {pose && <FrankAvatar pose={pose} className="mb-8 h-44 w-44 rounded-frame border border-white/30" />}
@@ -36,7 +35,7 @@ export function ContactBand({ h2 = home.contact.h2, sub = home.contact.sub, pose
             <ul className="mt-8 flex flex-col gap-3 text-[15px] text-white">
               {home.contact.points.map((pt) => (
                 <li key={pt} className="flex items-center gap-3">
-                  <span className="grid h-6 w-6 flex-none place-items-center rounded-full bg-white text-brand">
+                  <span className="grid h-6 w-6 flex-none place-items-center rounded-full bg-lime text-page">
                     <Check size={13} />
                   </span>
                   {pt}

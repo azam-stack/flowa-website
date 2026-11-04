@@ -16,7 +16,7 @@ export default {
         surface: "#0C0C0B",
         soft: "#131312",
         panel: { DEFAULT: "rgba(238,80,1,0.12)", strong: "rgba(238,80,1,0.24)" },
-        brand: { DEFAULT: "#EE5001", strong: "#FF6A24", deep: "#FF8A4C" },
+        brand: { DEFAULT: "#E8511A", strong: "#F26A2E", deep: "#FF9A5C", dark: "#C93E0C" },
         lime: "#C8FD03",
         ink: { DEFAULT: "#FCFFFF", 2: "#D7D5D0" },
         muted: "#8C8984",
