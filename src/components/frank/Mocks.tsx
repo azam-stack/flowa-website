@@ -16,7 +16,7 @@ import { Check, Mail, Calendar, Target, Search } from "./Icons";
  */
 export function DarkMock({ title, count, children, className = "" }: { title?: string; count?: string; children: ReactNode; className?: string }) {
   return (
-    <div className={`relative flex min-w-0 flex-col gap-4 overflow-hidden rounded-[20px] p-5 text-white md:p-6 ${className}`} aria-hidden="true" style={{ backgroundColor: "#0C0C0B" }}>
+    <div className={`relative flex min-w-0 flex-col gap-4 overflow-hidden rounded-[20px] p-5 text-white md:p-6 ${className}`} aria-hidden="true" style={{ backgroundColor: "#1B0C06" }}>
       <img src={asset("images/backgrounds/silk-dark.webp")} alt="" loading="lazy" decoding="async" className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-90" />
       <span className="pointer-events-none absolute -left-16 -top-20 h-64 w-64 rounded-full bg-brand/35 blur-3xl" />
       <span className="pointer-events-none absolute -bottom-24 right-0 h-56 w-56 rounded-full bg-coral/20 blur-3xl" />

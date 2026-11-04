@@ -48,7 +48,7 @@ export function MeetingValue() {
                 {t.rateLabel}
               </label>
               <div className="flex items-center gap-4">
-                <input id={`${uid}-rate`} type="range" min={1} max={5} step={1} value={rate} onChange={(e) => setRate(Number(e.target.value))} className="w-full accent-[#0C0C0B]" />
+                <input id={`${uid}-rate`} type="range" min={1} max={5} step={1} value={rate} onChange={(e) => setRate(Number(e.target.value))} className="w-full accent-[#1B0C06]" />
                 <span className="w-14 flex-none text-right text-[17px] font-semibold text-ink">{rate} / 10</span>
               </div>
             </div>

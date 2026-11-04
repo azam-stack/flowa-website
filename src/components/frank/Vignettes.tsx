@@ -15,7 +15,7 @@ function Panel({ tint, children, className = "" }: { tint: Tint; children: React
   return (
     <div className={`relative grid aspect-[4/3] w-full place-items-center overflow-hidden rounded-card bg-soft ${className}`} aria-hidden="true">
       <FlowaO tint={tint} className="absolute -right-6 -top-8 h-36 w-36 rotate-12 opacity-90" />
-      <FlowaO outline stroke="#0C0C0B" className="absolute -bottom-8 -left-6 h-24 w-24 -rotate-12 opacity-10" />
+      <FlowaO outline stroke="#1B0C06" className="absolute -bottom-8 -left-6 h-24 w-24 -rotate-12 opacity-10" />
       <div className="relative w-[78%]">{children}</div>
     </div>
   );

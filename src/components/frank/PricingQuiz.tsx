@@ -57,7 +57,7 @@ function Tiles({ name, options, value, onPick }: { name: string; options: readon
       {options.map((o) => {
         const selected = value === o;
         return (
-          <button key={o} type="button" role="radio" aria-checked={selected} onClick={() => onPick(o)} className={`press min-h-[56px] rounded-control border border-white/15 px-3 py-3 text-center text-[15px] font-medium leading-snug transition-[background-color,transform,box-shadow] duration-150 md:min-h-[100px] ${selected ? "bg-panel text-ink shadow-[inset_0_0_0_1px_#0C0C0B]" : "bg-surface text-ink hover:-translate-y-0.5 hover:bg-soft"}`}>
+          <button key={o} type="button" role="radio" aria-checked={selected} onClick={() => onPick(o)} className={`press min-h-[56px] rounded-control border border-white/15 px-3 py-3 text-center text-[15px] font-medium leading-snug transition-[background-color,transform,box-shadow] duration-150 md:min-h-[100px] ${selected ? "bg-panel text-ink shadow-[inset_0_0_0_1px_#1B0C06]" : "bg-surface text-ink hover:-translate-y-0.5 hover:bg-soft"}`}>
             {o}
           </button>
         );

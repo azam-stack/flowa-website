@@ -179,7 +179,7 @@ export function TabbedFeature() {
           <Sphere size={84} tint={1} mark className="absolute right-[6%] top-0 hidden lg:block xl:right-[14%]" duration={6.5} rotate={-12} />
         </div>
         <div ref={ref} className="framed mt-12 overflow-hidden md:mt-16" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocus={() => setPaused(true)} onBlur={() => setPaused(false)}>
-          <div className="relative overflow-hidden p-5 md:p-10" style={{ backgroundColor: "#0C0C0B" }}>
+          <div className="relative overflow-hidden p-5 md:p-10" style={{ backgroundColor: "#1B0C06" }}>
             <img src={asset("images/backgrounds/silk-dark.webp")} alt="" loading="lazy" decoding="async" className="pointer-events-none absolute inset-0 h-full w-full object-cover" />
             <span className="pointer-events-none absolute -left-20 -top-24 h-80 w-80 rounded-full bg-brand/40 blur-3xl" />
             <div key={`${active}-${round}`} className="swap-in relative grid min-w-0 gap-5 md:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] md:items-end" id={`${baseId}-panel-${active}`} role="tabpanel" aria-labelledby={`${baseId}-tab-${active}`}>

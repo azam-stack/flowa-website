@@ -12,15 +12,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        page: "#050505",
-        surface: "#0C0C0B",
-        soft: "#131312",
+        page: "#140804",
+        surface: "#1B0C06",
+        soft: "#22100A",
         panel: { DEFAULT: "rgba(238,80,1,0.12)", strong: "rgba(238,80,1,0.24)" },
         brand: { DEFAULT: "#E8511A", strong: "#F26A2E", deep: "#FF9A5C", dark: "#C93E0C" },
         lime: "#C8FD03",
         ink: { DEFAULT: "#FCFFFF", 2: "#D7D5D0" },
         muted: "#8C8984",
-        line: "rgba(252,255,255,0.10)",
+        line: "rgba(255,214,190,0.12)",
         coral: "#FF6A24",
         error: "#FF6B6B",
       },
