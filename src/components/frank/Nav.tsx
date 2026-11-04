@@ -101,7 +101,7 @@ export function Nav() {
               {nav.clientDashboard.label}
             </a>
           )}
-          <Btn href={nav.demo.href} size="sm" variant="outline" className="hidden lg:inline-flex" trackLabel="nav_book_demo">
+          <Btn href={nav.demo.href} size="sm" className="hidden lg:inline-flex" trackLabel="nav_book_demo">
             {nav.demo.label}
           </Btn>
           <button ref={burgerRef} type="button" onClick={() => setSheet(true)} aria-label={nav.menuOpen} aria-expanded={sheet} className="grid h-11 w-11 place-items-center rounded-control lg:hidden">

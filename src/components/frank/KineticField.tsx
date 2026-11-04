@@ -7,7 +7,7 @@ import { useInView, useReducedMotion } from "@/hooks/useInView";
  * something moving fast. Drawn additively on a 2D canvas so overlaps glow.
  * Drifts slowly while on screen; a single still frame under reduced motion.
  */
-export function KineticField({ className = "", strands = 140, pinch = 0.55 }: { className?: string; strands?: number; pinch?: number }) {
+export function KineticField({ className = "", strands = 140, pinch = 0.55, color = "238, 80, 1", intensity = 1, glow = true }: { className?: string; strands?: number; pinch?: number; /** "r, g, b" */ color?: string; intensity?: number; glow?: boolean }) {
   const ref = useRef<HTMLCanvasElement>(null);
   const { ref: wrap, active } = useInView<HTMLDivElement>({ threshold: 0.05 });
   const reduced = useReducedMotion();
@@ -63,18 +63,20 @@ export function KineticField({ className = "", strands = 140, pinch = 0.55 }: { 
         }
         // brighter near the centre band
         const nearCentre = 1 - Math.min(1, Math.abs(s.y - 0.5) * 2.2);
-        ctx.strokeStyle = `rgba(238, 80, 1, ${s.alpha * (0.5 + nearCentre)})`;
+        ctx.strokeStyle = `rgba(${color}, ${Math.min(1, s.alpha * intensity * (0.5 + nearCentre))})`;
         ctx.lineWidth = s.width;
         ctx.stroke();
       }
       // a soft core glow along the horizon
-      const g = ctx.createRadialGradient(w / 2, cy, 0, w / 2, cy, Math.max(w, h) * 0.45);
-      g.addColorStop(0, "rgba(238,80,1,0.22)");
-      g.addColorStop(0.5, "rgba(238,80,1,0.06)");
-      g.addColorStop(1, "rgba(238,80,1,0)");
-      ctx.globalCompositeOperation = "lighter";
-      ctx.fillStyle = g;
-      ctx.fillRect(0, 0, w, h);
+      if (glow) {
+        const g = ctx.createRadialGradient(w / 2, cy, 0, w / 2, cy, Math.max(w, h) * 0.45);
+        g.addColorStop(0, `rgba(${color},${0.22 * intensity})`);
+        g.addColorStop(0.5, `rgba(${color},${0.06 * intensity})`);
+        g.addColorStop(1, `rgba(${color},0)`);
+        ctx.globalCompositeOperation = "lighter";
+        ctx.fillStyle = g;
+        ctx.fillRect(0, 0, w, h);
+      }
       ctx.globalCompositeOperation = "source-over";
     };
 
@@ -100,7 +102,7 @@ export function KineticField({ className = "", strands = 140, pinch = 0.55 }: { 
       cancelAnimationFrame(raf);
       ro.disconnect();
     };
-  }, [active, reduced, strands, pinch, wrap]);
+  }, [active, reduced, strands, pinch, color, intensity, glow, wrap]);
 
   return (
     <div ref={wrap} className={`pointer-events-none absolute inset-0 ${className}`} aria-hidden="true">
