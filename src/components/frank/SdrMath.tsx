@@ -35,12 +35,12 @@ export function SdrMath() {
               ))}
             </ul>
           </div>
-          <div className="rounded-[20px] bg-brand p-7 text-white shadow-[0_30px_80px_rgba(238,80,1,0.25)] md:p-9" style={{ "--i": 1 } as CSSProperties}>
+          <div className="wall overflow-hidden rounded-[20px] p-7 text-white shadow-[0_30px_80px_rgba(232,81,26,0.25)] md:p-9" style={{ "--i": 1 } as CSSProperties}>
             <h3 className="text-[22px] font-semibold text-white">{m.right.title}</h3>
             <ul className="mt-6 divide-y divide-white/25">
               {m.right.rows.map((r) => (
                 <li key={r} className="flex gap-3 py-3 text-[16px] leading-snug text-white">
-                  <span className="mt-[2px] grid h-5 w-5 flex-none place-items-center rounded-full bg-white text-brand">
+                  <span className="mt-[2px] grid h-5 w-5 flex-none place-items-center rounded-full bg-lime text-page">
                     <Check size={11} />
                   </span>
                   {r}

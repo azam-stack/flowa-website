@@ -21,11 +21,12 @@
     --page-bg: #050505;
     --surface: #0c0c0b;
     --surface-soft: #131312;
-    --panel: rgba(238, 80, 1, 0.12);
-    --panel-strong: rgba(238, 80, 1, 0.24);
-    --brand: #ee5001;
-    --brand-strong: #ff6a24;
-    --brand-deep: #ff8a4c;
+    --panel: rgba(232, 81, 26, 0.12);
+    --panel-strong: rgba(232, 81, 26, 0.24);
+    --brand: #e8511a;
+    --brand-strong: #f26a2e;
+    --brand-deep: #ff9a5c;
+    --brand-dark: #c93e0c;
     --lime: #c8fd03;
     --ink: #fcffff;
     --ink-2: #d7d5d0;
@@ -147,7 +148,7 @@
   }
   .btn:hover { transform: translateY(-1px); }
   .btn:active { transform: translateY(0); }
-  .btn-primary { background: var(--brand); color: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), 0 0 0 1px rgba(238,80,1,0.5), 0 10px 30px rgba(238,80,1,0.25); }
+  .btn-primary { background: var(--brand); color: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,0.25), 0 0 0 1px rgba(232,81,26,0.5), 0 10px 30px rgba(232,81,26,0.25); }
   .btn-primary:hover { background: var(--brand-strong); }
   .btn-outline { background: rgba(252,255,255,0.03); color: var(--ink); border: 1px solid var(--line-strong); }
   .btn-outline:hover { background: rgba(252,255,255,0.08); border-color: rgba(252,255,255,0.35); }
@@ -415,7 +416,7 @@
 
   /* "How Frank works": the dark product window and its scenes. */
   .fm-window { position: relative; overflow: hidden; border-radius: 20px; background: #0a0a0a; border: 1px solid var(--line-strong); color: #fff; box-shadow: inset 0 1px 0 rgba(252,255,255,0.06), 0 30px 80px rgba(0,0,0,0.6); }
-  .fm-window::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 50% at 20% 0%, rgba(238,80,1,0.22), transparent 70%), radial-gradient(50% 40% at 100% 100%, rgba(238,80,1,0.1), transparent 70%); pointer-events: none; }
+  .fm-window::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 50% at 20% 0%, rgba(232,81,26,0.22), transparent 70%), radial-gradient(50% 40% at 100% 100%, rgba(232,81,26,0.1), transparent 70%); pointer-events: none; }
   .fm-window > * { position: relative; }
   .fm-card { border-radius: 14px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); padding: 16px 18px; }
   .fm-scene { animation: fm-scene 420ms var(--ease-out) both; }
@@ -458,6 +459,12 @@
     100% { transform: scale(1); }
   }
 
+  /* The tangerine wall: a deeper base, a warm light from the top-left, a soft dark fall-off at the edges and fine grain. */
+  .wall { position: relative; background: radial-gradient(120% 90% at 18% 0%, #f6803f 0%, rgba(246,128,63,0) 55%), radial-gradient(90% 70% at 85% 110%, #b83508 0%, rgba(184,53,8,0) 60%), linear-gradient(180deg, #ea5a22 0%, #d9470f 100%); }
+  .wall::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(80% 60% at 50% 50%, rgba(0,0,0,0) 40%, rgba(60,14,0,0.35) 100%); }
+  .wall::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.18; mix-blend-mode: overlay; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E"); }
+  .wall > * { position: relative; }
+
   /* --- Premium frame (Qronos grammar): hairline rails with crosshair ticks, hatched dividers. --- */
   .site-frame { position: relative; }
   .site-frame::before, .site-frame::after { content: ""; position: absolute; top: 0; bottom: 0; width: 1px; background: var(--line); pointer-events: none; z-index: 5; }
@@ -473,7 +480,7 @@
   /* Dark product panel: 1px hairline, soft inner top light, deep shadow. */
   .panel { background: linear-gradient(180deg, rgba(252,255,255,0.03), rgba(252,255,255,0.01)); border: 1px solid var(--line); border-radius: 20px; box-shadow: inset 0 1px 0 rgba(252,255,255,0.06), 0 30px 80px rgba(0,0,0,0.5); }
   .panel-soft { background: rgba(252,255,255,0.03); border: 1px solid var(--line); border-radius: 16px; }
-  .glow-orange { box-shadow: 0 0 0 1px rgba(238,80,1,0.4), 0 0 40px rgba(238,80,1,0.25); }
+  .glow-orange { box-shadow: 0 0 0 1px rgba(232,81,26,0.4), 0 0 40px rgba(232,81,26,0.25); }
   .mono-label { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
 }
 

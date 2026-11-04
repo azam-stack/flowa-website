@@ -279,3 +279,16 @@ export function paintLogo(ctx: CanvasRenderingContext2D, w: number, h: number, c
   ctx.fill(new Path2D(LOGO_PATH));
   ctx.restore();
 }
+
+/** Paint `word` across `widthFrac` of the field, hanging `crop` of its cap height below the bottom edge (0 = sitting on the edge). */
+export function paintWordmark(ctx: CanvasRenderingContext2D, w: number, h: number, word: string, crop = 0.3, widthFrac = 0.96) {
+  const family = '"Inter Tight Variable", "Inter Tight", "Inter", "Helvetica Neue", Arial, sans-serif';
+  ctx.font = `800 100px ${family}`;
+  const measured = ctx.measureText(word).width;
+  const fit = measured > 0 ? ((w * widthFrac) / measured) * 100 : 0;
+  ctx.font = `800 ${fit}px ${family}`;
+  const box = ctx.measureText(word);
+  const cap = box.actualBoundingBoxAscent || fit * 0.72;
+  ctx.textBaseline = "alphabetic";
+  ctx.fillText(word, (w - box.width) / 2, h + cap * Math.max(0, Math.min(0.6, crop)));
+}
