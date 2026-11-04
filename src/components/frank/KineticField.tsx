@@ -18,7 +18,7 @@ type Contour = { upper: Array<[number, number]>; lower: Array<[number, number]>;
  * lower run, both ordered left → right. `at` scales a point about the
  * field's centre.
  */
-function makeContour(w: number, h: number, size: number): Contour | null {
+function makeContour(w: number, h: number, size: number, maxWidth: number, offsetY: number): Contour | null {
   if (typeof document === "undefined") return null;
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -41,7 +41,7 @@ function makeContour(w: number, h: number, size: number): Contour | null {
     minY = Math.min(minY, y);
     maxY = Math.max(maxY, y);
   }
-  const s = size / (maxY - minY);
+  const s = Math.min(size / (maxY - minY), maxWidth / (maxX - minX));
   const cx = (minX + maxX) / 2;
   const cy = (minY + maxY) / 2;
   const pts: Array<[number, number]> = raw.map(([x, y]) => [(x - cx) * s, (y - cy) * s]);
@@ -66,10 +66,10 @@ function makeContour(w: number, h: number, size: number): Contour | null {
   const meanY = (arr: Array<[number, number]>) => arr.reduce((acc, p) => acc + p[1], 0) / arr.length;
   const upper = meanY(a) < meanY(b) ? a : b;
   const lower = upper === a ? b : a;
-  return { upper, lower, at: (p, scale) => [w / 2 + p[0] * scale, h / 2 + p[1] * scale] };
+  return { upper, lower, at: (p, scale) => [w / 2 + p[0] * scale, h / 2 + offsetY + p[1] * scale] };
 }
 
-export function KineticField({ className = "", strands = 140, pinch = 0.55, color = "238, 80, 1", intensity = 1, glow = true, shape = "horizon", shapeSize = 0.62 }: { className?: string; strands?: number; pinch?: number; /** "r, g, b" */ color?: string; intensity?: number; glow?: boolean; /** "horizon": strands pinch to a line. "logo": strands are pressed into the Flowa "o" at the centre. */ shape?: "horizon" | "logo"; /** Logo height as a fraction of the field height. */ shapeSize?: number }) {
+export function KineticField({ className = "", strands = 140, pinch = 0.55, color = "238, 80, 1", intensity = 1, glow = true, shape = "horizon", shapeSize = 0.62, shapeMaxWidth = 0.9, shapeOffsetY = 0 }: { className?: string; strands?: number; pinch?: number; /** "r, g, b" */ color?: string; intensity?: number; glow?: boolean; /** "horizon": strands pinch to a line. "logo": strands are pressed into the Flowa "o" at the centre. */ shape?: "horizon" | "logo"; /** Logo height as a fraction of the field height. */ shapeSize?: number; /** The logo never gets wider than this fraction of the field width (phones). */ shapeMaxWidth?: number; /** Vertical shift of the logo, as a fraction of the field height (positive = down). */ shapeOffsetY?: number }) {
   const ref = useRef<HTMLCanvasElement>(null);
   const { ref: wrap, active } = useInView<HTMLDivElement>({ threshold: 0.05 });
   const reduced = useReducedMotion();
@@ -107,7 +107,7 @@ export function KineticField({ className = "", strands = 140, pinch = 0.55, colo
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.round(w * dpr);
       canvas.height = Math.round(h * dpr);
-      contour = shape === "logo" ? makeContour(w, h, h * shapeSize) : null;
+      contour = shape === "logo" ? makeContour(w, h, h * shapeSize, w * shapeMaxWidth, h * shapeOffsetY) : null;
     };
 
     const draw = (t: number) => {
@@ -125,8 +125,10 @@ export function KineticField({ className = "", strands = 140, pinch = 0.55, colo
           const pts = upper ? contour.upper : contour.lower;
           const sc = s.scale * (1 + Math.sin(t * s.speed * 0.6 + s.phase) * 0.012);
           const yIn = cy + (s.y - 0.5) * h * 1.6;
-          const i0 = Math.floor(s.join * (pts.length - 1));
-          const i1 = Math.max(i0 + 2, Math.floor(s.leave * (pts.length - 1)));
+          // the window a strand covers drifts along the outline, so the whole ring looks like it is turning
+          const slide = ((t * s.speed * 0.05 + s.phase / (Math.PI * 2)) % 0.18 + 0.18) % 0.18;
+          const i0 = Math.floor(Math.min(0.3, s.join + slide) * (pts.length - 1));
+          const i1 = Math.max(i0 + 2, Math.floor(Math.max(0.7, s.leave - slide) * (pts.length - 1)));
           const first = contour.at(pts[i0], sc);
           const last = contour.at(pts[i1], sc);
           const wave = (u: number) => Math.sin(u * Math.PI * 2 * s.freq + s.phase + t * s.speed) * s.amp * h;
@@ -140,9 +142,21 @@ export function KineticField({ className = "", strands = 140, pinch = 0.55, colo
           const yOut = cy + (s.y - 0.5) * h * 1.6;
           ctx.bezierCurveTo(last[0] + (w - last[0]) * 0.25, last[1] + wave(0.65) * 0.3, last[0] + (w - last[0]) * 0.55, yOut + wave(0.8), w, yOut + wave(1));
           const nearOne = 1 - Math.min(1, Math.abs(s.scale - 1) / 0.35);
-          ctx.strokeStyle = `rgba(${color}, ${Math.min(1, s.alpha * intensity * (0.5 + nearOne * 0.7))})`;
+          const a = Math.min(1, s.alpha * intensity * (0.5 + nearOne * 0.7));
+          ctx.strokeStyle = `rgba(${color}, ${a})`;
           ctx.lineWidth = s.width * (0.7 + nearOne * 0.5);
           ctx.stroke();
+          // a short, brighter pulse of light running along the strand: the movement follows the "o" round
+          if (nearOne > 0.3) {
+            const dash = 90 + s.freq * 50;
+            const gap = 900 + s.amp * 6000;
+            ctx.setLineDash([dash, gap]);
+            ctx.lineDashOffset = -((t * (60 + s.speed * 90) + s.phase * 200) % (dash + gap));
+            ctx.strokeStyle = `rgba(255, 190, 120, ${Math.min(1, a * 1.6)})`;
+            ctx.lineWidth = s.width * (1 + nearOne * 0.8);
+            ctx.stroke();
+            ctx.setLineDash([]);
+          }
           continue;
         }
         for (let k = 0; k <= steps; k++) {
@@ -197,7 +211,7 @@ export function KineticField({ className = "", strands = 140, pinch = 0.55, colo
       cancelAnimationFrame(raf);
       ro.disconnect();
     };
-  }, [active, reduced, strands, pinch, color, intensity, glow, shape, shapeSize, wrap]);
+  }, [active, reduced, strands, pinch, color, intensity, glow, shape, shapeSize, shapeMaxWidth, shapeOffsetY, wrap]);
 
   return (
     <div ref={wrap} className={`pointer-events-none absolute inset-0 ${className}`} aria-hidden="true">

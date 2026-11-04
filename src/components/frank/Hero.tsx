@@ -14,7 +14,8 @@ export function Hero() {
   const h = home.hero;
   return (
     <section className="relative overflow-hidden" aria-label="Introduction">
-      <KineticField strands={220} intensity={0.85} shape="logo" shapeSize={0.68} />
+      <KineticField strands={220} intensity={0.85} shape="logo" shapeSize={0.66} shapeMaxWidth={0.92} shapeOffsetY={0.06} />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(48%_34%_at_50%_40%,rgba(5,5,5,0.42),rgba(5,5,5,0)_70%)]" aria-hidden="true" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-page" aria-hidden="true" />
       <Container>
         <div className="relative z-[2] mx-auto max-w-[960px] px-2 pb-20 pt-24 text-center md:pb-28 md:pt-36">
