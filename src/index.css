@@ -523,12 +523,6 @@
   .ms-held { opacity: 0; transform: scale(0.7); transition: opacity 360ms var(--e), transform 360ms var(--e); }
   .ms[data-step="3"] .ms-held { opacity: 1; transform: none; transition-delay: 1100ms; }
 
-  /* the rail */
-  .ms-rail { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-  .ms-rail-base { fill: none; stroke: rgba(14,11,9,0.12); stroke-width: 1.5; stroke-dasharray: 0.012 0.012; }
-  .ms-rail-pulse { fill: none; stroke: var(--brand); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 0.06 2; stroke-dashoffset: 0.06; }
-  .ms.is-live .ms-rail-pulse { animation: ms-pulse 3s linear infinite; }
-  @keyframes ms-pulse { 0% { stroke-dashoffset: 0.06; } 70%, 100% { stroke-dashoffset: -1; } }
 
   /* scrubber */
   .ms-progress { animation: ms-progress var(--d, 3s) linear both; }
@@ -536,7 +530,6 @@
 
   /* mobile stage: 520×740, stacked */
   .ms.is-m .ms-glow { right: -200px; bottom: -220px; }
-  .ms.is-m .ms-rail { display: none; }
   .ms.is-m .ms-market { left: 30px; top: 40px; width: 220px; gap: 7px; }
   .ms.is-m .ms-cap-market { left: 30px; top: 230px; }
   .ms.is-m .ms-person { left: 270px; top: 50px; width: 220px; transform: translate(-160px, 40px) scale(0.5); }
@@ -601,7 +594,7 @@
   .fm-scene, .fm-row, .fm-fade, .fm-caret, .fm-progress::after, .fm-send > span, .fm-approve { animation: none !important; }
   .fm-body { grid-template-rows: 1fr !important; }
   .meeting-held { opacity: 1 !important; transform: none !important; transition: none !important; }
-  .mj-rail-pulse, .mj-dot, .mj-ch, .mj-sent, .ms-rail-pulse, .ms-dot, .ms-progress { animation: none !important; }
+  .mj-rail-pulse, .mj-dot, .mj-ch, .mj-sent, .ms-dot, .ms-progress { animation: none !important; }
   .ms-card, .ms-channels, .ms-reply, .ms-held, .ms-approved, .ms-market, .ms-sent, .ms-ch { transition: none !important; }
   .mj-station, .mj-ch, .mj-reply, .mj-held, .mj-ch .mj-sent { opacity: 1 !important; transform: none !important; transition: none !important; }
   .draw-line { stroke-dashoffset: 0 !important; transition: none !important; }
