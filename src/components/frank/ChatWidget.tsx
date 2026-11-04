@@ -168,7 +168,7 @@ export function ChatWidget() {
             {msgs.length === 0 && (
               <div className="flex flex-wrap gap-2 pl-1">
                 {chat.quickReplies.map((q) => (
-                  <SmartLink key={q.href} href={q.href} onClick={() => track("chat_quick_reply", { label: q.label })} className="rounded-pill border border-white/15 px-3.5 py-2 text-[14px] font-medium text-ink transition-colors hover:bg-ink hover:text-page">
+                  <SmartLink key={q.href} href={q.href} onClick={() => track("chat_quick_reply", { label: q.label })} className="rounded-pill border border-line px-3.5 py-2 text-[14px] font-medium text-ink transition-colors hover:bg-ink hover:text-page">
                     {q.label}
                   </SmartLink>
                 ))}
@@ -219,7 +219,7 @@ export function ChatWidget() {
         onClick={() => (mode === "panel" ? close() : open())}
         aria-label={mode === "panel" ? chat.close : chat.open}
         aria-expanded={mode === "panel"}
-        className="relative grid h-16 w-16 place-items-center rounded-full border border-white/15 bg-surface shadow-lift transition-transform duration-200 hover:-translate-y-0.5"
+        className="relative grid h-16 w-16 place-items-center rounded-full border border-line bg-surface shadow-lift transition-transform duration-200 hover:-translate-y-0.5"
       >
         <FrankAvatar round decorative className="h-[56px] w-[56px]" />
         <span className="absolute bottom-0.5 right-0.5 h-3.5 w-3.5 rounded-full bg-lime ring-2 ring-white" />

@@ -8,7 +8,7 @@ export function NotFoundPage() {
   useSeo({ title: t.seo.title, description: t.seo.description, path: "/404" });
   return (
     <div className="pb-section-m lg:pb-section">
-      <PageHero light={t.h1} bold="" sub={t.body} aside={<FrankAvatar className="aspect-square w-full rounded-frame border border-white/15" />}>
+      <PageHero light={t.h1} bold="" sub={t.body} aside={<FrankAvatar className="aspect-square w-full rounded-frame border border-line" />}>
         <div className="mt-8">
           <Btn href="/" size="lg">
             {t.cta}

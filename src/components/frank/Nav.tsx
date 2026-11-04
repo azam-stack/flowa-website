@@ -96,14 +96,14 @@ export function Nav() {
   };
 
   return (
-    <nav aria-label="Main" className={`transition-colors duration-300 ${over ? "border-b border-transparent bg-transparent" : "border-b border-line bg-page/80 backdrop-blur-xl"}`}>
+    <nav aria-label="Main" className={`transition-colors duration-300 ${over ? "border-b border-transparent bg-transparent" : "border-b border-line bg-page/85 backdrop-blur-xl"}`}>
       <div className="mx-auto grid h-[72px] w-full max-w-container grid-cols-[1fr_auto_1fr] items-center px-4 md:px-10 xl:px-gutter">
         <Link to="/" aria-label="Flowa home" className="flex items-center justify-self-start rounded-control">
           <Logo />
         </Link>
         <div className="hidden items-center gap-2 lg:flex">
           {nav.links.map((l) => (
-            <SmartLink key={l.href} href={l.href} onClick={() => track("nav_click", { label: l.label })} className={`flex h-10 items-center rounded-pill px-4 text-[14.5px] font-medium transition-colors ${over ? "text-white/90 hover:text-white" : active(pathname, l.href) ? "bg-white/[0.06] text-ink" : "text-ink-2/80 hover:text-ink"}`}>
+            <SmartLink key={l.href} href={l.href} onClick={() => track("nav_click", { label: l.label })} className={`flex h-10 items-center rounded-pill px-4 text-[14.5px] font-medium transition-colors ${over ? "text-white/90 hover:text-white" : active(pathname, l.href) ? "bg-soft text-ink" : "text-ink-2/80 hover:text-ink"}`}>
               {l.label}
             </SmartLink>
           ))}

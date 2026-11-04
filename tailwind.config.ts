@@ -12,15 +12,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        page: "#140804",
-        surface: "#1B0C06",
-        soft: "#22100A",
+        page: "#FAFAF7",
+        surface: "#FFFFFF",
+        soft: "#F2F1ED",
         panel: { DEFAULT: "rgba(238,80,1,0.12)", strong: "rgba(238,80,1,0.24)" },
         brand: { DEFAULT: "#E8511A", strong: "#F26A2E", deep: "#FF9A5C", dark: "#C93E0C" },
         lime: "#C8FD03",
-        ink: { DEFAULT: "#FCFFFF", 2: "#D7D5D0" },
-        muted: "#8C8984",
-        line: "rgba(255,214,190,0.12)",
+        ink: { DEFAULT: "#0E0B09", 2: "#3A3632" },
+        muted: "#7A746D",
+        line: "rgba(14,11,9,0.1)",
         coral: "#FF6A24",
         error: "#FF6B6B",
       },
@@ -63,8 +63,8 @@ export default {
         "section-m": "80px",
       },
       boxShadow: {
-        float: "0 12px 40px rgba(0,0,0,0.45)",
-        lift: "0 30px 80px rgba(0,0,0,0.6)",
+        float: "0 12px 40px rgba(14,11,9,0.08)",
+        lift: "0 30px 80px rgba(14,11,9,0.14)",
       },
       transitionTimingFunction: {
         out: "cubic-bezier(0.16, 1, 0.3, 1)",

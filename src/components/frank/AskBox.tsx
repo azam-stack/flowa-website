@@ -48,7 +48,7 @@ export function AskBox({ className = "" }: { className?: string }) {
   };
 
   return (
-    <div className={`rounded-frame border border-white/15 bg-surface p-5 shadow-float md:p-7 ${className}`}>
+    <div className={`rounded-frame border border-line bg-surface p-5 shadow-float md:p-7 ${className}`}>
       <div className="flex items-center gap-3">
         <FrankAvatar round decorative className="h-10 w-10 flex-none" />
         <div>
@@ -85,14 +85,14 @@ export function AskBox({ className = "" }: { className?: string }) {
       {!asked && (
         <div className="mt-5 flex flex-wrap gap-2">
           {SUGGESTIONS.map((s) => (
-            <button key={s} type="button" onClick={() => void ask(s)} className="rounded-pill border border-line bg-surface px-3.5 py-2 text-[13px] text-ink-2 transition-colors hover:border-white/15">
+            <button key={s} type="button" onClick={() => void ask(s)} className="rounded-pill border border-line bg-surface px-3.5 py-2 text-[13px] text-ink-2 transition-colors hover:border-line">
               {s}
             </button>
           ))}
         </div>
       )}
 
-      <form onSubmit={submit} className="mt-4 flex items-center gap-2 rounded-pill border border-white/20 bg-surface py-1.5 pl-4 pr-1.5 focus-within:border-white/15">
+      <form onSubmit={submit} className="mt-4 flex items-center gap-2 rounded-pill border border-line bg-surface py-1.5 pl-4 pr-1.5 focus-within:border-line">
         <label htmlFor="ask-q" className="sr-only">
           Your question
         </label>

@@ -102,7 +102,7 @@ export function SignalMoment() {
                   <p className="text-[12px] font-semibold uppercase tracking-[0.14em] text-brand-deep">{g.name}</p>
                   <ul className="mt-2.5 flex flex-wrap gap-1.5">
                     {g.tags.map((t) => (
-                      <li key={t} className="rounded-pill border border-line bg-white/[0.04] px-2.5 py-1 text-[12.5px] font-medium text-ink-2">
+                      <li key={t} className="rounded-pill border border-line bg-soft px-2.5 py-1 text-[12.5px] font-medium text-ink-2">
                         {t}
                       </li>
                     ))}

@@ -91,7 +91,7 @@ export function ChannelBadge({ kind, size = 28, className = "" }: { kind: "linke
 export function ScanMock({ className = "" }: { className?: string }) {
   return (
     <DarkMock title="1,240 companies scanned" count="1,240 companies scanned" className={className}>
-      <div className="h-1.5 w-full overflow-hidden rounded-pill bg-white/15">
+      <div className="h-1.5 w-full overflow-hidden rounded-pill bg-ink/10">
         <div className="h-full w-[72%] rounded-pill bg-brand" />
       </div>
       <div className="relative">
@@ -118,7 +118,7 @@ export function ScanMock({ className = "" }: { className?: string }) {
           ["Priya Nair", "CRO · Northgate IT"],
           ["Tom Whitfield", "Founder · Kestrel Creative"],
         ].map(([n, t]) => (
-          <div key={n} className="flex items-center gap-2.5 rounded-card border border-white/15 bg-white/[0.08] p-3 backdrop-blur-md">
+          <div key={n} className="flex items-center gap-2.5 rounded-card border border-line bg-soft p-3 backdrop-blur-md">
             <Avatar name={n} size={36} />
             <div className="min-w-0">
               <p className="truncate text-[13px] font-medium text-white">{n}</p>
@@ -174,7 +174,7 @@ export function DraftMock({ className = "" }: { className?: string }) {
           </div>
         </MockCard>
       </div>
-      <div className={`flex items-center gap-3 rounded-card border border-white/15 bg-white/[0.08] p-3 backdrop-blur-md transition-opacity duration-500 ${done ? "opacity-100" : "opacity-40"}`}>
+      <div className={`flex items-center gap-3 rounded-card border border-line bg-soft p-3 backdrop-blur-md transition-opacity duration-500 ${done ? "opacity-100" : "opacity-40"}`}>
         <img src={asset("images/team/ahmed.webp")} alt="" width={36} height={36} loading="lazy" className="h-9 w-9 flex-none rounded-full object-cover ring-2 ring-white" />
         <div className="min-w-0">
           <p className="text-[13px] font-medium text-white">Checked and approved by Ahmed</p>
@@ -246,7 +246,7 @@ export function SignalsMock({ className = "" }: { className?: string }) {
     <DarkMock title="3 new signals detected" className={className}>
       <Reveal stagger className="flex flex-col gap-2">
         {rows.map((r) => (
-          <div key={r} className="flex items-center justify-between gap-3 rounded-card border border-white/15 bg-white/[0.08] px-3 py-2.5 backdrop-blur-md">
+          <div key={r} className="flex items-center justify-between gap-3 rounded-card border border-line bg-soft px-3 py-2.5 backdrop-blur-md">
             <p className="min-w-0 truncate text-[13px] text-white">{r}</p>
             <Chip>Buying signal</Chip>
           </div>

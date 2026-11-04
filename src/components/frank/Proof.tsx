@@ -42,7 +42,7 @@ export function ProofBlock({ withHeading = true, withStats = true }: { withHeadi
         </Reveal>
         {withStats && (
         <Reveal delay={80}>
-          <ul className="divide-y divide-ink border-y border-white/15">
+          <ul className="divide-y divide-ink border-y border-line">
             {p.stats.map((s) => (
               <li key={s.label} className="flex items-baseline gap-5 py-5 md:py-6">
                 <CountUp value={s.value} className="text-stat w-[200px] flex-none text-ink md:w-[230px]" />
@@ -78,7 +78,7 @@ export function StatsStrip({ className = "" }: { className?: string }) {
   return (
     <section id="results" className={className} aria-label={p.stripTitle}>
       <Container>
-        <Reveal className="grid gap-6 border-y border-white/15 py-8 md:grid-cols-[minmax(0,0.8fr)_minmax(0,3fr)] md:items-center md:gap-10 md:py-10">
+        <Reveal className="grid gap-6 border-y border-line py-8 md:grid-cols-[minmax(0,0.8fr)_minmax(0,3fr)] md:items-center md:gap-10 md:py-10">
           <div>
             <p className="text-[22px] font-light leading-tight text-ink md:text-[26px]">
               {p.stripTitleLight}
@@ -88,7 +88,7 @@ export function StatsStrip({ className = "" }: { className?: string }) {
           </div>
           <ul className="grid grid-cols-2 gap-y-6 md:grid-cols-4">
             {p.stats.map((s, i) => (
-              <li key={s.label} className={`min-w-0 px-0 md:px-6 ${i > 0 ? "md:border-l md:border-white/15" : ""}`}>
+              <li key={s.label} className={`min-w-0 px-0 md:px-6 ${i > 0 ? "md:border-l md:border-line" : ""}`}>
                 <CountUp value={s.value} className="block text-[clamp(2.25rem,1.6rem+1.6vw,3.25rem)] font-light leading-none tracking-[-0.03em] text-ink" />
                 <p className="mt-2 text-[14px] leading-snug text-ink-2">{s.label}</p>
               </li>

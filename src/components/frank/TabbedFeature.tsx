@@ -200,7 +200,7 @@ export function TabbedFeature() {
           </div>
 
           {/* desktop: four columns */}
-          <div role="tablist" aria-label={t.h2} className="hidden border-t border-white/15 md:grid md:grid-cols-4 md:divide-x md:divide-ink">
+          <div role="tablist" aria-label={t.h2} className="hidden border-t border-line md:grid md:grid-cols-4 md:divide-x md:divide-ink">
             {t.tabs.map((tb, i) => {
               const isActive = i === active;
               return (
@@ -228,10 +228,10 @@ export function TabbedFeature() {
           </div>
 
           {/* mobile: pills + the active description */}
-          <div className="border-t border-white/15 md:hidden">
+          <div className="border-t border-line md:hidden">
             <div role="tablist" aria-label={t.h2} className="no-scrollbar flex gap-2 overflow-x-auto px-4 pt-4">
               {t.tabs.map((tb, i) => (
-                <button key={tb.key} role="tab" aria-selected={i === active} onClick={() => select(i)} className={`flex-none rounded-pill border px-4 py-2 text-[14px] font-medium transition-colors ${i === active ? "border-white/15 bg-ink text-page" : "border-line bg-surface text-ink-2"}`}>
+                <button key={tb.key} role="tab" aria-selected={i === active} onClick={() => select(i)} className={`flex-none rounded-pill border px-4 py-2 text-[14px] font-medium transition-colors ${i === active ? "border-line bg-ink text-page" : "border-line bg-surface text-ink-2"}`}>
                   {tb.title}
                 </button>
               ))}

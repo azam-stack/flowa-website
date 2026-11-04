@@ -3,7 +3,7 @@ import { ContactBand } from "@/components/frank/ContactBand";
 import { FaqList } from "@/components/frank/FaqList";
 import { SmartLink } from "@/components/SmartLink";
 import { Hero } from "@/components/frank/Hero";
-import { TheMeeting } from "@/components/frank/TheMeeting";
+import { ChannelLoop } from "@/components/frank/ChannelLoop";
 import { SignalMoment } from "@/components/frank/SignalMoment";
 import { StatsStrip } from "@/components/frank/Proof";
 import { SectionHeading, Section } from "@/components/frank/SectionHeading";
@@ -25,12 +25,11 @@ export function HomePage() {
   return (
     <>
       <Hero />
-      <div className="hatch" />
-      <TheMeeting />
-      <div className="hatch" />
-      <SdrMath />
+      <ChannelLoop />
       <div className="hatch" />
       <SignalMoment />
+      <div className="hatch" />
+      <SdrMath />
       <div className="hatch" />
       <StatsStrip className="mt-2 md:mt-4" />
       <TeamBand />

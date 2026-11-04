@@ -39,8 +39,8 @@ export function AboutPage() {
               <span className="absolute bottom-6 left-[19px] top-6 w-px bg-ink/15" aria-hidden="true" />
               {t.story.timeline.map((s, i) => (
                 <li key={s.title} className="relative flex gap-4">
-                  <span className={`relative z-[1] grid h-10 w-10 flex-none place-items-center rounded-full border border-white/15 text-[13px] font-semibold ${i === t.story.timeline.length - 1 ? "bg-ink text-page" : "bg-surface text-ink"}`}>{i + 1}</span>
-                  <div className={`flex-1 rounded-card border p-5 ${i === t.story.timeline.length - 1 ? "border-white/15 bg-surface shadow-lift" : "border-line bg-surface"}`}>
+                  <span className={`relative z-[1] grid h-10 w-10 flex-none place-items-center rounded-full border border-line text-[13px] font-semibold ${i === t.story.timeline.length - 1 ? "bg-ink text-page" : "bg-surface text-ink"}`}>{i + 1}</span>
+                  <div className={`flex-1 rounded-card border p-5 ${i === t.story.timeline.length - 1 ? "border-line bg-surface shadow-lift" : "border-line bg-surface"}`}>
                     <p className="text-[12px] font-semibold uppercase tracking-[0.08em] text-brand-deep">{s.label}</p>
                     <h3 className="mt-1 text-[18px] font-semibold text-ink">{s.title}</h3>
                     <p className="mt-1 text-[15px] text-ink-2">{s.body}</p>

@@ -57,7 +57,7 @@ function Tiles({ name, options, value, onPick }: { name: string; options: readon
       {options.map((o) => {
         const selected = value === o;
         return (
-          <button key={o} type="button" role="radio" aria-checked={selected} onClick={() => onPick(o)} className={`press min-h-[56px] rounded-control border border-white/15 px-3 py-3 text-center text-[15px] font-medium leading-snug transition-[background-color,transform,box-shadow] duration-150 md:min-h-[100px] ${selected ? "bg-panel text-ink shadow-[inset_0_0_0_1px_#1B0C06]" : "bg-surface text-ink hover:-translate-y-0.5 hover:bg-soft"}`}>
+          <button key={o} type="button" role="radio" aria-checked={selected} onClick={() => onPick(o)} className={`press min-h-[56px] rounded-control border border-line px-3 py-3 text-center text-[15px] font-medium leading-snug transition-[background-color,transform,box-shadow] duration-150 md:min-h-[100px] ${selected ? "bg-panel text-ink shadow-[inset_0_0_0_1px_#1B0C06]" : "bg-surface text-ink hover:-translate-y-0.5 hover:bg-soft"}`}>
             {o}
           </button>
         );
@@ -207,7 +207,7 @@ export function PricingQuiz() {
             {GOALS.map((g) => {
               const checked = goals.includes(g);
               return (
-                <label key={g} className={`flex min-h-[52px] cursor-pointer items-center gap-3 rounded-control border px-4 py-3 text-[15px] font-medium transition-colors ${checked ? "border-white/15 bg-panel text-ink" : "border-white/15 bg-surface text-ink hover:bg-soft"}`}>
+                <label key={g} className={`flex min-h-[52px] cursor-pointer items-center gap-3 rounded-control border px-4 py-3 text-[15px] font-medium transition-colors ${checked ? "border-line bg-panel text-ink" : "border-line bg-surface text-ink hover:bg-soft"}`}>
                   <input type="checkbox" className="checkbox" checked={checked} onChange={() => toggleGoal(g)} />
                   {g}
                 </label>
@@ -314,7 +314,7 @@ export function PricingCard() {
           <p className="text-[17px] font-semibold text-ink">{t.left.badge}</p>
         </div>
       </div>
-      <div className="bg-soft px-5 py-8 md:px-10 md:py-12 lg:border-l lg:border-white/15">
+      <div className="bg-soft px-5 py-8 md:px-10 md:py-12 lg:border-l lg:border-line">
         <p className="text-[15px] font-medium text-ink">{t.right.heading}</p>
         <div className="mt-4 rounded-card bg-surface p-5 shadow-lift md:p-7">
           <PricingQuiz />
