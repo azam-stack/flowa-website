@@ -154,12 +154,6 @@ export function MethodScene() {
                     </span>
                   </div>
                 </div>
-
-                {/* the rail with the pulse */}
-                <svg className="ms-rail" viewBox={`0 0 ${W} ${H}`} aria-hidden="true">
-                  <path d="M 210 260 C 320 260, 320 250, 400 250 S 680 240, 770 240 S 860 300, 880 380" pathLength={1} className="ms-rail-base" />
-                  <path d="M 210 260 C 320 260, 320 250, 400 250 S 680 240, 770 240 S 860 300, 880 380" pathLength={1} className="ms-rail-pulse" />
-                </svg>
               </div>
             </div>
 
