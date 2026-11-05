@@ -5,7 +5,7 @@ import { Btn } from "@/components/frank/Btn";
 import { ContactBand } from "@/components/frank/ContactBand";
 import { CountUp } from "@/components/frank/CountUp";
 import { FaqList } from "@/components/frank/FaqList";
-import { FrankMotion } from "@/components/frank/FrankMotion";
+import { MethodScene } from "@/components/frank/MethodScene";
 import { SectionHeading, Section } from "@/components/frank/SectionHeading";
 import { UseCases } from "@/components/frank/UseCases";
 import { home } from "@/content/frank/home";
@@ -45,7 +45,7 @@ export function FrankPage() {
         </Container>
       </section>
 
-      <FrankMotion />
+      <MethodScene />
 
       <UseCases />
 

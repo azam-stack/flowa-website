@@ -44,9 +44,9 @@ export const howItWorks = {
   ],
   /** The product window beside the steps. One small scene per step; fictional lead, illustrative. */
   motion: {
-    eyebrow: "How Frank works",
-    h2Light: "Six steps, ",
-    h2Bold: "from signal to meeting",
+    eyebrow: "How we do it",
+    h2Light: "From a signal in the market ",
+    h2Bold: "to a meeting in your calendar.",
     sub: "Frank does the legwork. A person approves every message. This is the whole loop, as it runs.",
     windowTitle: "Frank",
     status: ["Reading the market", "Checking the lead", "Drafting", "Waiting for a person", "Sending", "Booked"],
