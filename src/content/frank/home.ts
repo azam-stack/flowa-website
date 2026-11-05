@@ -31,7 +31,7 @@ export const home = {
     proof: [
       { value: "2,000+", label: "meetings booked" },
       { value: "70%", label: "show up" },
-      { value: "£400", label: "per held meeting on the pilot" },
+      { value: "47%", label: "become a client" },
     ],
     cards: {
       left: {
@@ -293,6 +293,7 @@ export const home = {
     stats: [
       { value: "6+", label: "years of B2B outbound" },
       { value: "2,000+", label: "meetings booked" },
+      { value: "47%", label: "win rate: meetings that became a client" },
       { value: "£3.4M+", label: "revenue generated for clients" },
       { value: "£90K+", label: "record annual sale from one meeting" },
     ],
