@@ -22,7 +22,7 @@ export function Hero() {
       <HalftoneField ink={[252, 255, 255]} warm={[200, 253, 3]} dotGap={6} radius={110} grain={0} listenOn={section} paint={(ctx, w, hh) => paintWordmark(ctx, w, hh, "flowa", 0.34, 0.94)} />
       <Container>
         <div className="relative z-[1] mx-auto flex min-h-[calc(100svh-72px)] max-w-[900px] flex-col items-center pb-[30vh] pt-16 text-center md:pt-24 lg:justify-center lg:pb-[34vh]">
-          <p className="mono-label mb-6 text-lime">B2B appointment setting · UK</p>
+          <p className="mono-label mb-6 text-lime">B2B appointment setting</p>
           <h1 className="text-h1 text-white">
             <span className="block">{h.h1Light.trim()}</span>
             <span className="block text-[#2a0d00]/80">{h.h1Bold}</span>
