@@ -35,5 +35,5 @@ export const SITE_CONFIG = {
   /** Draft analytics only: events stay in window.dataLayer. Nothing is beaconed anywhere. */
   analyticsEndpoint: null as string | null,
   email: "info@flowa.dk",
-  ogImage: "/og-image.png",
+  ogImage: "/og-image-2.png",
 } as const;
