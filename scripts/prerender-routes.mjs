@@ -19,7 +19,7 @@ const base = (process.env.VITE_BASE || "/").replace(/\/$/, "");
 const DRAFT = process.env.VITE_DRAFT !== "false";
 const SITE = (process.env.VITE_SITE_URL || "https://azam-stack.github.io/flowa-website-lab").replace(/\/$/, "");
 const SITE_NAME = "Flowa";
-const OG_IMAGE = `${SITE}/og-image.png`;
+const OG_IMAGE = `${SITE}/og-image-2.png`;
 
 // Bundle the TypeScript content modules for Node with esbuild (Vite's own bundler).
 const tmp = path.join(root, "node_modules", ".flowa-routes.mjs");

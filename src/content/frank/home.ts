@@ -8,7 +8,7 @@ import { SITE_CONFIG } from "@/config/site";
 
 export const home = {
   seo: {
-    title: "Flowa | B2B meetings in the UK, paid per meeting that happens",
+    title: "Flowa | B2B meetings, paid per meeting that happens",
     description: "Flowa books qualified B2B meetings with UK buyers who have a reason to talk now. No SDR salary, no retainer on the pilot: you pay when the meeting takes place.",
   },
 
