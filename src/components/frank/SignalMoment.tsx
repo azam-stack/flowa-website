@@ -1,3 +1,4 @@
+import { Illustrative } from "./Illustrative";
 import { useEffect, useState } from "react";
 import { Container } from "@/components/Container";
 import { Reveal } from "@/components/Reveal";
@@ -112,6 +113,7 @@ export function SignalMoment() {
             </ul>
           </Reveal>
         </div>
+        <Illustrative className="text-center" />
       </Container>
     </Section>
   );

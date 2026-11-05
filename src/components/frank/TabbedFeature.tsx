@@ -1,3 +1,4 @@
+import { Illustrative } from "./Illustrative";
 import { useEffect, useId, useState, type CSSProperties } from "react";
 import { Container } from "@/components/Container";
 import { home } from "@/content/frank/home";
@@ -243,6 +244,7 @@ export function TabbedFeature() {
             </div>
           </div>
         </div>
+        <Illustrative className="text-center" />
       </Container>
     </Section>
   );

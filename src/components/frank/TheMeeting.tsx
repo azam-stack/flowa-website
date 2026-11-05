@@ -1,3 +1,4 @@
+import { Illustrative } from "./Illustrative";
 import { Container } from "@/components/Container";
 import { Reveal } from "@/components/Reveal";
 import { home } from "@/content/frank/home";
@@ -94,6 +95,7 @@ export function TheMeeting() {
             </p>
           </Reveal>
         </div>
+        <Illustrative className="text-center" />
       </Container>
     </Section>
   );

@@ -9,8 +9,9 @@
  * technical audit of the site:
  *   - no cookies are set, by this site or by anyone else
  *   - no third-party scripts, fonts, embeds, pixels or tag managers load
- *   - the only browser storage is one strictly necessary sessionStorage
- *     key that stops a form being submitted twice
+ *   - the only browser storage is two strictly necessary sessionStorage
+ *     keys: one that stops a form being submitted twice, one that
+ *     remembers you closed the chat panel for the rest of the tab
  *   - analytics events go to an in-memory array and are sent nowhere
  *     unless VITE_ANALYTICS_ENDPOINT is configured
  * If any of those four things changes, the cookie page and the privacy
@@ -104,7 +105,7 @@ export const privacyPolicy: LegalDoc = {
       heading: "Visitors to this website",
       blocks: [
         p("This website sets no cookies. It loads no third-party scripts, fonts, embeds, pixels or tag managers, so no other organisation receives anything about your visit through this site."),
-        p("The site stores one item in your browser's session storage: a short key that prevents the same enquiry being submitted twice by accident. It is deleted when you close the tab, it is never sent anywhere, and it contains no information about you beyond a hash of what you just submitted."),
+        p("The site stores two items in your browser's session storage: a short key that prevents the same enquiry being submitted twice by accident, and a flag that remembers you closed the chat panel so it stays closed for the rest of your visit. Both are deleted when you close the tab, neither is sent anywhere, and neither contains information about you beyond a hash of what you just submitted."),
         p("The site is hosted on GitHub Pages. Like any web host, GitHub processes the requests your browser makes, including your IP address, in order to serve the page. We do not receive those logs and we do not analyse them."),
       ],
     },
@@ -147,7 +148,7 @@ export const privacyPolicy: LegalDoc = {
         list([
           "GitHub, for hosting this website",
           "Cal.com, if you book a call through our booking link",
-          "Cloudflare Workers AI, which answers questions typed into the \"Ask a question\" box. Questions are not stored by us and should not contain personal data",
+          "Cloudflare Workers AI, which answers questions typed into the \"Ask a question\" box and the chat panel. Questions are not stored by us and should not contain personal data",
           "Cloudflare, for the service that receives enquiries from the contact form and the quote form, and stores them",
           "Resend, for sending us an internal notification when an enquiry arrives",
           "Microsoft, for our own email",
@@ -201,7 +202,7 @@ export const cookiePolicy: LegalDoc = {
   title: "Cookie policy",
   seo: {
     title: "Cookie policy | Flowa",
-    description: "Flowa's website sets no cookies and loads no third-party scripts or trackers. This page explains the single item of strictly necessary browser storage the site does use.",
+    description: "Flowa's website sets no cookies and loads no third-party scripts or trackers. This page explains the two items of strictly necessary browser storage the site does use.",
   },
   intro: "The short version: this website sets no cookies at all, and there is nothing here to consent to. The longer version explains what the site does store and why no consent banner is needed.",
   sections: [
@@ -213,23 +214,23 @@ export const cookiePolicy: LegalDoc = {
       ],
     },
     {
-      heading: "The one thing we do store",
+      heading: "The two things we do store",
       blocks: [
-        p("When you submit the contact form, the site writes a short key into your browser's session storage so that pressing submit twice does not send us the same enquiry twice. It holds no readable information about you, it is never transmitted anywhere, and your browser deletes it when you close the tab."),
+        p("When you submit the contact form, the site writes a short key into your browser's session storage so that pressing submit twice does not send us the same enquiry twice. When you close the chat panel, it writes a flag so the panel stays closed for the rest of your visit. Neither holds readable information about you, neither is ever transmitted anywhere, and your browser deletes both when you close the tab."),
       ],
     },
     {
       heading: "Why there is no consent banner",
       blocks: [
         p("The ePrivacy rules, and the UK's PECR, cover storing or reading information on your device. That includes browser storage, not only cookies. Consent is required unless the storage is strictly necessary for a service you have actively asked for."),
-        p("The only storage this site uses exists to complete a form you chose to submit, which is the strictly necessary case. So there is nothing here that requires your consent, and adding a banner asking for it would be theatre."),
+        p("The only storage this site uses exists to complete a form you chose to submit, or to honour your choice to close the chat panel, which is the strictly necessary case. So there is nothing here that requires your consent, and adding a banner asking for it would be theatre."),
         p("If we ever add analytics, advertising or anything that tracks you across sites, we will ask for consent properly before it loads, and this page will change first."),
       ],
     },
     {
       heading: "Your browser is still in charge",
       blocks: [
-        p("You can clear site data or block storage for this site in your browser settings at any time. Nothing on this site will break, except that submitting the same form twice will no longer be caught."),
+        p("You can clear site data or block storage for this site in your browser settings at any time. Nothing on this site will break, except that submitting the same form twice will no longer be caught, and the chat panel will forget that you closed it."),
       ],
     },
   ],
