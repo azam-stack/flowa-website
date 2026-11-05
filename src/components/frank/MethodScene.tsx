@@ -1,3 +1,4 @@
+import { Illustrative } from "./Illustrative";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { Container } from "@/components/Container";
 import { Reveal } from "@/components/Reveal";
@@ -178,6 +179,7 @@ export function MethodScene() {
             </ol>
           </div>
         </Reveal>
+        <Illustrative className="text-center" />
       </Container>
     </Section>
   );
