@@ -542,6 +542,14 @@
   .ms.is-m[data-step="3"] .ms-reply { transform: translate(0, -20px) scale(0.9); }
   .ms.is-m .ms-meeting { left: 30px; top: 560px; width: 460px; }
 
+  /* ROI calculator (pricing): orange-filled range track, hatched legend dot, animated funnel band */
+  .roi-range { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 999px; background: linear-gradient(90deg, var(--brand) 0 var(--p, 50%), rgba(14,11,9,0.12) var(--p, 50%) 100%); outline: none; }
+  .roi-range::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; border-radius: 999px; background: #fff; border: 1px solid rgba(14,11,9,0.12); box-shadow: 0 2px 8px rgba(14,11,9,0.18); cursor: pointer; }
+  .roi-range::-moz-range-thumb { width: 26px; height: 26px; border-radius: 999px; background: #fff; border: 1px solid rgba(14,11,9,0.12); box-shadow: 0 2px 8px rgba(14,11,9,0.18); cursor: pointer; }
+  .roi-range:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rgba(232,81,26,0.3); }
+  .roi-hatch-dot { background: repeating-linear-gradient(45deg, var(--brand) 0 1px, #FFF4EE 1px 3px); border: 1px solid var(--brand); }
+  .roi-band { transition: d 400ms cubic-bezier(0.22,1,0.36,1), y 400ms cubic-bezier(0.22,1,0.36,1), height 400ms cubic-bezier(0.22,1,0.36,1); }
+
   /* Accordion body (the /frank "How Frank works" steps). */
   .acc-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 400ms var(--ease-out); }
   .acc-body[data-open="true"] { grid-template-rows: 1fr; }
