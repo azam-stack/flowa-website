@@ -7,7 +7,9 @@ import { SectionHeading, Section } from "./SectionHeading";
 const PILOT = 400;
 const SETUP = 500;
 const SHOW = 0.7;
-const WIN = 0.47;
+const FLOWA_WIN = 0.47;
+const WIN_MIN = 0.1;
+const WIN_MAX = 0.6;
 const gbp = (n: number) => `£${Math.round(n).toLocaleString("en-GB")}`;
 
 /** Deal-size slider: log scale from £1k to £100k so small and large deals both get room. */
@@ -26,8 +28,9 @@ export function MeetingValue() {
   const uid = useId();
   const [deal, setDeal] = useState(8000);
   const [booked, setBooked] = useState(10);
+  const [win, setWin] = useState(0.25);
   const held = booked * SHOW;
-  const won = held * WIN;
+  const won = held * win;
   const revenue = won * deal;
   const meetingsCost = held * PILOT;
   const total = meetingsCost;
@@ -46,6 +49,17 @@ export function MeetingValue() {
             <Slider id={`${uid}-deal`} label={t.dealLabel} hint={t.dealHint} value={gbp(deal)} pos={posFromDeal(deal)} onPos={(p) => setDeal(dealFromPos(p))} ticks={[gbp(DEAL_MIN), gbp(10000), gbp(DEAL_MAX)]} />
             <div className="my-6 border-t border-line" />
             <Slider id={`${uid}-meet`} label={t.meetingsLabel} hint={t.meetingsHint} value={String(booked)} pos={(booked - 4) / 26} onPos={(p) => setBooked(Math.round(4 + p * 26))} ticks={["4", "17", "30"]} />
+            <div className="my-6 border-t border-line" />
+            <Slider
+              id={`${uid}-win`}
+              label={t.winLabel}
+              hint={t.winHint}
+              value={`${Math.round(win * 100)}%`}
+              pos={(win - WIN_MIN) / (WIN_MAX - WIN_MIN)}
+              onPos={(p) => setWin(Math.round((WIN_MIN + p * (WIN_MAX - WIN_MIN)) * 100) / 100)}
+              ticks={[`${WIN_MIN * 100}%`, `${Math.round(((WIN_MIN + WIN_MAX) / 2) * 100)}%`, `${WIN_MAX * 100}%`]}
+              marker={{ pos: (FLOWA_WIN - WIN_MIN) / (WIN_MAX - WIN_MIN), label: t.winMarker }}
+            />
             <div className="my-6 border-t border-line" />
             <p className="mono-label text-muted">{t.estimateEyebrow}</p>
             <p className="mt-2 text-[clamp(2.6rem,1.8rem+3vw,4.5rem)] font-semibold leading-none tracking-[-0.04em] text-ink" aria-live="polite">
@@ -70,7 +84,7 @@ export function MeetingValue() {
           {/* funnel */}
           <div className="rounded-frame border border-line bg-surface p-6 md:p-8">
             <p className="mono-label text-muted">{t.funnelEyebrow}</p>
-            <Funnel values={[booked, held, won]} />
+            <Funnel values={[booked, held, won]} hints={[t.stages[0].hint, t.stages[1].hint, t.stages[2].hint(Math.round(win * 100))]} />
           </div>
         </Reveal>
         <p className="mx-auto mt-4 max-w-[1180px] text-[13px] text-muted">{t.note}</p>
@@ -79,7 +93,7 @@ export function MeetingValue() {
   );
 }
 
-function Slider({ id, label, hint, value, pos, onPos, ticks }: { id: string; label: string; hint: string; value: string; pos: number; onPos: (p: number) => void; ticks: string[] }) {
+function Slider({ id, label, hint, value, pos, onPos, ticks, marker }: { id: string; label: string; hint: string; value: string; pos: number; onPos: (p: number) => void; ticks: string[]; marker?: { pos: number; label: string } }) {
   return (
     <div>
       <div className="flex items-baseline justify-between gap-4">
@@ -89,7 +103,15 @@ function Slider({ id, label, hint, value, pos, onPos, ticks }: { id: string; lab
         <span className="text-[22px] font-semibold tabular-nums tracking-[-0.02em] text-ink">{value}</span>
       </div>
       <p className="mt-0.5 text-[14px] text-muted">{hint}</p>
-      <input id={id} type="range" min={0} max={1000} step={1} value={Math.round(pos * 1000)} onChange={(e) => onPos(Number(e.target.value) / 1000)} className="roi-range mt-4" style={{ "--p": `${pos * 100}%` } as React.CSSProperties} />
+      <div className={`relative ${marker ? "mt-9" : "mt-4"}`}>
+        {marker && (
+          <span className="pointer-events-none absolute -top-5 flex -translate-x-1/2 flex-col items-center" style={{ left: `${marker.pos * 100}%` }} aria-hidden="true">
+            <span className="whitespace-nowrap text-[11px] font-medium text-brand-dark">{marker.label}</span>
+            <span className="mt-0.5 h-3 w-px bg-brand" />
+          </span>
+        )}
+        <input id={id} type="range" min={0} max={1000} step={1} value={Math.round(pos * 1000)} onChange={(e) => onPos(Number(e.target.value) / 1000)} className="roi-range block" style={{ "--p": `${pos * 100}%` } as React.CSSProperties} />
+      </div>
       <div className="mt-1 flex justify-between text-[13px] text-muted">
         {ticks.map((tk) => (
           <span key={tk}>{tk}</span>
@@ -115,7 +137,7 @@ function Row({ title, sub, value, unit, strong }: { title: string; sub: string; 
 }
 
 /** Three columns. The band's height at each column's left edge is that stage's number, easing across the column to the next; the last column is filled solid. */
-function Funnel({ values }: { values: number[] }) {
+function Funnel({ values, hints }: { values: number[]; hints: string[] }) {
   const W = 600;
   const H = 540;
   const pad = 14;
@@ -150,7 +172,7 @@ function Funnel({ values }: { values: number[] }) {
             <p className="mt-1 text-[clamp(1.8rem,1.4rem+1.4vw,2.6rem)] font-semibold leading-none tracking-[-0.03em] text-ink tabular-nums" aria-live="polite">
               {fmt(values[i])}
             </p>
-            <p className="mt-1 text-[12.5px] text-muted">{s.hint}</p>
+            <p className="mt-1 text-[12.5px] text-muted">{hints[i]}</p>
           </div>
         ))}
       </div>

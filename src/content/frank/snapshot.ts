@@ -51,11 +51,14 @@ export const snapshot = {
 export const meetingValue = {
   h2Light: "What would Flowa ",
   h2Bold: "be worth to you?",
-  sub: "Your deal size, our funnel. Move the sliders and see what a month on the Pilot returns.",
+  sub: "Your deal size, your close rate, our meetings. Move the sliders and see what a month on the Pilot returns.",
   dealLabel: "Your average deal size",
   dealHint: "What one won deal is worth to you",
   meetingsLabel: "Meetings booked per month",
   meetingsHint: "On the Pilot, most clients start between 6 and 15",
+  winLabel: "Meetings that become a client",
+  winHint: "Use your own close rate. Flowa's average across all engagements is 47%.",
+  winMarker: "Flowa avg 47%",
   estimateEyebrow: "Flowa estimate",
   perMonth: "/mo",
   estimateFormula: (won: string, deal: string) => `${won} deals won × ${deal}`,
@@ -69,7 +72,7 @@ export const meetingValue = {
   stages: [
     { key: "booked", label: "Booked", hint: "Meetings in your calendar" },
     { key: "held", label: "Held", hint: "70% take place" },
-    { key: "won", label: "Won", hint: "47% become a client" },
+    { key: "won", label: "Won", hint: (pct: number) => `${pct}% become a client` },
   ],
   note: "An estimate from Flowa's own averages across all engagements to date and the numbers you set. Your results will vary. Nothing you type is sent or saved.",
 } as const;
