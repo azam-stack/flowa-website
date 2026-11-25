@@ -57,25 +57,24 @@ export function EngagementTimeline() {
 export function PromiseBand() {
   const p = home.promise;
   return (
-    <section id="promise" className="relative overflow-hidden bg-ink py-section-m text-page lg:py-section" aria-label={p.eyebrow}>
-      <img src={asset("images/backgrounds/silk-dark.webp")} alt="" aria-hidden="true" loading="lazy" className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-40" />
+    <section id="promise" className="wall relative overflow-hidden py-section-m text-white lg:py-section" aria-label={p.eyebrow}>
       <Container className="relative">
         <Reveal className="max-w-3xl">
-          <p className="text-eyebrow text-brand">{p.eyebrow}</p>
+          <p className="text-eyebrow text-lime">{p.eyebrow}</p>
           <h2 className="mt-3 text-[clamp(2.25rem,1.5rem+2.4vw,3.75rem)] font-light leading-[1.05] tracking-[-0.03em]">
             {p.h2Light}
-            <span className="dim">{p.h2Bold}</span>
+            <span className="text-[#2a0d00]/80">{p.h2Bold}</span>
           </h2>
-          <p className="mt-4 max-w-lead text-sub text-white/75">{p.sub}</p>
+          <p className="mt-4 max-w-lead text-sub text-white/85">{p.sub}</p>
         </Reveal>
         <Reveal stagger as="ul" className="mt-12 grid gap-5 md:mt-14 md:grid-cols-3">
           {p.points.map((pt, i) => (
-            <li key={pt.title} className="rounded-frame border border-line bg-soft p-6 backdrop-blur-md md:p-7" style={{ "--i": i } as CSSProperties}>
+            <li key={pt.title} className="rounded-frame bg-surface p-6 text-ink shadow-float md:p-7" style={{ "--i": i } as CSSProperties}>
               <span className="grid h-9 w-9 place-items-center rounded-full bg-brand text-white">
                 <Check size={16} />
               </span>
-              <h3 className="mt-5 text-[20px] font-semibold">{pt.title}</h3>
-              <p className="mt-2 text-[15px] leading-relaxed text-white/75">{pt.body}</p>
+              <h3 className="mt-5 text-[20px] font-semibold text-ink">{pt.title}</h3>
+              <p className="mt-2 text-[15px] leading-relaxed text-ink-2">{pt.body}</p>
             </li>
           ))}
         </Reveal>
