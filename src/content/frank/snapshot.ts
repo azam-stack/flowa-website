@@ -68,6 +68,7 @@ export const meetingValue = {
   totalTitle: "You pay",
   moreThan: (diff: string, back: string) => [`That's `, diff, ` more than it costs. About ${back} back for every £1.`] as const,
   perDeal: (cost: string) => `Each won deal costs about ${cost} in meetings.`,
+  cta: "Book a 20-minute call",
   funnelEyebrow: "Your funnel",
   stages: [
     { key: "booked", label: "Booked", hint: "Meetings in your calendar" },

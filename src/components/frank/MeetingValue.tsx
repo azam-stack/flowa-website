@@ -3,6 +3,8 @@ import { Container } from "@/components/Container";
 import { Reveal } from "@/components/Reveal";
 import { meetingValue as t } from "@/content/frank/snapshot";
 import { SectionHeading, Section } from "./SectionHeading";
+import { Btn } from "./Btn";
+import { SITE_CONFIG } from "@/config/site";
 
 const PILOT = 400;
 const SETUP = 500;
@@ -78,6 +80,9 @@ export function MeetingValue() {
                 {more[2]}
               </p>
               <p className="mt-1 text-[13px] text-muted">{t.perDeal(gbp(won > 0 ? meetingsCost / won : 0))}</p>
+              <Btn href={SITE_CONFIG.bookCallHref} size="md" trackLabel="roi_book_call" className="mt-5 w-full">
+                {t.cta}
+              </Btn>
             </div>
           </div>
 
