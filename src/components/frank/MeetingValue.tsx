@@ -30,7 +30,7 @@ export function MeetingValue() {
   const won = held * WIN;
   const revenue = won * deal;
   const meetingsCost = held * PILOT;
-  const total = meetingsCost + SETUP;
+  const total = meetingsCost;
   const diff = revenue - total;
   const back = total > 0 ? revenue / total : 0;
   const wonShown = won.toFixed(1).replace(/\.0$/, "");
@@ -56,9 +56,8 @@ export function MeetingValue() {
 
             <div className="mt-6 rounded-[16px] border border-line bg-surface p-5">
               <Row title={t.costTitle} sub={t.costFormula(held.toFixed(1).replace(/\.0$/, ""), gbp(PILOT))} value={gbp(meetingsCost)} unit={t.perMonth} />
-              <Row title={t.setupTitle} sub={t.setupFormula} value={gbp(SETUP)} />
               <div className="my-4 border-t border-line" />
-              <Row title={t.totalTitle} sub="" value={gbp(total)} unit={t.perMonth} strong />
+              <Row title={t.totalTitle} sub={t.setupFormula(gbp(SETUP))} value={gbp(total)} unit={t.perMonth} strong />
               <p className="mt-4 text-[15px] leading-snug text-ink">
                 {more[0]}
                 <strong className={diff >= 0 ? "" : "text-brand-dark"}>{more[1]}</strong>
